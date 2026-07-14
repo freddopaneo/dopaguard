@@ -106,7 +106,8 @@ async function callAnthropic(model: string, prompt: string): Promise<RawLLMResul
     body: JSON.stringify({
       model,
       max_tokens: 1024,
-      temperature: 0.7,
+      // Pas de "temperature" ici : Claude Sonnet 5 rejette ce paramètre (erreur 400)
+      // dès qu'il diffère de la valeur par défaut, à cause de son raisonnement adaptatif.
       messages: [{ role: "user", content: prompt }],
     }),
   });
