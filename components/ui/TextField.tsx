@@ -12,7 +12,7 @@ export function TextField({ label, id, className = "", ...props }: TextFieldProp
       </label>
       <input
         id={id}
-        className={`rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-300 outline-none transition-colors focus:border-slate-400 focus:ring-4 focus:ring-slate-100 ${className}`}
+        className={`rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-300 outline-none transition-colors focus:border-dopaguard-navy focus:ring-4 focus:ring-dopaguard-navy/10 ${className}`}
         {...props}
       />
     </div>
