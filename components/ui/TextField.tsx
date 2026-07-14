@@ -6,13 +6,13 @@ type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
 
 export function TextField({ label, id, className = "", ...props }: TextFieldProps) {
   return (
-    <div className="flex flex-col gap-1 text-left">
-      <label htmlFor={id} className="text-sm font-medium text-slate-700">
+    <div className="flex flex-col gap-1.5 text-left">
+      <label htmlFor={id} className="text-xs font-medium uppercase tracking-wide text-slate-400">
         {label}
       </label>
       <input
         id={id}
-        className={`rounded-md border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none focus:border-dopaguard-accent focus:ring-2 focus:ring-dopaguard-accent/40 ${className}`}
+        className={`rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-300 outline-none transition-colors focus:border-slate-400 focus:ring-4 focus:ring-slate-100 ${className}`}
         {...props}
       />
     </div>
