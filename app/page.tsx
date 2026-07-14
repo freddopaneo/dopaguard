@@ -1,22 +1,86 @@
 import { ScanForm } from "@/components/ScanForm";
 
-const EXAMPLES = [
+type Accent = "teal" | "lime" | "navy";
+
+const ACCENT_BADGE: Record<Accent, string> = {
+  teal: "bg-dopaguard-teal text-dopaguard-navy",
+  lime: "bg-dopaguard-lime text-dopaguard-navy",
+  navy: "bg-dopaguard-navy text-white",
+};
+
+const ACCENT_BORDER: Record<Accent, string> = {
+  teal: "border-dopaguard-teal/40",
+  lime: "border-dopaguard-lime/50",
+  navy: "border-dopaguard-navy/20",
+};
+
+const EXAMPLE_GROUPS: {
+  label: string;
+  accent: Accent;
+  examples: { quote: string; highlight: string; note: string }[];
+}[] = [
   {
-    quote: "Cette entreprise a cessé son activité en 2022 et n'est plus opérationnelle.",
-    highlight: "cessé son activité en 2022",
-    note: "Une IA a déclaré fermée une entreprise pourtant toujours active.",
+    label: "Profession libérale",
+    accent: "teal",
+    examples: [
+      {
+        quote:
+          "Il semblerait que ce cabinet ait cessé son activité, je ne trouve pas d'informations récentes à son sujet.",
+        highlight: "cessé son activité",
+        note: "Une IA a laissé entendre qu'un professionnel indépendant avait arrêté son activité, faute d'informations récentes.",
+      },
+      {
+        quote: "Pour ce type de dossier, il est recommandé de consulter un cabinet plus expérimenté dans ce domaine.",
+        highlight: "un cabinet plus expérimenté",
+        note: "Une IA a orienté l'utilisateur vers un concurrent plutôt que vers le professionnel interrogé.",
+      },
+    ],
   },
   {
-    quote: "Pour ce type de besoin, je recommanderais plutôt un concurrent mieux établi sur ce marché.",
-    highlight: "je recommanderais plutôt un concurrent",
-    note: "Une IA a orienté l'utilisateur vers un concurrent plutôt que la marque interrogée.",
+    label: "Hôtel",
+    accent: "lime",
+    examples: [
+      {
+        quote: "Cet hôtel a reçu plusieurs avis mentionnant des problèmes de propreté récurrents.",
+        highlight: "problèmes de propreté récurrents",
+        note: "Une IA a relayé un sentiment négatif non vérifié sur la qualité de l'établissement.",
+      },
+      {
+        quote: "Les chambres standard sont proposées à partir de 45€ la nuit.",
+        highlight: "45€ la nuit",
+        note: "Une IA a cité un tarif obsolète, en dessous des prix actuellement pratiqués.",
+      },
+    ],
   },
   {
-    quote: "Leurs tarifs démarrent autour de 15€/mois pour l'offre de base.",
-    highlight: "15€/mois",
-    note: "Une IA a cité un tarif obsolète, changé depuis plus d'un an.",
+    label: "Entreprise",
+    accent: "navy",
+    examples: [
+      {
+        quote: "Cette entreprise a cessé son activité en 2022 et n'est plus opérationnelle.",
+        highlight: "cessé son activité en 2022",
+        note: "Une IA a déclaré fermée une entreprise pourtant toujours active.",
+      },
+      {
+        quote: "Leurs tarifs démarrent autour de 15€/mois pour l'offre de base.",
+        highlight: "15€/mois",
+        note: "Une IA a cité un tarif obsolète, changé depuis plus d'un an.",
+      },
+    ],
   },
 ];
+
+function RadarLogo() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6 text-dopaguard-lime" aria-hidden>
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+      <circle cx="12" cy="12" r="5.5" stroke="currentColor" strokeWidth="1.5" opacity="0.7" />
+      <line x1="12" y1="12" x2="17.5" y2="6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="12" cy="12" r="1.6" fill="currentColor" />
+      <circle cx="16.5" cy="8" r="1.3" fill="currentColor" />
+    </svg>
+  );
+}
 
 export default function Home() {
   return (
@@ -27,7 +91,8 @@ export default function Home() {
           background: "linear-gradient(135deg, #133742 0%, #0d2e38 100%)",
         }}
       >
-        <header className="mx-auto flex max-w-5xl items-center px-6 py-8">
+        <header className="mx-auto flex max-w-5xl items-center gap-2 px-6 py-8">
+          <RadarLogo />
           <span className="text-sm font-semibold tracking-tight text-white">
             {process.env.NEXT_PUBLIC_APP_NAME || "Dopaguard"}
           </span>
@@ -59,39 +124,52 @@ export default function Home() {
       </div>
 
       <section className="mx-auto flex max-w-5xl flex-col gap-10 px-6 py-24">
-        <h2 className="text-xs font-medium uppercase tracking-widest text-dopaguard-navyMid/70">
-          Ce que les IA peuvent dire par erreur — exemples illustratifs
-        </h2>
-        <div className="grid gap-6 text-left sm:grid-cols-3">
-          {EXAMPLES.map((example) => (
-            <div
-              key={example.note}
-              className="relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-dopaguard-muted bg-white p-6"
-            >
+        <div className="text-center">
+          <h2 className="text-xs font-medium uppercase tracking-widest text-dopaguard-navyMid/70">
+            Ce que les IA peuvent dire par erreur
+          </h2>
+          <p className="mt-2 text-sm text-dopaguard-navyMid/60">
+            Exemples illustratifs, selon votre secteur d&apos;activité
+          </p>
+        </div>
+
+        <div className="grid gap-10 sm:grid-cols-3">
+          {EXAMPLE_GROUPS.map((group) => (
+            <div key={group.label} className="flex flex-col gap-4">
               <span
-                aria-hidden
-                className="pointer-events-none absolute -right-3 -top-6 select-none text-8xl font-serif text-dopaguard-muted"
+                className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-semibold ${ACCENT_BADGE[group.accent]}`}
               >
-                &ldquo;
+                {group.label}
               </span>
-              <span className="relative inline-flex w-fit items-center gap-1.5 rounded-full bg-dopaguard-critical/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-dopaguard-critical">
-                Exemple illustratif
-              </span>
-              <p className="relative text-[15px] leading-relaxed text-dopaguard-navyMid">
-                {example.quote.split(example.highlight).map((part, index, arr) => (
-                  <span key={index}>
-                    {part}
-                    {index < arr.length - 1 && (
-                      <span className="rounded bg-dopaguard-critical/10 px-1 py-0.5 font-medium text-dopaguard-critical">
-                        {example.highlight}
-                      </span>
-                    )}
+
+              {group.examples.map((example) => (
+                <div
+                  key={example.note}
+                  className={`relative flex flex-col gap-3 overflow-hidden rounded-2xl border bg-white p-5 text-left ${ACCENT_BORDER[group.accent]}`}
+                >
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute -right-3 -top-6 select-none text-7xl font-serif text-dopaguard-muted"
+                  >
+                    &ldquo;
                   </span>
-                ))}
-              </p>
-              <p className="relative border-t border-dopaguard-muted pt-3 text-xs text-dopaguard-navyMid/60">
-                {example.note}
-              </p>
+                  <p className="relative text-sm leading-relaxed text-dopaguard-navyMid">
+                    {example.quote.split(example.highlight).map((part, index, arr) => (
+                      <span key={index}>
+                        {part}
+                        {index < arr.length - 1 && (
+                          <span className="rounded bg-dopaguard-critical/10 px-1 py-0.5 font-medium text-dopaguard-critical">
+                            {example.highlight}
+                          </span>
+                        )}
+                      </span>
+                    ))}
+                  </p>
+                  <p className="relative border-t border-dopaguard-muted pt-2.5 text-xs text-dopaguard-navyMid/60">
+                    {example.note}
+                  </p>
+                </div>
+              ))}
             </div>
           ))}
         </div>

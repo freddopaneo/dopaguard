@@ -12,7 +12,7 @@ export function ScanForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-2xl rounded-2xl bg-white p-6 shadow-[0_20px_60px_-15px_rgba(13,46,56,0.35)] sm:p-8"
+      className="mx-auto w-full max-w-2xl rounded-2xl bg-white p-6 shadow-[0_20px_60px_-15px_rgba(13,46,56,0.35)] sm:p-8"
     >
       <div className="grid gap-4 sm:grid-cols-3">
         <TextField id="brandName" name="brandName" label="Nom de marque" required placeholder="Dopaneo" />
