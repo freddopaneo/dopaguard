@@ -37,6 +37,15 @@ export default async function VerifyScanPage({
     .maybeSingle();
 
   if (!scan) {
+    try {
+      await supabase.from("error_logs").insert({
+        source: "verify-diagnostic",
+        message: "Hash de token non trouve",
+        context: { tokenLength: token.length, tokenHash },
+      });
+    } catch {
+      // Le logging ne doit jamais empêcher l'affichage de la page.
+    }
     return (
       <StatusCard
         title="Lien invalide"
