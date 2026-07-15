@@ -1,4 +1,10 @@
+"use client";
+
+import { useState } from "react";
+import type { PlanSlug } from "@/lib/stripe/plans";
+
 type Plan = {
+  slug: PlanSlug;
   name: string;
   price: string;
   recommended?: boolean;
@@ -13,6 +19,7 @@ type Plan = {
 
 const PLANS: Plan[] = [
   {
+    slug: "essentiel",
     name: "Essentiel",
     price: "69 €/mois",
     brands: "1",
@@ -24,6 +31,7 @@ const PLANS: Plan[] = [
     support: "standard",
   },
   {
+    slug: "pro",
     name: "Pro",
     price: "149 €/mois",
     recommended: true,
@@ -36,6 +44,7 @@ const PLANS: Plan[] = [
     support: "standard",
   },
   {
+    slug: "agence",
     name: "Agence",
     price: "349 €/mois",
     brands: "jusqu'à 10",
@@ -57,6 +66,34 @@ function Check({ on }: { on: boolean }) {
 }
 
 export function PricingTable() {
+  const [loadingPlan, setLoadingPlan] = useState<PlanSlug | null>(null);
+  const [error, setError] = useState("");
+
+  async function handleSelectPlan(plan: PlanSlug) {
+    setLoadingPlan(plan);
+    setError("");
+
+    try {
+      const response = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan }),
+      });
+      const data = await response.json();
+
+      if (!response.ok || !data.url) {
+        setError(data.error || "Une erreur est survenue. Réessayez plus tard.");
+        setLoadingPlan(null);
+        return;
+      }
+
+      window.location.href = data.url;
+    } catch {
+      setError("Une erreur est survenue. Réessayez plus tard.");
+      setLoadingPlan(null);
+    }
+  }
+
   return (
     <section id="tarifs" className="mx-auto max-w-5xl px-6 py-24">
       <div className="mx-auto max-w-2xl text-center">
@@ -66,6 +103,7 @@ export function PricingTable() {
         <p className="mt-4 text-lg text-dopaguard-navyMid/80">
           Essai 14 jours. Sans engagement. Résiliable en un clic.
         </p>
+        {error && <p className="mt-4 text-sm font-medium text-dopaguard-critical">{error}</p>}
       </div>
 
       <div className="mt-14 grid gap-6 sm:grid-cols-3">
@@ -117,14 +155,15 @@ export function PricingTable() {
 
             <button
               type="button"
-              disabled
-              className={`mt-6 w-full cursor-not-allowed rounded-xl px-4 py-2.5 text-sm font-semibold ${
+              disabled={loadingPlan !== null}
+              onClick={() => handleSelectPlan(plan.slug)}
+              className={`mt-6 w-full rounded-xl px-4 py-2.5 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60 ${
                 plan.recommended
                   ? "bg-dopaguard-navy text-white"
                   : "border border-dopaguard-navy/20 text-dopaguard-navy"
               }`}
             >
-              Démarrer l&apos;essai de 14 jours
+              {loadingPlan === plan.slug ? "Redirection…" : "Démarrer l'essai de 14 jours"}
             </button>
           </div>
         ))}
