@@ -1,4 +1,5 @@
 import { ScanForm } from "@/components/ScanForm";
+import { HighlightedText } from "@/components/HighlightedText";
 
 type Accent = "teal" | "lime" | "navy";
 
@@ -154,16 +155,7 @@ export default function Home() {
                     &ldquo;
                   </span>
                   <p className="relative text-sm leading-relaxed text-dopaguard-navyMid">
-                    {example.quote.split(example.highlight).map((part, index, arr) => (
-                      <span key={index}>
-                        {part}
-                        {index < arr.length - 1 && (
-                          <span className="rounded bg-dopaguard-critical/10 px-1 py-0.5 font-medium text-dopaguard-critical">
-                            {example.highlight}
-                          </span>
-                        )}
-                      </span>
-                    ))}
+                    <HighlightedText text={example.quote} excerpts={[example.highlight]} />
                   </p>
                   <p className="relative border-t border-dopaguard-muted pt-2.5 text-xs text-dopaguard-navyMid/60">
                     {example.note}

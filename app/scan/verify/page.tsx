@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { hashToken } from "@/lib/scan/token";
 
@@ -31,7 +32,7 @@ export default async function VerifyScanPage({
 
   const { data: scan } = await supabase
     .from("free_scans")
-    .select("id, status, token_expires_at, brand_name")
+    .select("id, status, token_expires_at")
     .eq("verification_token_hash", tokenHash)
     .maybeSingle();
 
@@ -44,8 +45,9 @@ export default async function VerifyScanPage({
     );
   }
 
+  // Email déjà confirmé (et éventuellement scan déjà en cours ou terminé) : direction la page de résultats.
   if (scan.status !== "pending") {
-    return <StatusCard title="Déjà vérifié" body="Cet email a déjà été vérifié précédemment." />;
+    redirect(`/scan/${scan.id}`);
   }
 
   if (!scan.token_expires_at || new Date(scan.token_expires_at) < new Date()) {
@@ -59,10 +61,5 @@ export default async function VerifyScanPage({
 
   await supabase.from("free_scans").update({ status: "verified" }).eq("id", scan.id);
 
-  return (
-    <StatusCard
-      title="Email vérifié !"
-      body={`Merci, votre email est confirmé pour le scan de ${scan.brand_name}. Le lancement du scan sera disponible très bientôt.`}
-    />
-  );
+  redirect(`/scan/${scan.id}`);
 }
