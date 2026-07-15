@@ -22,12 +22,21 @@ export default async function VerifyScanPage({
   searchParams: { token?: string };
 }) {
   const token = searchParams.token;
+  const supabase = createAdminClient();
 
   if (!token) {
+    try {
+      await supabase.from("error_logs").insert({
+        source: "verify-diagnostic",
+        message: "Aucun token dans l'URL",
+        context: { searchParamsKeys: Object.keys(searchParams) },
+      });
+    } catch {
+      // Le logging ne doit jamais empêcher l'affichage de la page.
+    }
     return <StatusCard title="Lien invalide" body="Ce lien de vérification est invalide." />;
   }
 
-  const supabase = createAdminClient();
   const tokenHash = hashToken(token);
 
   const { data: scan } = await supabase
