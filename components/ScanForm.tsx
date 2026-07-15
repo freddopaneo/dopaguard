@@ -62,7 +62,14 @@ export function ScanForm() {
     >
       <div className="grid gap-4 sm:grid-cols-3">
         <TextField id="brandName" name="brandName" label="Nom de marque" required placeholder="Dopaneo" />
-        <TextField id="website" name="website" label="Site web" type="text" required placeholder="dopaneo.ai" />
+        <TextField
+          id="website"
+          name="website"
+          label="Site web"
+          type="text"
+          required
+          placeholder="www.dopaneo.ai"
+        />
         <TextField id="email" name="email" label="Email professionnel" type="email" required placeholder="vous@entreprise.fr" />
       </div>
       <Button type="submit" disabled={status === "loading"} className="mt-5 w-full">
