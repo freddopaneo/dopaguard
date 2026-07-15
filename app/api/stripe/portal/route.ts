@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/login", request.url), 303);
   }
 
   const { data: subscription } = await supabase
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     .maybeSingle();
 
   if (!subscription) {
-    return NextResponse.redirect(new URL("/onboarding", request.url));
+    return NextResponse.redirect(new URL("/onboarding", request.url), 303);
   }
 
   const stripe = createStripeClient();
@@ -29,5 +29,7 @@ export async function POST(request: NextRequest) {
     return_url: `${getAppUrl()}/onboarding`,
   });
 
-  return NextResponse.redirect(portalSession.url);
+  // 303 (et non le 307 par défaut) : la requête d'origine est un POST (soumission de formulaire),
+  // mais la page Stripe hébergée n'accepte que du GET -- 307 préserverait POST et casserait la redirection.
+  return NextResponse.redirect(portalSession.url, 303);
 }
