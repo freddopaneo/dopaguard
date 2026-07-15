@@ -99,7 +99,9 @@ export async function POST(request: NextRequest) {
       if (insertError) throw insertError;
     }
 
-    const verifyUrl = `${process.env.NEXT_PUBLIC_APP_URL}/scan/verify?token=${token}`;
+    const appUrl =
+      process.env.NEXT_PUBLIC_APP_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+    const verifyUrl = `${appUrl}/scan/verify?token=${token}`;
     await sendMagicLinkEmail({ to: email, brandName, verifyUrl });
 
     return NextResponse.json({ success: true });
