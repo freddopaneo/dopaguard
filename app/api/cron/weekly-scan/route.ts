@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { runBrandScan } from "@/lib/scan/run-brand-scan";
+import { runBrandJudge } from "@/lib/scan/run-brand-judge";
 
 export const maxDuration = 300;
 
@@ -25,7 +26,16 @@ export async function GET(request: NextRequest) {
   const summaries = [];
   for (const brand of brands ?? []) {
     try {
-      summaries.push(await runBrandScan(brand));
+      const scanSummary = await runBrandScan(brand);
+      const judgeSummary = await runBrandJudge(brand);
+      summaries.push({
+        brandId: brand.id,
+        callsMade: scanSummary.callsMade,
+        callsSkipped: scanSummary.callsSkipped,
+        scanErrors: scanSummary.errors,
+        responsesJudged: judgeSummary.responsesJudged,
+        judgeErrors: judgeSummary.errors,
+      });
     } catch (scanError) {
       const message = scanError instanceof Error ? scanError.message : String(scanError);
       try {
