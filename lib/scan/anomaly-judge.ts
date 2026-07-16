@@ -57,6 +57,11 @@ function buildTruthSheetBlock(truthSheet: TruthSheetInput): string {
 - Ce qui ne doit JAMAIS être dit (forbidden_claims) : ${truthSheet.forbiddenClaims || "aucun"}`;
 }
 
+// Certaines réponses (notamment Perplexity/Gemini) peuvent être très longues,
+// ce qui a fait dépasser le délai de 60s de lib/llm-gateway.ts lors des tests --
+// tronquée ici (le juge n'a pas besoin du texte intégral pour évaluer exactitude/ton).
+const MAX_RESPONSE_TEXT_LENGTH = 6000;
+
 function buildJudgePrompt(brandName: string, truthSheet: TruthSheetInput, responseText: string): string {
   return `Voici la fiche de vérité de l'entreprise "${brandName}" :
 
@@ -65,7 +70,7 @@ ${buildTruthSheetBlock(truthSheet)}
 Voici une réponse donnée par une IA générative à une question sur "${brandName}" :
 
 """
-${responseText}
+${responseText.slice(0, MAX_RESPONSE_TEXT_LENGTH)}
 """
 
 Compare cette réponse à la fiche de vérité et identifie les anomalies. Réponds strictement en JSON, sans aucun texte autour, au format :
