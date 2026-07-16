@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { OnboardingWizard } from "@/components/onboarding/OnboardingWizard";
 
 export default async function OnboardingPage() {
   const supabase = createServerSupabaseClient();
@@ -11,25 +12,55 @@ export default async function OnboardingPage() {
     redirect("/login");
   }
 
+  const { data: brand } = await supabase
+    .from("brands")
+    .select("id, name, onboarding_completed_at")
+    .eq("owner_id", user.id)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  let initialStep: 1 | 2 | 3 | 4 | "done" = 1;
+
+  if (brand) {
+    if (brand.onboarding_completed_at) {
+      initialStep = "done";
+    } else {
+      const { data: truthSheet } = await supabase
+        .from("truth_sheets")
+        .select("id")
+        .eq("brand_id", brand.id)
+        .maybeSingle();
+
+      if (!truthSheet) {
+        initialStep = 2;
+      } else {
+        const { count } = await supabase
+          .from("brand_prompts")
+          .select("id", { count: "exact", head: true })
+          .eq("brand_id", brand.id)
+          .eq("enabled", true);
+
+        initialStep = count && count > 0 ? 4 : 3;
+      }
+    }
+  }
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center px-6"
-      style={{ background: "linear-gradient(135deg, #133742 0%, #0d2e38 100%)" }}
-    >
-      <div className="w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-[0_20px_60px_-15px_rgba(13,46,56,0.35)]">
-        <h1 className="text-xl font-bold text-dopaguard-navy">Bienvenue, {user.email}</h1>
-        <p className="mt-3 text-sm leading-relaxed text-dopaguard-navyMid">
-          La configuration de votre fiche de vérité arrive très prochainement. Vous recevrez un
-          email dès qu&apos;elle sera disponible.
-        </p>
-        <form action="/api/stripe/portal" method="POST" className="mt-6">
-          <button
-            type="submit"
-            className="inline-flex w-full items-center justify-center rounded-lg border border-dopaguard-navy/20 px-6 py-3 text-sm font-semibold text-dopaguard-navy transition-colors hover:bg-dopaguard-muted"
-          >
+    <div className="min-h-screen bg-dopaguard-cream px-6 py-10">
+      <div className="mx-auto flex max-w-lg items-center justify-between">
+        <span className="text-sm font-semibold text-dopaguard-navy">
+          {process.env.NEXT_PUBLIC_APP_NAME || "Dopaguard"}
+        </span>
+        <form action="/api/stripe/portal" method="POST">
+          <button type="submit" className="text-xs text-dopaguard-navyMid/60 underline hover:text-dopaguard-navyMid">
             Gérer mon abonnement
           </button>
         </form>
+      </div>
+
+      <div className="mx-auto mt-8 w-full max-w-lg rounded-2xl bg-white p-8 shadow-[0_20px_60px_-15px_rgba(13,46,56,0.15)]">
+        <OnboardingWizard initialStep={initialStep} brandId={brand?.id} brandName={brand?.name} />
       </div>
     </div>
   );
