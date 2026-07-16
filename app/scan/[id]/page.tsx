@@ -24,6 +24,16 @@ const CATEGORY_LABELS: Record<string, string> = {
   factual: "Factuel",
 };
 
+const CATEGORY_DESCRIPTIONS: Record<string, string> = {
+  reputation: "Image générale perçue",
+  reliability: "Confiance et légitimité",
+  recommendation: "Orienterait-elle un client vers vous ?",
+  comparison: "Positionnement face à la concurrence",
+  factual: "Exactitude des faits bruts",
+};
+
+const RESPONSE_PREVIEW_LENGTH = 300;
+
 const PROVIDER_ORDER = ["openai", "anthropic", "perplexity"];
 
 interface ScanResponseEntry {
@@ -45,6 +55,42 @@ function FullScreenCard({ title, body }: { title: string; body: string }) {
         <h1 className="text-xl font-bold text-dopaguard-navy">{title}</h1>
         <p className="mt-3 text-sm leading-relaxed text-dopaguard-navyMid">{body}</p>
       </div>
+    </div>
+  );
+}
+
+function ResponseCard({ entry }: { entry: ScanResponseEntry }) {
+  const [expanded, setExpanded] = useState(false);
+  const fullText = entry.responseText ?? "";
+  const isLong = fullText.length > RESPONSE_PREVIEW_LENGTH;
+  const displayText = !expanded && isLong ? `${fullText.slice(0, RESPONSE_PREVIEW_LENGTH)}…` : fullText;
+
+  return (
+    <div className="relative flex flex-col gap-2.5 overflow-hidden rounded-2xl border border-dopaguard-muted bg-white p-4 text-left">
+      <div>
+        <span className="text-xs font-semibold uppercase tracking-wide text-dopaguard-navyMid/60">
+          {CATEGORY_LABELS[entry.category] ?? entry.category}
+        </span>
+        <p className="mt-0.5 text-[11px] text-dopaguard-navyMid/40">{CATEGORY_DESCRIPTIONS[entry.category] ?? ""}</p>
+      </div>
+      {entry.error || !entry.responseText ? (
+        <p className="text-sm text-dopaguard-navyMid/60">Réponse indisponible pour cette question.</p>
+      ) : (
+        <>
+          <p className="text-sm leading-relaxed text-dopaguard-navyMid">
+            <HighlightedText text={displayText} excerpts={entry.flags.map((f) => f.excerpt)} />
+          </p>
+          {isLong && (
+            <button
+              type="button"
+              onClick={() => setExpanded((e) => !e)}
+              className="self-start text-xs font-medium text-dopaguard-navy underline underline-offset-2"
+            >
+              {expanded ? "Réduire" : "Lire la suite"}
+            </button>
+          )}
+        </>
+      )}
     </div>
   );
 }
@@ -179,21 +225,7 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
               {responses
                 .filter((r) => r.provider === provider)
                 .map((r) => (
-                  <div
-                    key={r.category}
-                    className="relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-dopaguard-muted bg-white p-5 text-left"
-                  >
-                    <span className="text-xs font-semibold uppercase tracking-wide text-dopaguard-navyMid/60">
-                      {CATEGORY_LABELS[r.category] ?? r.category}
-                    </span>
-                    {r.error || !r.responseText ? (
-                      <p className="text-sm text-dopaguard-navyMid/60">Réponse indisponible pour cette question.</p>
-                    ) : (
-                      <p className="text-sm leading-relaxed text-dopaguard-navyMid">
-                        <HighlightedText text={r.responseText} excerpts={r.flags.map((f) => f.excerpt)} />
-                      </p>
-                    )}
-                  </div>
+                  <ResponseCard key={r.category} entry={r} />
                 ))}
             </div>
           ))}
@@ -201,16 +233,13 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
 
         <div className="mt-16 flex flex-col items-center gap-4 rounded-2xl bg-white p-10 text-center">
           <h2 className="text-xl font-bold text-dopaguard-navy">Surveillez votre réputation IA en continu</h2>
-          <p className="max-w-md text-sm text-dopaguard-navyMid">
-            Essai 14 jours, sans engagement. Disponible très prochainement.
-          </p>
-          <button
-            type="button"
-            disabled
-            className="cursor-not-allowed rounded-lg bg-dopaguard-lime px-6 py-3.5 text-sm font-semibold text-dopaguard-navy opacity-50"
+          <p className="max-w-md text-sm text-dopaguard-navyMid">Essai 14 jours, sans engagement, résiliable en un clic.</p>
+          <a
+            href="/#tarifs"
+            className="rounded-lg bg-dopaguard-lime px-6 py-3.5 text-sm font-semibold text-dopaguard-navy transition-all hover:brightness-95"
           >
-            Essai 14 jours →
-          </button>
+            Voir les offres →
+          </a>
         </div>
       </div>
     </div>
