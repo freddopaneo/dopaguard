@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
   const supabase = createAdminClient();
   const { data: brands, error } = await supabase
     .from("brands")
-    .select("id, name, website, sector, plan")
+    .select("id, name, website, sector, plan, owner_id")
     .in("status", ["trial", "active"]);
 
   if (error) {
@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
   for (const brand of brands ?? []) {
     try {
       const scanSummary = await runBrandScan(brand);
-      const judgeSummary = await runBrandJudge(brand);
+      const judgeSummary = await runBrandJudge({ id: brand.id, name: brand.name, ownerId: brand.owner_id });
       summaries.push({
         brandId: brand.id,
         callsMade: scanSummary.callsMade,

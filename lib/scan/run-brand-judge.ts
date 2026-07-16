@@ -2,8 +2,11 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { judgeWithTruthSheet, type RecommendationPosition } from "./anomaly-judge";
 import { getIsoWeek } from "./iso-week";
 import { mapWithConcurrency } from "./concurrency";
+import { sendCriticalAlertEmail, sendWeeklyDigestEmail } from "@/lib/email/resend";
+import { getAppUrl } from "@/lib/app-url";
 
 const CONCURRENCY = 3;
+const SEVERITY_RANK: Record<string, number> = { critical: 0, major: 1, minor: 2 };
 
 const RECOMMENDATION_SCORES: Record<RecommendationPosition, number> = {
   recommended: 100,
@@ -15,6 +18,7 @@ const RECOMMENDATION_SCORES: Record<RecommendationPosition, number> = {
 export interface BrandForJudge {
   id: string;
   name: string;
+  ownerId: string;
 }
 
 export interface BrandJudgeSummary {
@@ -61,12 +65,16 @@ export async function runBrandJudge(brand: BrandForJudge): Promise<BrandJudgeSum
 
   const { data: unjudged } = await supabase
     .from("llm_responses")
-    .select("id, response_text")
+    .select("id, response_text, llm_provider")
     .eq("brand_id", brand.id)
     .eq("week_number", week)
     .eq("year", year)
     .is("judged_at", null)
     .not("response_text", "is", null);
+
+  const { data: ownerProfile } = await supabase.from("profiles").select("email").eq("id", brand.ownerId).maybeSingle();
+  const ownerEmail = ownerProfile?.email ?? null;
+  const dashboardUrl = `${getAppUrl()}/login`;
 
   let responsesJudged = 0;
   let errors = 0;
@@ -88,6 +96,27 @@ export async function runBrandJudge(brand: BrandForJudge): Promise<BrandJudgeSum
           }))
         );
         if (anomaliesError) throw anomaliesError;
+
+        if (ownerEmail) {
+          for (const anomaly of result.anomalies.filter((a) => a.severity === "critical")) {
+            try {
+              await sendCriticalAlertEmail({
+                to: ownerEmail,
+                brandName: brand.name,
+                anomaly: { type: anomaly.type, summary: anomaly.summary, evidence: anomaly.evidence },
+                llmProvider: response.llm_provider,
+                dashboardUrl,
+              });
+            } catch (emailError) {
+              const message = emailError instanceof Error ? emailError.message : String(emailError);
+              try {
+                await supabase.from("error_logs").insert({ source: "weekly-alert", brand_id: brand.id, message, context: {} });
+              } catch {
+                // Le logging ne doit jamais interrompre le jugement.
+              }
+            }
+          }
+        }
       }
 
       const { error: updateError } = await supabase
@@ -127,7 +156,7 @@ export async function runBrandJudge(brand: BrandForJudge): Promise<BrandJudgeSum
     }
   });
 
-  await updateWeeklyScore(supabase, brand.id, week, year);
+  await updateWeeklyScore(supabase, { id: brand.id, name: brand.name, ownerEmail, dashboardUrl }, week, year);
 
   return { brandId: brand.id, responsesJudged, errors };
 }
@@ -145,14 +174,14 @@ function weightedScore(r: {
 
 async function updateWeeklyScore(
   supabase: ReturnType<typeof createAdminClient>,
-  brandId: string,
+  brand: { id: string; name: string; ownerEmail: string | null; dashboardUrl: string },
   week: number,
   year: number
 ) {
   const { data: judgedResponses } = await supabase
     .from("llm_responses")
     .select("id, llm_provider, sentiment_score, accuracy_score, recommendation_position")
-    .eq("brand_id", brandId)
+    .eq("brand_id", brand.id)
     .eq("week_number", week)
     .eq("year", year)
     .not("judged_at", "is", null);
@@ -160,7 +189,10 @@ async function updateWeeklyScore(
   if (!judgedResponses || judgedResponses.length === 0) return;
 
   const responseIds = judgedResponses.map((r) => r.id);
-  const { data: anomaliesForWeek } = await supabase.from("anomalies").select("severity").in("llm_response_id", responseIds);
+  const { data: anomaliesForWeek } = await supabase
+    .from("anomalies")
+    .select("type, severity, summary")
+    .in("llm_response_id", responseIds);
 
   const anomaliesCount = { critical: 0, major: 0, minor: 0 };
   for (const anomaly of anomaliesForWeek ?? []) {
@@ -183,15 +215,68 @@ async function updateWeeklyScore(
     scoreByProvider[provider] = Math.round(total / count);
   }
 
+  const roundedGlobalScore = Math.round(globalScore);
+
+  const { data: existingScore } = await supabase
+    .from("scores")
+    .select("digest_sent_at")
+    .eq("brand_id", brand.id)
+    .eq("week_number", week)
+    .eq("year", year)
+    .maybeSingle();
+
   await supabase.from("scores").upsert(
     {
-      brand_id: brandId,
+      brand_id: brand.id,
       week_number: week,
       year,
-      global_score: Math.round(globalScore),
+      global_score: roundedGlobalScore,
       score_by_provider: scoreByProvider,
       anomalies_count: anomaliesCount,
     },
     { onConflict: "brand_id,week_number,year" }
   );
+
+  if (existingScore?.digest_sent_at || !brand.ownerEmail) return;
+
+  const { data: recentScores } = await supabase
+    .from("scores")
+    .select("week_number, year, global_score")
+    .eq("brand_id", brand.id)
+    .order("year", { ascending: false })
+    .order("week_number", { ascending: false })
+    .limit(2);
+
+  const previousScore =
+    (recentScores ?? []).find((s) => !(s.week_number === week && s.year === year))?.global_score ?? null;
+
+  const topAnomalies = (anomaliesForWeek ?? [])
+    .slice()
+    .sort((a, b) => (SEVERITY_RANK[a.severity] ?? 3) - (SEVERITY_RANK[b.severity] ?? 3))
+    .slice(0, 3)
+    .map((a) => ({ type: a.type, severity: a.severity, summary: a.summary ?? "" }));
+
+  try {
+    await sendWeeklyDigestEmail({
+      to: brand.ownerEmail,
+      brandName: brand.name,
+      score: roundedGlobalScore,
+      previousScore,
+      topAnomalies,
+      dashboardUrl: brand.dashboardUrl,
+    });
+    await supabase
+      .from("scores")
+      .update({ digest_sent_at: new Date().toISOString() })
+      .eq("brand_id", brand.id)
+      .eq("week_number", week)
+      .eq("year", year);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    try {
+      await supabase.from("error_logs").insert({ source: "weekly-alert", brand_id: brand.id, message, context: {} });
+    } catch {
+      // Le logging ne doit jamais interrompre le cycle.
+    }
+  }
 }
