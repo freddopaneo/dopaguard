@@ -1,6 +1,8 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 import { callLLM, type LLMProvider } from "@/lib/llm-gateway";
 import { renderPrompt } from "@/lib/prompts";
+import { getIsoWeek } from "./iso-week";
+import { mapWithConcurrency } from "./concurrency";
 
 const PLAN_PROVIDERS: Record<string, LLMProvider[]> = {
   essentiel: ["openai", "anthropic", "perplexity"],
@@ -9,30 +11,6 @@ const PLAN_PROVIDERS: Record<string, LLMProvider[]> = {
 };
 
 const CONCURRENCY = 3;
-
-function getIsoWeek(date: Date): { week: number; year: number } {
-  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  const dayNum = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  const week = Math.ceil(((d.getTime() - yearStart.getTime()) / 86_400_000 + 1) / 7);
-  return { week, year: d.getUTCFullYear() };
-}
-
-async function mapWithConcurrency<T, R>(items: T[], limit: number, fn: (item: T) => Promise<R>): Promise<R[]> {
-  const results: R[] = new Array(items.length);
-  let index = 0;
-
-  async function worker() {
-    while (index < items.length) {
-      const current = index++;
-      results[current] = await fn(items[current]);
-    }
-  }
-
-  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
-  return results;
-}
 
 export interface BrandForScan {
   id: string;
