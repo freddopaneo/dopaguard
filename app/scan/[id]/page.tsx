@@ -231,15 +231,28 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
           ))}
         </div>
 
-        <div className="mt-16 flex flex-col items-center gap-4 rounded-2xl bg-white p-10 text-center">
-          <h2 className="text-xl font-bold text-dopaguard-navy">Surveillez votre réputation IA en continu</h2>
-          <p className="max-w-md text-sm text-dopaguard-navyMid">Essai 14 jours, sans engagement, résiliable en un clic.</p>
+        <div className="mt-16 flex flex-col items-center gap-4 rounded-2xl bg-dopaguard-navy p-10 text-center">
+          <h2 className="max-w-lg text-2xl font-bold text-white sm:text-3xl">
+            Ce que vous venez de voir n&apos;est qu&apos;une photo — à un instant T.
+          </h2>
+          <p className="max-w-lg text-sm leading-relaxed text-white/70">
+            Certaines IA connaissent bien votre entreprise, d&apos;autres n&apos;ont presque rien à dire. Ce
+            déséquilibre est en soi un signal : votre présence dans les IA n&apos;est ni acquise, ni figée. Un nouvel
+            avis client, une mise à jour de modèle, ou un concurrent qui progresse — et ce que disent ChatGPT, Claude
+            ou Perplexity de vous peut changer du jour au lendemain, en bien comme en mal.
+          </p>
+          <p className="max-w-lg text-sm font-medium leading-relaxed text-white">
+            Votre réputation est votre actif le plus précieux. La laisser au hasard, c&apos;est laisser d&apos;autres
+            — vos concurrents, ou simplement le silence — décider ce que vos futurs clients entendront de vous.
+            Dopaguard la surveille pour vous, chaque semaine, dans les 5 grandes IA, et vous alerte dès que ça bouge.
+          </p>
           <a
             href="/#tarifs"
-            className="rounded-lg bg-dopaguard-lime px-6 py-3.5 text-sm font-semibold text-dopaguard-navy transition-all hover:brightness-95"
+            className="mt-2 rounded-lg bg-dopaguard-lime px-6 py-3.5 text-sm font-semibold text-dopaguard-navy transition-all hover:brightness-95"
           >
-            Voir les offres →
+            Démarrer mon essai de 14 jours →
           </a>
+          <p className="text-xs text-white/40">Sans engagement, résiliable en un clic.</p>
         </div>
       </div>
     </div>
