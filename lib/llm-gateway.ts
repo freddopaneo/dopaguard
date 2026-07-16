@@ -1,4 +1,4 @@
-export type LLMProvider = "openai" | "anthropic" | "perplexity";
+export type LLMProvider = "openai" | "anthropic" | "perplexity" | "google" | "mistral";
 
 export interface CallLLMParams {
   provider: LLMProvider;
@@ -31,6 +31,8 @@ const DEFAULT_MODELS: Record<LLMProvider, string> = {
   openai: "gpt-4o",
   anthropic: "claude-sonnet-5",
   perplexity: "sonar",
+  google: "gemini-2.0-flash",
+  mistral: "mistral-small-latest",
 };
 
 // Tarifs approximatifs en USD par million de tokens (entrée/sortie), juillet 2026.
@@ -39,6 +41,8 @@ const PRICING_USD_PER_MILLION: Record<LLMProvider, { in: number; out: number }> 
   openai: { in: 2.5, out: 10 },
   anthropic: { in: 3, out: 15 },
   perplexity: { in: 1, out: 1 },
+  google: { in: 0.1, out: 0.4 },
+  mistral: { in: 0.2, out: 0.6 },
 };
 
 const USD_TO_EUR = 0.92;
@@ -142,10 +146,55 @@ async function callPerplexity(model: string, prompt: string): Promise<RawLLMResu
   };
 }
 
+async function callGoogle(model: string, prompt: string): Promise<RawLLMResult> {
+  const res = await fetchWithTimeout(
+    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GOOGLE_AI_API_KEY}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.7 },
+      }),
+    }
+  );
+  if (!res.ok) throw new Error(`Google ${res.status}: ${await res.text()}`);
+  const data = await res.json();
+  return {
+    text: data.candidates[0].content.parts[0].text,
+    tokensIn: data.usageMetadata.promptTokenCount,
+    tokensOut: data.usageMetadata.candidatesTokenCount,
+  };
+}
+
+async function callMistral(model: string, prompt: string): Promise<RawLLMResult> {
+  const res = await fetchWithTimeout("https://api.mistral.ai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.MISTRAL_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model,
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0.7,
+    }),
+  });
+  if (!res.ok) throw new Error(`Mistral ${res.status}: ${await res.text()}`);
+  const data = await res.json();
+  return {
+    text: data.choices[0].message.content,
+    tokensIn: data.usage.prompt_tokens,
+    tokensOut: data.usage.completion_tokens,
+  };
+}
+
 const CALLERS: Record<LLMProvider, (model: string, prompt: string) => Promise<RawLLMResult>> = {
   openai: callOpenAI,
   anthropic: callAnthropic,
   perplexity: callPerplexity,
+  google: callGoogle,
+  mistral: callMistral,
 };
 
 export async function callLLM({ provider, model, prompt }: CallLLMParams): Promise<CallLLMResult> {
