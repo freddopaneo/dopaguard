@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 // Client service_role : contourne RLS. Usage serveur uniquement, jamais exposé au client.
 export function createAdminClient() {
@@ -6,3 +6,5 @@ export function createAdminClient() {
     auth: { persistSession: false },
   });
 }
+
+export type AdminClient = SupabaseClient;
