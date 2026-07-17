@@ -14,7 +14,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/dashboard/anomalies", label: "Anomalies", enabled: true },
   { href: "/dashboard/reponses", label: "Réponses brutes", enabled: true },
   { href: "/dashboard/fiche-de-verite", label: "Fiche de vérité", enabled: true },
-  { href: "/dashboard/parametres", label: "Paramètres", enabled: false },
+  { href: "/dashboard/parametres", label: "Paramètres", enabled: true },
 ];
 
 export function DashboardNav() {

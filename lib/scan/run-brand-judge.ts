@@ -72,8 +72,14 @@ export async function runBrandJudge(brand: BrandForJudge): Promise<BrandJudgeSum
     .is("judged_at", null)
     .not("response_text", "is", null);
 
-  const { data: ownerProfile } = await supabase.from("profiles").select("email").eq("id", brand.ownerId).maybeSingle();
+  const { data: ownerProfile } = await supabase
+    .from("profiles")
+    .select("email, notify_critical_alerts, notify_weekly_digest")
+    .eq("id", brand.ownerId)
+    .maybeSingle();
   const ownerEmail = ownerProfile?.email ?? null;
+  const notifyCriticalAlerts = ownerProfile?.notify_critical_alerts ?? true;
+  const notifyWeeklyDigest = ownerProfile?.notify_weekly_digest ?? true;
   const dashboardUrl = `${getAppUrl()}/login`;
 
   let responsesJudged = 0;
@@ -97,7 +103,7 @@ export async function runBrandJudge(brand: BrandForJudge): Promise<BrandJudgeSum
         );
         if (anomaliesError) throw anomaliesError;
 
-        if (ownerEmail) {
+        if (ownerEmail && notifyCriticalAlerts) {
           for (const anomaly of result.anomalies.filter((a) => a.severity === "critical")) {
             try {
               await sendCriticalAlertEmail({
@@ -156,7 +162,12 @@ export async function runBrandJudge(brand: BrandForJudge): Promise<BrandJudgeSum
     }
   });
 
-  await updateWeeklyScore(supabase, { id: brand.id, name: brand.name, ownerEmail, dashboardUrl }, week, year);
+  await updateWeeklyScore(
+    supabase,
+    { id: brand.id, name: brand.name, ownerEmail, notifyWeeklyDigest, dashboardUrl },
+    week,
+    year
+  );
 
   return { brandId: brand.id, responsesJudged, errors };
 }
@@ -174,7 +185,7 @@ function weightedScore(r: {
 
 async function updateWeeklyScore(
   supabase: ReturnType<typeof createAdminClient>,
-  brand: { id: string; name: string; ownerEmail: string | null; dashboardUrl: string },
+  brand: { id: string; name: string; ownerEmail: string | null; notifyWeeklyDigest: boolean; dashboardUrl: string },
   week: number,
   year: number
 ) {
@@ -237,7 +248,7 @@ async function updateWeeklyScore(
     { onConflict: "brand_id,week_number,year" }
   );
 
-  if (existingScore?.digest_sent_at || !brand.ownerEmail) return;
+  if (existingScore?.digest_sent_at || !brand.ownerEmail || !brand.notifyWeeklyDigest) return;
 
   const { data: recentScores } = await supabase
     .from("scores")
