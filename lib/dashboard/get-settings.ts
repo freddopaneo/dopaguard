@@ -6,6 +6,7 @@ export interface SettingsRecord {
     plan: PlanSlug | null;
     status: string | null;
     currentPeriodEnd: string | null;
+    retentionOfferAlreadySent: boolean;
   } | null;
   notifications: {
     notifyCriticalAlerts: boolean;
@@ -20,7 +21,7 @@ export async function getSettings(
   const [subscriptionResult, profileResult] = await Promise.all([
     supabase
       .from("subscriptions")
-      .select("plan, status, current_period_end")
+      .select("plan, status, current_period_end, retention_offer_sent_at")
       .eq("profile_id", userId)
       .order("created_at", { ascending: false })
       .limit(1)
@@ -34,6 +35,7 @@ export async function getSettings(
           plan: subscriptionResult.data.plan as PlanSlug | null,
           status: subscriptionResult.data.status,
           currentPeriodEnd: subscriptionResult.data.current_period_end,
+          retentionOfferAlreadySent: Boolean(subscriptionResult.data.retention_offer_sent_at),
         }
       : null,
     notifications: {

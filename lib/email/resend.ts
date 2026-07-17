@@ -227,3 +227,52 @@ export async function sendWeeklyDigestEmail({
     throw new Error(`Resend: ${error.message}`);
   }
 }
+
+function retentionOfferEmailHtml(percentOff: number, dashboardUrl: string): string {
+  return `
+    <div style="font-family: Arial, Helvetica, sans-serif; max-width: 480px; margin: 0 auto; color: #133742;">
+      <h1 style="font-size: 20px;">Votre réduction de ${percentOff}% a été appliquée</h1>
+      <p>Bonjour,</p>
+      <p>
+        Nous avons bien reçu votre demande concernant votre abonnement. Une réduction de
+        <strong>${percentOff}%</strong> a été appliquée automatiquement à partir de votre prochaine facture —
+        vous n'avez rien à faire de plus.
+      </p>
+      <p>
+        Si vous préférez tout de même résilier, vous pouvez le faire à tout moment depuis votre espace,
+        rubrique Paramètres.
+      </p>
+      <p style="text-align: center; margin: 32px 0;">
+        <a
+          href="${dashboardUrl}"
+          style="background: #c7ff98; color: #133742; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block;"
+        >
+          Voir mon espace Dopaguard
+        </a>
+      </p>
+    </div>
+  `;
+}
+
+export async function sendRetentionOfferEmail({
+  to,
+  percentOff,
+  dashboardUrl,
+}: {
+  to: string;
+  percentOff: number;
+  dashboardUrl: string;
+}) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  const { error } = await resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL!,
+    to,
+    subject: `Votre réduction de ${percentOff}% a été appliquée`,
+    html: retentionOfferEmailHtml(percentOff, dashboardUrl),
+  });
+
+  if (error) {
+    throw new Error(`Resend: ${error.message}`);
+  }
+}

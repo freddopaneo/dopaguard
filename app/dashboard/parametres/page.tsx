@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { getSettings } from "@/lib/dashboard/get-settings";
 import { NotificationSettings } from "@/components/dashboard/NotificationSettings";
+import { CancellationFlow } from "@/components/dashboard/CancellationFlow";
 import { Button } from "@/components/ui/Button";
 import { PLAN_LABELS } from "@/lib/stripe/plans";
 
@@ -67,9 +68,12 @@ export default async function ParametresPage() {
                   ` · Prochaine facturation le ${formatDate(settings.subscription.currentPeriodEnd)}`}
               </p>
             </div>
-            <form action="/api/stripe/portal" method="POST">
-              <Button type="submit">Gérer ma facturation</Button>
-            </form>
+            <div className="flex flex-col items-end gap-2">
+              <form action="/api/stripe/portal" method="POST">
+                <Button type="submit">Gérer ma facturation</Button>
+              </form>
+              <CancellationFlow initialOfferAlreadySent={settings.subscription.retentionOfferAlreadySent} />
+            </div>
           </div>
         ) : (
           <p className="text-sm text-white/50">Aucun abonnement actif.</p>
