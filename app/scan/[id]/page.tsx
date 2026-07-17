@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { HighlightedText } from "@/components/HighlightedText";
+import { PROVIDER_LABELS, PROVIDER_ORDER } from "@/lib/providers";
 
 const PROGRESS_MESSAGES = [
   "Interrogation de ChatGPT…",
@@ -9,12 +10,6 @@ const PROGRESS_MESSAGES = [
   "Interrogation de Perplexity…",
   "Analyse des réponses…",
 ];
-
-const PROVIDER_LABELS: Record<string, string> = {
-  openai: "ChatGPT (OpenAI)",
-  anthropic: "Claude (Anthropic)",
-  perplexity: "Perplexity",
-};
 
 const CATEGORY_LABELS: Record<string, string> = {
   reputation: "Réputation",
@@ -33,8 +28,6 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
 };
 
 const RESPONSE_PREVIEW_LENGTH = 300;
-
-const PROVIDER_ORDER = ["openai", "anthropic", "perplexity"];
 
 interface ScanResponseEntry {
   provider: string;
