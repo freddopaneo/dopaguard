@@ -34,12 +34,11 @@ export default async function ParametresPage() {
 
   const selectedBrandId = cookies().get(SELECTED_BRAND_COOKIE)?.value ?? null;
   const brand = await getCurrentBrand(supabase, user.id, selectedBrandId);
+  const settings = await getSettings(supabase, user.id);
 
   if (!brand) {
-    redirect("/onboarding");
+    redirect(settings.subscription?.plan === "agence" ? "/dashboard/marques" : "/onboarding");
   }
-
-  const settings = await getSettings(supabase, user.id);
 
   return (
     <div>

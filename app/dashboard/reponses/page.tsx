@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { getCurrentBrand, SELECTED_BRAND_COOKIE } from "@/lib/dashboard/get-current-brand";
+import { getSettings } from "@/lib/dashboard/get-settings";
 import { getAvailableWeeks, getResponsesForWeek } from "@/lib/dashboard/get-responses";
 import { WeekSelector } from "@/components/dashboard/WeekSelector";
 import { ResponseCard } from "@/components/dashboard/ResponseCard";
@@ -22,7 +23,8 @@ export default async function ReponsesPage({ searchParams }: { searchParams: { w
   const brand = await getCurrentBrand(supabase, user.id, selectedBrandId);
 
   if (!brand) {
-    redirect("/onboarding");
+    const settings = await getSettings(supabase, user.id);
+    redirect(settings.subscription?.plan === "agence" ? "/dashboard/marques" : "/onboarding");
   }
 
   const weeks = await getAvailableWeeks(supabase, brand.id);

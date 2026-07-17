@@ -42,7 +42,7 @@ export default async function MarquesPage() {
 
   return (
     <div>
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+      <div className="mb-1 flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-xl font-semibold text-white">Marques</h1>
         {atLimit ? (
           <span className="text-xs text-white/40">Limite de {MAX_BRANDS} marques atteinte.</span>
@@ -55,24 +55,44 @@ export default async function MarquesPage() {
           </Link>
         )}
       </div>
+      <p className="mb-6 text-xs text-white/40">
+        {brands.length} / {MAX_BRANDS} marques configurées
+      </p>
 
       <div className="mb-8 flex flex-col gap-3">
-        {brands.map((brand) => (
-          <div
-            key={brand.id}
-            className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] p-4"
-          >
-            <div>
+        {brands.length === 0 && (
+          <p className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm text-white/50">
+            Aucune marque pour l&apos;instant. Ajoutez la première marque de votre agence pour commencer à la
+            surveiller.
+          </p>
+        )}
+        {brands.map((brand) =>
+          brand.onboarding_completed_at ? (
+            <div
+              key={brand.id}
+              className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] p-4"
+            >
               <p className="text-sm font-medium text-white">{brand.name}</p>
-              {!brand.onboarding_completed_at && (
-                <p className="mt-1 text-xs text-dopaguard-critical">Configuration incomplète</p>
-              )}
+              <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white/50">
+                {BRAND_STATUS_LABELS[brand.status] ?? brand.status}
+              </span>
             </div>
-            <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white/50">
-              {BRAND_STATUS_LABELS[brand.status] ?? brand.status}
-            </span>
-          </div>
-        ))}
+          ) : (
+            <Link
+              key={brand.id}
+              href={`/dashboard/marques/nouvelle?brandId=${brand.id}`}
+              className="flex items-center justify-between rounded-2xl border border-dopaguard-critical/30 bg-white/[0.04] p-4 transition-colors hover:bg-white/[0.07]"
+            >
+              <div>
+                <p className="text-sm font-medium text-white">{brand.name}</p>
+                <p className="mt-1 text-xs text-dopaguard-critical">Configuration incomplète — continuer →</p>
+              </div>
+              <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white/50">
+                {BRAND_STATUS_LABELS[brand.status] ?? brand.status}
+              </span>
+            </Link>
+          )
+        )}
       </div>
 
       <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">

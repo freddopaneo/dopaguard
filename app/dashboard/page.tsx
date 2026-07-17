@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { getCurrentBrand, SELECTED_BRAND_COOKIE } from "@/lib/dashboard/get-current-brand";
+import { getSettings } from "@/lib/dashboard/get-settings";
 import { getDashboardOverview } from "@/lib/dashboard/get-overview";
 import { ScoreGauge } from "@/components/dashboard/ScoreGauge";
 import { ScoreEvolutionChart } from "@/components/dashboard/ScoreEvolutionChart";
@@ -34,7 +35,8 @@ export default async function DashboardOverviewPage() {
   const brand = await getCurrentBrand(supabase, user.id, selectedBrandId);
 
   if (!brand) {
-    redirect("/onboarding");
+    const settings = await getSettings(supabase, user.id);
+    redirect(settings.subscription?.plan === "agence" ? "/dashboard/marques" : "/onboarding");
   }
 
   const overview = await getDashboardOverview(supabase, brand.id);
