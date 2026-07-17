@@ -1,4 +1,6 @@
 import { Resend } from "resend";
+import { ANOMALY_TYPE_LABELS } from "@/lib/anomalies";
+import { PROVIDER_SHORT_LABELS as PROVIDER_LABELS } from "@/lib/providers";
 
 function magicLinkEmailHtml(brandName: string, verifyUrl: string): string {
   return `
@@ -86,22 +88,6 @@ export async function sendLoginLinkEmail({ to, loginUrl }: { to: string; loginUr
     throw new Error(`Resend: ${error.message}`);
   }
 }
-
-const ANOMALY_TYPE_LABELS: Record<string, string> = {
-  factual_error: "Erreur factuelle",
-  negative_sentiment: "Sentiment négatif",
-  competitor_push: "Concurrent recommandé",
-  hallucination: "Hallucination",
-  outdated_info: "Information datée",
-};
-
-const PROVIDER_LABELS: Record<string, string> = {
-  openai: "ChatGPT",
-  anthropic: "Claude",
-  perplexity: "Perplexity",
-  google: "Gemini",
-  mistral: "Mistral",
-};
 
 function criticalAlertEmailHtml(
   brandName: string,

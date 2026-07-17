@@ -4,10 +4,14 @@ export const PROVIDER_LABELS: Record<string, string> = {
   openai: "ChatGPT (OpenAI)",
   anthropic: "Claude (Anthropic)",
   perplexity: "Perplexity",
+  google: "Gemini (Google)",
+  mistral: "Mistral",
 };
 
 export const PROVIDER_SHORT_LABELS: Record<string, string> = {
   openai: "ChatGPT",
   anthropic: "Claude",
   perplexity: "Perplexity",
+  google: "Gemini",
+  mistral: "Mistral",
 };
