@@ -11,7 +11,20 @@ export async function GET(request: NextRequest) {
     const { error } = await supabase.auth.verifyOtp({ type: "magiclink", token_hash: tokenHash });
 
     if (!error) {
-      return NextResponse.redirect(new URL("/onboarding", request.url));
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const { data: brand } = await supabase
+        .from("brands")
+        .select("onboarding_completed_at")
+        .eq("owner_id", user!.id)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      const destination = brand?.onboarding_completed_at ? "/dashboard" : "/onboarding";
+      return NextResponse.redirect(new URL(destination, request.url));
     }
   }
 

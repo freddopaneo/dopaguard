@@ -22,10 +22,10 @@ function SuccessScreen() {
         Votre première analyse arrive très prochainement. Vous recevrez un email dès qu&apos;elle sera disponible.
       </p>
       <a
-        href="/"
+        href="/dashboard"
         className="mt-6 inline-block rounded-lg border border-dopaguard-navy/20 px-5 py-2.5 text-sm font-semibold text-dopaguard-navy transition-colors hover:bg-dopaguard-muted"
       >
-        Revenir au site
+        Voir mon tableau de bord →
       </a>
     </div>
   );
