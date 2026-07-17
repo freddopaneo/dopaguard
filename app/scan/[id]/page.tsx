@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { HighlightedText } from "@/components/HighlightedText";
+import { TruncatedText } from "@/components/ui/TruncatedText";
 import { PROVIDER_LABELS, PROVIDER_ORDER } from "@/lib/providers";
+import { CATEGORY_LABELS, CATEGORY_DESCRIPTIONS } from "@/lib/prompts/types";
 
 const PROGRESS_MESSAGES = [
   "Interrogation de ChatGPT…",
@@ -10,24 +11,6 @@ const PROGRESS_MESSAGES = [
   "Interrogation de Perplexity…",
   "Analyse des réponses…",
 ];
-
-const CATEGORY_LABELS: Record<string, string> = {
-  reputation: "Réputation",
-  reliability: "Fiabilité",
-  recommendation: "Recommandation",
-  comparison: "Comparaison",
-  factual: "Factuel",
-};
-
-const CATEGORY_DESCRIPTIONS: Record<string, string> = {
-  reputation: "Image générale perçue",
-  reliability: "Confiance et légitimité",
-  recommendation: "Orienterait-elle un client vers vous ?",
-  comparison: "Positionnement face à la concurrence",
-  factual: "Exactitude des faits bruts",
-};
-
-const RESPONSE_PREVIEW_LENGTH = 300;
 
 interface ScanResponseEntry {
   provider: string;
@@ -53,11 +36,6 @@ function FullScreenCard({ title, body }: { title: string; body: string }) {
 }
 
 function ResponseCard({ entry }: { entry: ScanResponseEntry }) {
-  const [expanded, setExpanded] = useState(false);
-  const fullText = entry.responseText ?? "";
-  const isLong = fullText.length > RESPONSE_PREVIEW_LENGTH;
-  const displayText = !expanded && isLong ? `${fullText.slice(0, RESPONSE_PREVIEW_LENGTH)}…` : fullText;
-
   return (
     <div className="relative flex flex-col gap-2.5 overflow-hidden rounded-2xl border border-dopaguard-muted bg-white p-4 text-left">
       <div>
@@ -69,20 +47,12 @@ function ResponseCard({ entry }: { entry: ScanResponseEntry }) {
       {entry.error || !entry.responseText ? (
         <p className="text-sm text-dopaguard-navyMid/60">Réponse indisponible pour cette question.</p>
       ) : (
-        <>
-          <p className="text-sm leading-relaxed text-dopaguard-navyMid">
-            <HighlightedText text={displayText} excerpts={entry.flags.map((f) => f.excerpt)} />
-          </p>
-          {isLong && (
-            <button
-              type="button"
-              onClick={() => setExpanded((e) => !e)}
-              className="self-start text-xs font-medium text-dopaguard-navy underline underline-offset-2"
-            >
-              {expanded ? "Réduire" : "Lire la suite"}
-            </button>
-          )}
-        </>
+        <TruncatedText
+          text={entry.responseText}
+          highlightExcerpts={entry.flags.map((f) => f.excerpt)}
+          className="text-sm leading-relaxed text-dopaguard-navyMid"
+          toggleClassName="self-start text-xs font-medium text-dopaguard-navy underline underline-offset-2"
+        />
       )}
     </div>
   );

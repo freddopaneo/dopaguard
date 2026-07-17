@@ -12,8 +12,8 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { href: "/dashboard", label: "Vue d'ensemble", enabled: true },
   { href: "/dashboard/anomalies", label: "Anomalies", enabled: true },
-  { href: "/dashboard/reponses", label: "Réponses brutes", enabled: false },
-  { href: "/dashboard/fiche-de-verite", label: "Fiche de vérité", enabled: false },
+  { href: "/dashboard/reponses", label: "Réponses brutes", enabled: true },
+  { href: "/dashboard/fiche-de-verite", label: "Fiche de vérité", enabled: true },
   { href: "/dashboard/parametres", label: "Paramètres", enabled: false },
 ];
 
