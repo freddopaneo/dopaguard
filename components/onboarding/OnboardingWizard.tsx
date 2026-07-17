@@ -25,7 +25,7 @@ function SuccessScreen() {
         href="/"
         className="mt-6 inline-block rounded-lg border border-dopaguard-navy/20 px-5 py-2.5 text-sm font-semibold text-dopaguard-navy transition-colors hover:bg-dopaguard-muted"
       >
-        Retour à l&apos;accueil
+        Revenir au site
       </a>
     </div>
   );
