@@ -117,8 +117,13 @@ async function callAnthropic(model: string, prompt: string): Promise<RawLLMResul
   });
   if (!res.ok) throw new Error(`Anthropic ${res.status}: ${await res.text()}`);
   const data = await res.json();
+  // Claude Sonnet 5 peut émettre un bloc "thinking" avant le bloc "text" (raisonnement
+  // adaptatif) -- prendre content[0] à l'aveugle récupérait parfois le bloc de réflexion
+  // (sans champ .text) au lieu de la vraie réponse. On cherche explicitement le bloc texte.
+  const textBlock = (data.content ?? []).find((block: { type: string }) => block.type === "text");
+  if (!textBlock) throw new Error("Anthropic: aucun bloc de texte dans la réponse.");
   return {
-    text: data.content[0].text,
+    text: textBlock.text,
     tokensIn: data.usage.input_tokens,
     tokensOut: data.usage.output_tokens,
   };
