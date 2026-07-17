@@ -227,3 +227,53 @@ export async function sendWeeklyDigestEmail({
     throw new Error(`Resend: ${error.message}`);
   }
 }
+
+function monthlyReportEmailHtml(brandName: string, monthLabel: string, pdfUrl: string, dashboardUrl: string): string {
+  return `
+    <div style="font-family: Arial, Helvetica, sans-serif; max-width: 480px; margin: 0 auto; color: #133742;">
+      <h1 style="font-size: 20px;">Votre rapport mensuel est prêt</h1>
+      <p>Bonjour,</p>
+      <p>
+        Le rapport de réputation IA de <strong>${brandName}</strong> pour <strong>${monthLabel}</strong> est disponible.
+      </p>
+      <p style="text-align: center; margin: 32px 0;">
+        <a
+          href="${pdfUrl}"
+          style="background: #c7ff98; color: #133742; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block;"
+        >
+          Télécharger le rapport PDF
+        </a>
+      </p>
+      <p style="text-align: center; font-size: 13px;">
+        <a href="${dashboardUrl}" style="color: #1e4d5e;">Voir mon espace Dopaguard</a>
+      </p>
+    </div>
+  `;
+}
+
+export async function sendMonthlyReportEmail({
+  to,
+  brandName,
+  monthLabel,
+  pdfUrl,
+  dashboardUrl,
+}: {
+  to: string;
+  brandName: string;
+  monthLabel: string;
+  pdfUrl: string;
+  dashboardUrl: string;
+}) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  const { error } = await resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL!,
+    to,
+    subject: `Votre rapport mensuel Dopaguard — ${brandName} (${monthLabel})`,
+    html: monthlyReportEmailHtml(brandName, monthLabel, pdfUrl, dashboardUrl),
+  });
+
+  if (error) {
+    throw new Error(`Resend: ${error.message}`);
+  }
+}
