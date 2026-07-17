@@ -1,4 +1,4 @@
-import { Document, Page, View, Text, Svg, Rect, Line, StyleSheet, renderToBuffer } from "@react-pdf/renderer";
+import { Document, Page, View, Text, Image, Svg, Rect, Line, StyleSheet, renderToBuffer } from "@react-pdf/renderer";
 import type { MonthlyReportData } from "./get-monthly-data";
 import { ANOMALY_TYPE_LABELS, SEVERITY_LABELS } from "@/lib/anomalies";
 import { PROVIDER_LABELS } from "@/lib/providers";
@@ -219,17 +219,28 @@ export async function renderMonthlyReportPdf(input: {
   monthLabel: string;
   data: MonthlyReportData;
   recommendations: string[];
+  whiteLabel?: { logoUrl: string; primaryColor: string } | null;
 }): Promise<Buffer> {
-  const { brandName, monthLabel, data, recommendations } = input;
+  const { brandName, monthLabel, data, recommendations, whiteLabel } = input;
 
   return renderToBuffer(
     <Document>
-      {/* Page 1 : garde */}
-      <Page size="A4" style={styles.coverPage}>
-        <Text style={styles.coverEyebrow}>Rapport mensuel</Text>
+      {/* Page 1 : garde -- couleur/logo de l'agence si white-label configuré, sinon
+          identité Dopaguard par défaut. Ne touche que cette page : les couleurs de
+          score (rouge/turquoise/vert) restent inchangées partout ailleurs, un mauvais
+          score doit rester visuellement alarmant quelle que soit la marque. */}
+      <Page size="A4" style={whiteLabel ? [styles.coverPage, { backgroundColor: whiteLabel.primaryColor }] : styles.coverPage}>
+        {whiteLabel?.logoUrl ? (
+          // eslint-disable-next-line jsx-a11y/alt-text -- composant react-pdf, pas une balise <img> HTML.
+          <Image src={whiteLabel.logoUrl} style={{ width: 140, height: 50, objectFit: "contain", marginBottom: 16 }} />
+        ) : (
+          <Text style={styles.coverEyebrow}>Rapport mensuel</Text>
+        )}
         <Text style={styles.coverBrand}>{brandName}</Text>
         <Text style={styles.coverSubtitle}>{monthLabel}</Text>
-        <Text style={styles.coverFooter}>Dopaguard — surveillance de réputation dans les IA</Text>
+        <Text style={styles.coverFooter}>
+          {whiteLabel ? "Rapport généré par Dopaguard" : "Dopaguard — surveillance de réputation dans les IA"}
+        </Text>
       </Page>
 
       {/* Page 2 : score du mois + évolution */}

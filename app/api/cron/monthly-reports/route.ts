@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
   const supabase = createAdminClient();
   const { data: brands, error } = await supabase
     .from("brands")
-    .select("id, name, plan, owner_id")
+    .select("id, name, plan, owner_id, agency_id")
     .in("status", ["trial", "active"]);
 
   if (error) {
@@ -81,11 +81,31 @@ export async function GET(request: NextRequest) {
       });
       if (usageError) throw usageError;
 
+      // Réglages white-label (logo + couleur) si la marque appartient à une agence
+      // qui les a configurés -- les deux doivent être renseignés, sinon on retombe
+      // sur l'identité Dopaguard par défaut plutôt qu'une page de garde à moitié faite.
+      let whiteLabel: { logoUrl: string; primaryColor: string } | null = null;
+      if (brand.agency_id) {
+        const { data: agency } = await supabase
+          .from("agencies")
+          .select("logo_url, primary_color")
+          .eq("id", brand.agency_id)
+          .maybeSingle();
+
+        if (agency?.logo_url && agency?.primary_color) {
+          const { data: signedLogo } = await supabase.storage.from("logos").createSignedUrl(agency.logo_url, 300);
+          if (signedLogo) {
+            whiteLabel = { logoUrl: signedLogo.signedUrl, primaryColor: agency.primary_color };
+          }
+        }
+      }
+
       const pdfBuffer = await renderMonthlyReportPdf({
         brandName: brand.name,
         monthLabel: data.monthLabel,
         data,
         recommendations: recos.recommendations,
+        whiteLabel,
       });
 
       const path = `${brand.id}/${year}-${String(month).padStart(2, "0")}.pdf`;

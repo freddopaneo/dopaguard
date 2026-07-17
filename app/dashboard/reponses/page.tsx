@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { getCurrentBrand, SELECTED_BRAND_COOKIE } from "@/lib/dashboard/get-current-brand";
 import { getAvailableWeeks, getResponsesForWeek } from "@/lib/dashboard/get-responses";
 import { WeekSelector } from "@/components/dashboard/WeekSelector";
 import { ResponseCard } from "@/components/dashboard/ResponseCard";
@@ -16,13 +18,8 @@ export default async function ReponsesPage({ searchParams }: { searchParams: { w
     redirect("/login");
   }
 
-  const { data: brand } = await supabase
-    .from("brands")
-    .select("id")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+  const selectedBrandId = cookies().get(SELECTED_BRAND_COOKIE)?.value ?? null;
+  const brand = await getCurrentBrand(supabase, user.id, selectedBrandId);
 
   if (!brand) {
     redirect("/onboarding");

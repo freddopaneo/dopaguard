@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { getCurrentBrand, SELECTED_BRAND_COOKIE } from "@/lib/dashboard/get-current-brand";
 import { OnboardingWizard } from "@/components/onboarding/OnboardingWizard";
 
 export default async function OnboardingPage() {
@@ -12,13 +14,8 @@ export default async function OnboardingPage() {
     redirect("/login");
   }
 
-  const { data: brand } = await supabase
-    .from("brands")
-    .select("id, name, onboarding_completed_at")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+  const selectedBrandId = cookies().get(SELECTED_BRAND_COOKIE)?.value ?? null;
+  const brand = await getCurrentBrand(supabase, user.id, selectedBrandId);
 
   let initialStep: 1 | 2 | 3 | 4 | "done" = 1;
 

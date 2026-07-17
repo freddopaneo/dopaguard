@@ -1,13 +1,11 @@
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { DashboardNav } from "@/components/dashboard/DashboardNav";
-
-const STATUS_LABELS: Record<string, string> = {
-  trial: "Essai",
-  active: "Actif",
-  paused: "En pause",
-  cancelled: "Résilié",
-};
+import { BrandSwitcher } from "@/components/dashboard/BrandSwitcher";
+import { getCurrentBrand, getUserBrands, SELECTED_BRAND_COOKIE } from "@/lib/dashboard/get-current-brand";
+import { getSettings } from "@/lib/dashboard/get-settings";
+import { BRAND_STATUS_LABELS } from "@/lib/dashboard/labels";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const supabase = createServerSupabaseClient();
@@ -19,17 +17,16 @@ export default async function DashboardLayout({ children }: { children: React.Re
     redirect("/login");
   }
 
-  const { data: brand } = await supabase
-    .from("brands")
-    .select("id, name, status, onboarding_completed_at")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+  const selectedBrandId = cookies().get(SELECTED_BRAND_COOKIE)?.value ?? null;
+  const brand = await getCurrentBrand(supabase, user.id, selectedBrandId);
 
   if (!brand || !brand.onboarding_completed_at) {
     redirect("/onboarding");
   }
+
+  const settings = await getSettings(supabase, user.id);
+  const isAgence = settings.subscription?.plan === "agence";
+  const brands = isAgence ? await getUserBrands(supabase, user.id) : [];
 
   return (
     <div className="min-h-screen bg-dopaguard-navyDark text-white">
@@ -37,9 +34,13 @@ export default async function DashboardLayout({ children }: { children: React.Re
         <div className="flex items-center gap-3">
           <span className="text-sm font-semibold">{process.env.NEXT_PUBLIC_APP_NAME || "Dopaguard"}</span>
           <span className="text-white/30">/</span>
-          <span className="text-sm text-white/70">{brand.name}</span>
+          {isAgence && brands.length > 0 ? (
+            <BrandSwitcher brands={brands} selectedBrandId={brand.id} />
+          ) : (
+            <span className="text-sm text-white/70">{brand.name}</span>
+          )}
           <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white/50">
-            {STATUS_LABELS[brand.status] ?? brand.status}
+            {BRAND_STATUS_LABELS[brand.status] ?? brand.status}
           </span>
         </div>
         <div className="flex items-center gap-4">
