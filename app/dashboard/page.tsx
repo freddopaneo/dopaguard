@@ -12,10 +12,11 @@ import { OpenAnomaliesCard } from "@/components/dashboard/OpenAnomaliesCard";
 function EmptyOverviewState({ brandName }: { brandName: string }) {
   return (
     <div className="flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-12 text-center">
-      <h2 className="text-lg font-semibold text-white">Votre première analyse est en préparation</h2>
+      <h2 className="text-lg font-semibold text-white">Votre première analyse est en cours</h2>
       <p className="max-w-md text-sm leading-relaxed text-white/60">
-        Dopaguard interroge les IA au sujet de {brandName} chaque semaine. Le premier résultat arrive généralement sous
-        quelques jours — vous recevrez un email dès qu&apos;il sera disponible.
+        Si vous venez de terminer votre configuration, les premiers résultats pour {brandName} apparaissent
+        généralement en quelques minutes — actualisez cette page dans un instant. Sinon, ils arriveront au prochain
+        passage de notre surveillance hebdomadaire.
       </p>
     </div>
   );

@@ -5,6 +5,7 @@ import { BrandInfoStep } from "./BrandInfoStep";
 import { TruthSheetStep } from "./TruthSheetStep";
 import { PromptSelectionStep } from "./PromptSelectionStep";
 import { ConfirmationStep } from "./ConfirmationStep";
+import { PROVIDER_ORDER, ALL_PROVIDERS, PROVIDER_LABELS } from "@/lib/providers";
 
 type Step = 1 | 2 | 3 | 4 | "done";
 
@@ -14,12 +15,15 @@ interface Props {
   brandName?: string;
 }
 
-function SuccessScreen() {
+function SuccessScreen({ plan }: { plan: string | null }) {
+  const providers = (plan === "essentiel" ? PROVIDER_ORDER : ALL_PROVIDERS).map((p) => PROVIDER_LABELS[p]);
+
   return (
     <div className="py-8 text-center">
       <h2 className="text-lg font-semibold text-dopaguard-navy">Configuration terminée !</h2>
       <p className="mt-3 text-sm leading-relaxed text-dopaguard-navyMid">
-        Votre première analyse arrive très prochainement. Vous recevrez un email dès qu&apos;elle sera disponible.
+        Votre première analyse est en cours ({providers.join(", ")}) — elle prend quelques minutes. Revenez sur
+        votre tableau de bord d&apos;ici là, il se remplira automatiquement.
       </p>
       <a
         href="/dashboard"
@@ -36,9 +40,10 @@ export function OnboardingWizard({ initialStep, brandId: initialBrandId, brandNa
   const [brandId, setBrandId] = useState(initialBrandId ?? "");
   const [brandName, setBrandName] = useState(initialBrandName ?? "");
   const [promptCount, setPromptCount] = useState(0);
+  const [plan, setPlan] = useState<string | null>(null);
 
   if (step === "done") {
-    return <SuccessScreen />;
+    return <SuccessScreen plan={plan} />;
   }
 
   return (
@@ -67,7 +72,15 @@ export function OnboardingWizard({ initialStep, brandId: initialBrandId, brandNa
         />
       )}
       {step === 4 && (
-        <ConfirmationStep brandId={brandId} brandName={brandName} promptCount={promptCount} onDone={() => setStep("done")} />
+        <ConfirmationStep
+          brandId={brandId}
+          brandName={brandName}
+          promptCount={promptCount}
+          onDone={(completedPlan) => {
+            setPlan(completedPlan);
+            setStep("done");
+          }}
+        />
       )}
     </div>
   );
