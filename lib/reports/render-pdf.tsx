@@ -1,6 +1,7 @@
 import { Document, Page, View, Text, Image, Svg, Rect, Line, StyleSheet, renderToBuffer } from "@react-pdf/renderer";
 import type { MonthlyReportData } from "./get-monthly-data";
 import { ANOMALY_TYPE_LABELS, SEVERITY_LABELS } from "@/lib/anomalies";
+import { DOPAGEO_URL } from "@/lib/constants";
 import { PROVIDER_LABELS } from "@/lib/providers";
 
 const COLORS = {
@@ -108,13 +109,21 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   recommendationItem: {
-    flexDirection: "row",
-    marginBottom: 10,
+    marginBottom: 14,
+    paddingBottom: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: "#e8f0ee",
   },
-  recommendationNumber: {
-    width: 20,
-    fontWeight: 700,
-    color: COLORS.teal,
+  recommendationMeta: {
+    fontSize: 9,
+    color: COLORS.navyMid,
+    marginBottom: 3,
+  },
+  dopageoCta: {
+    marginTop: 20,
+    padding: 16,
+    borderRadius: 8,
+    backgroundColor: "#f2f8f6",
   },
 });
 
@@ -218,10 +227,10 @@ export async function renderMonthlyReportPdf(input: {
   brandName: string;
   monthLabel: string;
   data: MonthlyReportData;
-  recommendations: string[];
   whiteLabel?: { logoUrl: string; primaryColor: string } | null;
 }): Promise<Buffer> {
-  const { brandName, monthLabel, data, recommendations, whiteLabel } = input;
+  const { brandName, monthLabel, data, whiteLabel } = input;
+  const actionableAnomalies = data.anomalies.open.filter((a) => a.recommended_action);
 
   return renderToBuffer(
     <Document>
@@ -319,16 +328,27 @@ export async function renderMonthlyReportPdf(input: {
         ))}
       </Page>
 
-      {/* Page 6 : recommandations */}
+      {/* Page 6 : recommandations -- une correction concrète par anomalie encore
+          ouverte (générée par le juge IA au moment de la détection, cf.
+          lib/scan/anomaly-judge.ts), plutôt qu'une synthèse générique recalculée
+          ici : plus précis, et un appel IA en moins à chaque rapport. */}
       <Page size="A4" style={styles.page}>
         <Text style={styles.sectionTitle}>Recommandations</Text>
-        {recommendations.length === 0 && <Text>Aucune recommandation générée ce mois.</Text>}
-        {recommendations.map((rec, i) => (
-          <View key={i} style={styles.recommendationItem}>
-            <Text style={styles.recommendationNumber}>{i + 1}.</Text>
-            <Text style={{ flex: 1 }}>{rec}</Text>
+        {actionableAnomalies.length === 0 && <Text>Aucune correction à signaler ce mois-ci.</Text>}
+        {actionableAnomalies.map((a) => (
+          <View key={a.id} style={styles.recommendationItem}>
+            <Text style={styles.recommendationMeta}>
+              {SEVERITY_LABELS[a.severity] ?? a.severity} — {ANOMALY_TYPE_LABELS[a.type] ?? a.type}
+              {a.llmProvider ? ` — ${PROVIDER_LABELS[a.llmProvider] ?? a.llmProvider}` : ""}
+            </Text>
+            <Text>{a.recommended_action}</Text>
           </View>
         ))}
+        <View style={styles.dopageoCta}>
+          <Text>
+            Vous pouvez appliquer ces corrections vous-même, ou laisser Dopageo.ai s&apos;en charger : {DOPAGEO_URL}
+          </Text>
+        </View>
       </Page>
     </Document>
   );

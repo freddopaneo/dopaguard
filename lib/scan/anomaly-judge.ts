@@ -25,6 +25,7 @@ export interface Anomaly {
   summary: string;
   evidence: string;
   expectedTruth: string;
+  recommendedAction: string;
 }
 
 export interface TruthSheetInput {
@@ -76,7 +77,7 @@ ${responseText.slice(0, MAX_RESPONSE_TEXT_LENGTH)}
 Compare cette réponse à la fiche de vérité et identifie les anomalies. Réponds strictement en JSON, sans aucun texte autour, au format :
 {
   "anomalies": [
-    {"type": "factual_error|negative_sentiment|competitor_push|hallucination|outdated_info", "severity": "critical|major|minor", "summary": "résumé en une phrase", "evidence": "extrait exact de la réponse ci-dessus", "expected_truth": "ce que dit la fiche de vérité"}
+    {"type": "factual_error|negative_sentiment|competitor_push|hallucination|outdated_info", "severity": "critical|major|minor", "summary": "résumé en une phrase", "evidence": "extrait exact de la réponse ci-dessus", "expected_truth": "ce que dit la fiche de vérité", "recommended_action": "action concrète et spécifique à mettre en place pour corriger la cause de cette anomalie (ex. mettre à jour telle information à tel endroit), en une ou deux phrases"}
   ],
   "sentiment_score": 0,
   "accuracy_score": 0,
@@ -138,6 +139,7 @@ function parseJudgeOutput(
       summary: typeof a.summary === "string" ? a.summary : "",
       evidence: a.evidence as string,
       expectedTruth: typeof a.expected_truth === "string" ? a.expected_truth : "",
+      recommendedAction: typeof a.recommended_action === "string" ? a.recommended_action : "",
     }));
 
   const recommendationPosition = RECOMMENDATION_POSITIONS.includes(obj.recommendation_position as RecommendationPosition)
