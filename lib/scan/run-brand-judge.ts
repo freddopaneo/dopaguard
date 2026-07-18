@@ -107,6 +107,7 @@ export async function runBrandJudge(brand: BrandForJudge, options?: { silent?: b
             summary: a.summary,
             evidence: a.evidence,
             expected_truth: a.expectedTruth,
+            recommended_action: a.recommendedAction,
           }))
         );
         if (anomaliesError) throw anomaliesError;

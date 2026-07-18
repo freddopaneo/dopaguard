@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { DOPAGEO_URL } from "@/lib/constants";
 import { PROVIDER_ORDER, PROVIDER_LABELS } from "@/lib/providers";
 import {
   ANOMALY_TYPE_LABELS,
@@ -169,6 +170,25 @@ export function AnomaliesList({ initialAnomalies }: { initialAnomalies: AnomalyW
                       <div className="border-l-2 border-dopaguard-teal pl-3">
                         <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-white/40">Ce qui est vrai</p>
                         <p className="text-sm text-white/70">{anomaly.expected_truth}</p>
+                      </div>
+                    )}
+
+                    {anomaly.recommended_action && (
+                      <div className="border-l-2 border-dopaguard-lime pl-3">
+                        <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-white/40">Comment corriger</p>
+                        <p className="text-sm text-white/70">{anomaly.recommended_action}</p>
+                        <p className="mt-2 text-xs text-white/50">
+                          Vous pouvez appliquer cette correction vous-même, ou{" "}
+                          <a
+                            href={DOPAGEO_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-dopaguard-lime underline underline-offset-2"
+                          >
+                            laisser Dopageo.ai s&apos;en charger
+                          </a>
+                          .
+                        </p>
                       </div>
                     )}
 

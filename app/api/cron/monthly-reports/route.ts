@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getMonthlyReportData } from "@/lib/reports/get-monthly-data";
-import { generateMonthlyRecommendations } from "@/lib/reports/generate-recommendations";
 import { renderMonthlyReportPdf } from "@/lib/reports/render-pdf";
 import { sendMonthlyReportEmail } from "@/lib/email/resend";
 import { getAppUrl } from "@/lib/app-url";
@@ -58,29 +57,6 @@ export async function GET(request: NextRequest) {
         continue;
       }
 
-      const topAnomalySummaries = [...data.anomalies.open, ...data.anomalies.resolved]
-        .slice(0, 5)
-        .map((a) => ({ type: a.type, severity: a.severity, summary: a.summary }));
-
-      const recos = await generateMonthlyRecommendations({
-        brandName: brand.name,
-        monthLabel: data.monthLabel,
-        score: data.score.current,
-        previousScore: data.score.previous,
-        anomaliesOpenCount: data.anomalies.open.length,
-        anomaliesResolvedCount: data.anomalies.resolved.length,
-        topAnomalySummaries,
-      });
-
-      const { error: usageError } = await supabase.from("api_usage").insert({
-        brand_id: brand.id,
-        provider: "anthropic",
-        tokens_in: recos.tokensIn,
-        tokens_out: recos.tokensOut,
-        estimated_cost_eur: recos.estimatedCostEur,
-      });
-      if (usageError) throw usageError;
-
       // Réglages white-label (logo + couleur) si la marque appartient à une agence
       // qui les a configurés -- les deux doivent être renseignés, sinon on retombe
       // sur l'identité Dopaguard par défaut plutôt qu'une page de garde à moitié faite.
@@ -104,7 +80,6 @@ export async function GET(request: NextRequest) {
         brandName: brand.name,
         monthLabel: data.monthLabel,
         data,
-        recommendations: recos.recommendations,
         whiteLabel,
       });
 
@@ -135,7 +110,7 @@ export async function GET(request: NextRequest) {
         });
       }
 
-      summaries.push({ brandId: brand.id, generated: true, recommendationsCount: recos.recommendations.length });
+      summaries.push({ brandId: brand.id, generated: true });
     } catch (genError) {
       const message = genError instanceof Error ? genError.message : String(genError);
       try {
