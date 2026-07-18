@@ -17,9 +17,9 @@ interface Props {
 function SuccessScreen() {
   return (
     <div className="py-8 text-center">
-      <h2 className="text-lg font-semibold text-dopaguard-navy">Configuration terminée !</h2>
+      <h2 className="text-lg font-semibold text-dopaguard-navy">Votre première analyse est prête !</h2>
       <p className="mt-3 text-sm leading-relaxed text-dopaguard-navyMid">
-        Votre première analyse arrive très prochainement. Vous recevrez un email dès qu&apos;elle sera disponible.
+        Configuration terminée — votre tableau de bord contient déjà vos premiers résultats.
       </p>
       <a
         href="/dashboard"

@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "brandId requis." }, { status: 400 });
   }
 
-  const { data: brand } = await supabase.from("brands").select("name").eq("id", brandId).maybeSingle();
+  const { data: brand } = await supabase.from("brands").select("name, plan").eq("id", brandId).maybeSingle();
   if (!brand) {
     return NextResponse.json({ error: "Marque introuvable." }, { status: 404 });
   }
@@ -27,5 +27,5 @@ export async function GET(request: NextRequest) {
     .eq("brand_id", brandId)
     .eq("enabled", true);
 
-  return NextResponse.json({ brandName: brand.name, promptCount: count ?? 0 });
+  return NextResponse.json({ brandName: brand.name, plan: brand.plan, promptCount: count ?? 0 });
 }

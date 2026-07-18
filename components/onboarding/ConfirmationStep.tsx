@@ -2,6 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { PROVIDER_ORDER, ALL_PROVIDERS, PROVIDER_LABELS } from "@/lib/providers";
+
+function providersForPlan(plan: string | null): string[] {
+  const providers = plan === "essentiel" ? PROVIDER_ORDER : ALL_PROVIDERS;
+  return providers.map((p) => PROVIDER_LABELS[p]);
+}
 
 export function ConfirmationStep({
   brandId,
@@ -17,6 +23,7 @@ export function ConfirmationStep({
   const [loading, setLoading] = useState(true);
   const [brandName, setBrandName] = useState(initialBrandName);
   const [promptCount, setPromptCount] = useState(initialPromptCount);
+  const [plan, setPlan] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
@@ -32,6 +39,7 @@ export function ConfirmationStep({
         if (cancelled) return;
         setBrandName(data.brandName ?? "");
         setPromptCount(data.promptCount ?? 0);
+        setPlan(data.plan ?? null);
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -75,6 +83,19 @@ export function ConfirmationStep({
     );
   }
 
+  const providers = providersForPlan(plan);
+
+  if (saving) {
+    return (
+      <div className="flex flex-col items-center gap-3 py-10 text-center">
+        <h2 className="text-lg font-semibold text-dopaguard-navy">Lancement de votre première analyse…</h2>
+        <p className="max-w-sm text-sm leading-relaxed text-dopaguard-navyMid">
+          Nous interrogeons {providers.join(", ")} au sujet de {brandName}. Cela prend environ une minute.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-4 text-center">
       <h2 className="text-lg font-semibold text-dopaguard-navy">Récapitulatif</h2>
@@ -88,9 +109,12 @@ export function ConfirmationStep({
         <p className="mt-1">
           <span className="font-medium">Fiche de vérité :</span> validée
         </p>
+        <p className="mt-1">
+          <span className="font-medium">IA interrogées :</span> {providers.join(", ")}
+        </p>
       </div>
       <Button type="button" onClick={handleConfirm} disabled={saving}>
-        {saving ? "Confirmation…" : "Confirmer et terminer"}
+        Confirmer et terminer
       </Button>
       {error && <p className="text-sm font-medium text-dopaguard-critical">{error}</p>}
     </div>
