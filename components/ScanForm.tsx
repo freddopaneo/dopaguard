@@ -62,14 +62,14 @@ export function ScanForm() {
       className="mx-auto w-full max-w-2xl rounded-2xl bg-white p-6 shadow-[0_20px_60px_-15px_rgba(13,46,56,0.35)] sm:p-8"
     >
       <div className="grid gap-4 sm:grid-cols-3">
-        <TextField id="brandName" name="brandName" label="Nom de marque" required placeholder="Dopaneo" />
+        <TextField id="brandName" name="brandName" label="Nom de marque" required placeholder="Dopaguard" />
         <TextField
           id="website"
           name="website"
           label="Site web"
           type="text"
           required
-          placeholder="www.dopaneo.ai"
+          placeholder="www.dopaguard.ai"
         />
         <TextField id="email" name="email" label="Email professionnel" type="email" required placeholder="vous@entreprise.fr" />
       </div>
