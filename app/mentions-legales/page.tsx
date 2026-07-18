@@ -1,0 +1,40 @@
+import { LegalLayout } from "@/components/legal/LegalLayout";
+
+export default function MentionsLegalesPage() {
+  return (
+    <LegalLayout title="Mentions légales">
+      <section>
+        <h2 className="font-semibold text-dopaguard-navy">Éditeur du site</h2>
+        <p>
+          Le site et le service {process.env.NEXT_PUBLIC_APP_NAME || "Dopaguard"} sont édités par la société{" "}
+          <strong>Dopaneo.ai</strong>, dont le siège social est situé au 136 rue Amelot, 75011 Paris, France.
+        </p>
+        <p>Représentants légaux : Frédéric Dubois et Frédéric Dupeyron.</p>
+        <p>
+          Contact : <a href="mailto:contact@dopaneo.ai">contact@dopaneo.ai</a>
+        </p>
+      </section>
+
+      <section>
+        <h2 className="font-semibold text-dopaguard-navy">Hébergement</h2>
+        <p>
+          Le site est hébergé par Vercel Inc. (États-Unis) — <a href="https://vercel.com">vercel.com</a>. La base de
+          données et l&apos;authentification sont hébergées par Supabase.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="font-semibold text-dopaguard-navy">Directeur de la publication</h2>
+        <p>Frédéric Dubois.</p>
+      </section>
+
+      <section>
+        <h2 className="font-semibold text-dopaguard-navy">Propriété intellectuelle</h2>
+        <p>
+          L&apos;ensemble des contenus présents sur ce site (textes, marque, logo) est la propriété de Dopaneo.ai,
+          sauf mention contraire, et ne peut être reproduit sans autorisation préalable.
+        </p>
+      </section>
+    </LegalLayout>
+  );
+}
