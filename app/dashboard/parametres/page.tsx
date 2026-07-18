@@ -7,18 +7,7 @@ import { NotificationSettings } from "@/components/dashboard/NotificationSetting
 import { PasswordSettings } from "@/components/dashboard/PasswordSettings";
 import { AccountDeletion } from "@/components/dashboard/AccountDeletion";
 import { Button } from "@/components/ui/Button";
-import { PLAN_LABELS } from "@/lib/stripe/plans";
-
-const SUBSCRIPTION_STATUS_LABELS: Record<string, string> = {
-  active: "Actif",
-  trialing: "Période d'essai",
-  past_due: "Paiement en retard",
-  canceled: "Résilié",
-  incomplete: "Incomplet",
-  incomplete_expired: "Expiré",
-  paused: "En pause",
-  unpaid: "Impayé",
-};
+import { PLAN_LABELS, SUBSCRIPTION_STATUS_LABELS } from "@/lib/stripe/plans";
 
 function formatDate(isoDate: string): string {
   return new Date(isoDate).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });

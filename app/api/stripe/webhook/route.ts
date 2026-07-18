@@ -89,6 +89,7 @@ async function syncSubscription(supabase: AdminClient, subscription: Stripe.Subs
     .update({
       status: subscription.status,
       current_period_end: subscriptionPeriodEnd(subscription),
+      canceled_at: subscription.canceled_at ? new Date(subscription.canceled_at * 1000).toISOString() : null,
       ...(plan ? { plan } : {}),
     })
     .eq("id", existing.id);
