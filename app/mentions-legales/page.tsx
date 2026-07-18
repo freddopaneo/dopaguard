@@ -7,8 +7,8 @@ export default function MentionsLegalesPage() {
         <h2 className="font-semibold text-dopaguard-navy">Éditeur du site</h2>
         <p>
           Le site et le service {process.env.NEXT_PUBLIC_APP_NAME || "Dopaguard"} sont édités par la société{" "}
-          <strong>DOPANEO.AI</strong>, SAS (société par actions simplifiée) au capital social de [montant à
-          compléter] €, immatriculée sous le SIREN 100 247 600 (SIRET 100 247 600 00016), n° TVA intracommunautaire
+          <strong>DOPANEO.AI</strong>, SAS (société par actions simplifiée) au capital social de 1 000 €,
+          immatriculée sous le SIREN 100 247 600 (SIRET 100 247 600 00016), n° TVA intracommunautaire
           FR35 100 247 600, dont le siège social est situé au 136 rue Amelot, 75011 Paris, France.
         </p>
         <p>Représentants légaux : Frédéric Dubois et Frédéric Dupeyron.</p>
