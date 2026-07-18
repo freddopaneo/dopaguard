@@ -18,7 +18,7 @@ export function ConfirmationStep({
   brandId: string;
   brandName: string;
   promptCount: number;
-  onDone: () => void;
+  onDone: (plan: string | null) => void;
 }) {
   const [loading, setLoading] = useState(true);
   const [brandName, setBrandName] = useState(initialBrandName);
@@ -68,7 +68,19 @@ export function ConfirmationStep({
         return;
       }
 
-      onDone();
+      // Déclenchée sans attendre sa réponse : pour un plan Pro/Agence (5 IA), cette
+      // analyse peut prendre plusieurs minutes -- bien trop long pour que le
+      // navigateur reste bloqué dessus. Elle continue de tourner côté serveur
+      // indépendamment de la navigation qui suit.
+      fetch("/api/onboarding/run-first-scan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ brandId }),
+      }).catch(() => {
+        // Un échec ici n'empêche jamais la suite : le prochain cron hebdomadaire rattrapera.
+      });
+
+      onDone(plan);
     } catch {
       setError("Une erreur est survenue.");
       setSaving(false);
@@ -84,17 +96,6 @@ export function ConfirmationStep({
   }
 
   const providers = providersForPlan(plan);
-
-  if (saving) {
-    return (
-      <div className="flex flex-col items-center gap-3 py-10 text-center">
-        <h2 className="text-lg font-semibold text-dopaguard-navy">Lancement de votre première analyse…</h2>
-        <p className="max-w-sm text-sm leading-relaxed text-dopaguard-navyMid">
-          Nous interrogeons {providers.join(", ")} au sujet de {brandName}. Cela prend environ une minute.
-        </p>
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col gap-4 text-center">
@@ -114,7 +115,7 @@ export function ConfirmationStep({
         </p>
       </div>
       <Button type="button" onClick={handleConfirm} disabled={saving}>
-        Confirmer et terminer
+        {saving ? "Confirmation…" : "Confirmer et terminer"}
       </Button>
       {error && <p className="text-sm font-medium text-dopaguard-critical">{error}</p>}
     </div>
