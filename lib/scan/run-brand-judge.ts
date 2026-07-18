@@ -29,7 +29,15 @@ export interface BrandJudgeSummary {
 
 // Juge les réponses brutes déjà stockées par runBrandScan (CDC 6.4) : anomalies
 // détectées via la fiche de vérité, puis score hebdomadaire agrégé.
-export async function runBrandJudge(brand: BrandForJudge): Promise<BrandJudgeSummary> {
+//
+// `silent` (utilisé uniquement pour la toute première analyse, déclenchée à la fin
+// de l'onboarding) : les anomalies et le score sont bien enregistrés -- seuls les
+// emails (alerte critique + bilan hebdomadaire) sont sautés, pour ne pas alerter un
+// client qui n'a même pas encore vu son tableau de bord une première fois. Décision
+// de Frédéric : les alertes "immédiates" du CDC 6.5 reprennent normalement dès le
+// cycle hebdomadaire suivant.
+export async function runBrandJudge(brand: BrandForJudge, options?: { silent?: boolean }): Promise<BrandJudgeSummary> {
+  const silent = options?.silent ?? false;
   const supabase = createAdminClient();
   const { week, year } = getIsoWeek(new Date());
 
@@ -103,7 +111,7 @@ export async function runBrandJudge(brand: BrandForJudge): Promise<BrandJudgeSum
         );
         if (anomaliesError) throw anomaliesError;
 
-        if (ownerEmail && notifyCriticalAlerts) {
+        if (!silent && ownerEmail && notifyCriticalAlerts) {
           for (const anomaly of result.anomalies.filter((a) => a.severity === "critical")) {
             try {
               await sendCriticalAlertEmail({
@@ -164,7 +172,7 @@ export async function runBrandJudge(brand: BrandForJudge): Promise<BrandJudgeSum
 
   await updateWeeklyScore(
     supabase,
-    { id: brand.id, name: brand.name, ownerEmail, notifyWeeklyDigest, dashboardUrl },
+    { id: brand.id, name: brand.name, ownerEmail, notifyWeeklyDigest: notifyWeeklyDigest && !silent, dashboardUrl },
     week,
     year
   );
