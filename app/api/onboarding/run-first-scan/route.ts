@@ -55,7 +55,11 @@ export async function POST(request: NextRequest) {
 
     if (brand) {
       await runBrandScan(brand);
-      await runBrandJudge({ id: brand.id, name: brand.name, ownerId: brand.owner_id });
+      // Silencieux : première analyse déclenchée juste après l'onboarding, avant même
+      // que le client ait vu son tableau de bord une première fois -- pas d'alerte
+      // prématurée (décision de Frédéric). Les anomalies et le score sont bien
+      // enregistrés ; seuls les emails sont sautés, jusqu'au cycle hebdomadaire suivant.
+      await runBrandJudge({ id: brand.id, name: brand.name, ownerId: brand.owner_id }, { silent: true });
     }
 
     return NextResponse.json({ success: true });
