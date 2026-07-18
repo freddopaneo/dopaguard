@@ -277,3 +277,53 @@ export async function sendMonthlyReportEmail({
     throw new Error(`Resend: ${error.message}`);
   }
 }
+
+function accountDeletionConfirmationEmailHtml(): string {
+  return `
+    <div style="font-family: Arial, Helvetica, sans-serif; max-width: 480px; margin: 0 auto; color: #133742;">
+      <h1 style="font-size: 20px;">Votre demande de suppression a bien été reçue</h1>
+      <p>Bonjour,</p>
+      <p>
+        Nous avons bien reçu votre demande de suppression de compte. Conformément à
+        notre politique de confidentialité, toutes vos données seront supprimées
+        sous 30 jours.
+      </p>
+      <p style="font-size: 13px; color: #1e4d5e;">
+        Si vous changez d'avis avant que la suppression soit effective, contactez-nous
+        simplement à contact@dopaneo.ai.
+      </p>
+    </div>
+  `;
+}
+
+export async function sendAccountDeletionConfirmationEmail({ to }: { to: string }) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  const { error } = await resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL!,
+    to,
+    subject: "Votre demande de suppression de compte Dopaguard",
+    html: accountDeletionConfirmationEmailHtml(),
+  });
+
+  if (error) {
+    throw new Error(`Resend: ${error.message}`);
+  }
+}
+
+// Notification interne (pas au client) : alerte l'équipe qu'une suppression est à
+// traiter manuellement dans les 30 jours (RGPD, CDC section 7).
+export async function sendAccountDeletionNotificationEmail({ clientEmail }: { clientEmail: string }) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  const { error } = await resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL!,
+    to: "contact@dopaneo.ai",
+    subject: `Demande de suppression de compte — ${clientEmail}`,
+    html: `<p>Le compte <strong>${clientEmail}</strong> a demandé la suppression de ses données. À traiter sous 30 jours.</p>`,
+  });
+
+  if (error) {
+    throw new Error(`Resend: ${error.message}`);
+  }
+}

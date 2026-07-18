@@ -20,6 +20,7 @@ export function ScanForm() {
       brandName: formData.get("brandName"),
       website: formData.get("website"),
       email: formData.get("email"),
+      consent: formData.get("consent") === "on",
     };
 
     try {
@@ -72,7 +73,17 @@ export function ScanForm() {
         />
         <TextField id="email" name="email" label="Email professionnel" type="email" required placeholder="vous@entreprise.fr" />
       </div>
-      <Button type="submit" disabled={status === "loading"} className="mt-5 w-full">
+      <label className="mt-4 flex items-start gap-2 text-left text-xs text-slate-500">
+        <input type="checkbox" name="consent" required className="mt-0.5" />
+        <span>
+          J&apos;accepte que mes données soient traitées conformément à la{" "}
+          <a href="/confidentialite" className="underline hover:text-dopaguard-navy" target="_blank" rel="noreferrer">
+            politique de confidentialité
+          </a>
+          .
+        </span>
+      </label>
+      <Button type="submit" disabled={status === "loading"} className="mt-4 w-full">
         {status === "loading" ? "Envoi en cours…" : "Lancer mon scan gratuit →"}
       </Button>
       {status === "error" && (

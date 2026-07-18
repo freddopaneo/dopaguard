@@ -11,13 +11,14 @@ export interface SettingsRecord {
     notifyCriticalAlerts: boolean;
     notifyWeeklyDigest: boolean;
   };
+  hasPendingDeletionRequest: boolean;
 }
 
 export async function getSettings(
   supabase: ReturnType<typeof createServerSupabaseClient>,
   userId: string
 ): Promise<SettingsRecord> {
-  const [subscriptionResult, profileResult] = await Promise.all([
+  const [subscriptionResult, profileResult, deletionRequestResult] = await Promise.all([
     supabase
       .from("subscriptions")
       .select("plan, status, current_period_end")
@@ -26,6 +27,7 @@ export async function getSettings(
       .limit(1)
       .maybeSingle(),
     supabase.from("profiles").select("notify_critical_alerts, notify_weekly_digest").eq("id", userId).maybeSingle(),
+    supabase.from("account_deletion_requests").select("id").eq("profile_id", userId).is("processed_at", null).maybeSingle(),
   ]);
 
   return {
@@ -40,5 +42,6 @@ export async function getSettings(
       notifyCriticalAlerts: profileResult.data?.notify_critical_alerts ?? true,
       notifyWeeklyDigest: profileResult.data?.notify_weekly_digest ?? true,
     },
+    hasPendingDeletionRequest: Boolean(deletionRequestResult.data),
   };
 }

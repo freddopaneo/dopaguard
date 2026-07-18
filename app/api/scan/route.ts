@@ -9,6 +9,7 @@ const scanRequestSchema = z.object({
   brandName: z.string().trim().min(1, "Nom de marque requis.").max(200),
   website: z.string().trim().min(1, "Site web requis."),
   email: z.string().trim().email("Email invalide."),
+  consent: z.literal(true, { message: "Le consentement au traitement des données est requis." }),
 });
 
 const TOKEN_TTL_MS = 30 * 60 * 1000;

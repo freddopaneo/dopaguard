@@ -4,6 +4,7 @@ import { HowItWorks } from "@/components/landing/HowItWorks";
 import { DetectionTypes } from "@/components/landing/DetectionTypes";
 import { PricingTable } from "@/components/landing/PricingTable";
 import { Faq } from "@/components/landing/Faq";
+import { Footer } from "@/components/landing/Footer";
 
 function RadarLogo() {
   return (
@@ -82,9 +83,7 @@ export default function Home() {
         </a>
       </section>
 
-      <footer className="border-t border-dopaguard-muted py-10 text-center text-xs text-dopaguard-navyMid/50">
-        © {new Date().getFullYear()} {process.env.NEXT_PUBLIC_APP_NAME || "Dopaguard"}
-      </footer>
+      <Footer />
     </div>
   );
 }

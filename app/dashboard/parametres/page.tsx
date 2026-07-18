@@ -5,6 +5,7 @@ import { getCurrentBrand, SELECTED_BRAND_COOKIE } from "@/lib/dashboard/get-curr
 import { getSettings } from "@/lib/dashboard/get-settings";
 import { NotificationSettings } from "@/components/dashboard/NotificationSettings";
 import { PasswordSettings } from "@/components/dashboard/PasswordSettings";
+import { AccountDeletion } from "@/components/dashboard/AccountDeletion";
 import { Button } from "@/components/ui/Button";
 import { PLAN_LABELS } from "@/lib/stripe/plans";
 
@@ -71,6 +72,9 @@ export default async function ParametresPage() {
         ) : (
           <p className="text-sm text-white/50">Aucun abonnement actif.</p>
         )}
+        <p className="mt-4 text-xs text-white/40">
+          Besoin de résilier votre abonnement ? Cliquez sur « Gérer ma facturation » ci-dessus.
+        </p>
       </section>
 
       <section className="mb-6 rounded-2xl border border-white/10 bg-white/[0.04] p-6">
@@ -81,9 +85,29 @@ export default async function ParametresPage() {
         />
       </section>
 
-      <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+      <section className="mb-6 rounded-2xl border border-white/10 bg-white/[0.04] p-6">
         <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-white/40">Sécurité</h2>
         <PasswordSettings />
+      </section>
+
+      <section className="mb-6 rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-white/40">Documents légaux</h2>
+        <div className="flex flex-wrap gap-4 text-sm">
+          <a href="/mentions-legales" target="_blank" rel="noreferrer" className="text-white/70 underline hover:text-white">
+            Mentions légales
+          </a>
+          <a href="/cgv" target="_blank" rel="noreferrer" className="text-white/70 underline hover:text-white">
+            CGV
+          </a>
+          <a href="/confidentialite" target="_blank" rel="noreferrer" className="text-white/70 underline hover:text-white">
+            Politique de confidentialité
+          </a>
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-white/40">Compte</h2>
+        <AccountDeletion initialHasPendingRequest={settings.hasPendingDeletionRequest} />
       </section>
     </div>
   );
