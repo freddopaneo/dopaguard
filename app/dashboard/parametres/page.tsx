@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { getCurrentBrand, SELECTED_BRAND_COOKIE } from "@/lib/dashboard/get-current-brand";
 import { getSettings } from "@/lib/dashboard/get-settings";
 import { NotificationSettings } from "@/components/dashboard/NotificationSettings";
 import { Button } from "@/components/ui/Button";
@@ -30,19 +32,13 @@ export default async function ParametresPage() {
     redirect("/login");
   }
 
-  const { data: brand } = await supabase
-    .from("brands")
-    .select("id")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+  const selectedBrandId = cookies().get(SELECTED_BRAND_COOKIE)?.value ?? null;
+  const brand = await getCurrentBrand(supabase, user.id, selectedBrandId);
+  const settings = await getSettings(supabase, user.id);
 
   if (!brand) {
-    redirect("/onboarding");
+    redirect(settings.subscription?.plan === "agence" ? "/dashboard/marques" : "/onboarding");
   }
-
-  const settings = await getSettings(supabase, user.id);
 
   return (
     <div>
