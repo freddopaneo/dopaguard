@@ -26,11 +26,16 @@ export default function Home() {
           background: "linear-gradient(135deg, #133742 0%, #0d2e38 100%)",
         }}
       >
-        <header className="mx-auto flex max-w-5xl items-center gap-2 px-6 py-8">
-          <RadarLogo />
-          <span className="text-sm font-semibold tracking-tight text-white">
-            {process.env.NEXT_PUBLIC_APP_NAME || "Dopaguard"}
-          </span>
+        <header className="mx-auto flex max-w-5xl items-center justify-between gap-2 px-6 py-8">
+          <div className="flex items-center gap-2">
+            <RadarLogo />
+            <span className="text-sm font-semibold tracking-tight text-white">
+              {process.env.NEXT_PUBLIC_APP_NAME || "Dopaguard"}
+            </span>
+          </div>
+          <a href="/login" className="text-xs font-medium text-white/60 underline-offset-2 hover:text-white hover:underline">
+            Se connecter
+          </a>
         </header>
 
         <main className="mx-auto flex max-w-5xl flex-col items-center px-6 pb-24 pt-8 text-center sm:pb-32 sm:pt-12">

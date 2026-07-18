@@ -4,6 +4,7 @@ import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { getCurrentBrand, SELECTED_BRAND_COOKIE } from "@/lib/dashboard/get-current-brand";
 import { getSettings } from "@/lib/dashboard/get-settings";
 import { NotificationSettings } from "@/components/dashboard/NotificationSettings";
+import { PasswordSettings } from "@/components/dashboard/PasswordSettings";
 import { Button } from "@/components/ui/Button";
 import { PLAN_LABELS } from "@/lib/stripe/plans";
 
@@ -72,12 +73,17 @@ export default async function ParametresPage() {
         )}
       </section>
 
-      <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+      <section className="mb-6 rounded-2xl border border-white/10 bg-white/[0.04] p-6">
         <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-white/40">Notifications</h2>
         <NotificationSettings
           initialNotifyCriticalAlerts={settings.notifications.notifyCriticalAlerts}
           initialNotifyWeeklyDigest={settings.notifications.notifyWeeklyDigest}
         />
+      </section>
+
+      <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-white/40">Sécurité</h2>
+        <PasswordSettings />
       </section>
     </div>
   );
