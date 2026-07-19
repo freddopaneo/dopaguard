@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { ScanForm } from "@/components/ScanForm";
 import { WhyContinuousMonitoring } from "@/components/landing/WhyContinuousMonitoring";
 import { HowItWorks } from "@/components/landing/HowItWorks";
@@ -5,6 +6,37 @@ import { DetectionTypes } from "@/components/landing/DetectionTypes";
 import { PricingTable } from "@/components/landing/PricingTable";
 import { Faq } from "@/components/landing/Faq";
 import { Footer } from "@/components/landing/Footer";
+import { getAppUrl } from "@/lib/app-url";
+import { PLAN_PRICES_EUR } from "@/lib/stripe/plans";
+
+export const metadata: Metadata = {
+  title: { absolute: "Dopaguard — Surveillance de réputation dans ChatGPT, Claude, Gemini, Perplexity" },
+  description:
+    "Découvrez gratuitement ce que ChatGPT, Claude, Gemini et Perplexity disent de votre entreprise, puis surveillez votre réputation IA chaque semaine.",
+  alternates: { canonical: getAppUrl() },
+};
+
+const ORGANIZATION_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Dopaguard",
+  url: getAppUrl(),
+  parentOrganization: { "@type": "Organization", name: "Dopaneo.ai" },
+};
+
+const PRODUCT_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Dopaguard",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  description: "Surveillance hebdomadaire de la réputation d'une entreprise dans les IA génératives.",
+  offers: [
+    { "@type": "Offer", name: "Essentiel", price: PLAN_PRICES_EUR.essentiel, priceCurrency: "EUR" },
+    { "@type": "Offer", name: "Pro", price: PLAN_PRICES_EUR.pro, priceCurrency: "EUR" },
+    { "@type": "Offer", name: "Agence", price: PLAN_PRICES_EUR.agence, priceCurrency: "EUR" },
+  ],
+};
 
 function RadarLogo() {
   return (
@@ -21,6 +53,10 @@ function RadarLogo() {
 export default function Home() {
   return (
     <div className="min-h-screen bg-dopaguard-cream text-dopaguard-navy">
+      {/* eslint-disable-next-line react/no-danger -- JSON-LD statique, aucune donnée utilisateur. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }} />
+      {/* eslint-disable-next-line react/no-danger -- JSON-LD statique, aucune donnée utilisateur. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(PRODUCT_JSON_LD) }} />
       <div
         className="relative overflow-hidden"
         style={{

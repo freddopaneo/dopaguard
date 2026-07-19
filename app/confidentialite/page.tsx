@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { LegalLayout } from "@/components/legal/LegalLayout";
+
+export const metadata: Metadata = {
+  title: "Politique de confidentialité",
+  description: "Politique de confidentialité de Dopaguard : traitement des données personnelles et vos droits.",
+};
 
 export default function ConfidentialitePage() {
   const appName = process.env.NEXT_PUBLIC_APP_NAME || "Dopaguard";

@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { LegalLayout } from "@/components/legal/LegalLayout";
+
+export const metadata: Metadata = {
+  title: "Conditions générales de vente",
+  description: "Conditions générales de vente de Dopaguard : plans, tarifs, essai et résiliation.",
+};
 
 export default function CgvPage() {
   const appName = process.env.NEXT_PUBLIC_APP_NAME || "Dopaguard";

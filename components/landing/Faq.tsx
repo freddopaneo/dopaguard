@@ -25,11 +25,23 @@ const FAQ_ITEMS = [
   },
 ];
 
+const FAQ_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+
 export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section className="mx-auto max-w-3xl px-6 py-24">
+      {/* eslint-disable-next-line react/no-danger -- JSON-LD statique, aucune donnée utilisateur. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }} />
       <h2 className="text-center text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
         Questions fréquentes
       </h2>
@@ -48,9 +60,14 @@ export function Faq() {
                 <span className="font-medium text-dopaguard-navy">{item.question}</span>
                 <span className="shrink-0 text-xl text-dopaguard-navyMid/60">{isOpen ? "−" : "+"}</span>
               </button>
-              {isOpen && (
-                <p className="px-5 pb-4 text-sm leading-relaxed text-dopaguard-navyMid/80">{item.answer}</p>
-              )}
+              {/* Toujours présent dans le HTML (visible aux robots qui n'exécutent pas
+                  JS, dont la plupart des robots IA) -- seul l'affichage est contrôlé
+                  par CSS, jamais le rendu React. */}
+              <p
+                className={`px-5 pb-4 text-sm leading-relaxed text-dopaguard-navyMid/80 ${isOpen ? "block" : "hidden"}`}
+              >
+                {item.answer}
+              </p>
             </div>
           );
         })}
