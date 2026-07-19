@@ -1,0 +1,19 @@
+# Dopaguard
+
+> Dopaguard surveille automatiquement et chaque semaine ce que les principales IA génératives (ChatGPT, Claude, Gemini, Perplexity, Mistral) disent d'une entreprise, détecte les anomalies (erreur factuelle, sentiment négatif, concurrent recommandé à tort, hallucination, information datée), et alerte le dirigeant concerné. Édité par Dopaneo.ai (France).
+
+## Offre
+
+- Scan gratuit (3 minutes, sans carte bancaire) : https://dopaguard.ai/#scan-form
+- Abonnements : Essentiel (69 €/mois, 3 IA), Pro (149 €/mois, 5 IA + suivi d'un concurrent), Agence (349 €/mois, jusqu'à 10 marques, marque blanche) : https://dopaguard.ai/#tarifs
+- Essai 14 jours, sans engagement.
+
+## Blog
+
+- Index : https://dopaguard.ai/blog
+
+## Pages légales
+
+- Mentions légales : https://dopaguard.ai/mentions-legales
+- Conditions générales de vente : https://dopaguard.ai/cgv
+- Politique de confidentialité : https://dopaguard.ai/confidentialite
