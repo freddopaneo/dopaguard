@@ -95,7 +95,7 @@ export function PricingTable() {
   }
 
   return (
-    <section id="tarifs" className="mx-auto max-w-5xl px-6 py-24">
+    <section id="tarifs" className="mx-auto max-w-5xl px-6 py-14 sm:py-24">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
           Une réputation surveillée, à partir de 69 € par mois.
