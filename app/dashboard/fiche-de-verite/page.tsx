@@ -5,6 +5,9 @@ import { getCurrentBrand, SELECTED_BRAND_COOKIE } from "@/lib/dashboard/get-curr
 import { getSettings } from "@/lib/dashboard/get-settings";
 import { getTruthSheet } from "@/lib/dashboard/get-truth-sheet";
 import { TruthSheetEditor } from "@/components/dashboard/TruthSheetEditor";
+import { CompetitorTracker } from "@/components/dashboard/CompetitorTracker";
+
+const COMPETITOR_TRACKING_PLANS = ["pro", "agence"];
 
 export default async function FicheDeVeritePage() {
   const supabase = createServerSupabaseClient();
@@ -45,6 +48,15 @@ export default async function FicheDeVeritePage() {
         }}
         initialLastValidatedAt={truthSheet.lastValidatedAt}
       />
+      {COMPETITOR_TRACKING_PLANS.includes(brand.plan ?? "") && (
+        <div className="mt-6">
+          <CompetitorTracker
+            brandId={brand.id}
+            knownCompetitors={truthSheet.knownCompetitors}
+            initialTrackedCompetitor={brand.tracked_competitor}
+          />
+        </div>
+      )}
     </div>
   );
 }

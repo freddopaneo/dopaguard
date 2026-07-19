@@ -1,5 +1,6 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 import { judgeWithTruthSheet, type RecommendationPosition } from "./anomaly-judge";
+import { judgeCompetitorResponse } from "./competitor-judge";
 import { getIsoWeek } from "./iso-week";
 import { mapWithConcurrency } from "./concurrency";
 import { sendCriticalAlertEmail, sendWeeklyDigestEmail } from "@/lib/email/resend";
@@ -8,7 +9,7 @@ import { getAppUrl } from "@/lib/app-url";
 const CONCURRENCY = 3;
 const SEVERITY_RANK: Record<string, number> = { critical: 0, major: 1, minor: 2 };
 
-const RECOMMENDATION_SCORES: Record<RecommendationPosition, number> = {
+export const RECOMMENDATION_SCORES: Record<RecommendationPosition, number> = {
   recommended: 100,
   neutral: 60,
   not_mentioned: 40,
@@ -77,6 +78,7 @@ export async function runBrandJudge(brand: BrandForJudge, options?: { silent?: b
     .eq("brand_id", brand.id)
     .eq("week_number", week)
     .eq("year", year)
+    .eq("competitor_name", "")
     .is("judged_at", null)
     .not("response_text", "is", null);
 
@@ -204,6 +206,7 @@ async function updateWeeklyScore(
     .eq("brand_id", brand.id)
     .eq("week_number", week)
     .eq("year", year)
+    .eq("competitor_name", "")
     .not("judged_at", "is", null);
 
   if (!judgedResponses || judgedResponses.length === 0) return;
@@ -243,6 +246,7 @@ async function updateWeeklyScore(
     .eq("brand_id", brand.id)
     .eq("week_number", week)
     .eq("year", year)
+    .eq("competitor_name", "")
     .maybeSingle();
 
   await supabase.from("scores").upsert(
@@ -250,11 +254,12 @@ async function updateWeeklyScore(
       brand_id: brand.id,
       week_number: week,
       year,
+      competitor_name: "",
       global_score: roundedGlobalScore,
       score_by_provider: scoreByProvider,
       anomalies_count: anomaliesCount,
     },
-    { onConflict: "brand_id,week_number,year" }
+    { onConflict: "brand_id,week_number,year,competitor_name" }
   );
 
   if (existingScore?.digest_sent_at || !brand.ownerEmail || !brand.notifyWeeklyDigest) return;
@@ -263,6 +268,7 @@ async function updateWeeklyScore(
     .from("scores")
     .select("week_number, year, global_score")
     .eq("brand_id", brand.id)
+    .eq("competitor_name", "")
     .order("year", { ascending: false })
     .order("week_number", { ascending: false })
     .limit(2);
@@ -290,7 +296,8 @@ async function updateWeeklyScore(
       .update({ digest_sent_at: new Date().toISOString() })
       .eq("brand_id", brand.id)
       .eq("week_number", week)
-      .eq("year", year);
+      .eq("year", year)
+      .eq("competitor_name", "");
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     try {
@@ -299,4 +306,120 @@ async function updateWeeklyScore(
       // Le logging ne doit jamais interrompre le cycle.
     }
   }
+}
+
+export interface CompetitorJudgeSummary {
+  brandId: string;
+  responsesJudged: number;
+  errors: number;
+}
+
+// Score simplifié pour un concurrent (pas de fiche de vérité, donc pas d'exactitude
+// possible) : uniquement ton (60 %) et position de recommandation (40 %) -- étiqueté
+// côté dashboard comme une estimation, pas une note comparable à l'identique.
+function competitorWeightedScore(r: { sentiment_score: number | null; recommendation_position: string | null }): number {
+  const sentiment = r.sentiment_score ?? 50;
+  const position = RECOMMENDATION_SCORES[(r.recommendation_position as RecommendationPosition) ?? "neutral"] ?? 60;
+  return sentiment * 0.6 + position * 0.4;
+}
+
+// Juge les réponses brutes du concurrent suivi (cf. runCompetitorScan) -- aucune
+// détection d'anomalie ni email, seulement un score hebdomadaire comparable au score
+// de la marque elle-même sur la page Vue d'ensemble.
+export async function runCompetitorJudge(brandId: string, competitorName: string): Promise<CompetitorJudgeSummary> {
+  const supabase = createAdminClient();
+  const { week, year } = getIsoWeek(new Date());
+
+  const { data: unjudged } = await supabase
+    .from("llm_responses")
+    .select("id, response_text, llm_provider")
+    .eq("brand_id", brandId)
+    .eq("week_number", week)
+    .eq("year", year)
+    .eq("competitor_name", competitorName)
+    .is("judged_at", null)
+    .not("response_text", "is", null);
+
+  let responsesJudged = 0;
+  let errors = 0;
+
+  await mapWithConcurrency(unjudged ?? [], CONCURRENCY, async (response) => {
+    try {
+      const result = await judgeCompetitorResponse(competitorName, response.response_text as string);
+
+      const { error: updateError } = await supabase
+        .from("llm_responses")
+        .update({
+          judged_at: new Date().toISOString(),
+          sentiment_score: result.sentimentScore,
+          recommendation_position: result.recommendationPosition,
+        })
+        .eq("id", response.id);
+      if (updateError) throw updateError;
+
+      const { error: usageError } = await supabase.from("api_usage").insert({
+        brand_id: brandId,
+        provider: "anthropic",
+        tokens_in: result.tokensIn,
+        tokens_out: result.tokensOut,
+        estimated_cost_eur: result.estimatedCostEur,
+      });
+      if (usageError) throw usageError;
+
+      responsesJudged++;
+    } catch (error) {
+      errors++;
+      const message = error instanceof Error ? error.message : String(error);
+      try {
+        await supabase.from("error_logs").insert({
+          source: "weekly-judge-competitor",
+          brand_id: brandId,
+          message,
+          context: { llmResponseId: response.id, competitorName },
+        });
+      } catch {
+        // Le logging ne doit jamais interrompre le jugement des autres réponses.
+      }
+    }
+  });
+
+  const { data: judgedResponses } = await supabase
+    .from("llm_responses")
+    .select("llm_provider, sentiment_score, recommendation_position")
+    .eq("brand_id", brandId)
+    .eq("week_number", week)
+    .eq("year", year)
+    .eq("competitor_name", competitorName)
+    .not("judged_at", "is", null);
+
+  if (judgedResponses && judgedResponses.length > 0) {
+    const globalScore = judgedResponses.reduce((sum, r) => sum + competitorWeightedScore(r), 0) / judgedResponses.length;
+
+    const byProvider: Record<string, { total: number; count: number }> = {};
+    for (const r of judgedResponses) {
+      const key = r.llm_provider;
+      if (!byProvider[key]) byProvider[key] = { total: 0, count: 0 };
+      byProvider[key].total += competitorWeightedScore(r);
+      byProvider[key].count++;
+    }
+    const scoreByProvider: Record<string, number> = {};
+    for (const [provider, { total, count }] of Object.entries(byProvider)) {
+      scoreByProvider[provider] = Math.round(total / count);
+    }
+
+    await supabase.from("scores").upsert(
+      {
+        brand_id: brandId,
+        week_number: week,
+        year,
+        competitor_name: competitorName,
+        global_score: Math.round(globalScore),
+        score_by_provider: scoreByProvider,
+        anomalies_count: null,
+      },
+      { onConflict: "brand_id,week_number,year,competitor_name" }
+    );
+  }
+
+  return { brandId, responsesJudged, errors };
 }

@@ -6,8 +6,10 @@ export interface CurrentBrand {
   id: string;
   name: string;
   status: string;
+  plan: string | null;
   onboarding_completed_at: string | null;
   agency_id: string | null;
+  tracked_competitor: string | null;
 }
 
 export interface BrandListItem {
@@ -17,6 +19,7 @@ export interface BrandListItem {
   plan: string | null;
   agency_id: string | null;
   onboarding_completed_at: string | null;
+  tracked_competitor: string | null;
   created_at: string;
 }
 
@@ -26,7 +29,7 @@ export async function getUserBrands(
 ): Promise<BrandListItem[]> {
   const { data } = await supabase
     .from("brands")
-    .select("id, name, status, plan, agency_id, onboarding_completed_at, created_at")
+    .select("id, name, status, plan, agency_id, onboarding_completed_at, tracked_competitor, created_at")
     .eq("owner_id", userId)
     .order("created_at", { ascending: false });
 

@@ -63,6 +63,7 @@ async function getAverageScoreForMonth(
     .from("scores")
     .select("global_score, score_by_provider")
     .eq("brand_id", brandId)
+    .eq("competitor_name", "")
     .gte("created_at", start)
     .lt("created_at", end);
 
@@ -107,6 +108,7 @@ export async function getMonthlyReportData(
       .from("llm_responses")
       .select("response_text, llm_provider, accuracy_score")
       .eq("brand_id", brandId)
+      .eq("competitor_name", "")
       .gte("created_at", start)
       .lt("created_at", end)
       .not("judged_at", "is", null)

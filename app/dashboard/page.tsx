@@ -4,10 +4,12 @@ import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { getCurrentBrand, SELECTED_BRAND_COOKIE } from "@/lib/dashboard/get-current-brand";
 import { getSettings } from "@/lib/dashboard/get-settings";
 import { getDashboardOverview } from "@/lib/dashboard/get-overview";
+import { getCompetitorOverview } from "@/lib/dashboard/get-competitor-overview";
 import { ScoreGauge } from "@/components/dashboard/ScoreGauge";
 import { ScoreEvolutionChart } from "@/components/dashboard/ScoreEvolutionChart";
 import { ScoreByProviderChart } from "@/components/dashboard/ScoreByProviderChart";
 import { OpenAnomaliesCard } from "@/components/dashboard/OpenAnomaliesCard";
+import { CompetitorComparisonCard } from "@/components/dashboard/CompetitorComparisonCard";
 
 function EmptyOverviewState({ brandName }: { brandName: string }) {
   return (
@@ -48,6 +50,10 @@ export default async function DashboardOverviewPage() {
 
   const latest = overview.scores[overview.scores.length - 1];
 
+  const competitorOverview = brand.tracked_competitor
+    ? await getCompetitorOverview(supabase, brand.id, brand.tracked_competitor)
+    : null;
+
   return (
     <div>
       <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
@@ -58,6 +64,16 @@ export default async function DashboardOverviewPage() {
         <ScoreByProviderChart scoreByProvider={latest.scoreByProvider} />
         <OpenAnomaliesCard count={overview.openAnomaliesCount} />
       </div>
+      {competitorOverview && (
+        <div className="mt-6">
+          <CompetitorComparisonCard
+            brandName={brand.name}
+            brandScore={latest.globalScore}
+            competitorName={competitorOverview.competitorName}
+            competitorScore={competitorOverview.currentScore}
+          />
+        </div>
+      )}
     </div>
   );
 }
