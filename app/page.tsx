@@ -107,7 +107,7 @@ export default function Home() {
       <PricingTable />
       <Faq />
 
-      <section className="mx-auto max-w-3xl px-6 py-20 text-center">
+      <section className="mx-auto max-w-3xl px-6 py-12 text-center sm:py-20">
         <h2 className="text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
           Ce que l&apos;IA dit de vous change cette semaine. Le saurez-vous ?
         </h2>

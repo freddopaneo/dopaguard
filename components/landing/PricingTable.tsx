@@ -25,7 +25,7 @@ const PLANS: Plan[] = [
     brands: "1",
     ais: "3",
     digest: true,
-    criticalAlerts: false,
+    criticalAlerts: true,
     competitors: "—",
     whiteLabel: false,
     support: "standard",
@@ -39,7 +39,7 @@ const PLANS: Plan[] = [
     ais: "5",
     digest: true,
     criticalAlerts: true,
-    competitors: "3",
+    competitors: "1",
     whiteLabel: false,
     support: "standard",
   },
@@ -51,7 +51,7 @@ const PLANS: Plan[] = [
     ais: "5",
     digest: true,
     criticalAlerts: true,
-    competitors: "3 par marque",
+    competitors: "1 par marque",
     whiteLabel: true,
     support: "prioritaire",
   },
@@ -95,7 +95,7 @@ export function PricingTable() {
   }
 
   return (
-    <section id="tarifs" className="mx-auto max-w-5xl px-6 py-24">
+    <section id="tarifs" className="mx-auto max-w-5xl px-6 py-14 sm:py-24">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
           Une réputation surveillée, à partir de 69 € par mois.
