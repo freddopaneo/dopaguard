@@ -28,6 +28,7 @@ export async function getDashboardOverview(
       .from("scores")
       .select("week_number, year, global_score, score_by_provider")
       .eq("brand_id", brandId)
+      .eq("competitor_name", "")
       .order("year", { ascending: false })
       .order("week_number", { ascending: false })
       .limit(12),

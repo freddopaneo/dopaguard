@@ -1,54 +1,51 @@
 import { createAdminClient } from "@/lib/supabase/admin";
-import { callLLM, type LLMProvider } from "@/lib/llm-gateway";
+import { callLLM } from "@/lib/llm-gateway";
 import { renderPrompt } from "@/lib/prompts";
+import { reputationPrompts } from "@/lib/prompts/reputation";
+import { recommendationPrompts } from "@/lib/prompts/recommendation";
+import { comparisonPrompts } from "@/lib/prompts/comparison";
 import { getIsoWeek } from "./iso-week";
 import { mapWithConcurrency } from "./concurrency";
-
-export const PLAN_PROVIDERS: Record<string, LLMProvider[]> = {
-  essentiel: ["openai", "anthropic", "perplexity"],
-  pro: ["openai", "anthropic", "perplexity", "google", "mistral"],
-  agence: ["openai", "anthropic", "perplexity", "google", "mistral"],
-};
+import { PLAN_PROVIDERS } from "./run-brand-scan";
 
 const CONCURRENCY = 3;
 
-export interface BrandForScan {
+// 3 prompts génériques (un par catégorie), pas les 20-30 du client : un concurrent
+// n'a pas de fiche de vérité, les prompts tarifs/factuels n'ont pas de sens pour lui
+// -- cf. décision de cadrage du Sprint 5 (garder le coût maîtrisé, un seul concurrent
+// suivi à la fois).
+const COMPETITOR_PROMPT_TEMPLATES = [reputationPrompts[0], recommendationPrompts[0], comparisonPrompts[0]];
+
+export interface BrandForCompetitorScan {
   id: string;
-  name: string;
-  website: string;
-  sector: string | null;
   plan: string | null;
 }
 
-export interface BrandScanSummary {
+export interface CompetitorScanSummary {
   brandId: string;
   callsMade: number;
   callsSkipped: number;
   errors: number;
 }
 
-// Interroge les IA du plan de la marque pour ses prompts actifs et stocke les
-// réponses brutes -- aucune analyse ici (CDC 6.3, "stockage brut systématique
-// avant analyse"), le jugement/scores arrivent à l'Étape 6.
-export async function runBrandScan(brand: BrandForScan): Promise<BrandScanSummary> {
+// Interroge les mêmes IA que la marque au sujet de son concurrent suivi, avec un jeu
+// de prompts réduit et fixe -- même mécanique d'idempotence que runBrandScan (rien
+// n'est rejoué si déjà présent pour la semaine ISO courante).
+export async function runCompetitorScan(brand: BrandForCompetitorScan, competitorName: string): Promise<CompetitorScanSummary> {
   const supabase = createAdminClient();
   const { week, year } = getIsoWeek(new Date());
   const providers = PLAN_PROVIDERS[brand.plan ?? "essentiel"] ?? PLAN_PROVIDERS.essentiel;
 
-  const { data: brandPrompts } = await supabase
-    .from("brand_prompts")
-    .select("prompt_template_id, prompt_templates(id, template)")
-    .eq("brand_id", brand.id)
-    .eq("enabled", true);
-
-  interface JoinedPrompt {
-    id: string;
-    template: string;
+  const promptRows: { id: string; template: string }[] = [];
+  for (const promptTemplate of COMPETITOR_PROMPT_TEMPLATES) {
+    const { data } = await supabase
+      .from("prompt_templates")
+      .select("id, template")
+      .eq("template", promptTemplate.template)
+      .limit(1)
+      .maybeSingle();
+    if (data) promptRows.push(data);
   }
-
-  const prompts: JoinedPrompt[] = ((brandPrompts ?? []) as unknown as { prompt_templates: JoinedPrompt | null }[])
-    .map((row) => row.prompt_templates)
-    .filter((template): template is JoinedPrompt => Boolean(template));
 
   const { data: existing } = await supabase
     .from("llm_responses")
@@ -56,11 +53,11 @@ export async function runBrandScan(brand: BrandForScan): Promise<BrandScanSummar
     .eq("brand_id", brand.id)
     .eq("week_number", week)
     .eq("year", year)
-    .eq("competitor_name", "");
+    .eq("competitor_name", competitorName);
 
   const doneKeys = new Set((existing ?? []).map((row) => `${row.prompt_template_id}:${row.llm_provider}`));
 
-  const pairs = prompts
+  const pairs = promptRows
     .flatMap((p) => providers.map((provider) => ({ promptTemplateId: p.id, template: p.template, provider })))
     .filter((pair) => !doneKeys.has(`${pair.promptTemplateId}:${pair.provider}`));
 
@@ -68,11 +65,7 @@ export async function runBrandScan(brand: BrandForScan): Promise<BrandScanSummar
   let errors = 0;
 
   await mapWithConcurrency(pairs, CONCURRENCY, async (pair) => {
-    const prompt = renderPrompt(pair.template, {
-      brand: brand.name,
-      website: brand.website,
-      sector: brand.sector ?? undefined,
-    });
+    const prompt = renderPrompt(pair.template, { brand: competitorName });
 
     try {
       const result = await callLLM({ provider: pair.provider, prompt });
@@ -86,6 +79,7 @@ export async function runBrandScan(brand: BrandForScan): Promise<BrandScanSummar
         response_text: result.text,
         week_number: week,
         year,
+        competitor_name: competitorName,
       });
       if (insertError) throw insertError;
 
@@ -104,10 +98,10 @@ export async function runBrandScan(brand: BrandForScan): Promise<BrandScanSummar
       const message = error instanceof Error ? error.message : String(error);
       try {
         await supabase.from("error_logs").insert({
-          source: "weekly-scan",
+          source: "weekly-scan-competitor",
           brand_id: brand.id,
           message,
-          context: { provider: pair.provider, promptTemplateId: pair.promptTemplateId },
+          context: { provider: pair.provider, promptTemplateId: pair.promptTemplateId, competitorName },
         });
       } catch {
         // Le logging ne doit jamais interrompre le scan des autres prompts/marques.

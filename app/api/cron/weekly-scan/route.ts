@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { runBrandScan } from "@/lib/scan/run-brand-scan";
-import { runBrandJudge } from "@/lib/scan/run-brand-judge";
+import { runBrandJudge, runCompetitorJudge } from "@/lib/scan/run-brand-judge";
+import { runCompetitorScan } from "@/lib/scan/run-competitor-scan";
+
+const COMPETITOR_TRACKING_PLANS = ["pro", "agence"];
 
 export const maxDuration = 300;
 
@@ -14,7 +17,7 @@ export async function GET(request: NextRequest) {
   const supabase = createAdminClient();
   const { data: brands, error } = await supabase
     .from("brands")
-    .select("id, name, website, sector, plan, owner_id")
+    .select("id, name, website, sector, plan, owner_id, tracked_competitor")
     .in("status", ["trial", "active"]);
 
   if (error) {
@@ -28,6 +31,12 @@ export async function GET(request: NextRequest) {
     try {
       const scanSummary = await runBrandScan(brand);
       const judgeSummary = await runBrandJudge({ id: brand.id, name: brand.name, ownerId: brand.owner_id });
+
+      if (brand.tracked_competitor && COMPETITOR_TRACKING_PLANS.includes(brand.plan ?? "")) {
+        await runCompetitorScan({ id: brand.id, plan: brand.plan }, brand.tracked_competitor);
+        await runCompetitorJudge(brand.id, brand.tracked_competitor);
+      }
+
       summaries.push({
         brandId: brand.id,
         callsMade: scanSummary.callsMade,

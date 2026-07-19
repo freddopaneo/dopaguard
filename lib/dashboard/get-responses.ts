@@ -19,7 +19,11 @@ export async function getAvailableWeeks(
   supabase: ReturnType<typeof createServerSupabaseClient>,
   brandId: string
 ): Promise<WeekOption[]> {
-  const { data } = await supabase.from("llm_responses").select("week_number, year").eq("brand_id", brandId);
+  const { data } = await supabase
+    .from("llm_responses")
+    .select("week_number, year")
+    .eq("brand_id", brandId)
+    .eq("competitor_name", "");
 
   const seen = new Set<string>();
   const weeks: WeekOption[] = [];
@@ -44,7 +48,8 @@ export async function getResponsesForWeek(
     .select("id, llm_provider, response_text, created_at, prompt_templates(category)")
     .eq("brand_id", brandId)
     .eq("week_number", week)
-    .eq("year", year);
+    .eq("year", year)
+    .eq("competitor_name", "");
 
   return (data ?? []).map((row: Record<string, unknown>) => ({
     id: row.id as string,
