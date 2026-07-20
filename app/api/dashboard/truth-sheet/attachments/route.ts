@@ -100,7 +100,24 @@ export async function POST(request: NextRequest) {
       .single();
     if (insertError) throw insertError;
 
-    return NextResponse.json({ attachment: inserted });
+    const { data: signed } = await admin.storage.from("truth-sheet-attachments").createSignedUrl(path, 300);
+
+    // La réponse doit reprendre exactement la forme d'AttachmentValues (camelCase) --
+    // la ligne renvoyée par Supabase est en snake_case, sinon l'ajout affiché
+    // immédiatement après l'envoi (avant tout rechargement de page) montre des
+    // valeurs incorrectes (nom vide, taille "NaN Mo", date invalide).
+    return NextResponse.json({
+      attachment: {
+        id: inserted.id,
+        label: inserted.label,
+        fileName: inserted.file_name,
+        mimeType: inserted.mime_type,
+        fileSize: inserted.file_size,
+        hasExtractedText: Boolean(inserted.extracted_text),
+        createdAt: inserted.created_at,
+        viewUrl: signed?.signedUrl ?? null,
+      },
+    });
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     try {
