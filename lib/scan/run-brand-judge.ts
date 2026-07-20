@@ -44,7 +44,9 @@ export async function runBrandJudge(brand: BrandForJudge, options?: { silent?: b
 
   const { data: truthSheetRow } = await supabase
     .from("truth_sheets")
-    .select("legal_status, offering, pricing_facts, key_people, differentiators, known_competitors, forbidden_claims")
+    .select(
+      "legal_status, offering, pricing_facts, key_people, differentiators, known_competitors, forbidden_claims, opening_hours, address, official_links, certifications"
+    )
     .eq("brand_id", brand.id)
     .maybeSingle();
 
@@ -70,7 +72,25 @@ export async function runBrandJudge(brand: BrandForJudge, options?: { silent?: b
     differentiators: truthSheetRow.differentiators,
     knownCompetitors: truthSheetRow.known_competitors,
     forbiddenClaims: truthSheetRow.forbidden_claims,
+    openingHours: truthSheetRow.opening_hours,
+    address: truthSheetRow.address,
+    officialLinks: truthSheetRow.official_links,
+    certifications: truthSheetRow.certifications,
   };
+
+  const { data: attachmentRows } = await supabase
+    .from("truth_sheet_attachments")
+    .select("label, file_name, extracted_text")
+    .eq("brand_id", brand.id)
+    .not("extracted_text", "is", null)
+    .order("created_at", { ascending: false })
+    .limit(3);
+
+  const attachments = (attachmentRows ?? []).map((a) => ({
+    label: a.label,
+    fileName: a.file_name,
+    extractedText: a.extracted_text as string,
+  }));
 
   const { data: unjudged } = await supabase
     .from("llm_responses")
@@ -97,7 +117,7 @@ export async function runBrandJudge(brand: BrandForJudge, options?: { silent?: b
 
   await mapWithConcurrency(unjudged ?? [], CONCURRENCY, async (response) => {
     try {
-      const result = await judgeWithTruthSheet(brand.name, truthSheet, response.response_text as string);
+      const result = await judgeWithTruthSheet(brand.name, truthSheet, response.response_text as string, attachments);
 
       if (result.anomalies.length > 0) {
         const { error: anomaliesError } = await supabase.from("anomalies").insert(

@@ -4,6 +4,7 @@ import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { getCurrentBrand, SELECTED_BRAND_COOKIE } from "@/lib/dashboard/get-current-brand";
 import { getSettings } from "@/lib/dashboard/get-settings";
 import { getTruthSheet } from "@/lib/dashboard/get-truth-sheet";
+import { getTruthSheetAttachments } from "@/lib/dashboard/get-attachments";
 import { TruthSheetEditor } from "@/components/dashboard/TruthSheetEditor";
 import { CompetitorTracker } from "@/components/dashboard/CompetitorTracker";
 
@@ -27,7 +28,10 @@ export default async function FicheDeVeritePage() {
     redirect(settings.subscription?.plan === "agence" ? "/dashboard/marques" : "/onboarding");
   }
 
-  const truthSheet = await getTruthSheet(supabase, brand.id);
+  const [truthSheet, attachments] = await Promise.all([
+    getTruthSheet(supabase, brand.id),
+    getTruthSheetAttachments(supabase, brand.id),
+  ]);
 
   return (
     <div>
@@ -45,8 +49,13 @@ export default async function FicheDeVeritePage() {
           differentiators: truthSheet.differentiators,
           knownCompetitors: truthSheet.knownCompetitors,
           forbiddenClaims: truthSheet.forbiddenClaims,
+          openingHours: truthSheet.openingHours,
+          address: truthSheet.address,
+          officialLinks: truthSheet.officialLinks,
+          certifications: truthSheet.certifications,
         }}
         initialLastValidatedAt={truthSheet.lastValidatedAt}
+        initialAttachments={attachments}
       />
       {COMPETITOR_TRACKING_PLANS.includes(brand.plan ?? "") && (
         <div className="mt-6">

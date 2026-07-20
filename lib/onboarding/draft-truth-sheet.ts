@@ -7,6 +7,10 @@ export interface TruthSheetDraft {
   keyPeople: string;
   differentiators: string;
   knownCompetitors: string[];
+  openingHours: string;
+  address: string;
+  officialLinks: string;
+  certifications: string;
 }
 
 const EMPTY_DRAFT: TruthSheetDraft = {
@@ -16,6 +20,10 @@ const EMPTY_DRAFT: TruthSheetDraft = {
   keyPeople: "",
   differentiators: "",
   knownCompetitors: [],
+  openingHours: "",
+  address: "",
+  officialLinks: "",
+  certifications: "",
 };
 
 function buildDraftPrompt(brandName: string, websiteMarkdown: string): string {
@@ -26,7 +34,7 @@ ${websiteMarkdown.slice(0, 8000)}
 """
 
 À partir de ce contenu, propose un brouillon de fiche d'identité pour cette entreprise. Réponds strictement en JSON, sans aucun texte autour, au format :
-{"legal_status": "...", "offering": "...", "pricing_facts": "...", "key_people": "...", "differentiators": "...", "known_competitors": ["...", "..."]}
+{"legal_status": "...", "offering": "...", "pricing_facts": "...", "key_people": "...", "differentiators": "...", "known_competitors": ["...", "..."], "opening_hours": "...", "address": "...", "official_links": "...", "certifications": "..."}
 
 Consignes :
 - legal_status : statut/ancienneté si mentionné (ex. "SARL en activité, créée en 2019"), sinon chaîne vide.
@@ -35,6 +43,10 @@ Consignes :
 - key_people : dirigeants/fondateurs mentionnés, sinon chaîne vide.
 - differentiators : points forts mis en avant par l'entreprise elle-même.
 - known_competitors : liste de concurrents si mentionnés explicitement, sinon liste vide.
+- opening_hours : horaires d'ouverture si mentionnés, sinon chaîne vide.
+- address : adresse et coordonnées officielles si mentionnées, sinon chaîne vide.
+- official_links : site et réseaux sociaux officiels mentionnés (un par ligne), sinon chaîne vide.
+- certifications : certifications/labels mentionnés, sinon chaîne vide.
 Ne déduis rien qui ne soit pas présent dans le texte fourni.`;
 }
 
@@ -53,6 +65,10 @@ function parseDraft(raw: string): TruthSheetDraft {
       knownCompetitors: Array.isArray(parsed.known_competitors)
         ? parsed.known_competitors.filter((c: unknown) => typeof c === "string")
         : [],
+      openingHours: typeof parsed.opening_hours === "string" ? parsed.opening_hours : "",
+      address: typeof parsed.address === "string" ? parsed.address : "",
+      officialLinks: typeof parsed.official_links === "string" ? parsed.official_links : "",
+      certifications: typeof parsed.certifications === "string" ? parsed.certifications : "",
     };
   } catch {
     return EMPTY_DRAFT;

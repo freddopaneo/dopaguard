@@ -36,7 +36,21 @@ export interface TruthSheetInput {
   differentiators: string | null;
   knownCompetitors: string[] | null;
   forbiddenClaims: string | null;
+  openingHours: string | null;
+  address: string | null;
+  officialLinks: string | null;
+  certifications: string | null;
 }
+
+export interface TruthSheetAttachmentInput {
+  label: string | null;
+  fileName: string;
+  extractedText: string;
+}
+
+// Nombre maximum de pièces justificatives injectées dans le prompt du juge -- au-delà,
+// seules les plus récentes sont retenues pour ne pas faire gonfler le coût de chaque jugement.
+const MAX_ATTACHMENTS_IN_PROMPT = 3;
 
 export interface JudgeResult {
   anomalies: Anomaly[];
@@ -55,7 +69,24 @@ function buildTruthSheetBlock(truthSheet: TruthSheetInput): string {
 - Dirigeants : ${truthSheet.keyPeople || "non renseigné"}
 - Points forts : ${truthSheet.differentiators || "non renseigné"}
 - Concurrents connus : ${(truthSheet.knownCompetitors ?? []).join(", ") || "non renseigné"}
+- Horaires d'ouverture : ${truthSheet.openingHours || "non renseigné"}
+- Adresse/coordonnées : ${truthSheet.address || "non renseigné"}
+- Site et réseaux officiels : ${truthSheet.officialLinks || "non renseigné"}
+- Certifications/labels : ${truthSheet.certifications || "non renseigné"}
 - Ce qui ne doit JAMAIS être dit (forbidden_claims) : ${truthSheet.forbiddenClaims || "aucun"}`;
+}
+
+function buildAttachmentsBlock(attachments: TruthSheetAttachmentInput[]): string {
+  const usable = attachments.filter((a) => a.extractedText.trim().length > 0).slice(0, MAX_ATTACHMENTS_IN_PROMPT);
+  if (usable.length === 0) return "";
+
+  const items = usable
+    .map((a) => `--- ${a.label || a.fileName} ---\n${a.extractedText}`)
+    .join("\n\n");
+
+  return `\n\nPièces justificatives fournies par l'entreprise (documents téléversés, à considérer comme des preuves corroborant ou contredisant la fiche de vérité ci-dessus) :
+
+${items}`;
 }
 
 // Certaines réponses (notamment Perplexity/Gemini) peuvent être très longues,
@@ -63,10 +94,15 @@ function buildTruthSheetBlock(truthSheet: TruthSheetInput): string {
 // tronquée ici (le juge n'a pas besoin du texte intégral pour évaluer exactitude/ton).
 const MAX_RESPONSE_TEXT_LENGTH = 6000;
 
-function buildJudgePrompt(brandName: string, truthSheet: TruthSheetInput, responseText: string): string {
+function buildJudgePrompt(
+  brandName: string,
+  truthSheet: TruthSheetInput,
+  responseText: string,
+  attachments: TruthSheetAttachmentInput[]
+): string {
   return `Voici la fiche de vérité de l'entreprise "${brandName}" :
 
-${buildTruthSheetBlock(truthSheet)}
+${buildTruthSheetBlock(truthSheet)}${buildAttachmentsBlock(attachments)}
 
 Voici une réponse donnée par une IA générative à une question sur "${brandName}" :
 
@@ -157,9 +193,13 @@ function parseJudgeOutput(
 export async function judgeWithTruthSheet(
   brandName: string,
   truthSheet: TruthSheetInput,
-  responseText: string
+  responseText: string,
+  attachments: TruthSheetAttachmentInput[] = []
 ): Promise<JudgeResult> {
-  const result = await callLLM({ provider: "anthropic", prompt: buildJudgePrompt(brandName, truthSheet, responseText) });
+  const result = await callLLM({
+    provider: "anthropic",
+    prompt: buildJudgePrompt(brandName, truthSheet, responseText, attachments),
+  });
   const parsed = parseJudgeOutput(result.text, responseText);
 
   return {

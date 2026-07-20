@@ -10,6 +10,10 @@ interface Draft {
   keyPeople: string;
   differentiators: string;
   knownCompetitors: string[];
+  openingHours: string;
+  address: string;
+  officialLinks: string;
+  certifications: string;
 }
 
 const EMPTY_DRAFT: Draft = {
@@ -19,6 +23,10 @@ const EMPTY_DRAFT: Draft = {
   keyPeople: "",
   differentiators: "",
   knownCompetitors: [],
+  openingHours: "",
+  address: "",
+  officialLinks: "",
+  certifications: "",
 };
 
 export function TruthSheetStep({ brandId, onDone }: { brandId: string; onDone: () => void }) {
