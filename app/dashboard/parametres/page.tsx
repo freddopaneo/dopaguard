@@ -61,9 +61,6 @@ export default async function ParametresPage() {
         ) : (
           <p className="text-sm text-white/50">Aucun abonnement actif.</p>
         )}
-        <p className="mt-4 text-xs text-white/40">
-          Besoin de résilier votre abonnement ? Cliquez sur « Gérer ma facturation » ci-dessus.
-        </p>
       </section>
 
       <section className="mb-6 rounded-2xl border border-white/10 bg-white/[0.04] p-6">
