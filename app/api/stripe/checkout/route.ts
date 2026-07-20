@@ -32,6 +32,7 @@ export async function POST(request: NextRequest) {
       mode: "subscription",
       line_items: [{ price: PLAN_PRICE_IDS[plan], quantity: 1 }],
       subscription_data: { trial_period_days: 14 },
+      allow_promotion_codes: true,
       success_url: `${appUrl}/bienvenue`,
       cancel_url: `${appUrl}/#tarifs`,
     });
