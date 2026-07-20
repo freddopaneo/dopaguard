@@ -60,7 +60,7 @@ export function AttachmentUploader({
         setError(data.error || "Une erreur est survenue.");
         return;
       }
-      setAttachments((prev) => [{ ...data.attachment, viewUrl: null }, ...prev]);
+      setAttachments((prev) => [data.attachment, ...prev]);
       setLabel("");
       if (fileInputRef.current) fileInputRef.current.value = "";
     } catch {
