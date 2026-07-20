@@ -100,6 +100,13 @@ async function callOpenAI(model: string, prompt: string): Promise<RawLLMResult> 
 }
 
 async function callAnthropic(model: string, prompt: string): Promise<RawLLMResult> {
+  return callAnthropicMessages(model, [{ role: "user", content: prompt }]);
+}
+
+async function callAnthropicMessages(
+  model: string,
+  messages: Array<{ role: string; content: unknown }>
+): Promise<RawLLMResult> {
   const res = await fetchWithTimeout("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
@@ -112,7 +119,7 @@ async function callAnthropic(model: string, prompt: string): Promise<RawLLMResul
       max_tokens: 1024,
       // Pas de "temperature" ici : Claude Sonnet 5 rejette ce paramètre (erreur 400)
       // dès qu'il diffère de la valeur par défaut, à cause de son raisonnement adaptatif.
-      messages: [{ role: "user", content: prompt }],
+      messages,
     }),
   });
   if (!res.ok) throw new Error(`Anthropic ${res.status}: ${await res.text()}`);
@@ -228,4 +235,50 @@ export async function callLLM({ provider, model, prompt }: CallLLMParams): Promi
 
   const message = lastError instanceof Error ? lastError.message : String(lastError);
   throw new LLMGatewayError(provider, resolvedModel, message);
+}
+
+export interface ExtractAttachmentTextParams {
+  base64Data: string;
+  mimeType: "application/pdf" | "image/png" | "image/jpeg";
+  instructions: string;
+}
+
+// Lit une pièce justificative (PDF ou image) fournie par le client pour la fiche de
+// vérité -- réutilise Claude (support natif des documents/images), sans nouvelle
+// dépendance ni service externe. Même logique de retry que callLLM.
+export async function extractAttachmentText({
+  base64Data,
+  mimeType,
+  instructions,
+}: ExtractAttachmentTextParams): Promise<CallLLMResult> {
+  const model = DEFAULT_MODELS.anthropic;
+  const documentBlock =
+    mimeType === "application/pdf"
+      ? { type: "document", source: { type: "base64", media_type: mimeType, data: base64Data } }
+      : { type: "image", source: { type: "base64", media_type: mimeType, data: base64Data } };
+
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+      const { text, tokensIn, tokensOut } = await callAnthropicMessages(model, [
+        { role: "user", content: [documentBlock, { type: "text", text: instructions }] },
+      ]);
+      return {
+        provider: "anthropic",
+        model,
+        text,
+        tokensIn,
+        tokensOut,
+        estimatedCostEur: estimateCostEur("anthropic", tokensIn, tokensOut),
+      };
+    } catch (error) {
+      lastError = error;
+      if (attempt < MAX_ATTEMPTS) {
+        await sleep(RETRY_DELAYS_MS[attempt - 1]);
+      }
+    }
+  }
+
+  const message = lastError instanceof Error ? lastError.message : String(lastError);
+  throw new LLMGatewayError("anthropic", model, message);
 }

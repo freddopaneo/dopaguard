@@ -12,6 +12,10 @@ const truthSheetRequestSchema = z.object({
   differentiators: z.string().trim().max(2000).default(""),
   knownCompetitors: z.array(z.string().trim().max(200)).max(20).default([]),
   forbiddenClaims: z.string().trim().max(2000).default(""),
+  openingHours: z.string().trim().max(2000).default(""),
+  address: z.string().trim().max(2000).default(""),
+  officialLinks: z.string().trim().max(2000).default(""),
+  certifications: z.string().trim().max(2000).default(""),
 });
 
 export async function POST(request: NextRequest) {
@@ -36,8 +40,20 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: parsed.error.issues[0]?.message ?? "Requête invalide." }, { status: 400 });
   }
 
-  const { brandId, legalStatus, offering, pricingFacts, keyPeople, differentiators, knownCompetitors, forbiddenClaims } =
-    parsed.data;
+  const {
+    brandId,
+    legalStatus,
+    offering,
+    pricingFacts,
+    keyPeople,
+    differentiators,
+    knownCompetitors,
+    forbiddenClaims,
+    openingHours,
+    address,
+    officialLinks,
+    certifications,
+  } = parsed.data;
 
   try {
     const { error: upsertError } = await supabase.from("truth_sheets").upsert(
@@ -50,6 +66,10 @@ export async function POST(request: NextRequest) {
         differentiators,
         known_competitors: knownCompetitors,
         forbidden_claims: forbiddenClaims,
+        opening_hours: openingHours,
+        address,
+        official_links: officialLinks,
+        certifications,
         last_validated_at: new Date().toISOString(),
       },
       { onConflict: "brand_id" }

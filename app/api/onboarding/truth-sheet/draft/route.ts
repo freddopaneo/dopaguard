@@ -57,7 +57,18 @@ export async function POST(request: NextRequest) {
     }
     // Le brouillon échoue (site inaccessible, etc.) : le client remplit manuellement, ce n'est pas bloquant.
     return NextResponse.json({
-      draft: { legalStatus: "", offering: "", pricingFacts: "", keyPeople: "", differentiators: "", knownCompetitors: [] },
+      draft: {
+        legalStatus: "",
+        offering: "",
+        pricingFacts: "",
+        keyPeople: "",
+        differentiators: "",
+        knownCompetitors: [],
+        openingHours: "",
+        address: "",
+        officialLinks: "",
+        certifications: "",
+      },
       scraped: false,
     });
   }
