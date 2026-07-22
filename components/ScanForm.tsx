@@ -71,7 +71,7 @@ export function ScanForm() {
           required
           placeholder="www.dopaguard.ai"
         />
-        <TextField id="email" name="email" label="Email professionnel" type="email" required placeholder="vous@entreprise.fr" />
+        <TextField id="email" name="email" label="Email pro" type="email" required placeholder="vous@entreprise.fr" />
       </div>
       <label className="mt-4 flex items-start gap-2 text-left text-xs text-slate-500">
         <input type="checkbox" name="consent" required className="mt-0.5" />
