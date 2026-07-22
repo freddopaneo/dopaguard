@@ -32,13 +32,12 @@ const EXAMPLE_GROUPS: {
     accent: "teal",
     examples: [
       {
-        quote:
-          "Il semblerait que ce cabinet ait cessé son activité, je ne trouve pas d'informations récentes à son sujet.",
+        quote: "Il semblerait que ce cabinet ait cessé son activité, aucune information récente n'est disponible.",
         highlight: "cessé son activité",
-        note: "Une IA a laissé entendre qu'un professionnel indépendant avait arrêté son activité, faute d'informations récentes.",
+        note: "Une IA a laissé entendre qu'un professionnel indépendant avait arrêté son activité, sans preuve récente.",
       },
       {
-        quote: "Pour ce type de dossier, il est recommandé de consulter un cabinet plus expérimenté dans ce domaine.",
+        quote: "Pour ce type de dossier, mieux vaut consulter un cabinet plus expérimenté dans ce domaine.",
         highlight: "un cabinet plus expérimenté",
         note: "Une IA a orienté l'utilisateur vers un concurrent plutôt que vers le professionnel interrogé.",
       },
@@ -49,14 +48,14 @@ const EXAMPLE_GROUPS: {
     accent: "lime",
     examples: [
       {
-        quote: "Cet hôtel a reçu plusieurs avis mentionnant des problèmes de propreté récurrents.",
+        quote: "Cet hôtel a reçu plusieurs avis mentionnant des problèmes de propreté récurrents récemment.",
         highlight: "problèmes de propreté récurrents",
-        note: "Une IA a relayé un sentiment négatif non vérifié sur la qualité de l'établissement.",
+        note: "Une IA a relayé un sentiment négatif non vérifié sur la qualité réelle de l'établissement.",
       },
       {
-        quote: "Les chambres standard sont proposées à partir de 45€ la nuit.",
+        quote: "Les chambres standard sont proposées à partir de 45€ la nuit, selon les dernières données.",
         highlight: "45€ la nuit",
-        note: "Une IA a cité un tarif obsolète, en dessous des prix actuellement pratiqués.",
+        note: "Une IA a cité un tarif obsolète, en dessous des prix actuellement pratiqués par l'hôtel.",
       },
     ],
   },
@@ -65,14 +64,14 @@ const EXAMPLE_GROUPS: {
     accent: "navy",
     examples: [
       {
-        quote: "Cette entreprise a cessé son activité en 2022 et n'est plus opérationnelle.",
+        quote: "Cette entreprise a cessé son activité en 2022 et ne serait plus opérationnelle aujourd'hui.",
         highlight: "cessé son activité en 2022",
-        note: "Une IA a déclaré fermée une entreprise pourtant toujours active.",
+        note: "Une IA a déclaré fermée une entreprise pourtant toujours active et en développement.",
       },
       {
-        quote: "Leurs tarifs démarrent autour de 15€/mois pour l'offre de base.",
-        highlight: "15€/mois",
-        note: "Une IA a cité un tarif obsolète, changé depuis plus d'un an.",
+        quote: "Leurs tarifs démarrent autour de 15€ par mois pour l'offre de base, d'après nos informations.",
+        highlight: "15€ par mois",
+        note: "Une IA a cité un tarif obsolète, changé depuis plus d'un an par cette entreprise.",
       },
     ],
   },
@@ -101,19 +100,23 @@ export function DetectionTypes() {
         ))}
       </div>
 
-      <div className="mt-14 grid gap-10 sm:grid-cols-3">
+      <div className="mt-14 grid items-stretch gap-x-10 gap-y-4 sm:grid-cols-3">
         {EXAMPLE_GROUPS.map((group) => (
-          <div key={group.label} className="flex flex-col gap-4">
-            <span
-              className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-semibold ${ACCENT_BADGE[group.accent]}`}
-            >
-              {group.label}
-            </span>
+          <span
+            key={group.label}
+            className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-semibold ${ACCENT_BADGE[group.accent]}`}
+          >
+            {group.label}
+          </span>
+        ))}
 
-            {group.examples.map((example) => (
+        {[0, 1].map((exampleIndex) =>
+          EXAMPLE_GROUPS.map((group) => {
+            const example = group.examples[exampleIndex];
+            return (
               <div
-                key={example.note}
-                className={`relative flex flex-col gap-3 overflow-hidden rounded-2xl border bg-white p-5 text-left ${ACCENT_BORDER[group.accent]}`}
+                key={`${group.label}-${exampleIndex}`}
+                className={`relative flex h-full flex-col gap-3 overflow-hidden rounded-2xl border bg-white p-5 text-left ${ACCENT_BORDER[group.accent]}`}
               >
                 <span
                   aria-hidden
@@ -121,16 +124,16 @@ export function DetectionTypes() {
                 >
                   &ldquo;
                 </span>
-                <p className="relative text-sm leading-relaxed text-dopaguard-navyMid">
+                <p className="relative flex-1 text-sm leading-relaxed text-dopaguard-navyMid">
                   <HighlightedText text={example.quote} excerpts={[example.highlight]} />
                 </p>
                 <p className="relative border-t border-dopaguard-muted pt-2.5 text-xs text-dopaguard-navyMid/60">
                   {example.note}
                 </p>
               </div>
-            ))}
-          </div>
-        ))}
+            );
+          }),
+        )}
       </div>
     </section>
   );
