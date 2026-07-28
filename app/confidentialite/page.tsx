@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/legal/LegalLayout";
+import { getAppUrl } from "@/lib/app-url";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
   description: "Politique de confidentialité de Dopaguard : traitement des données personnelles et vos droits.",
+  alternates: { canonical: `${getAppUrl()}/confidentialite` },
 };
 
 export default function ConfidentialitePage() {

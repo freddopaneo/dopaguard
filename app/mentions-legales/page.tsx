@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/legal/LegalLayout";
+import { getAppUrl } from "@/lib/app-url";
 
 export const metadata: Metadata = {
   title: "Mentions légales",
   description: "Mentions légales de Dopaguard, édité par Dopaneo.ai.",
+  alternates: { canonical: `${getAppUrl()}/mentions-legales` },
 };
 
 export default function MentionsLegalesPage() {
