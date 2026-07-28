@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/legal/LegalLayout";
+import { getAppUrl } from "@/lib/app-url";
 
 export const metadata: Metadata = {
   title: "Conditions générales de vente",
   description: "Conditions générales de vente de Dopaguard : plans, tarifs, essai et résiliation.",
+  alternates: { canonical: `${getAppUrl()}/cgv` },
 };
 
 export default function CgvPage() {

@@ -1,11 +1,13 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { BLOG_ARTICLES, CATEGORY_LABELS } from "@/lib/blog/articles";
+import { getAppUrl } from "@/lib/app-url";
 
 export const metadata: Metadata = {
   title: "Blog — Réputation IA",
   description:
     "Conseils et guides pour comprendre et surveiller ce que les IA génératives (ChatGPT, Claude, Gemini, Perplexity) disent de votre entreprise.",
+  alternates: { canonical: `${getAppUrl()}/blog` },
 };
 
 export default function BlogIndexPage() {
