@@ -65,6 +65,25 @@ function Check({ on }: { on: boolean }) {
   );
 }
 
+const VALUE_STACK = [
+  {
+    label: "Surveillance hebdomadaire de vos IA",
+    value: "l'équivalent de plusieurs heures de vérification manuelle chaque semaine",
+  },
+  {
+    label: "Alertes immédiates sur anomalie critique",
+    value: "le coût d'un seul client perdu dépasse largement l'abonnement",
+  },
+  {
+    label: "Rapport mensuel prêt à partager",
+    value: "du temps de reporting épargné chaque mois",
+  },
+  {
+    label: "Suivi de concurrent inclus (Pro/Agence)",
+    value: "l'équivalent d'une veille concurrentielle payante",
+  },
+];
+
 export function PricingTable() {
   const [loadingPlan, setLoadingPlan] = useState<PlanSlug | null>(null);
   const [error, setError] = useState("");
@@ -97,16 +116,36 @@ export function PricingTable() {
   return (
     <section id="tarifs" className="mx-auto max-w-5xl px-6 py-14 sm:py-24">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
+        <p className="text-xs font-semibold uppercase tracking-wide text-dopaguard-teal">Programme Réputation IA</p>
+        <h2 className="mt-2 text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
           Une réputation surveillée, à partir de 69 € par mois.
         </h2>
         <p className="mt-4 text-lg text-dopaguard-navyMid/80">
-          Essai 14 jours. Sans engagement. Résiliable en un clic.
+          Essai 14 jours, sans engagement. Vous n&apos;êtes jamais débité si vous annulez avant la fin.
         </p>
+        <span className="mt-4 inline-flex items-center gap-2 rounded-full border border-dopaguard-lime bg-dopaguard-lime/10 px-3.5 py-1.5 text-xs font-medium text-dopaguard-navy">
+          <span className="h-1.5 w-1.5 rounded-full bg-dopaguard-lime" />
+          Les 20 premiers comptes : session de configuration personnelle avec le fondateur
+        </span>
         {error && <p className="mt-4 text-sm font-medium text-dopaguard-critical">{error}</p>}
       </div>
 
-      <div className="mt-14 grid gap-6 sm:grid-cols-3">
+      <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-dopaguard-muted bg-white p-6">
+        <p className="text-xs font-semibold uppercase tracking-wide text-dopaguard-navyMid/50">Ce que ça vous fait gagner</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {VALUE_STACK.map((item) => (
+            <div key={item.label} className="flex gap-3">
+              <span className="mt-0.5 shrink-0 text-dopaguard-success">✓</span>
+              <div>
+                <p className="text-sm font-medium text-dopaguard-navy">{item.label}</p>
+                <p className="mt-0.5 text-xs leading-relaxed text-dopaguard-navyMid/70">{item.value}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-10 grid gap-6 sm:grid-cols-3">
         {PLANS.map((plan) => (
           <div
             key={plan.name}
@@ -167,6 +206,17 @@ export function PricingTable() {
             </button>
           </div>
         ))}
+      </div>
+
+      <div className="mx-auto mt-10 max-w-2xl rounded-2xl bg-dopaguard-navy px-6 py-6 text-center text-white">
+        <p className="text-base font-semibold">
+          🛡️ <span className="text-dopaguard-lime">Garantie Essai Zéro Risque</span>
+        </p>
+        <p className="mt-2 text-sm leading-relaxed text-white/70">
+          Vous ne payez rien avant la fin des 14 jours d&apos;essai. Si Dopaguard ne vous a rien appris d&apos;utile
+          sur ce que les IA disent de votre entreprise, annulez avant la fin de l&apos;essai : vous ne serez jamais
+          débité.
+        </p>
       </div>
     </section>
   );
