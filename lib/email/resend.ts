@@ -327,3 +327,35 @@ export async function sendAccountDeletionNotificationEmail({ clientEmail }: { cl
     throw new Error(`Resend: ${error.message}`);
   }
 }
+
+// Notification interne (pas au visiteur) : prévient l'équipe qu'un scan gratuit
+// vient de se terminer, pour suivre les prospects entrants.
+export async function sendFreeScanCompletedNotificationEmail({
+  brandName,
+  email,
+  website,
+}: {
+  brandName: string;
+  email: string;
+  website: string | null;
+}) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  const { error } = await resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL!,
+    to: "fred@dopaneo.ai",
+    subject: `Nouveau scan gratuit terminé — ${brandName}`,
+    html: `
+      <div style="font-family: Arial, Helvetica, sans-serif; max-width: 480px; margin: 0 auto; color: #133742;">
+        <h1 style="font-size: 20px;">Un scan gratuit vient de se terminer</h1>
+        <p><strong>Marque :</strong> ${brandName}</p>
+        <p><strong>Email :</strong> ${email}</p>
+        ${website ? `<p><strong>Site web :</strong> ${website}</p>` : ""}
+      </div>
+    `,
+  });
+
+  if (error) {
+    throw new Error(`Resend: ${error.message}`);
+  }
+}

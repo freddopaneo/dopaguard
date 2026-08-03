@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { runScan } from "@/lib/scan/run-scan";
+import { sendFreeScanCompletedNotificationEmail } from "@/lib/email/resend";
 
 export const maxDuration = 120;
 
@@ -9,7 +10,7 @@ export async function POST(_request: NextRequest, { params }: { params: { id: st
 
   const { data: scan, error: lookupError } = await supabase
     .from("free_scans")
-    .select("id, brand_name, status, results")
+    .select("id, brand_name, email, website, status, results")
     .eq("id", params.id)
     .maybeSingle();
 
@@ -83,6 +84,25 @@ export async function POST(_request: NextRequest, { params }: { params: { id: st
         status: "completed",
       })
       .eq("id", scan.id);
+
+    try {
+      await sendFreeScanCompletedNotificationEmail({
+        brandName: scan.brand_name,
+        email: scan.email,
+        website: scan.website,
+      });
+    } catch (notificationError) {
+      const message = notificationError instanceof Error ? notificationError.message : String(notificationError);
+      try {
+        await supabase.from("error_logs").insert({
+          source: "scan-engine",
+          message: `Echec de la notification interne de fin de scan: ${message}`,
+          context: { scanId: scan.id },
+        });
+      } catch {
+        // Le logging ne doit jamais empêcher de répondre au client.
+      }
+    }
 
     return NextResponse.json({ status: "completed", results });
   } catch (error) {
