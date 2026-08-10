@@ -269,6 +269,102 @@ export const VERTICALS: VerticalMeta[] = [
       "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre expertise, et surveillez votre réputation dans les IA chaque semaine.",
     accent: "lime",
   },
+  {
+    slug: "commerce-ecommerce",
+    label: "Commerce & e-commerce",
+    angle: "Quelle boutique en ligne l'IA recommande-t-elle à votre place ?",
+    heroHighlight: "l'IA",
+    heroKicker: "Scan gratuit · Commerce & e-commerce",
+    heroSubtitle:
+      "Avant d'acheter, de plus en plus de clients demandent directement à une IA : « quelle boutique choisir pour ce produit ? », « ce site est-il fiable ? ». Quand l'IA se trompe — un tarif obsolète, une politique de livraison périmée, une enseigne concurrente recommandée à votre place — le client n'ira jamais vérifier sur votre site, il achète ailleurs.",
+    painExamples: [
+      {
+        quote: "Les frais de livraison standard sont offerts dès 50€ d'achat, et les retours sont gratuits sous 30 jours.",
+        highlight: "retours sont gratuits sous 30 jours",
+        note: "Une IA a cité une politique de retour que la boutique a modifiée depuis, en décalage avec les conditions réellement appliquées.",
+      },
+      {
+        quote: "Pour ce type de produit, une autre enseigne semble proposer un meilleur rapport qualité-prix et un service plus réactif.",
+        highlight: "une autre enseigne semble proposer un meilleur rapport qualité-prix",
+        note: "Une IA a orienté un client potentiel vers une enseigne concurrente plutôt que vers la boutique interrogée.",
+      },
+    ],
+    faqItems: [
+      {
+        question: "Est-ce que ça concerne les petites boutiques, pas seulement les grandes enseignes ?",
+        answer:
+          "Particulièrement. Une petite boutique en ligne, même excellente, part avec un désavantage face aux enseignes très médiatisées, mieux représentées dans les contenus que les IA consultent — d'où l'intérêt de savoir précisément ce qui se dit d'elle.",
+      },
+      {
+        question: "Une IA peut-elle vraiment influencer une décision d'achat ?",
+        answer:
+          "De plus en plus. Un client qui demande « quelle boutique choisir pour ce produit » reçoit une réponse formulée avec assurance, qui peut orienter son choix avant même qu'il visite un site.",
+      },
+      {
+        question: "Que se passe-t-il si Dopaguard détecte un tarif ou une information erronée ?",
+        answer:
+          "Vous recevez une alerte avec l'extrait exact de ce que l'IA a dit, la vérité attendue que vous avez validée, et une recommandation pour corriger la source.",
+      },
+      {
+        question: "Combien de temps avant de voir un premier résultat ?",
+        answer:
+          "Le scan gratuit donne un résultat en quelques minutes. La surveillance hebdomadaire démarre dès la semaine suivant votre inscription.",
+      },
+    ],
+    relatedArticleSlug: "reputation-ia-commerce-ecommerce",
+    metaTitle: "Quelle boutique en ligne l'IA recommande-t-elle à votre place ?",
+    metaDescription:
+      "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre boutique en ligne, et surveillez votre réputation dans les IA chaque semaine.",
+    accent: "navy",
+  },
+  {
+    slug: "sante-cabinets-medicaux",
+    label: "Santé & cabinets médicaux",
+    angle: "Que répond une IA quand un patient cherche votre cabinet ?",
+    heroHighlight: "une IA",
+    heroKicker: "Scan gratuit · Santé & cabinets médicaux",
+    heroSubtitle:
+      "Avant d'appeler, un patient demande de plus en plus à une IA : « ce cabinet est-il ouvert le samedi ? », « accepte-t-il de nouveaux patients ? ». Quand l'IA répond à tort que le cabinet est fermé ou complet, l'appel qui aurait dû avoir lieu n'a jamais lieu — et personne ne vous prévient.",
+    painExamples: [
+      {
+        quote: "Ce cabinet ne semble plus accepter de nouveaux patients actuellement, selon les dernières informations disponibles.",
+        highlight: "ne semble plus accepter de nouveaux patients",
+        note: "Une IA a indiqué à tort qu'un cabinet en activité n'acceptait plus de nouveaux patients, faute d'information récente.",
+      },
+      {
+        quote: "Les horaires d'ouverture indiqués sont du lundi au vendredi, 9h-17h, sans consultation le samedi.",
+        highlight: "sans consultation le samedi",
+        note: "Une IA a relayé des horaires obsolètes après un changement d'organisation du cabinet.",
+      },
+    ],
+    faqItems: [
+      {
+        question: "Est-ce que Dopaguard analyse du contenu médical ou clinique ?",
+        answer:
+          "Non, jamais. Dopaguard se limite strictement aux informations pratiques et organisationnelles — horaires, adresse, coordonnées, disponibilité pour de nouveaux patients — jamais au contenu médical.",
+      },
+      {
+        question: "Ça concerne quels types de professionnels de santé ?",
+        answer:
+          "Médecins, dentistes, kinésithérapeutes, et plus largement tout cabinet médical ou paramédical dont des patients se renseignent en ligne avant de prendre contact.",
+      },
+      {
+        question: "Que se passe-t-il si une IA affirme à tort que mon cabinet est fermé ?",
+        answer:
+          "Vous recevez une alerte avec l'extrait exact de ce que l'IA a dit, la vérité attendue que vous avez validée, et une recommandation pour corriger la source.",
+      },
+      {
+        question: "Combien de temps avant de voir un premier résultat ?",
+        answer:
+          "Le scan gratuit donne un résultat en quelques minutes. La surveillance hebdomadaire démarre dès la semaine suivant votre inscription.",
+      },
+    ],
+    relatedArticleSlug: "reputation-ia-cabinets-medicaux",
+    metaTitle: "Que répond une IA quand un patient cherche votre cabinet ?",
+    metaDescription:
+      "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre cabinet médical, et surveillez vos informations pratiques dans les IA chaque semaine.",
+    accent: "teal",
+  },
 ];
 
 export function getVerticalBySlug(slug: string): VerticalMeta | undefined {

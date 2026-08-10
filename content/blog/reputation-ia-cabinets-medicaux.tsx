@@ -109,6 +109,14 @@ export default function ArticleBody() {
         pouvoir corriger rapidement une information pratique erronée avant qu&apos;elle n&apos;éloigne
         durablement quelqu&apos;un qui avait besoin de soins.
       </p>
+      <p>
+        <a
+          href="/secteurs/sante-cabinets-medicaux"
+          className="font-semibold text-dopaguard-navy underline hover:text-dopaguard-navyMid"
+        >
+          Découvrez la page dédiée aux cabinets médicaux et paramédicaux →
+        </a>
+      </p>
     </>
   );
 }

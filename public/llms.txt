@@ -16,6 +16,8 @@
 - Immobilier : https://dopaguard.ai/secteurs/immobilier
 - Avocats & professions libérales : https://dopaguard.ai/secteurs/avocats-professions-liberales
 - Consultants, coachs & agences : https://dopaguard.ai/secteurs/consultants-coachs-agences
+- Commerce & e-commerce : https://dopaguard.ai/secteurs/commerce-ecommerce
+- Santé & cabinets médicaux : https://dopaguard.ai/secteurs/sante-cabinets-medicaux
 
 ## Blog
 

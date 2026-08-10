@@ -51,6 +51,14 @@ export default function ArticleBody() {
       <p>
         Pour un commerce ou une boutique en ligne, la question n&apos;est plus de savoir si les IA génératives influencent déjà les décisions d&apos;achat de vos clients, mais de savoir ce qu&apos;elles leur racontent précisément aujourd&apos;hui. Prendre le temps de le vérifier, ponctuellement ou de façon continue, permet au moins de ne plus découvrir un problème de réputation des mois après qu&apos;il a commencé à coûter des ventes.
       </p>
+      <p>
+        <a
+          href="/secteurs/commerce-ecommerce"
+          className="font-semibold text-dopaguard-navy underline hover:text-dopaguard-navyMid"
+        >
+          Découvrez la page dédiée au commerce et à l&apos;e-commerce →
+        </a>
+      </p>
     </>
   );
 }
