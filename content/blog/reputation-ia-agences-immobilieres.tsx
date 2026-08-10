@@ -51,6 +51,14 @@ export default function ArticleBody() {
       <p>
         Un bien mal décrit ou une agence confondue avec une autre par une IA générative ne se voit jamais dans vos statistiques de visites de site, seulement dans un contact qui ne vient jamais. Surveiller ce que les IA racontent de votre agence n&apos;est plus une précaution accessoire : c&apos;est devenu un prolongement naturel de la gestion de votre réputation locale.
       </p>
+      <p>
+        <a
+          href="/secteurs/immobilier"
+          className="font-semibold text-dopaguard-navy underline hover:text-dopaguard-navyMid"
+        >
+          Découvrez la page dédiée aux agences immobilières →
+        </a>
+      </p>
     </>
   );
 }

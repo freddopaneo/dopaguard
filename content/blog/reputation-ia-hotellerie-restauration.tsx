@@ -139,6 +139,20 @@ export default function ArticleBody() {
         nouveaux prescripteurs, sans pour autant ajouter une charge de travail supplémentaire à des
         équipes déjà mobilisées par le quotidien de l&apos;accueil et du service.
       </p>
+      <p>
+        Vous gérez un hôtel ?{" "}
+        <a href="/secteurs/hotels" className="font-semibold text-dopaguard-navy underline hover:text-dopaguard-navyMid">
+          Découvrez la page dédiée aux hôtels →
+        </a>
+        <br />
+        Vous gérez un restaurant ?{" "}
+        <a
+          href="/secteurs/restaurants"
+          className="font-semibold text-dopaguard-navy underline hover:text-dopaguard-navyMid"
+        >
+          Découvrez la page dédiée aux restaurants →
+        </a>
+      </p>
     </>
   );
 }

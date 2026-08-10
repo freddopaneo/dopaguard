@@ -50,6 +50,14 @@ export default function ArticleBody() {
       <p>
         Pour un professionnel libéral, la réputation ne s&apos;improvise jamais : elle se construit patiemment, dossier après dossier, recommandation après recommandation. Il serait dommage qu&apos;elle se dégrade silencieusement dans une conversation avec une IA, simplement parce que personne n&apos;avait le temps de vérifier ce qui s&apos;y disait. Savoir ce que ChatGPT, Claude, Gemini ou Perplexity racontent de votre activité n&apos;est plus un détail technique réservé aux grandes structures : c&apos;est devenu un prolongement naturel du soin que vous apportez déjà à votre image professionnelle.
       </p>
+      <p>
+        <a
+          href="/secteurs/avocats-professions-liberales"
+          className="font-semibold text-dopaguard-navy underline hover:text-dopaguard-navyMid"
+        >
+          Découvrez la page dédiée aux avocats et professions libérales →
+        </a>
+      </p>
     </>
   );
 }

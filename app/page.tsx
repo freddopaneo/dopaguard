@@ -9,35 +9,13 @@ import { Faq } from "@/components/landing/Faq";
 import { About } from "@/components/landing/About";
 import { Footer } from "@/components/landing/Footer";
 import { getAppUrl } from "@/lib/app-url";
-import { PLAN_PRICES_EUR } from "@/lib/stripe/plans";
+import { ORGANIZATION_JSON_LD, PRODUCT_JSON_LD } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
   title: { absolute: "Dopaguard — Surveillance de réputation dans ChatGPT, Claude, Gemini, Perplexity" },
   description:
     "Découvrez gratuitement ce que ChatGPT, Claude, Gemini et Perplexity disent de votre entreprise, puis surveillez votre réputation IA chaque semaine.",
   alternates: { canonical: getAppUrl() },
-};
-
-const ORGANIZATION_JSON_LD = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Dopaguard",
-  url: getAppUrl(),
-  parentOrganization: { "@type": "Organization", name: "Dopaneo.ai" },
-};
-
-const PRODUCT_JSON_LD = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Dopaguard",
-  applicationCategory: "BusinessApplication",
-  operatingSystem: "Web",
-  description: "Surveillance hebdomadaire de la réputation d'une entreprise dans les IA génératives.",
-  offers: [
-    { "@type": "Offer", name: "Essentiel", price: PLAN_PRICES_EUR.essentiel, priceCurrency: "EUR" },
-    { "@type": "Offer", name: "Pro", price: PLAN_PRICES_EUR.pro, priceCurrency: "EUR" },
-    { "@type": "Offer", name: "Agence", price: PLAN_PRICES_EUR.agence, priceCurrency: "EUR" },
-  ],
 };
 
 export default function Home() {

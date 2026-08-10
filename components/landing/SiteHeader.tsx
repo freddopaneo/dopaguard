@@ -4,6 +4,7 @@ import { useState } from "react";
 
 const NAV_LINKS = [
   { label: "Produits", href: "#produits" },
+  { label: "Secteurs", href: "/secteurs" },
   { label: "Scanner mon entreprise", href: "#scan-form" },
   { label: "Tarifs", href: "#tarifs" },
   { label: "FAQ", href: "#faq" },

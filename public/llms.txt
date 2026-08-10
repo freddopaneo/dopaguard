@@ -8,6 +8,15 @@
 - Abonnements : Essentiel (69 €/mois, 3 IA), Pro (149 €/mois, 5 IA + suivi d'un concurrent), Agence (349 €/mois, jusqu'à 10 marques, marque blanche) : https://dopaguard.ai/#tarifs
 - Essai 14 jours, sans engagement.
 
+## Secteurs
+
+- Index : https://dopaguard.ai/secteurs
+- Hôtels : https://dopaguard.ai/secteurs/hotels
+- Restaurants : https://dopaguard.ai/secteurs/restaurants
+- Immobilier : https://dopaguard.ai/secteurs/immobilier
+- Avocats & professions libérales : https://dopaguard.ai/secteurs/avocats-professions-liberales
+- Consultants, coachs & agences : https://dopaguard.ai/secteurs/consultants-coachs-agences
+
 ## Blog
 
 - Index : https://dopaguard.ai/blog

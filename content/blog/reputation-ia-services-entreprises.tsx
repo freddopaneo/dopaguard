@@ -134,6 +134,14 @@ export default function ArticleBody() {
         régulièrement, c&apos;est s&apos;assurer que cette première impression, invisible mais décisive, reste fidèle à ce que
         vous êtes réellement.
       </p>
+      <p>
+        <a
+          href="/secteurs/consultants-coachs-agences"
+          className="font-semibold text-dopaguard-navy underline hover:text-dopaguard-navyMid"
+        >
+          Découvrez la page dédiée aux consultants, coachs et agences →
+        </a>
+      </p>
     </>
   );
 }
