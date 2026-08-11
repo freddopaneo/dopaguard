@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { TruncatedText } from "@/components/ui/TruncatedText";
-import { PROVIDER_LABELS, PROVIDER_ORDER } from "@/lib/providers";
-import { CATEGORY_LABELS, CATEGORY_DESCRIPTIONS } from "@/lib/prompts/types";
+import { ScanScoreGauge } from "@/components/scan/ScanScoreGauge";
+import { ScanProviderSummary } from "@/components/scan/ScanProviderSummary";
+import { ScanCategoryAccordion } from "@/components/scan/ScanCategoryAccordion";
+import { computeOverallScore } from "@/lib/scan/score";
 
 const PROGRESS_MESSAGES = [
   "Interrogation de ChatGPT…",
@@ -31,29 +32,6 @@ function FullScreenCard({ title, body }: { title: string; body: string }) {
         <h1 className="text-xl font-bold text-dopaguard-navy">{title}</h1>
         <p className="mt-3 text-sm leading-relaxed text-dopaguard-navyMid">{body}</p>
       </div>
-    </div>
-  );
-}
-
-function ResponseCard({ entry }: { entry: ScanResponseEntry }) {
-  return (
-    <div className="relative flex flex-col gap-2.5 overflow-hidden rounded-2xl border border-dopaguard-muted bg-white p-4 text-left">
-      <div>
-        <span className="text-xs font-semibold uppercase tracking-wide text-dopaguard-navyMid/60">
-          {CATEGORY_LABELS[entry.category] ?? entry.category}
-        </span>
-        <p className="mt-0.5 text-[11px] text-dopaguard-navyMid/40">{CATEGORY_DESCRIPTIONS[entry.category] ?? ""}</p>
-      </div>
-      {entry.error || !entry.responseText ? (
-        <p className="text-sm text-dopaguard-navyMid/60">Réponse indisponible pour cette question.</p>
-      ) : (
-        <TruncatedText
-          text={entry.responseText}
-          highlightExcerpts={entry.flags.map((f) => f.excerpt)}
-          className="text-sm leading-relaxed text-dopaguard-navyMid"
-          toggleClassName="self-start text-xs font-medium text-dopaguard-navy underline underline-offset-2"
-        />
-      )}
     </div>
   );
 }
@@ -178,20 +156,25 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
         <h1 className="mt-3 text-3xl font-bold text-white sm:text-4xl">Ce que les IA disent de {brandName}</h1>
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="grid gap-8 sm:grid-cols-3">
-          {PROVIDER_ORDER.map((provider) => (
-            <div key={provider} className="flex flex-col gap-4">
-              <span className="inline-flex w-fit items-center rounded-full bg-dopaguard-navy px-3 py-1 text-xs font-semibold text-white">
-                {PROVIDER_LABELS[provider]}
-              </span>
-              {responses
-                .filter((r) => r.provider === provider)
-                .map((r) => (
-                  <ResponseCard key={r.category} entry={r} />
-                ))}
-            </div>
-          ))}
+      <div className="mx-auto max-w-4xl px-6 py-16">
+        <div className="grid gap-6 sm:grid-cols-[auto_1fr] sm:items-start">
+          <ScanScoreGauge score={computeOverallScore(responses).score} />
+          <div className="flex flex-col justify-center gap-3">
+            <ScanProviderSummary responses={responses} />
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-dopaguard-muted bg-white px-5 py-4 text-center text-sm text-dopaguard-navyMid">
+          Cette photo a été prise aujourd&apos;hui — ce que dit une IA peut changer la semaine prochaine.{" "}
+          <a href="/#tarifs" className="font-semibold text-dopaguard-navy underline underline-offset-2">
+            Essai 14 jours →
+          </a>
+        </div>
+
+        <h2 className="mt-10 text-lg font-semibold text-dopaguard-navy">Le détail, catégorie par catégorie</h2>
+        <p className="mt-1 text-sm text-dopaguard-navyMid/70">Cliquez sur une catégorie pour voir les réponses complètes des 3 IA.</p>
+        <div className="mt-4">
+          <ScanCategoryAccordion responses={responses} />
         </div>
 
         <div className="mt-16 flex flex-col items-center gap-4 rounded-2xl bg-dopaguard-navy p-10 text-center">
@@ -213,7 +196,7 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
             href="/#tarifs"
             className="mt-2 rounded-lg bg-dopaguard-lime px-6 py-3.5 text-sm font-semibold text-dopaguard-navy transition-all hover:brightness-95"
           >
-            Démarrer mon essai de 14 jours →
+            Démarrer l&apos;essai de 14 jours →
           </a>
           <p className="text-xs text-white/40">Sans engagement, résiliable en un clic.</p>
         </div>
