@@ -18,9 +18,9 @@ export function ScanProviderSummary({ responses }: { responses: ScoredResponse[]
         const pillClasses = tier ? TIER_PILL_CLASSES[tier] : "bg-dopaguard-muted text-dopaguard-navyMid/60 border border-dopaguard-muted";
 
         return (
-          <div key={provider} className="flex items-center justify-between rounded-xl border border-dopaguard-muted bg-white px-4 py-3">
+          <div key={provider} className="flex flex-col gap-1.5 rounded-xl border border-dopaguard-muted bg-white px-4 py-3">
             <span className="text-sm font-medium text-dopaguard-navy">{PROVIDER_SHORT_LABELS[provider] ?? provider}</span>
-            <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${pillClasses}`}>
+            <span className={`w-fit whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-semibold ${pillClasses}`}>
               {breakdown && breakdown.total > 0
                 ? breakdown.clean === breakdown.total
                   ? "Aucun écart"
