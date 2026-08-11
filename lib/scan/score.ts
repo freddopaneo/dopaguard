@@ -18,6 +18,16 @@ export interface ScoreBreakdown {
 
 export type ScoreTier = "high" | "mid" | "low" | null;
 
+// Les 3 types d'écarts que peut détecter le juge du scan gratuit (lib/scan/judge.ts).
+// Important : un écart n'est pas toujours une erreur factuelle — "information_datee"
+// signale surtout une IA qui hésite ou manque de données récentes, pas forcément
+// une affirmation fausse.
+export const FLAG_TYPE_LABELS: Record<string, string> = {
+  sentiment_negatif: "Sentiment négatif",
+  mention_concurrent: "Concurrent mentionné à votre place",
+  information_datee: "Information datée ou incertaine",
+};
+
 function summarize(entries: ScoredResponse[]): ScoreBreakdown {
   const usable = entries.filter((e) => !e.error);
   const clean = usable.filter((e) => e.flags.length === 0).length;

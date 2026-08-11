@@ -4,13 +4,19 @@ import { useState } from "react";
 import { TruncatedText } from "@/components/ui/TruncatedText";
 import { PROVIDER_ORDER, PROVIDER_SHORT_LABELS } from "@/lib/providers";
 import { CATEGORY_ORDER, CATEGORY_LABELS, CATEGORY_DESCRIPTIONS } from "@/lib/prompts/types";
-import { computeByCategory, scoreTier } from "@/lib/scan/score";
+import { computeByCategory, scoreTier, FLAG_TYPE_LABELS } from "@/lib/scan/score";
+
+interface ResponseFlag {
+  type: string;
+  excerpt: string;
+  explanation: string;
+}
 
 interface ScanResponseEntry {
   provider: string;
   category: string;
   responseText: string | null;
-  flags: { excerpt: string }[];
+  flags: ResponseFlag[];
   error: string | null;
 }
 
@@ -43,7 +49,8 @@ export function ScanCategoryAccordion({ responses }: { responses: ScanResponseEn
         const breakdown = byCategory[category];
         const tier = breakdown ? scoreTier(breakdown.score) : null;
         const pillClasses = tier ? TIER_PILL_CLASSES[tier] : "bg-dopaguard-muted text-dopaguard-navyMid/60 border border-dopaguard-muted";
-        const hasFlags = tier === "mid" || tier === "low";
+        const flaggedCount = breakdown ? breakdown.total - breakdown.clean : 0;
+        const hasFlags = flaggedCount > 0;
         const entries = PROVIDER_ORDER.map((provider) => ({
           provider,
           entry: responses.find((r) => r.category === category && r.provider === provider) ?? null,
@@ -64,7 +71,9 @@ export function ScanCategoryAccordion({ responses }: { responses: ScanResponseEn
               <div className="flex items-center gap-3">
                 {breakdown && breakdown.total > 0 && (
                   <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${pillClasses}`}>
-                    {breakdown.clean}/{breakdown.total} sans écart
+                    {hasFlags
+                      ? `${flaggedCount} écart${flaggedCount > 1 ? "s" : ""} détecté${flaggedCount > 1 ? "s" : ""} sur ${breakdown.total}`
+                      : "Aucun écart détecté"}
                   </span>
                 )}
                 <span className="shrink-0 text-xl text-dopaguard-navyMid/60">{isOpen ? "−" : "+"}</span>
@@ -87,6 +96,18 @@ export function ScanCategoryAccordion({ responses }: { responses: ScanResponseEn
                         className="text-sm leading-relaxed text-dopaguard-navyMid"
                         toggleClassName="mt-1 self-start text-xs font-medium text-dopaguard-navy underline underline-offset-2"
                       />
+                      {entry.flags.length > 0 && (
+                        <ul className="mt-3 flex flex-col gap-1.5 border-l-2 border-dopaguard-critical/30 pl-3">
+                          {entry.flags.map((flag, i) => (
+                            <li key={i} className="text-xs text-dopaguard-navyMid/80">
+                              <span className="font-semibold text-dopaguard-critical">
+                                {FLAG_TYPE_LABELS[flag.type] ?? flag.type}
+                              </span>
+                              {flag.explanation && <> — {flag.explanation}</>}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   )}
                 </div>

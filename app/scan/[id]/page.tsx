@@ -17,7 +17,7 @@ interface ScanResponseEntry {
   provider: string;
   category: string;
   responseText: string | null;
-  flags: { excerpt: string }[];
+  flags: { type: string; excerpt: string; explanation: string }[];
   error: string | null;
 }
 
@@ -161,6 +161,12 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
           <ScanScoreGauge score={computeOverallScore(responses).score} />
           <div className="flex flex-col justify-center gap-3">
             <ScanProviderSummary responses={responses} />
+            <p className="text-xs leading-relaxed text-dopaguard-navyMid/60">
+              Ce score compte la proportion de réponses sans écart détecté sur les 3 IA interrogées. Un écart n&apos;est
+              pas toujours une erreur factuelle : il peut aussi s&apos;agir d&apos;une IA qui hésite ou manque
+              d&apos;informations récentes sur vous — un signal de fragilité de visibilité, pas forcément une
+              affirmation fausse. Le détail de chaque écart est visible plus bas, catégorie par catégorie.
+            </p>
           </div>
         </div>
 

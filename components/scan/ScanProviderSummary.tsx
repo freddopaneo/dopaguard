@@ -21,7 +21,11 @@ export function ScanProviderSummary({ responses }: { responses: ScoredResponse[]
           <div key={provider} className="flex items-center justify-between rounded-xl border border-dopaguard-muted bg-white px-4 py-3">
             <span className="text-sm font-medium text-dopaguard-navy">{PROVIDER_SHORT_LABELS[provider] ?? provider}</span>
             <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${pillClasses}`}>
-              {breakdown && breakdown.total > 0 ? `${breakdown.clean}/${breakdown.total} sans écart` : "Indisponible"}
+              {breakdown && breakdown.total > 0
+                ? breakdown.clean === breakdown.total
+                  ? "Aucun écart"
+                  : `${breakdown.total - breakdown.clean} écart${breakdown.total - breakdown.clean > 1 ? "s" : ""} sur ${breakdown.total}`
+                : "Indisponible"}
             </span>
           </div>
         );
