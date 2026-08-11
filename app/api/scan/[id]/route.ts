@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
+// Sans ceci, Next.js met cette route en cache statique en production après le
+// premier appel : la page de progression restait bloquée sur le tout premier
+// résultat lu (status "verified", progress vide) au lieu de suivre le scan en
+// cours, jusqu'à ce que /run renvoie directement le résultat final.
+export const dynamic = "force-dynamic";
+
 export async function GET(_request: NextRequest, { params }: { params: { id: string } }) {
   const supabase = createAdminClient();
 

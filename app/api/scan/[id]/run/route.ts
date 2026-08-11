@@ -4,6 +4,9 @@ import { runScan, type ScanProgressEvent } from "@/lib/scan/run-scan";
 import { sendFreeScanCompletedNotificationEmail } from "@/lib/email/resend";
 
 export const maxDuration = 120;
+// Empêche Next.js de mettre en cache la lecture du statut du scan : le verrou
+// optimiste ci-dessous doit toujours lire l'état le plus récent en base.
+export const dynamic = "force-dynamic";
 
 export async function POST(_request: NextRequest, { params }: { params: { id: string } }) {
   const supabase = createAdminClient();
