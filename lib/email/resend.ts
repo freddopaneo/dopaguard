@@ -20,7 +20,7 @@ function magicLinkEmailHtml(brandName: string, verifyUrl: string): string {
         </a>
       </p>
       <p style="font-size: 13px; color: #1e4d5e;">
-        Ce lien expire dans 30 minutes. Si vous n'êtes pas à l'origine de cette demande,
+        Ce lien expire dans 7 jours. Si vous n'êtes pas à l'origine de cette demande,
         vous pouvez ignorer cet email.
       </p>
     </div>

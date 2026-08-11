@@ -6,7 +6,7 @@ export async function GET(_request: NextRequest, { params }: { params: { id: str
 
   const { data: scan, error } = await supabase
     .from("free_scans")
-    .select("id, brand_name, status, results")
+    .select("id, brand_name, status, results, progress")
     .eq("id", params.id)
     .maybeSingle();
 
@@ -19,5 +19,6 @@ export async function GET(_request: NextRequest, { params }: { params: { id: str
     brandName: scan.brand_name,
     status: scan.status,
     results: scan.status === "completed" ? scan.results : null,
+    progress: scan.progress ?? [],
   });
 }

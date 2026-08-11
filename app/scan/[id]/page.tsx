@@ -4,13 +4,8 @@ import { useEffect, useState } from "react";
 import { TruncatedText } from "@/components/ui/TruncatedText";
 import { PROVIDER_LABELS, PROVIDER_ORDER } from "@/lib/providers";
 import { CATEGORY_LABELS, CATEGORY_DESCRIPTIONS } from "@/lib/prompts/types";
-
-const PROGRESS_MESSAGES = [
-  "Interrogation de ChatGPT…",
-  "Interrogation de Claude…",
-  "Interrogation de Perplexity…",
-  "Analyse des réponses…",
-];
+import { ScanVisualizer, type ScanProgressEntry } from "@/components/scan/ScanVisualizer";
+import { ScanEventLog } from "@/components/scan/ScanEventLog";
 
 interface ScanResponseEntry {
   provider: string;
@@ -62,14 +57,34 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
   const [view, setView] = useState<ViewState>("checking");
   const [brandName, setBrandName] = useState("");
   const [responses, setResponses] = useState<ScanResponseEntry[]>([]);
-  const [messageIndex, setMessageIndex] = useState(0);
+  const [progress, setProgress] = useState<ScanProgressEntry[]>([]);
 
+  // Sondage rapide et indépendant du flux principal ci-dessous : pendant que
+  // POST /run travaille côté serveur (jusqu'à 2 minutes), ce sondage lit les
+  // vrais événements déjà écrits en base pour alimenter la visualisation en direct.
   useEffect(() => {
-    const interval = setInterval(() => {
-      setMessageIndex((i) => (i + 1) % PROGRESS_MESSAGES.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+    if (view !== "checking" && view !== "progress") return;
+
+    let cancelled = false;
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/scan/${params.id}`);
+        if (cancelled || !res.ok) return;
+        const data = await res.json();
+        if (cancelled) return;
+        if (Array.isArray(data.progress)) {
+          setProgress(data.progress);
+        }
+      } catch {
+        // Un sondage raté n'a aucune conséquence, le suivant reprendra l'affichage.
+      }
+    }, 1200);
+
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [params.id, view]);
 
   useEffect(() => {
     let cancelled = false;
@@ -132,12 +147,10 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
 
   if (view === "checking" || view === "progress") {
     return (
-      <div className="flex min-h-screen items-center justify-center px-6" style={HERO_GRADIENT}>
-        <div className="text-center">
-          <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-white/20 border-t-dopaguard-lime" />
-          <p className="mt-6 text-lg font-medium text-white">{PROGRESS_MESSAGES[messageIndex]}</p>
-          <p className="mt-2 text-sm text-white/50">Ça prend généralement moins de 2 minutes.</p>
-        </div>
+      <div className="flex min-h-screen flex-col items-center justify-center px-6 py-16" style={HERO_GRADIENT}>
+        <ScanVisualizer progress={progress} />
+        <ScanEventLog progress={progress} />
+        <p className="mt-6 text-sm text-white/50">Ça prend généralement moins de 2 minutes.</p>
       </div>
     );
   }

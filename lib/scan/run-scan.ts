@@ -21,6 +21,17 @@ export interface ScanResult {
   estimatedCostEur: number;
 }
 
+export interface ScanProgressEvent {
+  seq: number;
+  provider: LLMProvider;
+  category: string;
+  status: "done" | "error";
+  hasFlag: boolean;
+  ts: string;
+}
+
+export type OnChainSettled = (event: ScanProgressEvent) => Promise<void> | void;
+
 interface ChainResult extends ScanResponseEntry {
   tokensIn: number;
   tokensOut: number;
@@ -79,13 +90,27 @@ async function runChain(brandName: string, category: string, template: string, p
   }
 }
 
-export async function runScan(brandName: string): Promise<ScanResult> {
+export async function runScan(brandName: string, onChainSettled?: OnChainSettled): Promise<ScanResult> {
   const chains = PROMPT_TEMPLATES.flatMap((template) =>
     PROVIDERS.map((provider) => ({ category: template.category, template: template.template, provider }))
   );
 
+  let seq = 0;
   const results = await Promise.all(
-    chains.map(({ category, template, provider }) => runChain(brandName, category, template, provider))
+    chains.map(async ({ category, template, provider }) => {
+      const result = await runChain(brandName, category, template, provider);
+      if (onChainSettled) {
+        await onChainSettled({
+          seq: seq++,
+          provider,
+          category,
+          status: result.error ? "error" : "done",
+          hasFlag: result.flags.length > 0,
+          ts: new Date().toISOString(),
+        });
+      }
+      return result;
+    })
   );
 
   const totals = results.reduce(
