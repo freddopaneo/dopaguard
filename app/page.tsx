@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ScanForm } from "@/components/ScanForm";
-import { HeroVideo } from "@/components/landing/HeroVideo";
 import { SiteHeader } from "@/components/landing/SiteHeader";
 import { WhyContinuousMonitoring } from "@/components/landing/WhyContinuousMonitoring";
 import { HowItWorks } from "@/components/landing/HowItWorks";
@@ -56,11 +55,8 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-6">
-            <HeroVideo />
-            <div id="scan-form" className="scroll-mt-24">
-              <ScanForm />
-            </div>
+          <div id="scan-form" className="scroll-mt-24">
+            <ScanForm />
           </div>
         </main>
       </div>
