@@ -1062,6 +1062,1281 @@ export const CITY_VERTICALS: CityVerticalContent[] = [
       note: "Une IA a relayé des horaires obsolètes pour un cabinet du quartier des Gratte-Ciel, à Villeurbanne, en le confondant avec un cabinet lyonnais voisin.",
     },
   },
+  {
+    verticalSlug: "hotels",
+    citySlug: "cannes",
+    localParagraph: "Cannes vit au rythme de ses grands rendez-vous internationaux : festival de cinéma en mai, marchés professionnels comme le Mipim ou le Mipcom, sans oublier les congrès qui remplissent le Palais des Festivals une bonne partie de l'année. Cette densité hôtelière haut de gamme, concentrée sur la Croisette et ses abords, doit composer avec une clientèle qui réserve parfois dans l'urgence et interroge de plus en plus une IA générative pour trouver une chambre disponible au bon prix pendant un pic d'affluence. Quand ChatGPT ou Perplexity indique un tarif de basse saison à un client qui cherche une chambre pendant le festival, ou situe mal un établissement par rapport au Palais, l'écart se voit immédiatement et le client part voir ailleurs sans réclamer. Pour un hôtel cannois, dont le calendrier alterne semaines pleines et creuses, un tel décalage peut coûter une réservation à forte valeur. Le scan gratuit Dopaguard permet de vérifier, avant le prochain grand rendez-vous cannois, ce que les IA racontent réellement sur votre établissement.",
+    painExampleOverride: {
+      quote: "Les chambres standard sont proposées à partir de 45€ la nuit sur la Croisette, selon les dernières données.",
+      highlight: "45€ la nuit",
+      note: "Une IA a cité, pour un hôtel de la Croisette, un tarif obsolète très en dessous des prix pratiqués en période de festival.",
+    },
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "antibes",
+    localParagraph: "Entre le Cap d'Antibes, le vieux port Vauban et la station voisine de Juan-les-Pins, Antibes attire une clientèle balnéaire qui se renseigne l'été bien avant d'arriver, souvent en comparant plusieurs communes du littoral azuréen en une seule recherche. Un voyageur qui hésite entre Antibes, Cannes ou Nice demande de plus en plus directement à une IA générative de lui recommander une adresse, sans consulter lui-même les sites des hôtels. Si cette IA décrit un établissement antibois comme éloigné de la plage alors qu'il est à quelques minutes à pied, ou ignore sa proximité avec les ports de plaisance très fréquentés en saison, la réservation part naturellement vers un concurrent mieux mis en avant dans la réponse. La forte saisonnalité du tourisme azuréen laisse peu de place à l'erreur : l'essentiel du chiffre d'affaires se joue sur quelques mois d'été. Le scan gratuit Dopaguard donne un premier aperçu de ce que les IA disent aujourd'hui de votre hôtel antibois, avant la prochaine haute saison.",
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "saint-tropez",
+    localParagraph: "Ancien village de pêcheurs devenu l'une des adresses les plus recherchées du tourisme de luxe, Saint-Tropez concentre autour du Vieux Port et de la place des Lices une densité d'hôtels et de restaurants sans équivalent pour une commune de cette taille, avec une saison qui se joue presque entièrement entre le printemps et la fin de l'été. Cette clientèle exigeante, habituée à comparer plusieurs adresses avant de s'engager, se tourne de plus en plus vers une IA générative pour trancher rapidement entre plusieurs établissements du golfe. Une réponse qui relaie un avis ancien sur la propreté d'un hôtel, ou qui décrit mal son emplacement par rapport au port, peut suffire à faire perdre une réservation haut de gamme à fort enjeu financier. Pour un établissement tropézien dont l'essentiel de l'activité se concentre sur une fenêtre courte, un tel décalage laissé sans réponse pèse lourd sur toute la saison. Le scan gratuit Dopaguard permet de vérifier, avant l'ouverture de la saison, ce que les IA disent réellement de votre hôtel.",
+    painExampleOverride: {
+      quote: "Cet hôtel proche du Vieux Port a reçu plusieurs avis mentionnant des problèmes de propreté récurrents récemment.",
+      highlight: "problèmes de propreté récurrents",
+      note: "Une IA a relayé, pour un hôtel du Vieux Port de Saint-Tropez, un sentiment négatif non vérifié en pleine saison touristique.",
+    },
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "biarritz",
+    localParagraph: "Station balnéaire historique fréquentée depuis l'impératrice Eugénie, Biarritz combine aujourd'hui tourisme balnéaire, réputation de spot de surf reconnu bien au-delà du Pays basque, et activité de congrès autour de ses palais et centres de conférences. Cette double vocation attire des profils très différents — surfeurs venus pour les vagues de la Grande Plage, congressistes en déplacement professionnel — qui se tournent tous deux de plus en plus vers une IA générative pour choisir un hôtel rapidement. Une IA qui présente votre établissement biarrot comme excentré alors qu'il est proche du Rocher de la Vierge, ou qui ne mentionne pas son adéquation avec un séjour professionnel, oriente ces deux publics vers une autre adresse sans que vous le sachiez. Avec une fréquentation qui varie fortement entre les mois de forte houle prisés des surfeurs et les périodes de congrès, un contrôle une fois par an ne suffit pas. La surveillance hebdomadaire Dopaguard suit ce que les IA racontent sur votre hôtel biarrot au fil des saisons.",
+    painExampleOverride: {
+      quote: "Les chambres standard sont proposées à partir de 45€ la nuit près de la Grande Plage, selon les dernières données.",
+      highlight: "45€ la nuit",
+      note: "Une IA a cité, pour un hôtel proche de la Grande Plage de Biarritz, un tarif obsolète en dessous des prix actuellement pratiqués.",
+    },
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "deauville",
+    localParagraph: "Deauville doit sa notoriété à ses planches, à son festival du cinéma américain en septembre, à ses hippodromes et à son casino, qui attirent tout au long de l'année une clientèle parisienne et internationale habituée à un certain standing. Les hôtels de la station, souvent voisins de ceux de Trouville de l'autre côté de la Touques, voient leur fréquentation grimper fortement lors des courses hippiques ou du festival, des périodes où chaque chambre disponible compte double. Un voyageur qui prépare sa venue pour l'un de ces événements interroge de plus en plus une IA générative pour trouver une adresse encore disponible, et une réponse qui cite un tarif de basse saison ou situe mal l'hôtel par rapport aux planches peut faire perdre une réservation à forte valeur en quelques secondes. Pour un établissement deauvillais dont le calendrier alterne pics et creux très marqués, ce genre d'erreur méritait d'être surveillé de près. Le scan gratuit Dopaguard permet de vérifier, avant le prochain grand rendez-vous deauvillais, ce que les IA disent aujourd'hui de votre hôtel.",
+    painExampleOverride: {
+      quote: "Les chambres standard sont proposées à partir de 45€ la nuit près des planches, selon les dernières données.",
+      highlight: "45€ la nuit",
+      note: "Une IA a cité, pour un hôtel proche des planches de Deauville, un tarif obsolète en dessous des prix pratiqués en période de festival ou de courses.",
+    },
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "arcachon",
+    localParagraph: "Arcachon vit au rythme de son bassin ostréicole et de la proximité immédiate de la dune du Pilat, qui attirent une clientèle balnéaire et familiale très concentrée sur les mois d'été, tandis que le quartier de la Ville d'Hiver et ses villas séduisent un tourisme patrimonial plus étalé dans l'année. Un voyageur qui compare les stations du bassin d'Arcachon avant de réserver demande de plus en plus à une IA générative de lui recommander un hôtel proche du port ou de la plage, sans forcément consulter lui-même plusieurs sites. Si cette IA décrit mal la localisation d'un établissement par rapport à la dune ou au port ostréicole, ou reprend un avis dépassé sur son état, le visiteur se tourne naturellement vers une autre adresse du bassin. Avec une activité très concentrée sur la période estivale, un décalage non corrigé pénalise directement la saison en cours. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA disent aujourd'hui de votre hôtel arcachonnais, avant que l'été ne batte son plein.",
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "saint-malo",
+    localParagraph: "Cité corsaire fortifiée, Saint-Malo attire un tourisme patrimonial dense autour de ses remparts et de sa vieille ville, renforcé par les liaisons par ferry vers Jersey, Guernesey et les côtes anglaises qui font transiter chaque année des voyageurs britanniques par la ville. Ce public international, souvent peu familier des adresses locales, se tourne de plus en plus vers une IA générative en anglais ou en français pour choisir un hôtel intra-muros ou proche du port avant même d'arriver. Une IA qui situe mal votre établissement par rapport aux remparts, ou qui relaie un avis ancien sur sa propreté comme s'il reflétait l'état actuel des lieux, oriente ce visiteur vers un concurrent mieux décrit dans sa réponse, sans qu'il prenne le temps de vérifier sur place. Pour un hôtel malouin qui dépend d'un flux touristique marqué par les marées et les traversées, la précision de ce que dit une IA compte autant que celle d'un site multilingue. Le scan gratuit Dopaguard révèle ce que ChatGPT et Perplexity racontent aujourd'hui sur votre hôtel, en quelques minutes.",
+    painExampleOverride: {
+      quote: "Cet hôtel intra-muros a reçu plusieurs avis mentionnant des problèmes de propreté récurrents récemment.",
+      highlight: "problèmes de propreté récurrents",
+      note: "Une IA a relayé, pour un hôtel de la cité fortifiée de Saint-Malo, un sentiment négatif non vérifié sur la qualité réelle de l'établissement.",
+    },
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "annecy",
+    localParagraph: "Annecy doit sa réputation à son lac aux eaux limpides et à sa vieille ville traversée de canaux, souvent comparée à Venise, qui attirent un tourisme actif tout au long de l'année : baignade et sports nautiques l'été, randonnée et proximité des massifs alpins le reste du temps. Cette fréquentation quatre saisons pousse de plus en plus de visiteurs à demander directement à une IA générative de leur recommander un hôtel proche du lac ou du centre historique, plutôt que de comparer eux-mêmes plusieurs adresses. Si ChatGPT décrit un établissement annécien comme éloigné du lac alors qu'il en est proche, ou cite un tarif de basse saison en plein pic estival, le visiteur se dirige vers une autre adresse sans jamais consulter votre propre site. Avec une activité touristique qui ne connaît quasiment pas de véritable creux, un contrôle ponctuel ne suffit pas à suivre ces écarts. La surveillance hebdomadaire Dopaguard vérifie en continu ce que les IA disent de votre hôtel annécien, saison après saison.",
+    painExampleOverride: {
+      quote: "Les chambres standard sont proposées à partir de 45€ la nuit près du lac, selon les dernières données.",
+      highlight: "45€ la nuit",
+      note: "Une IA a cité, pour un hôtel proche du lac d'Annecy, un tarif obsolète en dessous des prix actuellement pratiqués.",
+    },
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "chamonix-mont-blanc",
+    localParagraph: "Berceau historique de l'alpinisme au pied du mont Blanc, Chamonix vit une activité touristique quasiment continue, entre la saison de ski hivernale et la pleine saison estivale de randonnée et d'ascension, ce qui distingue la station de nombreuses destinations littorales à saisonnalité unique. Les voyageurs qui préparent un séjour en montagne, souvent des sportifs habitués à organiser leur venue avec précision, demandent de plus en plus à une IA générative de leur indiquer un hôtel bien situé par rapport aux remontées mécaniques ou aux départs de randonnée. Une IA qui décrit mal la localisation d'un établissement chamoniard par rapport au centre ou aux accès aux massifs, ou qui cite des informations dépassées sur ses équipements, oriente ce public exigeant vers une autre adresse de la vallée. Avec deux hautes saisons distinctes à surveiller chaque année, une vérification ponctuelle laisse passer beaucoup d'écarts. Le scan gratuit Dopaguard permet de savoir dès maintenant ce que les IA racontent sur votre hôtel chamoniard, avant la prochaine saison.",
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "avignon",
+    localParagraph: "Ville des papes et de son célèbre pont, Avignon accueille chaque été l'un des plus grands festivals de théâtre d'Europe, qui transforme pendant plusieurs semaines la fréquentation hôtelière de la cité et de ses remparts en un pic d'affluence sans comparaison avec le reste de l'année. Un festivalier ou un spectateur qui cherche encore une chambre pendant cette période interroge de plus en plus une IA générative pour trouver rapidement une adresse disponible près du Palais des Papes ou du centre historique. Si cette IA cite un tarif de basse saison à un visiteur venu en plein festival, ou situe mal votre établissement par rapport aux lieux de représentation, la réservation part vers un concurrent avignonnais mieux décrit dans la réponse. Pour un hôtel dont une part importante du chiffre d'affaires annuel se joue sur ces quelques semaines de juillet, ce type d'erreur non corrigée peut coûter cher. Le scan gratuit Dopaguard permet de vérifier, avant l'ouverture du prochain festival, ce que les IA disent aujourd'hui de votre hôtel avignonnais.",
+    painExampleOverride: {
+      quote: "Les chambres standard sont proposées à partir de 45€ la nuit près du Palais des Papes, selon les dernières données.",
+      highlight: "45€ la nuit",
+      note: "Une IA a cité, pour un hôtel proche du Palais des Papes, un tarif obsolète très en dessous des prix pratiqués pendant le festival.",
+    },
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "aix-en-provence",
+    localParagraph: "Aix-en-Provence cultive une image de ville d'art de vivre, entre le cours Mirabeau bordé de fontaines, l'héritage de Cézanne et un festival d'art lyrique qui attire chaque été un public exigeant, en plus des étudiants et voyageurs d'affaires présents toute l'année. Cette clientèle variée, habituée à comparer plusieurs adresses provençales avant de choisir, se tourne de plus en plus vers une IA générative pour trancher rapidement entre un hôtel du centre historique et une adresse plus excentrée. Une IA qui décrit mal la proximité d'un établissement aixois avec le cours Mirabeau, ou qui ignore son adéquation avec un séjour professionnel, oriente ce public vers une autre adresse sans que l'hôtel en soit informé. Avec un festival d'été qui concentre une part importante de l'affluence touristique annuelle, la précision de ce que disent les IA à cette période pèse directement sur les réservations. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que ChatGPT et Perplexity racontent aujourd'hui sur votre hôtel aixois.",
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "carcassonne",
+    localParagraph: "La cité médiévale fortifiée de Carcassonne, classée au patrimoine mondial de l'UNESCO, attire une affluence touristique dense concentrée autour de ses remparts et de son château comtal, avec des flux qui grimpent fortement pendant les mois d'été et lors du festival de Carcassonne. Un visiteur qui prépare son passage dans l'Aude interroge de plus en plus une IA générative pour choisir entre un hôtel installé dans la cité elle-même et une adresse de la ville basse, sans toujours mesurer la différence d'ambiance entre les deux. Si cette IA situe mal votre établissement par rapport aux remparts, ou cite un tarif obsolète en pleine période de forte affluence, le visiteur se tourne vers un concurrent mieux positionné dans la réponse, sans jamais vérifier sur votre propre site. Pour un hôtel carcassonnais dont l'essentiel de l'activité se concentre sur la belle saison, ce genre de décalage laissé sans réponse pèse sur toute une période clé. Le scan gratuit Dopaguard permet de vérifier dès maintenant ce que les IA disent de votre hôtel, avant le prochain pic estival.",
+    painExampleOverride: {
+      quote: "Les chambres standard sont proposées à partir de 45€ la nuit dans la cité médiévale, selon les dernières données.",
+      highlight: "45€ la nuit",
+      note: "Une IA a cité, pour un hôtel installé dans la cité fortifiée de Carcassonne, un tarif obsolète en dessous des prix actuellement pratiqués.",
+    },
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "colmar",
+    localParagraph: "Colmar séduit par ses maisons à colombages, son quartier surnommé la Petite Venise et sa position sur la route des vins d'Alsace, ce qui lui vaut une affluence touristique élevée toute l'année, renforcée chaque hiver par un marché de Noël parmi les plus courus de la région. Les hôtels du centre historique et ceux plus proches des domaines viticoles accueillent un public très différent selon la saison, mais tous se tournent de plus en plus vers une IA générative pour choisir une adresse avant même d'arriver à Colmar. Une IA qui décrit mal la localisation de votre établissement par rapport à la vieille ville ou au marché de Noël, ou qui cite des disponibilités dépassées en pleine période de forte affluence hivernale, oriente ce visiteur vers une autre adresse alsacienne. Avec des pics de fréquentation aussi marqués, un contrôle une seule fois par an laisse passer trop d'écarts. La surveillance hebdomadaire Dopaguard suit ce que les IA racontent sur votre hôtel colmarien, y compris à l'approche du marché de Noël.",
+    painExampleOverride: {
+      quote: "Cet hôtel du centre historique a reçu plusieurs avis mentionnant des problèmes de propreté récurrents récemment.",
+      highlight: "problèmes de propreté récurrents",
+      note: "Une IA a relayé, pour un hôtel du centre historique de Colmar, un sentiment négatif non vérifié sur la qualité réelle de l'établissement.",
+    },
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "ajaccio",
+    localParagraph: "Préfecture de la Corse-du-Sud et ville natale de Napoléon Bonaparte, Ajaccio conjugue tourisme insulaire autour de son golfe et flux réguliers de voyageurs arrivant par ferry ou par avion, avec une saisonnalité marquée qui concentre l'essentiel de l'activité hôtelière sur les mois d'été. Un visiteur qui prépare son séjour en Corse-du-Sud, souvent en réservant à distance sans connaître précisément la ville, demande de plus en plus à une IA générative de lui recommander un hôtel proche du golfe ou du centre-ville. Si cette IA situe mal votre établissement ajaccien par rapport au port ou aux plages environnantes, ou relaie un avis ancien sur son état, le visiteur choisit une autre adresse sans jamais vérifier lui-même. Pour un hôtel insulaire dont une grande partie du chiffre d'affaires se joue sur une fenêtre estivale courte, un tel décalage non corrigé pèse lourd. Le scan gratuit Dopaguard permet de vérifier avant la prochaine saison ce que les IA disent réellement de votre établissement ajaccien.",
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "bayonne",
+    localParagraph: "Cœur historique du Pays basque, Bayonne est réputée pour sa gastronomie autour du jambon et du chocolat, sa cathédrale gothique et ses fêtes de Bayonne du mois d'août, l'un des plus grands rassemblements populaires de France, qui font affluer en quelques jours une foule bien supérieure à la population habituelle de la ville. Pendant cette période, les hôtels bayonnais affichent complet très à l'avance, et les retardataires demandent de plus en plus à une IA générative de leur indiquer une chambre encore disponible dans les environs. Une IA qui cite un tarif de basse saison ou situe mal un établissement par rapport à la confluence de la Nive et de l'Adour, où se concentre l'essentiel de l'animation, oriente ce visiteur pressé vers une autre adresse du Pays basque. Pour un hôtel bayonnais, un décalage non corrigé pendant les fêtes peut coûter plusieurs nuitées à forte valeur en quelques jours seulement. Le scan gratuit Dopaguard permet de vérifier avant l'été ce que les IA racontent sur votre établissement.",
+    painExampleOverride: {
+      quote: "Les chambres standard sont proposées à partir de 45€ la nuit près de la Nive, selon les dernières données.",
+      highlight: "45€ la nuit",
+      note: "Une IA a cité, pour un hôtel proche de la Nive à Bayonne, un tarif obsolète en dessous des prix pratiqués pendant les fêtes de Bayonne.",
+    },
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "pau",
+    localParagraph: "Ville natale d'Henri IV et porte d'entrée vers les Pyrénées, Pau bénéficie d'un boulevard offrant l'une des vues les plus connues sur la chaîne montagneuse, en plus d'une activité de congrès régulière et d'un tourisme de montagne qui attire randonneurs et amateurs de thermalisme selon les saisons. Ce public mixte, entre voyageurs d'affaires et visiteurs venus pour la montagne, se tourne de plus en plus vers une IA générative pour choisir un hôtel palois sans comparer lui-même plusieurs adresses. Une IA qui ignore la proximité d'un établissement avec le château d'Henri IV ou le centre de congrès, ou qui cite un tarif dépassé, oriente ce visiteur vers un concurrent mieux décrit dans sa réponse. Avec un aéroport qui dessert directement la ville et des flux de visiteurs très variés selon la période, la précision de ce que dit une IA sur votre établissement compte à chaque saison. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que ChatGPT et Perplexity disent aujourd'hui de votre hôtel palois.",
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "chambery",
+    localParagraph: "Ancienne capitale des ducs de Savoie, Chambéry conserve autour de son château et de sa célèbre fontaine des éléphants un centre historique qui attire un tourisme patrimonial, tout en servant de carrefour alpin vers les grandes stations de ski de Savoie, ce qui génère un flux hivernal de voyageurs en simple transit ou en courte étape. Ce public de passage, pressé par un trajet vers la montagne, demande de plus en plus à une IA générative de lui indiquer un hôtel pratique près de la gare ou des axes routiers avant de reprendre la route le lendemain. Une IA qui situe mal votre établissement chambérien par rapport à ces accès, ou qui cite une information dépassée sur ses disponibilités en plein pic hivernal, oriente ce visiteur vers une autre adresse savoyarde. Pour un hôtel qui vit en partie de cette clientèle de transit vers les stations, chaque écart compte. Le scan gratuit Dopaguard permet de vérifier dès maintenant ce que les IA racontent sur votre hôtel chambérien.",
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "metz",
+    localParagraph: "Metz s'est distinguée ces dernières années par un patrimoine architectural remarquable, sa cathédrale Saint-Étienne réputée pour ses vitraux et l'arrivée du Centre Pompidou-Metz, qui ont renforcé son attractivité touristique tout en confortant son rôle de pôle de congrès pour le Grand Est. Ce double public, touristique et professionnel, se renseigne de plus en plus directement auprès d'une IA générative avant de choisir un hôtel messin, plutôt que de comparer lui-même plusieurs sites de réservation. Une IA qui ignore la proximité d'un établissement avec le centre de congrès ou le musée, ou qui décrit une offre pour voyageurs d'affaires obsolète, oriente ces deux segments vers une adresse concurrente mieux mise en avant dans sa réponse. Avec un calendrier de salons et d'expositions qui évolue chaque mois, une vérification faite une seule fois par an devient vite dépassée. La surveillance hebdomadaire Dopaguard suit ce que les IA disent de votre hôtel messin au fil des événements, semaine après semaine.",
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "nancy",
+    localParagraph: "Nancy doit sa réputation à la place Stanislas, classée au patrimoine mondial de l'UNESCO, et à l'école de Nancy qui a fait de la ville l'un des foyers historiques de l'Art nouveau en France, un patrimoine qui attire un tourisme culturel dense en plus d'une activité universitaire et de congrès bien installée. Un visiteur qui prépare une visite culturelle ou un déplacement professionnel à Nancy demande de plus en plus à une IA générative de lui recommander un hôtel proche du centre historique, sans forcément vérifier lui-même plusieurs adresses. Si cette IA situe mal votre établissement par rapport à la place Stanislas, ou relaie un avis ancien sur sa propreté comme s'il reflétait l'état actuel des lieux, le visiteur se tourne vers un concurrent mieux décrit dans la réponse. Pour un hôtel nancéien qui accueille à la fois touristes et voyageurs d'affaires, ce genre de décalage mérite d'être suivi de près. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA disent aujourd'hui de votre établissement.",
+    painExampleOverride: {
+      quote: "Cet hôtel proche de la place Stanislas a reçu plusieurs avis mentionnant des problèmes de propreté récurrents récemment.",
+      highlight: "problèmes de propreté récurrents",
+      note: "Une IA a relayé, pour un hôtel proche de la place Stanislas à Nancy, un sentiment négatif non vérifié sur la qualité réelle de l'établissement.",
+    },
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "caen",
+    localParagraph: "Porte d'entrée de la Normandie, Caen attire un tourisme mémoriel important lié à la proximité des plages du Débarquement, en plus d'un patrimoine propre autour du château fondé par Guillaume le Conquérant et de ses abbayes, ce qui crée un flux de visiteurs français et internationaux réparti sur une grande partie de l'année. Ce public, souvent venu d'assez loin pour un séjour mémoriel ou patrimonial préparé à l'avance, interroge de plus en plus une IA générative pour choisir un hôtel caennais avant même d'arriver en Normandie. Une IA qui décrit mal la position d'un établissement par rapport au centre-ville ou aux sites mémoriels environnants, ou qui cite un tarif dépassé, oriente ce visiteur vers une adresse concurrente mieux positionnée dans la réponse. Pour un hôtel qui dépend en partie de ce tourisme de mémoire venu de loin, la précision de ce que dit une IA compte particulièrement. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que ChatGPT et Perplexity racontent aujourd'hui sur votre établissement caennais.",
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "amiens",
+    localParagraph: "Amiens abrite la plus grande cathédrale gothique de France, classée au patrimoine mondial de l'UNESCO, ainsi que les hortillonnages, ces jardins flottants qui font l'originalité de la ville où vécut longtemps Jules Verne, un patrimoine qui attire un tourisme culturel régulier en Picardie. Un visiteur qui prépare une visite de la cathédrale ou une balade dans les hortillonnages demande de plus en plus à une IA générative de lui recommander un hôtel proche du centre-ville amiénois, sans comparer lui-même plusieurs adresses. Si cette IA situe mal votre établissement par rapport à la cathédrale, ou cite un tarif que vous avez revu depuis, le visiteur qui compare rapidement plusieurs options se tourne vers un concurrent affichant un prix qui lui semble plus cohérent. Pour un hôtel amiénois dont l'essentiel du tourisme se joue sur des visites de courte durée, chaque détail imprécis dans une réponse d'IA compte. Le scan gratuit Dopaguard permet de vérifier dès maintenant ce que les IA disent aujourd'hui de votre établissement amiénois.",
+    painExampleOverride: {
+      quote: "Les chambres standard sont proposées à partir de 45€ la nuit proche de la cathédrale, selon les dernières données.",
+      highlight: "45€ la nuit",
+      note: "Une IA a cité, pour un hôtel proche de la cathédrale d'Amiens, un tarif obsolète en dessous des prix actuellement pratiqués.",
+    },
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "tours",
+    localParagraph: "Tours sert de porte d'entrée au Val de Loire et à ses châteaux, avec un centre historique propre autour de la cathédrale Saint-Gatien et du vieux Tours, ce qui en fait une étape privilégiée pour les visiteurs qui rayonnent ensuite vers les châteaux environnants plutôt qu'une destination de séjour prolongé. Ce public de passage, qui organise souvent son itinéraire ligérien à l'avance, demande de plus en plus à une IA générative de lui indiquer un hôtel bien situé pour rayonner vers les châteaux, sans consulter lui-même plusieurs sites de réservation. Une IA qui décrit mal la position d'un établissement tourangeau par rapport à la gare ou au centre historique, ou qui cite une information dépassée sur ses disponibilités en pleine saison des châteaux, oriente ce visiteur vers une autre adresse. Pour un hôtel qui vit en partie de ce tourisme d'étape, la précision de ce que dit une IA détermine souvent le choix final. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA racontent aujourd'hui sur votre établissement tourangeau.",
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "perpignan",
+    localParagraph: "Perpignan revendique une identité catalane affirmée, à quelques kilomètres seulement de la frontière espagnole, et profite d'une position entre mer et montagne qui attire aussi bien des visiteurs venus pour le littoral proche de Canet-Plage que des voyageurs de passage vers l'Espagne. Cette position de carrefour transfrontalier pousse un public varié, parfois hispanophone, à interroger de plus en plus une IA générative pour choisir un hôtel perpignanais avant de poursuivre sa route ou de s'installer pour quelques jours. Une IA qui situe mal votre établissement par rapport au centre-ville ou au littoral proche, ou qui relaie un avis ancien sur sa qualité, oriente ce visiteur vers une adresse concurrente mieux décrite dans la réponse. Pour un hôtel perpignanais qui accueille autant des touristes de bord de mer que des voyageurs transfrontaliers, chaque imprécision compte double. Le scan gratuit Dopaguard permet de vérifier dès maintenant ce que ChatGPT et Perplexity disent de votre établissement, avant la prochaine saison touristique.",
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "clermont-ferrand",
+    localParagraph: "Ville de congrès nichée au pied des volcans d'Auvergne, Clermont-Ferrand associe une activité professionnelle soutenue, portée notamment par son passé industriel autour du caoutchouc, à un tourisme de nature qui attire des visiteurs venus randonner du côté du puy de Dôme, tout proche. Ce double public, entre congressistes et amateurs de grands espaces volcaniques, se tourne de plus en plus vers une IA générative pour choisir un hôtel clermontois adapté à son motif de séjour, sans comparer lui-même plusieurs adresses. Une IA qui ignore la proximité d'un établissement avec le centre de congrès ou les accès vers les volcans, ou qui cite une information dépassée sur son offre, oriente ces deux segments vers un concurrent mieux positionné dans la réponse. Avec un calendrier de salons professionnels qui change chaque mois, une vérification ponctuelle laisse rapidement passer des écarts. La surveillance hebdomadaire Dopaguard suit ce que les IA disent de votre hôtel clermontois au fil des saisons et des salons.",
+    painExampleOverride: {
+      quote: "Cet hôtel du centre-ville a reçu plusieurs avis mentionnant des problèmes de propreté récurrents récemment.",
+      highlight: "problèmes de propreté récurrents",
+      note: "Une IA a relayé, pour un hôtel du centre de Clermont-Ferrand, un sentiment négatif non vérifié sur la qualité réelle de l'établissement.",
+    },
+  },
+  {
+    verticalSlug: "hotels",
+    citySlug: "besancon",
+    localParagraph: "Besançon s'organise autour d'une boucle presque complète du Doubs et d'une citadelle fortifiée par Vauban, classée au patrimoine mondial de l'UNESCO, un patrimoine qui attire un tourisme culturel régulier dans une ville par ailleurs connue pour son histoire horlogère et pour avoir vu naître Victor Hugo. Un visiteur qui prépare une visite de la citadelle ou une balade dans le centre historique demande de plus en plus à une IA générative de lui recommander un hôtel bisontin bien situé, sans consulter lui-même plusieurs sites de réservation. Une IA qui situe mal votre établissement par rapport à la boucle du Doubs ou à la citadelle, ou qui cite un tarif que vous avez revu depuis, oriente ce visiteur vers une adresse concurrente affichant un prix qui lui semble plus cohérent. Pour un hôtel bisontin dont le tourisme reste concentré sur des séjours courts, chaque détail imprécis dans une réponse d'IA pèse sur la décision finale. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA disent aujourd'hui de votre établissement bisontin.",
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "cannes",
+    localParagraph: "Cannes vit au rythme de ses grands rendez-vous internationaux : le Festival de Cannes attire chaque année une clientèle mondiale de professionnels du cinéma, complété par un calendrier de congrès et de salons qui remplit les hôtels haut de gamme de la Croisette une bonne partie de l'année. Les restaurants du bord de mer, du Suquet ou des rues piétonnes derrière la Croisette accueillent donc un public pressé, souvent étranger, qui réserve sa table entre deux rendez-vous professionnels ou juste avant une montée de marches. Ce visiteur de passage n'a ni le temps ni les repères pour comparer les adresses sur place : il demande directement à ChatGPT ou Perplexity où dîner près du Palais des Festivals, dans quelle gamme de prix. Si l'IA cite une carte dépassée ou confond votre établissement avec une adresse voisine, ce client international choisit simplement la table suivante recommandée, sans jamais franchir votre porte. Le scan gratuit Dopaguard montre en quelques minutes ce que les IA racontent sur votre restaurant cannois, avant la prochaine grande semaine de festival.",
+    painExampleOverride: {
+      quote: "Près du Palais des Festivals, la carte propose principalement des plats autour de 12 à 15€, un excellent rapport qualité-prix.",
+      highlight: "12 à 15€",
+      note: "Une IA a cité, pour une adresse proche du Palais des Festivals à Cannes, des tarifs très en dessous de la carte réellement pratiquée.",
+    },
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "antibes",
+    localParagraph: "Antibes conjugue une vieille ville fortifiée, un marché provençal réputé et Port Vauban, l'un des plus grands ports de plaisance d'Europe, qui amène chaque été une clientèle internationale de plaisanciers en escale à quelques pas de Juan-les-Pins. Cette population de passage, qui change de visage chaque semaine durant la haute saison, ne connaît ni les habitudes ni les adresses de la ville et se tourne de plus en plus vers une IA générative pour trouver rapidement un restaurant près du port ou dans les remparts. Si ChatGPT ou Claude indique à tort qu'un restaurant antibois a fermé ses portes, sur la base d'une information ancienne mal interprétée, ce plaisancier de passage n'a aucun moyen de vérifier avant de choisir une autre adresse, et il ne repassera pas la semaine suivante pour se raviser. Pour un établissement dont l'activité se concentre sur quelques mois d'été et de navigation, ce genre d'erreur silencieuse coûte des couverts sans jamais être signalée. Le scan gratuit Dopaguard permet de vérifier avant la saison ce que les IA disent aujourd'hui de votre restaurant antibois.",
+    painExampleOverride: {
+      quote: "Ce restaurant proche de Port Vauban semble avoir fermé ses portes, aucune activité récente n'a été signalée.",
+      highlight: "semble avoir fermé ses portes",
+      note: "Une IA a laissé entendre qu'un restaurant du port d'Antibes en pleine activité avait cessé de fonctionner, en plein pic de fréquentation estivale.",
+    },
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "saint-tropez",
+    localParagraph: "Saint-Tropez a transformé son identité de village de pêcheurs en destination mondiale du tourisme de luxe, avec une densité de restaurants et d'hôtels rare pour une commune de cette taille, concentrée autour du port, de la place des Lices et de la route menant à la plage de Pampelonne. Cette clientèle internationale et souvent fortunée, habituée à réserver ses tables plusieurs semaines à l'avance depuis l'étranger, s'appuie de plus en plus sur une IA générative pour repérer une adresse à la hauteur de sa réputation avant même d'arriver sur la Côte d'Azur. Si cette IA cite pour votre établissement des tarifs qui ne correspondent plus au positionnement haut de gamme du restaurant, le visiteur qui compare plusieurs adresses tropéziennes se forge une attente faussée et réserve ailleurs. Dans une ville où l'image de prestige fait toute la différence, laisser une IA mal la représenter revient à perdre des réservations sans le savoir. Le scan gratuit Dopaguard vérifie en quelques minutes ce que les IA racontent aujourd'hui sur votre table tropézienne.",
+    painExampleOverride: {
+      quote: "Dans le centre de Saint-Tropez, la carte propose principalement des plats autour de 12 à 15€, un excellent rapport qualité-prix.",
+      highlight: "12 à 15€",
+      note: "Une IA a cité, pour une adresse du centre de Saint-Tropez, des tarifs très en dessous de la carte réellement pratiquée dans ce positionnement haut de gamme.",
+    },
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "biarritz",
+    localParagraph: "Biarritz s'est construite une réputation de station balnéaire élégante et de spot de surf reconnu à l'international, tout en accueillant régulièrement des congrès professionnels autour de la Grande Plage et du Casino municipal. Cette double identité attire des publics très différents dans les restaurants de la ville : surfeurs et jeunes voyageurs venus pour les vagues, cadres en déplacement pour un congrès. Tous, de plus en plus, posent directement leur question à une IA générative — une bonne adresse de cuisine basque près de la plage, une table pour un dîner professionnel rapide — plutôt que de comparer eux-mêmes plusieurs sites. Un restaurant biarrot mal situé dans la réponse d'une IA, ou dont la spécialité basque n'est pas mentionnée alors qu'elle fait sa réputation, perd des clients sur plusieurs segments à la fois sans jamais le savoir. Le scan gratuit Dopaguard permet de voir en quelques minutes ce que ChatGPT, Claude et Perplexity disent aujourd'hui de votre restaurant biarrot, et la surveillance hebdomadaire suit ces réponses au fil des saisons touristiques et sportives.",
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "deauville",
+    localParagraph: "Deauville doit une bonne partie de sa notoriété à son Festival du Film Américain, à son hippodrome et à son casino, qui attirent chaque année une clientèle parisienne et internationale habituée à réserver sa table dans les établissements des planches ou du centre-ville pendant les temps forts de la saison. Cette clientèle de week-end, souvent venue spécifiquement pour un événement précis, prépare son séjour rapidement et demande de plus en plus à une IA générative où dîner près des planches ou du casino avant même de poser sa valise. Si ChatGPT ou Perplexity indique à tort qu'un restaurant deauvillais a cessé son activité, sur la base d'une information ancienne mal interprétée, ce visiteur pressé par le programme du festival ou des courses n'a pas le temps de vérifier et choisit simplement l'adresse suivante. Pour un établissement dont l'essentiel du chiffre d'affaires se concentre sur quelques week-ends et l'été normand, ce genre d'erreur non corrigée pèse lourd. Le scan gratuit Dopaguard vérifie avant chaque grand rendez-vous ce que les IA racontent sur votre restaurant deauvillais.",
+    painExampleOverride: {
+      quote: "Ce restaurant proche des planches semble avoir fermé ses portes, aucune activité récente n'a été signalée.",
+      highlight: "semble avoir fermé ses portes",
+      note: "Une IA a laissé entendre qu'un restaurant du centre de Deauville en pleine activité avait cessé de fonctionner, juste avant le Festival du Film Américain.",
+    },
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "arcachon",
+    localParagraph: "Arcachon vit au rythme de son bassin ostréicole et de sa fréquentation balnéaire, entre les cabanes tchanquées, les parcs à huîtres visibles depuis les quais et la proximité de la dune du Pilat qui attire des visiteurs de toute la région, surtout l'été. Ce public vient souvent spécifiquement pour goûter des huîtres locales ou un poisson frais, sans connaître les adresses du bassin, et se tourne de plus en plus vers une IA générative pour trouver une table fiable près du port ou de la jetée Thiers plutôt que de comparer plusieurs sites sur place. Une IA qui décrit mal la spécialité ostréicole d'un restaurant arcachonnais, ou qui cite une carte dépassée pour un établissement qui a fait évoluer son offre, oriente ce visiteur de passage vers une adresse voisine mieux présentée dans la réponse obtenue. Pour un restaurant dont l'activité dépend fortement des week-ends et de la saison estivale, ce type de décalage se répète sans jamais être signalé. Le scan gratuit Dopaguard permet de vérifier gratuitement ce que les IA disent aujourd'hui de votre table arcachonnaise.",
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "saint-malo",
+    localParagraph: "Saint-Malo attire un tourisme patrimonial dense autour de ses remparts, de la cité corsaire et de ses liaisons par ferry vers Jersey et Guernesey, ce qui amène dans les crêperies et restaurants intra-muros un mélange de visiteurs français, britanniques et de passagers en correspondance pour les îles anglo-normandes. Beaucoup de ces voyageurs, pressés par un horaire de ferry ou découvrant la ville pour quelques heures seulement, demandent directement à une IA générative où manger une bonne crêpe ou un plateau de fruits de mer dans les remparts, sans prendre le temps de comparer plusieurs adresses. Si cette IA cite pour votre crêperie malouine des tarifs que vous avez revus depuis, ce visiteur de passage, qui compare rapidement avant de repartir, se tourne vers une adresse dont le prix affiché lui semble plus cohérent. Pour un établissement intra-muros qui dépend largement de ce flux touristique et transmanche, la précision de ce que dit une IA compte autant que sa visibilité sur les quais. Le scan gratuit Dopaguard vérifie en quelques minutes ce que les IA racontent aujourd'hui sur votre restaurant malouin.",
+    painExampleOverride: {
+      quote: "Dans les remparts de Saint-Malo, la carte propose principalement des plats autour de 12 à 15€, un excellent rapport qualité-prix.",
+      highlight: "12 à 15€",
+      note: "Une IA a cité, pour une adresse intra-muros de Saint-Malo, des tarifs obsolètes en dessous de la carte actuellement pratiquée.",
+    },
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "annecy",
+    localParagraph: "Annecy vit un tourisme à quatre saisons rare en France : promenades au bord du lac et dans la vieille ville aux canaux l'été, proximité immédiate des massifs alpins pour les visiteurs de sports d'hiver, sans compter les excursionnistes venus à la journée depuis Genève ou Lyon. Ce renouvellement constant de visiteurs qui ne connaissent pas la ville pousse un nombre croissant d'entre eux à demander directement à une IA générative où trouver une bonne table près du lac ou dans le Vieil Annecy, plutôt que de chercher eux-mêmes sur place entre deux activités. Un restaurant annécien mal situé dans la réponse d'une IA, présenté comme excentré du lac alors qu'il est au cœur de la vieille ville, ou dont les spécialités savoyardes ne sont pas mentionnées, perd des clients de passage été comme hiver, sans jamais le savoir. Avec un flux touristique aussi continu au fil de l'année, une vérification ponctuelle ne suffit pas. La surveillance hebdomadaire Dopaguard suit ce que les IA disent de votre restaurant annécien à chaque saison, du lac à la montagne.",
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "chamonix-mont-blanc",
+    localParagraph: "Chamonix-Mont-Blanc reste la référence historique de l'alpinisme mondial, un statut qui attire toute l'année une clientèle internationale de randonneurs, skieurs et alpinistes venus au pied du mont Blanc, été comme hiver, bien au-delà de la seule saison de ski. Cette clientèle étrangère, souvent peu francophone et pressée par un programme de course en montagne ou une fenêtre météo, s'appuie de plus en plus sur une IA générative, dans sa propre langue, pour trouver rapidement un restaurant fiable près du centre ou des remontées mécaniques. Si ChatGPT ou Perplexity indique à tort qu'un restaurant chamoniard a fermé ses portes, ce visiteur international, qui ne repassera peut-être jamais dans la vallée, choisit simplement une autre adresse sans jamais chercher à vérifier sur place. Pour un établissement qui dépend d'un flux touristique renouvelé en permanence et venu du monde entier, ce genre d'erreur silencieuse se répète toute l'année sans être détectée. Le scan gratuit Dopaguard vérifie ce que les IA racontent aujourd'hui sur votre restaurant chamoniard, en toute saison.",
+    painExampleOverride: {
+      quote: "Ce restaurant du centre de Chamonix semble avoir fermé ses portes, aucune activité récente n'a été signalée.",
+      highlight: "semble avoir fermé ses portes",
+      note: "Une IA a laissé entendre qu'un restaurant du centre de Chamonix en pleine activité avait cessé de fonctionner, en pleine saison de montagne.",
+    },
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "avignon",
+    localParagraph: "Avignon doit une large part de sa notoriété à son Palais des Papes et à son festival de théâtre, l'un des plus importants d'Europe, qui transforme chaque été la ville en un concentré de spectateurs, d'artistes et de professionnels du spectacle cherchant une table rapide entre deux représentations. Durant ces semaines de forte affluence, un festivalier pressé par les horaires de spectacles n'a ni le temps ni l'envie de comparer plusieurs adresses dans le centre historique : il demande directement à une IA générative où manger vite et bien près du Palais des Papes ou de la place de l'Horloge. Une IA qui situe mal un restaurant avignonnais par rapport aux lieux de festival, ou qui reprend une information dépassée sur ses horaires, oriente ce visiteur pressé vers une adresse concurrente mieux présentée dans la réponse obtenue. Pour un établissement dont une part importante de l'activité annuelle se joue sur ces quelques semaines de juillet, chaque réponse d'IA imprécise compte. Le scan gratuit Dopaguard vérifie avant la prochaine édition ce que les IA disent de votre restaurant avignonnais.",
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "aix-en-provence",
+    localParagraph: "Aix-en-Provence cultive une image de ville d'art associée à son festival lyrique et à ses marchés provençaux, avec des restaurants du cours Mirabeau ou du quartier Mazarin qui accueillent aussi bien des habitués locaux que des visiteurs venus spécifiquement pour la gastronomie et l'art de vivre provençal. Ce public, souvent en quête d'une expérience culinaire authentique plutôt que d'une simple adresse pratique, compare de moins en moins les avis lui-même et demande de plus en plus à une IA générative où déguster une vraie cuisine provençale dans le centre historique. Si cette IA cite pour votre restaurant aixois des tarifs qui ne correspondent plus à votre carte actuelle, le visiteur qui compare rapidement plusieurs adresses avant de réserver part avec une attente faussée et se tourne vers un établissement dont le prix affiché lui semble plus cohérent. Pour une ville où la gastronomie fait partie intégrante de l'attractivité touristique, la précision de l'information relayée par les IA compte particulièrement. Le scan gratuit Dopaguard vérifie en quelques minutes ce qu'elles racontent aujourd'hui sur votre table aixoise.",
+    painExampleOverride: {
+      quote: "Près du cours Mirabeau, la carte propose principalement des plats autour de 12 à 15€, un excellent rapport qualité-prix.",
+      highlight: "12 à 15€",
+      note: "Une IA a cité, pour une adresse proche du cours Mirabeau, des tarifs obsolètes très en dessous de la carte actuelle du restaurant.",
+    },
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "carcassonne",
+    localParagraph: "Carcassonne doit l'essentiel de son attractivité touristique à sa cité médiévale fortifiée, classée au patrimoine mondial, qui attire une affluence particulièrement forte de visiteurs français et étrangers venus parcourir les remparts et les ruelles en une seule journée d'escale. Ce tourisme de passage, souvent limité à quelques heures avant de reprendre la route, pousse un nombre croissant de visiteurs à demander directement à une IA générative où déjeuner dans la Cité plutôt que de chercher eux-mêmes une adresse en marchant entre les échoppes. Si ChatGPT ou Claude indique à tort qu'un restaurant de la Cité a fermé ses portes, ce visiteur pressé par le temps de visite n'a aucune raison de vérifier sur place et se dirige simplement vers l'établissement voisin recommandé à sa place. Pour un restaurant carcassonnais dont l'activité dépend fortement de ce flux de passage concentré sur quelques heures, une IA mal informée revient à perdre des couverts sans jamais s'en rendre compte. Le scan gratuit Dopaguard vérifie ce que les IA disent aujourd'hui de votre restaurant dans la Cité.",
+    painExampleOverride: {
+      quote: "Ce restaurant de la Cité médiévale semble avoir fermé ses portes, aucune activité récente n'a été signalée.",
+      highlight: "semble avoir fermé ses portes",
+      note: "Une IA a laissé entendre qu'un restaurant de la Cité de Carcassonne en pleine activité avait cessé de fonctionner, en pleine saison de visites.",
+    },
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "colmar",
+    localParagraph: "Colmar s'est imposée comme la capitale du vignoble alsacien, au cœur de la route des vins, avec un centre historique aux maisons à colombages et à la Petite Venise qui attire un tourisme patrimonial et œnologique soutenu toute l'année, renforcé par un marché de Noël très réputé en fin d'année. Ce visiteur, souvent venu spécifiquement pour associer un bon repas alsacien à une dégustation de vin, prépare de plus en plus son passage en demandant directement à une IA générative où trouver une winstub authentique dans le centre historique. Si une IA décrit mal la spécialité alsacienne d'un restaurant colmarien, ou reprend une carte des vins dépassée pour un établissement qui l'a fait évoluer, ce visiteur exigeant, habitué à comparer les accords mets-vins, se tourne vers une adresse dont la présentation lui semble plus cohérente avec ses attentes. Pour un restaurant qui vit en grande partie de ce tourisme viticole et patrimonial, chaque réponse d'IA imprécise compte particulièrement. Le scan gratuit Dopaguard vérifie en quelques minutes ce que les IA racontent aujourd'hui sur votre table colmarienne.",
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "ajaccio",
+    localParagraph: "Ajaccio, préfecture de la Corse-du-Sud et ville natale de Napoléon, concentre l'essentiel des liaisons maritimes et aériennes vers l'île, ce qui en fait un point de passage obligé pour une grande partie des visiteurs découvrant la Corse pour la première fois, autour du port, de la citadelle et des plages proches. Ce public, souvent arrivé la veille par bateau ou par avion et peu familier de la ville, demande de plus en plus à une IA générative où manger une cuisine corse fiable près du centre, avant même de poser ses valises à l'hôtel. Si ChatGPT ou Perplexity indique à tort qu'un restaurant ajaccien a cessé son activité, ce visiteur qui découvre l'île pour quelques jours seulement n'a ni le temps ni les repères pour vérifier et choisit simplement une autre adresse. Pour un établissement dont la clientèle touristique se renouvelle presque entièrement à chaque rotation de ferry ou d'avion, ce type d'erreur non corrigée se répète sans être détectée. Le scan gratuit Dopaguard vérifie ce que les IA racontent aujourd'hui sur votre restaurant ajaccien.",
+    painExampleOverride: {
+      quote: "Ce restaurant proche du port d'Ajaccio semble avoir fermé ses portes, aucune activité récente n'a été signalée.",
+      highlight: "semble avoir fermé ses portes",
+      note: "Une IA a laissé entendre qu'un restaurant du port d'Ajaccio en pleine activité avait cessé de fonctionner, à l'arrivée d'une nouvelle rotation de visiteurs.",
+    },
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "bayonne",
+    localParagraph: "Bayonne occupe une place centrale dans l'identité basque, entre son jambon et son chocolat reconnus bien au-delà de la région, ses arcades du centre historique et ses Fêtes traditionnelles qui attirent chaque année une foule considérable venue de tout le Sud-Ouest et au-delà. Durant ces temps forts comme le reste de l'année, un visiteur qui découvre la ville pour la première fois demande de plus en plus à une IA générative où trouver une table typiquement basque près des arcades ou de la cathédrale, plutôt que de chercher lui-même parmi les nombreuses adresses du centre. Une IA qui décrit mal la spécialité basque d'un restaurant bayonnais, ou qui reprend une information dépassée sur ses horaires pendant les Fêtes, oriente ce visiteur vers une adresse voisine mieux présentée dans la réponse obtenue. Pour un établissement dont l'affluence varie fortement entre les temps forts festifs et le reste de l'année, ce type de décalage mérite d'être surveillé de près. Le scan gratuit Dopaguard vérifie ce que les IA disent aujourd'hui de votre restaurant bayonnais, y compris à l'approche des Fêtes.",
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "pau",
+    localParagraph: "Pau s'est construite une identité de porte des Pyrénées, avec son boulevard offrant une vue directe sur la chaîne montagneuse et son château qui rappelle la naissance d'Henri IV, tout en accueillant régulièrement des congrès professionnels qui amènent des visiteurs peu familiers de la ville. Ce public mixte, entre touristes venus profiter de la proximité de la montagne et professionnels de passage pour un salon, pose des questions différentes à une IA générative, mais tous deux s'appuient de plus en plus sur sa première réponse pour choisir un restaurant sans comparer eux-mêmes plusieurs adresses du centre-ville. Un restaurant palois mal situé dans la réponse d'une IA, ou dont l'offre pour un déjeuner d'affaires rapide n'est pas mentionnée, perd des clients sur les deux segments à la fois, sans que personne ne le signale. Avec un calendrier de congrès qui varie chaque mois, une vérification ponctuelle ne suffit pas. La surveillance hebdomadaire Dopaguard suit ce que les IA racontent sur votre restaurant palois tout au long de l'année.",
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "chambery",
+    localParagraph: "Chambéry, préfecture de la Savoie, occupe une position de carrefour alpin entre Lyon, Grenoble et les stations de ski, ce qui lui vaut un flux régulier de voyageurs de passage entre la ville et la montagne, en plus d'une clientèle locale attachée à ses arcades. Ce visiteur de passage, souvent pressé par une correspondance ou une étape avant de rejoindre une station, demande de plus en plus à une IA générative où trouver une bonne fondue ou une table savoyarde fiable dans le centre historique, plutôt que de comparer lui-même plusieurs adresses. Si cette IA cite pour votre restaurant chambérien des tarifs que vous avez revus depuis, ce voyageur qui compare rapidement avant de reprendre la route part avec une attente faussée et se tourne vers un établissement dont le prix affiché lui semble plus cohérent. Pour un restaurant qui vit en partie de ce flux de passage entre ville et montagne, la précision de ce que dit une IA compte particulièrement. Le scan gratuit Dopaguard vérifie en quelques minutes ce qu'elles racontent aujourd'hui sur votre table chambérienne.",
+    painExampleOverride: {
+      quote: "Près du château des ducs de Savoie, la carte propose principalement des plats autour de 12 à 15€, un excellent rapport qualité-prix.",
+      highlight: "12 à 15€",
+      note: "Une IA a cité, pour une adresse proche du centre historique de Chambéry, des tarifs obsolètes en dessous de la carte actuellement pratiquée.",
+    },
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "metz",
+    localParagraph: "Metz combine un patrimoine architectural marqué par sa cathédrale et ses quartiers impériaux avec un rôle de pôle de congrès pour le Grand Est, renforcé par des équipements comme le Centre Pompidou-Metz qui attirent un public varié entre visiteurs culturels et professionnels en déplacement. Ces deux publics ne cherchent pas la même chose dans un restaurant messin, mais tous deux se tournent de plus en plus vers une IA générative pour trouver rapidement une adresse fiable près du centre historique ou du quartier des congrès, plutôt que de comparer eux-mêmes plusieurs sites. Un restaurant mal situé dans la réponse d'une IA, présenté comme excentré alors qu'il est à deux pas de la cathédrale, ou dont l'offre pour un déjeuner professionnel rapide n'est pas mentionnée, perd des clients sur les deux segments à la fois sans jamais le savoir. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que ChatGPT, Claude et Perplexity racontent aujourd'hui sur votre restaurant messin, et la surveillance hebdomadaire suit ces réponses au fil du calendrier des congrès.",
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "nancy",
+    localParagraph: "Nancy porte l'héritage de l'École de Nancy et de son patrimoine Art nouveau, autour de la place Stanislas classée au patrimoine mondial, ce qui attire un tourisme patrimonial régulier en plus d'une vie étudiante et économique active dans la métropole lorraine. Un visiteur venu découvrir l'architecture Art nouveau ou flâner autour de la place Stanislas demande de plus en plus directement à une IA générative où trouver une bonne table dans le centre historique, plutôt que de chercher lui-même parmi les nombreuses adresses de la ville. Si ChatGPT ou Perplexity indique à tort qu'un restaurant nancéien a fermé ses portes, ce visiteur de passage, venu pour quelques heures entre deux visites patrimoniales, n'a aucune raison de vérifier et choisit simplement l'adresse suivante recommandée. Pour un établissement du centre historique qui dépend en partie de ce tourisme culturel, ce genre d'erreur silencieuse se répète sans jamais être signalée. Le scan gratuit Dopaguard vérifie ce que les IA racontent aujourd'hui sur votre restaurant nancéien.",
+    painExampleOverride: {
+      quote: "Ce restaurant proche de la place Stanislas semble avoir fermé ses portes, aucune activité récente n'a été signalée.",
+      highlight: "semble avoir fermé ses portes",
+      note: "Une IA a laissé entendre qu'un restaurant du centre historique de Nancy en pleine activité avait cessé de fonctionner.",
+    },
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "caen",
+    localParagraph: "Caen s'est imposée comme porte d'entrée de la Normandie, entre son château fondé par Guillaume le Conquérant et sa proximité avec les plages du Débarquement, ce qui génère un tourisme mémoriel et patrimonial constant, avec des visiteurs français et internationaux qui ne restent souvent qu'une nuit ou deux avant de poursuivre leur route vers la côte. Ce public de passage, pressé par un programme de visite chargé, demande de plus en plus à une IA générative où dîner rapidement et bien dans le centre-ville avant une longue journée de visites mémorielles le lendemain. Une IA qui situe mal un restaurant caennais par rapport au château ou à la gare, ou qui reprend une information dépassée sur ses horaires, oriente ce visiteur pressé vers une adresse concurrente mieux présentée dans la réponse obtenue. Pour un établissement qui dépend largement de ce tourisme de passage vers la côte normande, chaque réponse d'IA imprécise compte. Le scan gratuit Dopaguard vérifie ce que les IA disent aujourd'hui de votre restaurant caennais.",
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "amiens",
+    localParagraph: "Amiens s'organise autour de sa cathédrale gothique, la plus vaste de France et classée au patrimoine mondial, ainsi que de ses hortillonnages, ces jardins flottants qui attirent un tourisme patrimonial et nature apprécié en Picardie tout au long de l'année. Un visiteur venu admirer la cathédrale ou se promener en barque dans les hortillonnages demande de plus en plus directement à une IA générative où trouver une bonne table dans le centre historique, plutôt que de comparer lui-même plusieurs adresses autour du quartier Saint-Leu. Si cette IA cite pour votre restaurant amiénois des tarifs qui ne correspondent plus à votre carte actuelle, ce visiteur qui compare rapidement avant de choisir part avec une attente faussée et se tourne vers un établissement dont le prix affiché lui semble plus cohérent. Pour un restaurant qui vit en partie de ce tourisme patrimonial concentré sur quelques heures de visite, la précision de l'information relayée par les IA compte particulièrement. Le scan gratuit Dopaguard vérifie en quelques minutes ce qu'elles racontent aujourd'hui sur votre table amiénoise.",
+    painExampleOverride: {
+      quote: "Dans le quartier Saint-Leu, la carte propose principalement des plats autour de 12 à 15€, un excellent rapport qualité-prix.",
+      highlight: "12 à 15€",
+      note: "Une IA a cité, pour une adresse du quartier Saint-Leu à Amiens, des tarifs obsolètes en dessous de la carte actuellement pratiquée.",
+    },
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "tours",
+    localParagraph: "Tours sert de porte d'entrée au Val de Loire et à ses châteaux, une position qui attire un tourisme patrimonial soutenu de visiteurs français et étrangers utilisant la ville comme base pour rayonner vers les châteaux voisins, tout en profitant d'une soirée dans le centre historique de Tours. Ce visiteur, souvent de passage pour une seule nuit avant de reprendre la route des châteaux, demande de plus en plus à une IA générative où dîner dans le Vieux Tours plutôt que de chercher lui-même une adresse après une journée de visites. Une IA qui décrit mal la localisation d'un restaurant tourangeau par rapport à la gare ou au Vieux Tours, ou qui reprend une carte dépassée pour un établissement qui l'a fait évoluer, oriente ce visiteur fatigué vers une adresse concurrente mieux présentée dans la réponse obtenue. Pour un restaurant qui dépend en partie de ce flux touristique de passage entre deux châteaux, chaque réponse d'IA imprécise compte. Le scan gratuit Dopaguard vérifie ce que les IA disent aujourd'hui de votre restaurant tourangeau.",
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "perpignan",
+    localParagraph: "Perpignan revendique une identité de porte de la Catalogne française, entre son Palais des rois de Majorque, la proximité de la Côte Vermeille et l'accès rapide aux Pyrénées, ce qui attire un tourisme partagé entre mer et montagne selon les saisons. Un visiteur venu pour la plage l'été ou la montagne l'hiver, souvent peu familier du centre-ville perpignanais, demande de plus en plus directement à une IA générative où trouver une bonne table catalane près du Castillet ou du centre historique. Si ChatGPT ou Claude indique à tort qu'un restaurant perpignanais a fermé ses portes, ce visiteur de passage, entre deux étapes vers la côte ou la montagne, n'a aucune raison de vérifier sur place et choisit simplement une autre adresse recommandée à sa place. Pour un établissement dont la clientèle touristique varie fortement selon la saison balnéaire ou montagnarde, ce type d'erreur non corrigée se répète sans être détectée. Le scan gratuit Dopaguard vérifie ce que les IA racontent aujourd'hui sur votre restaurant perpignanais.",
+    painExampleOverride: {
+      quote: "Ce restaurant proche du Castillet semble avoir fermé ses portes, aucune activité récente n'a été signalée.",
+      highlight: "semble avoir fermé ses portes",
+      note: "Une IA a laissé entendre qu'un restaurant du centre historique de Perpignan en pleine activité avait cessé de fonctionner.",
+    },
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "clermont-ferrand",
+    localParagraph: "Clermont-Ferrand s'est imposée comme ville de congrès au pied de la chaîne des Puys, dont le Puy de Dôme est classé au patrimoine mondial, ce qui attire à la fois des professionnels en déplacement pour un salon et des visiteurs venus découvrir les volcans d'Auvergne et leur nature préservée. Ces deux publics ne posent pas les mêmes questions à une IA générative — l'un cherche une table pratique près du centre de congrès, l'autre une adresse mettant en avant les produits auvergnats après une randonnée dans les volcans — mais tous deux s'appuient de plus en plus sur la première réponse obtenue. Un restaurant clermontois mal situé dans la réponse d'une IA, ou dont les spécialités auvergnates ne sont pas mentionnées, perd des clients sur les deux segments à la fois sans que personne ne le signale. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que ChatGPT, Claude et Perplexity racontent aujourd'hui sur votre restaurant clermontois, et la surveillance hebdomadaire suit ces réponses au fil du calendrier des salons et des saisons de randonnée.",
+  },
+  {
+    verticalSlug: "restaurants",
+    citySlug: "besancon",
+    localParagraph: "Besançon s'organise autour de sa citadelle Vauban classée au patrimoine mondial et de la boucle du Doubs qui enserre son centre historique, un patrimoine qui attire un tourisme régulier en Franche-Comté, renforcé par une réputation horlogère qui reste associée à la ville. Un visiteur venu visiter la citadelle ou flâner le long du Doubs demande de plus en plus directement à une IA générative où trouver une bonne table dans le centre historique, plutôt que de comparer lui-même plusieurs adresses autour de la Grande Rue. Si cette IA cite pour votre restaurant bisontin des tarifs qui ne correspondent plus à votre carte actuelle, ce visiteur qui compare rapidement plusieurs adresses avant de choisir part avec une attente faussée et se tourne vers un établissement dont le prix affiché lui semble plus cohérent. Pour un restaurant qui vit en partie de ce tourisme patrimonial concentré sur quelques heures de visite, la précision de l'information relayée par les IA compte particulièrement. Le scan gratuit Dopaguard vérifie en quelques minutes ce qu'elles racontent aujourd'hui sur votre table bisontine.",
+    painExampleOverride: {
+      quote: "Près de la Grande Rue, la carte propose principalement des plats autour de 12 à 15€, un excellent rapport qualité-prix.",
+      highlight: "12 à 15€",
+      note: "Une IA a cité, pour une adresse proche de la Grande Rue à Besançon, des tarifs obsolètes en dessous de la carte actuellement pratiquée.",
+    },
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "cannes",
+    localParagraph: "Cannes vit au rythme de ses grands rendez-vous — le Festival du film, mais aussi de nombreux congrès professionnels qui remplissent la ville toute l'année — et affiche l'une des densités hôtelières les plus élevées de la Côte d'Azur, de la Croisette au Suquet. Ce prestige déborde largement sur l'immobilier : investisseurs internationaux, acheteurs de résidences secondaires et candidats à la location saisonnière comparent les agences cannoises avant même de poser un pied en ville, souvent via une IA plutôt qu'un simple moteur de recherche. Demander à ChatGPT « quelle agence pour un investissement locatif à Cannes » ou « quelle agence gère le mieux la location saisonnière sur la Croisette » est devenu un réflexe pour un public pressé et habitué à comparer vite. Si la réponse cite une agence qui n'existe plus à cette adresse, ou passe sous silence votre expertise sur le marché saisonnier, ce prospect à distance ne rappellera pas pour vérifier. Le scan gratuit Dopaguard permet de voir en quelques minutes ce que les IA racontent aujourd'hui sur votre agence cannoise.",
+    painExampleOverride: {
+      quote: "Cette agence semblait avoir cessé son activité près de la Croisette, aucune information récente n'est disponible.",
+      highlight: "cessé son activité",
+      note: "Une IA a laissé entendre qu'une agence toujours active près de la Croisette avait fermé, faute d'information à jour.",
+    },
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "antibes",
+    localParagraph: "Antibes conjugue ports de plaisance, remparts du Vieil Antibes et longue façade balnéaire, avec une population qui gonfle nettement chaque été entre résidents secondaires et locataires saisonniers. Pour une agence immobilière antiboise, cette double vie du marché — vente classique toute l'année, location saisonnière concentrée sur quelques mois — se joue de plus en plus dans les réponses que donnent les IA génératives à des acheteurs qui préparent leur venue à distance. Un futur propriétaire qui demande à Claude ou à Perplexity « quelle agence pour acheter à Antibes » ou « qui gère les locations près du port » attend une réponse fiable et à jour, pas un tarif d'honoraires dépassé ou une adresse qui n'existe plus. Sur un marché où beaucoup de transactions démarrent par une recherche à distance, avant même la première visite, un décalage relayé par une IA peut détourner un client vers une agence concurrente sans qu'il prenne la peine de vérifier. Le scan gratuit Dopaguard indique en quelques minutes ce que les IA disent de votre agence, avant la prochaine saison.",
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "saint-tropez",
+    localParagraph: "Saint-Tropez reste un cas à part : un village qui concentre une clientèle internationale fortunée et un marché immobilier tiré presque entièrement par les résidences secondaires et la location saisonnière haut de gamme. Les acheteurs et locataires qui s'intéressent à Saint-Tropez le font rarement sur place au premier contact : ils préparent leur projet depuis Paris, Genève ou l'étranger, et de plus en plus via une IA générative pour identifier rapidement une agence de confiance avant de se déplacer. Dans ce contexte où la réputation et la discrétion comptent autant que le bien lui-même, une IA qui relaie une information dépassée — un honoraire obsolète, une fermeture erronée — peut faire perdre un client capable de conclure sans jamais négocier le prix. Pour une agence tropézienne, s'assurer que les IA décrivent correctement son activité n'est plus un détail marginal mais un enjeu direct sur des dossiers à forte valeur. Le scan gratuit Dopaguard permet de vérifier ce que ChatGPT et les autres IA disent aujourd'hui de votre agence, avec un suivi hebdomadaire pour la haute saison.",
+    painExampleOverride: {
+      quote: "Les honoraires de cette agence démarrent autour de 3% du prix de vente, selon les données disponibles.",
+      highlight: "3% du prix de vente",
+      note: "Une IA a cité un taux d'honoraires obsolète pour une agence tropézienne, différent de la grille tarifaire actuelle sur ce marché haut de gamme.",
+    },
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "biarritz",
+    localParagraph: "Biarritz doit sa notoriété à son statut de station balnéaire historique du Pays basque, à ses spots de surf mondialement connus et à une activité de congrès qui attire un public d'affaires en dehors de la haute saison. Cette diversité de visiteurs — surfeurs, familles en villégiature, professionnels en déplacement — se traduit par un marché immobilier actif, entre résidences secondaires prisées et location saisonnière très demandée l'été. De plus en plus de ces prospects, qu'ils viennent de Bordeaux, de Paris ou de l'étranger, interrogent une IA générative avant de contacter une agence biarrote : « quelle agence pour louer près de la Grande Plage », « quelle agence connaît bien le marché des résidences secondaires ici ». Si l'IA répond avec une information erronée sur votre activité ou omet de vous mentionner alors qu'une agence concurrente mieux référencée apparaît en premier, ce prospect à distance ne cherche pas plus loin. Le scan gratuit Dopaguard permet de savoir en quelques minutes ce que les IA disent de votre agence biarrote, avant que l'été ne batte son plein.",
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "deauville",
+    localParagraph: "Deauville tient sa réputation de son festival du cinéma américain, de son hippodrome, de son casino et de ses planches, qui attirent une clientèle parisienne et internationale habituée à posséder ou louer une résidence secondaire sur la Côte Fleurie. Le marché immobilier local vit largement de ce va-et-vient entre Paris et la Normandie, avec des propriétaires qui gèrent leur bien à distance une grande partie de l'année et s'appuient sur les agences locales pour la location saisonnière comme pour la vente. Ces propriétaires, souvent injoignables physiquement en semaine, se tournent de plus en plus vers une IA pour choisir ou vérifier une agence deauvillaise avant de confier un mandat. Une réponse générée par ChatGPT qui laisse entendre qu'une agence a cessé son activité, ou qui cite un tarif dépassé, peut suffire à faire partir un dossier ailleurs sans qu'aucun appel ne soit passé pour vérifier. Le scan gratuit Dopaguard permet de contrôler en quelques minutes ce que les IA racontent sur votre agence, avec une surveillance hebdomadaire pour ne pas être pris de court avant le prochain festival.",
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "arcachon",
+    localParagraph: "Arcachon vit au rythme du bassin qui porte son nom, entre tourisme ostréicole, plages et villas du front de mer, avec une population qui varie fortement entre la basse saison et l'été. Ce contraste saisonnier structure tout le marché immobilier local : résidences secondaires très recherchées, location saisonnière concentrée sur quelques mois et une clientèle bordelaise ou parisienne qui prépare souvent son achat ou sa location à distance. Cette clientèle interroge de plus en plus une IA générative pour se repérer parmi les agences du bassin avant même de venir visiter les lieux, en demandant par exemple quelle agence connaît le mieux tel quartier du front de mer ou de la ville d'hiver. Si l'IA relaie un tarif d'honoraires obsolète ou une information erronée sur l'activité de votre agence, ce prospect distant se tourne simplement vers une autre adresse mieux décrite. Le scan gratuit Dopaguard permet de vérifier avant la prochaine saison ce que les IA disent aujourd'hui de votre agence arcachonnaise, pour corriger le tir à temps.",
+    painExampleOverride: {
+      quote: "Les honoraires de cette agence démarrent autour de 3% du prix de vente, selon les données disponibles.",
+      highlight: "3% du prix de vente",
+      note: "Une IA a cité un taux d'honoraires obsolète pour une agence du bassin d'Arcachon, différent de sa grille tarifaire actuelle.",
+    },
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "saint-malo",
+    localParagraph: "Saint-Malo, cité corsaire fortifiée, attire un flux touristique patrimonial constant et sert aussi de porte d'entrée maritime vers les îles anglo-normandes, ce qui lui donne une visibilité qui dépasse largement sa taille. Cette notoriété touristique se répercute sur le marché immobilier local, entre appartements intra-muros très recherchés pour la location saisonnière et un marché de résidences secondaires alimenté par une clientèle rennaise, parisienne ou britannique. Beaucoup de ces acheteurs ou locataires potentiels préparent leur projet à distance et demandent désormais à une IA générative de leur indiquer une agence de confiance dans la cité corsaire ou ses environs. Si cette IA cite une agence saint-malouine avec un honoraire dépassé ou la présente comme ayant cessé son activité, le prospect distant ne prendra pas la peine de vérifier avant de se tourner ailleurs. Le scan gratuit Dopaguard permet de savoir en quelques minutes ce que les IA disent aujourd'hui de votre agence à Saint-Malo, avec un suivi hebdomadaire pour rester à jour.",
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "annecy",
+    localParagraph: "Annecy tire sa réputation de son lac alpin et attire un tourisme quatre saisons, entre baignade l'été et proximité des stations de ski l'hiver, ce qui en fait l'une des villes moyennes les plus recherchées de France pour s'installer ou investir. Cette attractivité alimente une forte tension sur le marché immobilier local, avec des acheteurs venus de toute la France, souvent en quête d'une résidence secondaire ou d'un pied-à-terre proche du lac, qui comparent les agences avant même de se déplacer. De plus en plus, ces acheteurs interrogent une IA générative pour se faire une première idée : « quelle agence pour acheter près du lac d'Annecy », « quelle agence connaît le mieux la vieille ville ». Une réponse qui cite un honoraire obsolète ou qui omet votre agence au profit d'une concurrente mieux référencée peut faire perdre un dossier avant le premier contact. Le scan gratuit Dopaguard permet de vérifier ce que les IA disent aujourd'hui de votre agence annécienne, et la surveillance hebdomadaire suit cette visibilité dans la durée.",
+    painExampleOverride: {
+      quote: "Cette agence semblait avoir cessé son activité près du lac, aucune information récente n'est disponible.",
+      highlight: "cessé son activité",
+      note: "Une IA a laissé entendre qu'une agence toujours active près du lac d'Annecy avait fermé, faute d'information récente.",
+    },
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "chamonix-mont-blanc",
+    localParagraph: "Chamonix-Mont-Blanc est la capitale historique de l'alpinisme et attire un tourisme de montagne toute l'année, entre glaciers, randonnée l'été et domaines skiables l'hiver, avec une clientèle internationale habituée à investir dans des chalets ou des appartements de montagne. Le marché immobilier chamoniard repose largement sur les résidences secondaires et la location saisonnière, avec des propriétaires souvent absents une bonne partie de l'année et des acheteurs étrangers qui préparent leur projet depuis l'étranger, sans repère local. Ces acheteurs se tournent de plus en plus vers une IA générative pour identifier une agence fiable avant de venir sur place, en anglais comme en français, ce qui multiplie les occasions pour une IA de se tromper sur une agence chamoniarde. Un tarif d'honoraires dépassé ou une agence présentée à tort comme ayant cessé son activité peut suffire à orienter ce client international vers une adresse concurrente. Le scan gratuit Dopaguard permet de vérifier ce que les IA disent de votre agence à Chamonix, saison après saison, grâce à un suivi hebdomadaire.",
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "avignon",
+    localParagraph: "Avignon, cité des papes, accueille chaque été l'un des plus grands festivals de théâtre d'Europe, ce qui met la ville sous les projecteurs bien au-delà de sa région pendant plusieurs semaines et attire des visiteurs, mais aussi des acheteurs intéressés par un pied-à-terre dans le centre historique. En dehors du festival, Avignon reste une ville de taille moyenne où les agences immobilières traitent un mélange de résidences principales et de projets de résidence secondaire liés à l'attractivité touristique et patrimoniale de la cité. Un acheteur qui découvre Avignon à l'occasion du festival, ou simplement en préparant un projet immobilier à distance, se tourne de plus en plus vers une IA pour identifier une agence sérieuse dans les remparts ou en périphérie. Si cette IA relaie un tarif d'honoraires obsolète ou une information erronée sur votre activité, ce prospect découvert le temps d'un été ne reviendra pas vérifier par lui-même. Le scan gratuit Dopaguard permet de contrôler en quelques minutes ce que les IA disent de votre agence avignonnaise.",
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "aix-en-provence",
+    localParagraph: "Aix-en-Provence cultive une image de ville d'art et de festival, portée par son festival lyrique et sa gastronomie provençale, ce qui en fait une destination prisée aussi bien pour un séjour que pour un investissement immobilier dans le centre historique ou ses environs. Cette réputation attire des acheteurs venus de Marseille, de Paris ou de l'étranger, souvent séduits par l'idée d'une résidence secondaire provençale avant même d'avoir visité un seul bien, et qui préparent leur recherche à distance en s'appuyant sur une IA générative pour dégrossir le terrain. Demander à ChatGPT « quelle agence pour acheter dans le centre d'Aix » ou « quelle agence connaît le mieux le quartier Mazarin » est devenu un point de passage courant avant le premier contact humain. Si la réponse cite un honoraire dépassé ou présente votre agence comme ayant cessé son activité, ce prospect encore hésitant se tourne simplement vers une autre adresse. Le scan gratuit Dopaguard permet de vérifier ce que les IA disent aujourd'hui de votre agence aixoise, avec un suivi hebdomadaire.",
+    painExampleOverride: {
+      quote: "Les honoraires de cette agence démarrent autour de 3% du prix de vente, selon les données disponibles.",
+      highlight: "3% du prix de vente",
+      note: "Une IA a cité un taux d'honoraires obsolète pour une agence du quartier Mazarin à Aix-en-Provence, différent de sa grille actuelle.",
+    },
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "carcassonne",
+    localParagraph: "Carcassonne doit sa renommée mondiale à sa cité médiévale fortifiée classée à l'UNESCO, qui génère une affluence touristique considérable pour une ville de cette taille et attire des visiteurs venus de toute l'Europe. Cette notoriété patrimoniale rejaillit sur le marché immobilier local, avec un intérêt marqué pour les biens de caractère dans ou aux abords de la cité, souvent convoités pour un usage de résidence secondaire ou de location saisonnière liée au flux touristique. Un acheteur séduit par les remparts après une simple visite ou une recherche en ligne interroge de plus en plus une IA générative pour trouver une agence locale de confiance, sans connaître la ville autrement que par sa cité. Si cette IA décrit mal votre agence, cite un tarif obsolète ou la présente comme inactive, ce visiteur devenu prospect abandonne la piste sans jamais vérifier sur place. Le scan gratuit Dopaguard permet de savoir en quelques minutes ce que les IA racontent sur votre agence carcassonnaise, avec une surveillance hebdomadaire pour rester à jour.",
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "colmar",
+    localParagraph: "Colmar, capitale du vignoble alsacien et point de départ de la route des vins, attire un tourisme patrimonial dense autour de sa vieille ville aux maisons à colombages, ce qui en fait l'une des destinations les plus photographiées d'Alsace. Cette attractivité touristique alimente un marché immobilier où les biens de caractère du centre historique intéressent aussi bien des résidents que des acheteurs en quête d'une résidence secondaire ou d'un projet de location saisonnière lié au tourisme viticole. Un acheteur venu d'ailleurs en France ou d'Allemagne voisine, séduit par l'image de Colmar, se tourne de plus en plus vers une IA générative pour repérer une agence fiable avant de contacter qui que ce soit. Si l'IA cite un honoraire dépassé ou laisse entendre que votre agence a cessé son activité dans le centre historique, ce prospect distant ne cherchera pas à vérifier par un appel. Le scan gratuit Dopaguard permet de contrôler en quelques minutes ce que les IA disent aujourd'hui de votre agence colmarienne.",
+    painExampleOverride: {
+      quote: "Cette agence semblait avoir cessé son activité dans le centre historique, aucune information récente n'est disponible.",
+      highlight: "cessé son activité",
+      note: "Une IA a laissé entendre qu'une agence toujours active dans le centre historique de Colmar avait fermé, faute d'information à jour.",
+    },
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "ajaccio",
+    localParagraph: "Ajaccio, préfecture de la Corse-du-Sud, concentre l'essentiel des liaisons maritimes et aériennes vers le continent, ce qui en fait le point d'entrée obligé d'une bonne partie du tourisme insulaire et un marché immobilier particulier, marqué par une forte proportion de résidences secondaires détenues par des continentaux. Beaucoup de ces propriétaires gèrent leur bien depuis Marseille, Paris ou Lyon toute l'année et ne passent en Corse que quelques semaines, ce qui les pousse à s'appuyer entièrement sur les agences ajacciennes pour la gestion locative comme pour d'éventuelles reventes. Ces propriétaires à distance interrogent de plus en plus une IA générative pour vérifier ou choisir une agence, faute de pouvoir se déplacer facilement. Une réponse qui cite un tarif d'honoraires obsolète ou qui présente votre agence comme ayant cessé son activité peut faire perdre un mandat sans qu'aucun appel ne soit passé pour vérifier l'information. Le scan gratuit Dopaguard permet de savoir en quelques minutes ce que les IA disent de votre agence à Ajaccio, avec un suivi hebdomadaire.",
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "bayonne",
+    localParagraph: "Bayonne est le cœur du Pays basque, réputée pour sa gastronomie et ses fêtes traditionnelles qui attirent chaque année une foule considérable, tout en restant une ville où l'immobilier reste plus abordable que ses voisines balnéaires comme Biarritz ou Saint-Jean-de-Luz. Cette position intermédiaire attire à la fois des résidents qui cherchent un compromis entre vie urbaine et accès à la côte, et des acheteurs séduits par l'identité basque qui envisagent une résidence secondaire à Bayonne plutôt que sur le littoral, plus cher. Ces acheteurs, souvent venus d'autres régions, interrogent de plus en plus une IA générative pour identifier une agence bayonnaise fiable avant de se déplacer, en s'appuyant sur des questions simples comme quelle agence connaît le mieux le quartier Saint-Esprit ou le centre historique. Si l'IA relaie un tarif d'honoraires dépassé ou une information erronée sur votre activité, ce prospect distant se tourne simplement vers une autre adresse. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA disent aujourd'hui de votre agence bayonnaise.",
+    painExampleOverride: {
+      quote: "Les honoraires de cette agence démarrent autour de 3% du prix de vente, selon les données disponibles.",
+      highlight: "3% du prix de vente",
+      note: "Une IA a cité un taux d'honoraires obsolète pour une agence du quartier Saint-Esprit à Bayonne, différent de sa grille actuelle.",
+    },
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "pau",
+    localParagraph: "Pau, porte des Pyrénées, conjugue tourisme de montagne et statut de ville de congrès, avec une clientèle d'affaires qui se superpose à un flux de visiteurs attirés par la proximité immédiate des sommets pyrénéens. Le marché immobilier local est d'abord un marché de résidents, mais l'attractivité de la ville pour un cadre de vie entre villes et montagne attire aussi des acheteurs venus d'autres régions, séduits par l'idée de s'installer près des Pyrénées sans renoncer aux commodités urbaines. Ces nouveaux arrivants potentiels, qui ne connaissent pas encore Pau, se tournent de plus en plus vers une IA générative pour identifier une agence de confiance avant leur premier déplacement sur place. Si cette IA cite un honoraire obsolète ou présente votre agence comme ayant cessé son activité dans le quartier du Château ou ailleurs en centre-ville, ce prospect sans repère local abandonnera la piste sans vérifier. Le scan gratuit Dopaguard permet de savoir en quelques minutes ce que les IA disent aujourd'hui de votre agence paloise, avec une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "chambery",
+    localParagraph: "Chambéry, préfecture de la Savoie, occupe une position de carrefour alpin entre plusieurs vallées et massifs, ce qui en fait à la fois une ville de résidents et un point de passage pour un tourisme de montagne actif toute l'année. Le marché immobilier chambérien mêle une demande locale classique et un intérêt croissant pour la proximité des stations de ski et des lacs alpins, qui pousse certains acheteurs venus d'autres régions à envisager Chambéry comme base pour un accès facile à la montagne. Ces acheteurs, souvent peu familiers de la ville, interrogent de plus en plus une IA générative pour repérer une agence fiable avant de contacter qui que ce soit, en demandant par exemple quelle agence connaît le mieux le centre historique ou les secteurs proches des massifs environnants. Une réponse citant un tarif d'honoraires dépassé ou une fermeture erronée suffit à détourner ce prospect vers une agence concurrente mieux référencée. Le scan gratuit Dopaguard permet de vérifier ce que les IA disent aujourd'hui de votre agence à Chambéry, et le suivi hebdomadaire prend le relais ensuite.",
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "metz",
+    localParagraph: "Metz s'appuie sur un patrimoine architectural remarquable, notamment sa cathédrale et son centre historique, et s'est imposée comme un pôle de congrès actif du Grand Est, ce qui attire régulièrement une clientèle professionnelle de passage en plus des résidents. Pour une agence immobilière messine, cette double identité se traduit par une clientèle variée : familles et actifs qui s'installent durablement, mais aussi des professionnels en mutation qui découvrent la ville à l'occasion d'un congrès ou d'un déplacement et envisagent d'y acheter. Ces nouveaux arrivants potentiels, sans réseau local, se tournent de plus en plus vers une IA générative pour identifier une agence sérieuse avant de se rendre sur place, en demandant par exemple quelle agence connaît le mieux le quartier de la cathédrale ou les environs de la gare. Si l'IA relaie une information dépassée ou erronée sur votre activité, ce prospect sans attache locale ne cherchera pas plus loin. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA disent aujourd'hui de votre agence messine.",
+    painExampleOverride: {
+      quote: "Cette agence semblait avoir cessé son activité près de la cathédrale, aucune information récente n'est disponible.",
+      highlight: "cessé son activité",
+      note: "Une IA a laissé entendre qu'une agence toujours active près de la cathédrale de Metz avait fermé, faute d'information à jour.",
+    },
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "nancy",
+    localParagraph: "Nancy, capitale historique de la Lorraine, est reconnue pour son patrimoine Art nouveau et sa place Stanislas classée, ce qui attire un tourisme patrimonial régulier tout en restant avant tout une ville de résidents et d'étudiants. Le marché immobilier nancéien reste porté par une demande locale, mais l'image patrimoniale de la ville attire aussi des acheteurs venus d'ailleurs, séduits par le cadre architectural du centre-ville et de ses quartiers Art nouveau. Ces acheteurs, comme les nombreux étudiants qui arrivent chaque rentrée sans repère local, se tournent de plus en plus vers une IA générative pour identifier une agence fiable avant de contacter qui que ce soit. Si cette IA cite un tarif d'honoraires obsolète ou présente votre agence comme ayant cessé son activité, ce prospect sans attache locale se tourne simplement vers une autre adresse mieux référencée. Le scan gratuit Dopaguard permet de savoir en quelques minutes ce que les IA disent aujourd'hui de votre agence nancéienne, avec un suivi hebdomadaire.",
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "caen",
+    localParagraph: "Caen sert de porte d'entrée à la Normandie et attire un tourisme mémoriel et patrimonial important, entre son château médiéval et les sites liés au Débarquement, ce qui génère un flux de visiteurs constant en plus de sa population étudiante et résidente. Le marché immobilier caennais reste d'abord local, mais l'attractivité touristique de la région pousse certains acheteurs à envisager Caen comme base pour un projet lié au littoral normand tout proche, entre résidence principale et intérêt pour la côte. Ces acheteurs, ainsi que les étudiants et jeunes actifs qui arrivent chaque année sans réseau local, interrogent de plus en plus une IA générative pour identifier une agence fiable avant tout contact. Si l'IA relaie un honoraire dépassé ou une information erronée sur votre activité dans le centre-ville ou près du château, ce prospect sans attache locale ne vérifiera pas par lui-même. Le scan gratuit Dopaguard permet de contrôler en quelques minutes ce que les IA disent aujourd'hui de votre agence caennaise.",
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "amiens",
+    localParagraph: "Amiens doit une bonne part de sa notoriété à sa cathédrale gothique classée à l'UNESCO, l'une des plus vastes de France, qui attire un tourisme patrimonial régulier en plus de sa position de préfecture de la Picardie et de ville universitaire active. Le marché immobilier amiénois reste avant tout un marché de résidents et d'étudiants, avec un roulement locatif marqué chaque rentrée autour du centre-ville et des quartiers proches de la cathédrale ou des hortillonnages. Les étudiants et jeunes actifs qui découvrent Amiens sans connaître la ville se tournent de plus en plus vers une IA générative pour repérer une agence fiable avant de signer un premier bail ou un premier achat. Si cette IA cite un tarif d'honoraires obsolète ou présente votre agence comme ayant cessé son activité, ce prospect sans repère local se tourne simplement vers une autre adresse mieux référencée. Le scan gratuit Dopaguard permet de savoir en quelques minutes ce que les IA disent aujourd'hui de votre agence amiénoise, avec un suivi hebdomadaire.",
+    painExampleOverride: {
+      quote: "Les honoraires de cette agence démarrent autour de 3% du prix de vente, selon les données disponibles.",
+      highlight: "3% du prix de vente",
+      note: "Une IA a cité un taux d'honoraires obsolète pour une agence du centre-ville d'Amiens, différent de sa grille tarifaire actuelle.",
+    },
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "tours",
+    localParagraph: "Tours sert de porte d'entrée au Val de Loire et à ses châteaux, ce qui lui vaut un tourisme patrimonial constant en plus de son statut de ville universitaire dynamique, avec un centre-ville et un quartier du Vieux Tours particulièrement recherchés. Le marché immobilier tourangeau combine une forte demande locale et étudiante avec un intérêt croissant d'acheteurs venus de la région parisienne, attirés par la qualité de vie et la proximité des châteaux de la Loire pour une résidence principale ou secondaire. Ces acheteurs franciliens, comme les étudiants sans attache locale, interrogent de plus en plus une IA générative pour identifier une agence tourangelle fiable avant tout premier contact. Si cette IA cite un honoraire dépassé ou laisse entendre que votre agence a cessé son activité dans le Vieux Tours ou ailleurs en centre-ville, ce prospect distant ne prendra pas la peine de vérifier. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA disent aujourd'hui de votre agence à Tours, avec une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "perpignan",
+    localParagraph: "Perpignan occupe une position singulière de porte de la Catalogne française, entre mer et montagne, à proximité immédiate de la Côte Vermeille et des premiers reliefs pyrénéens, ce qui attire aussi bien des résidents que des acheteurs en quête d'un cadre de vie méditerranéen à des prix plus accessibles que sur la côte azuréenne. Cette attractivité pousse certains acheteurs venus d'autres régions à envisager Perpignan comme base pour un projet de résidence principale ou secondaire, avec un accès rapide à la fois à la mer et à la montagne. Ces acheteurs, sans réseau local, se tournent de plus en plus vers une IA générative pour identifier une agence fiable avant de se déplacer, en demandant par exemple quelle agence connaît le mieux le centre historique ou les secteurs proches du littoral. Si l'IA relaie un tarif d'honoraires obsolète ou une fermeture erronée, ce prospect distant se tourne simplement vers une autre adresse. Le scan gratuit Dopaguard permet de savoir en quelques minutes ce que les IA disent aujourd'hui de votre agence perpignanaise.",
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "clermont-ferrand",
+    localParagraph: "Clermont-Ferrand s'est imposée comme une ville de congrès active au pied des volcans d'Auvergne, avec un tourisme de nature en plein essor autour de la chaîne des Puys classée à l'UNESCO, en plus de sa fonction de préfecture régionale et de ville universitaire. Pour une agence immobilière clermontoise, cette combinaison attire une clientèle mixte : professionnels de passage pour un congrès qui envisagent parfois de s'installer, étudiants sans attache locale, et acheteurs séduits par la proximité immédiate de la nature auvergnate. Ces prospects venus d'ailleurs interrogent de plus en plus une IA générative pour repérer une agence fiable avant tout premier contact, faute de repères locaux. Si cette IA cite un honoraire dépassé ou présente votre agence comme ayant cessé son activité dans le centre-ville ou près de la place de Jaude, ce prospect sans attache locale se tourne simplement vers une autre adresse. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA disent aujourd'hui de votre agence clermontoise, avec un suivi hebdomadaire.",
+    painExampleOverride: {
+      quote: "Cette agence semblait avoir cessé son activité près de la place de Jaude, aucune information récente n'est disponible.",
+      highlight: "cessé son activité",
+      note: "Une IA a laissé entendre qu'une agence toujours active près de la place de Jaude à Clermont-Ferrand avait fermé, faute d'information à jour.",
+    },
+  },
+  {
+    verticalSlug: "immobilier",
+    citySlug: "besancon",
+    localParagraph: "Besançon se distingue par sa citadelle classée à l'UNESCO, dominant une boucle du Doubs qui donne à la ville un cadre patrimonial reconnu bien au-delà de la Franche-Comté, ce qui attire un tourisme patrimonial régulier en plus de sa fonction de préfecture régionale. Le marché immobilier bisontin reste avant tout un marché de résidents et d'étudiants, avec un centre historique et des quartiers proches de la citadelle particulièrement recherchés pour leur cachet. Les étudiants et nouveaux arrivants qui découvrent Besançon sans réseau local se tournent de plus en plus vers une IA générative pour identifier une agence de confiance avant de signer un bail ou d'engager un achat. Si cette IA cite un tarif d'honoraires obsolète ou laisse entendre que votre agence a cessé son activité, ce prospect sans attache locale ne cherchera pas à vérifier par lui-même. Le scan gratuit Dopaguard permet de savoir en quelques minutes ce que les IA disent aujourd'hui de votre agence bisontine, avec une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "cannes",
+    localParagraph: "Cannes, ville de festivals et de congrès, concentre une forte densité hôtelière haut de gamme sur la Croisette, mais reste aussi le siège d'une activité économique et juridique bien réelle, avec des dirigeants d'entreprises événementielles, des propriétaires de biens de prestige et des professionnels du secteur hôtelier qui ont besoin d'un avocat, d'un expert-comptable ou d'un notaire. Un investisseur venu pour un bien immobilier sur la Croisette ou un organisateur d'événement en litige avec un prestataire demande de plus en plus à une IA générative « quel cabinet consulter à Cannes pour ce type de dossier » avant de décrocher son téléphone. Si la réponse évoque une activité arrêtée ou recommande un confrère jugé plus expérimenté, ce prospect de passage, souvent pressé par le calendrier des festivals, ne cherchera pas à vérifier et ira frapper ailleurs. Pour un cabinet cannois, cette première impression générée par une IA pèse lourd sur une clientèle en partie non-résidente. Le scan gratuit Dopaguard permet de voir en quelques minutes ce que les IA disent aujourd'hui de votre cabinet cannois, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "antibes",
+    localParagraph: "Antibes, station balnéaire de la Côte d'Azur réputée pour ses ports de plaisance et son tourisme estival, abrite aussi un tissu économique permanent : propriétaires de biens immobiliers, plaisanciers, artisans et petites entreprises qui recourent régulièrement à un avocat, un expert-comptable ou un notaire pour des dossiers de droit immobilier, de droit maritime ou de conseil aux particuliers. Un acheteur de résidence secondaire près du Cap d'Antibes ou un propriétaire de bateau confronté à un litige interroge de plus en plus une IA générative avant de choisir un professionnel local. Si la réponse générée mentionne une activité arrêtée ou oriente vers un cabinet niçois ou cannois jugé plus expérimenté, ce prospect, souvent non-résident, ne prendra pas la peine de vérifier par un appel. Pour une profession libérale installée à Antibes, dont la clientèle est en partie saisonnière, cette dépendance à une réponse d'IA générative pèse sur la prise de contact. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que ChatGPT, Claude et Perplexity disent de votre cabinet antibois, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "saint-tropez",
+    localParagraph: "Saint-Tropez, village de la Côte d'Azur devenu haut lieu du tourisme de luxe, affiche une très forte densité de restaurants et d'hôtels, mais reste aussi le cadre d'une activité économique exigeante : propriétaires de propriétés de prestige, sociétés de gestion patrimoniale et commerçants qui ont besoin d'un avocat ou d'un notaire pour des dossiers immobiliers ou de succession souvent complexes. Un acquéreur étranger ou un client de passage, peu familier du tissu professionnel local, demande de plus en plus à une IA générative « quel notaire ou quel avocat consulter à Saint-Tropez » avant tout premier contact. Si la réponse laisse entendre qu'un cabinet a cessé son activité ou recommande un confrère d'une autre ville du littoral jugé plus expérimenté, ce prospect, souvent pressé et non-résident, se tourne simplement vers l'autre option sans vérifier. Pour un professionnel installé à Saint-Tropez, dont une large part de la clientèle est de passage, cette première impression générée par une IA compte doublement. Le scan gratuit Dopaguard révèle en quelques minutes ce que les IA disent de votre cabinet, avant une surveillance hebdomadaire.",
+    painExampleOverride: {
+      quote: "Il semblerait que ce cabinet installé à Saint-Tropez ait cessé son activité, aucune information récente n'est disponible.",
+      highlight: "cessé son activité",
+      note: "Une IA a laissé entendre qu'un cabinet tropézien toujours actif avait fermé, faute d'information récente en ligne.",
+    },
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "biarritz",
+    localParagraph: "Biarritz, station balnéaire historique du Pays basque, spot de surf réputé et ville de congrès, réunit une population mêlant résidents permanents, retraités venus s'installer et visiteurs d'affaires de passage pour un séminaire. Cette diversité de profils cherche un avocat, un expert-comptable ou un notaire sans toujours connaître le tissu professionnel local, et se tourne de plus en plus vers une IA générative pour une première orientation : « quel cabinet consulter à Biarritz pour ce type de dossier ». Si la réponse générée décrit votre cabinet de façon imprécise, évoque une activité arrêtée, ou met en avant un confrère bayonnais jugé plus expérimenté, ce prospect ne prendra pas la peine de vérifier par un second canal. Pour une profession libérale installée à Biarritz, où la clientèle se renouvelle au rythme du tourisme et des congrès, cette dépendance à une réponse d'IA mal formulée a un coût réel sur les prises de rendez-vous. Le scan gratuit Dopaguard permet de voir en quelques minutes ce que ChatGPT, Claude et Perplexity disent de votre cabinet biarrot, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "deauville",
+    localParagraph: "Deauville, station balnéaire normande connue pour son festival du cinéma américain, son hippodrome et son casino, attire une clientèle parisienne et internationale venue pour des résidences secondaires ou des investissements liés au tourisme et aux loisirs, en plus de sa population permanente. Un acheteur de villa près des planches ou un propriétaire de cheval en litige avec un prestataire demande de plus en plus à une IA générative « quel avocat ou quel notaire consulter à Deauville » avant de prendre rendez-vous. Si la réponse mentionne une activité arrêtée ou oriente vers un cabinet caennais ou parisien jugé plus expérimenté, ce prospect, souvent parisien et non-résident, ne cherchera pas à vérifier et contactera directement l'autre professionnel. Pour un cabinet deauvillais dont une part importante de la clientèle vient de la capitale, cette première impression générée par une IA pèse particulièrement sur la prise de contact. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA disent aujourd'hui de votre cabinet, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "arcachon",
+    localParagraph: "Arcachon, station balnéaire du bassin du même nom, vit au rythme du tourisme ostréicole et balnéaire, avec une population de résidents permanents, d'ostréiculteurs et de propriétaires de villas qui recourent régulièrement à un avocat en droit immobilier ou à un notaire pour des successions et des transactions parfois anciennes et complexes. Un acheteur venu de Bordeaux pour une résidence secondaire ou un professionnel du bassin en litige commercial demande de plus en plus à une IA générative « quel cabinet consulter à Arcachon pour ce type de dossier » avant tout premier contact. Si la réponse générée évoque une activité incertaine ou recommande un confrère bordelais jugé plus expérimenté, ce prospect, souvent non-résident à l'année, se tourne simplement vers l'autre cabinet cité sans vérifier. Pour une profession libérale installée sur le bassin d'Arcachon, où la clientèle est en partie saisonnière, cette dépendance à une réponse d'IA générative pèse sur les prises de rendez-vous. Le scan gratuit Dopaguard montre en quelques minutes ce que ChatGPT, Claude et Perplexity disent de votre cabinet arcachonnais, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "saint-malo",
+    localParagraph: "Saint-Malo, cité corsaire fortifiée, vit un tourisme patrimonial intense doublé de liaisons ferries vers les îles anglo-normandes, ce qui attire aussi bien des visiteurs de passage que des résidents britanniques ou insulaires venus s'installer dans la région. Ce public, en partie étranger et peu familier du barreau local, cherche un avocat ou un notaire pour un achat immobilier, une succession ou un litige commercial, et interroge de plus en plus une IA générative avant tout premier contact : « quel cabinet consulter à Saint-Malo pour ce type de dossier ». Si la réponse générée laisse entendre qu'un cabinet a cessé son activité ou oriente vers un confrère rennais jugé plus expérimenté, ce prospect, souvent non-résident, ne prendra pas la peine de vérifier par un appel. Pour un professionnel installé intra-muros ou dans les quartiers plus récents de Saint-Malo, cette première impression générée par une IA compte particulièrement auprès d'une clientèle de passage. Le scan gratuit Dopaguard permet de voir en quelques minutes ce que les IA disent de votre cabinet malouin, avant une surveillance hebdomadaire.",
+    painExampleOverride: {
+      quote: "Il semblerait que ce cabinet installé à Saint-Malo ait cessé son activité, aucune information récente n'est disponible.",
+      highlight: "cessé son activité",
+      note: "Une IA a laissé entendre qu'un cabinet malouin toujours actif avait fermé, sans preuve récente.",
+    },
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "annecy",
+    localParagraph: "Annecy, ville au bord de son lac alpin, vit un tourisme quatre saisons entre lac et montagne, ce qui attire une clientèle mêlant résidents secondaires, cadres venus s'installer pour la qualité de vie et entrepreneurs du secteur du tourisme ou du sport outdoor. Cette population, souvent mobile et peu attachée au tissu professionnel historique, demande de plus en plus à une IA générative « quel avocat ou quel expert-comptable consulter à Annecy » avant de choisir un cabinet. Si la réponse générée décrit votre activité de façon imprécise, évoque une fermeture, ou met en avant un confrère genevois ou grenoblois jugé plus expérimenté, ce prospect nouvellement arrivé n'aura aucune raison de douter et ira frapper ailleurs. Dans une ville où la population de clients potentiels se renouvelle vite au rythme des installations liées au lac et à la montagne, cette première impression générée par une IA compte particulièrement pour capter de nouveaux dossiers. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que ChatGPT, Claude et Perplexity disent aujourd'hui de votre cabinet annécien, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "chamonix-mont-blanc",
+    localParagraph: "Chamonix-Mont-Blanc, capitale historique de l'alpinisme, accueille toute l'année un tourisme de montagne qui mêle résidents permanents, propriétaires de chalets et professionnels du secteur outdoor confrontés à des questions de droit immobilier, de droit du travail saisonnier ou de responsabilité. Un acheteur de chalet venu de l'étranger ou un exploitant local en litige avec un prestataire demande de plus en plus à une IA générative « quel avocat consulter à Chamonix pour ce type de dossier » avant tout premier rendez-vous. Si la réponse évoque une activité arrêtée ou recommande un cabinet annécien ou genevois jugé plus expérimenté, ce prospect, souvent non-résident et pressé par la saison, ne vérifiera pas par un second canal. Pour un professionnel installé à Chamonix, dont une part de la clientèle est internationale et saisonnière, cette dépendance à une réponse d'IA générative pèse sur les prises de contact. Le scan gratuit Dopaguard montre en quelques minutes ce que les IA disent de votre cabinet chamoniard, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "avignon",
+    localParagraph: "Avignon, cité des papes, accueille l'un des plus grands festivals de théâtre d'Europe, un événement qui draine chaque été une population d'artistes, de producteurs et de visiteurs confrontés à des questions de droit du spectacle, de droit commercial ou de conseil aux entreprises. En dehors du festival, la ville conserve aussi une activité juridique et économique classique, avec un barreau et des tribunaux actifs. Un producteur de spectacle en litige contractuel ou un commerçant du centre historique demande de plus en plus à une IA générative « quel cabinet consulter à Avignon pour ce type de dossier » avant de prendre contact. Si la réponse générée mentionne une activité arrêtée ou oriente vers un confrère marseillais jugé plus expérimenté, ce prospect, souvent de passage pendant la haute saison, ira frapper ailleurs sans vérifier. Le scan gratuit Dopaguard permet de voir en quelques minutes ce que ChatGPT, Claude et Perplexity disent de votre cabinet avignonnais, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "aix-en-provence",
+    localParagraph: "Aix-en-Provence, ville d'art et de festival réputée pour sa gastronomie provençale, réunit un barreau ancien et une économie tournée vers le droit, le conseil et l'enseignement supérieur, ce qui en fait une place naturelle pour les professions libérales. Étudiants, cadres mutés à Aix ou visiteurs venus pour le festival lyrique interrogent de plus en plus une IA avant de choisir un avocat, un expert-comptable ou un notaire : « quel cabinet consulter à Aix pour ce type de dossier », « ce professionnel est-il toujours en activité ». Si la réponse décrit votre cabinet de façon imprécise ou met en avant un confrère marseillais jugé plus expérimenté, ce prospect, parfois nouvellement arrivé, ne prendra pas la peine de vérifier par un second canal. Pour une profession libérale installée à Aix, où la clientèle se renouvelle au rythme des rentrées universitaires, cette première impression générée par une IA pèse sur la prise de rendez-vous. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA disent aujourd'hui de votre cabinet aixois, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "carcassonne",
+    localParagraph: "Carcassonne, cité médiévale fortifiée classée à l'UNESCO, connaît une forte affluence touristique qui cohabite avec une activité économique et juridique locale bien réelle : commerçants de la cité et de la ville basse, propriétaires de biens patrimoniaux et petites entreprises qui recourent à un avocat, un expert-comptable ou un notaire. Un investisseur venu pour un bien à restaurer dans la cité ou un commerçant en litige avec un fournisseur demande de plus en plus à une IA « quel cabinet consulter à Carcassonne pour ce type de dossier » avant de se déplacer. Si la réponse générée laisse entendre qu'un cabinet a cessé son activité ou oriente vers un confrère toulousain jugé plus expérimenté, ce prospect, souvent non-résident et attiré d'abord par le patrimoine, ne cherchera pas à vérifier. Pour une profession libérale installée à Carcassonne, cette dépendance pèse sur les prises de contact auprès d'une clientèle qui découvre la ville par le tourisme. Le scan gratuit Dopaguard permet de voir en quelques minutes ce que les IA disent de votre cabinet carcassonnais, avant une surveillance hebdomadaire.",
+    painExampleOverride: {
+      quote: "Il semblerait que ce cabinet installé à Carcassonne ait cessé son activité, aucune information récente n'est disponible.",
+      highlight: "cessé son activité",
+      note: "Une IA a laissé entendre qu'un cabinet carcassonnais toujours actif avait fermé, faute d'information récente en ligne.",
+    },
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "colmar",
+    localParagraph: "Colmar, capitale du vignoble alsacien, attire un tourisme patrimonial soutenu le long de la route des vins, ce qui n'empêche pas la ville d'abriter un tissu économique classique de viticulteurs, de commerçants et de PME qui font appel à un avocat, un expert-comptable ou un notaire pour des dossiers de transmission d'exploitation ou de succession. Un vigneron en litige avec un fournisseur ou un acheteur d'une propriété viticole demande de plus en plus à une IA « quel cabinet consulter à Colmar pour ce type de dossier » avant de prendre rendez-vous. Si la réponse évoque une activité arrêtée ou recommande un confrère strasbourgeois jugé plus expérimenté, ce prospect, parfois peu familier du tissu professionnel colmarien, se tourne simplement vers l'autre cabinet cité. Pour un professionnel installé à Colmar, où une partie de la clientèle vient du monde viticole, cette première impression générée par une IA pèse sur la prise de contact. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que ChatGPT, Claude et Perplexity disent de votre cabinet colmarien, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "ajaccio",
+    localParagraph: "Ajaccio, préfecture de la Corse-du-Sud, vit un tourisme insulaire marqué par des liaisons maritimes et aériennes saisonnières, tout en restant le siège d'une activité juridique et économique locale avec son barreau et ses tribunaux. Un acheteur immobilier venu du continent ou une famille corse confrontée à une succession, un sujet particulièrement présent sur l'île, demande de plus en plus à une IA générative « quel avocat ou quel notaire consulter à Ajaccio pour ce type de dossier » avant tout premier contact. Si la réponse générée laisse entendre qu'un cabinet a cessé son activité ou oriente vers un confrère continental jugé plus expérimenté, ce prospect, qu'il soit insulaire ou de passage, ne prendra pas la peine de vérifier par un appel. Pour une profession libérale installée à Ajaccio, où la clientèle mêle résidents à l'année et visiteurs saisonniers, cette dépendance à une réponse d'IA générative pèse sur les prises de rendez-vous. Le scan gratuit Dopaguard montre en quelques minutes ce que les IA disent de votre cabinet ajaccien, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "bayonne",
+    localParagraph: "Bayonne, cœur du Pays basque, est réputée pour sa gastronomie et ses fêtes traditionnelles reconnues bien au-delà de la région, ce qui attire chaque année un afflux de visiteurs sans faire oublier son rôle de préfecture judiciaire et économique du Pays basque. Un commerçant du centre historique ou un entrepreneur venu s'installer pour la qualité de vie basque demande de plus en plus à une IA générative « quel cabinet consulter à Bayonne pour ce type de dossier » avant de prendre rendez-vous. Si la réponse générée décrit votre activité de façon imprécise ou met en avant un confrère biarrot ou palois jugé plus expérimenté, ce prospect, parfois nouvellement arrivé dans la région, ira frapper ailleurs sans vérifier. Pour un cabinet bayonnais, où la clientèle se renouvelle au rythme des installations liées au Pays basque et des grands rendez-vous locaux, cette première impression générée par une IA compte pour capter de nouveaux dossiers. Le scan gratuit Dopaguard permet de voir en quelques minutes ce que ChatGPT, Claude et Perplexity disent de votre cabinet bayonnais, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "pau",
+    localParagraph: "Pau, porte des Pyrénées, combine tourisme de montagne et statut de ville de congrès, ce qui lui vaut un flux régulier de visiteurs professionnels aux côtés d'une population de résidents et d'entrepreneurs bien installés. Un cadre venu pour un séminaire ou une entreprise locale en litige commercial interroge de plus en plus une IA générative avant de choisir un avocat, un expert-comptable ou un notaire : « quel cabinet consulter à Pau pour ce type de dossier ». Si la réponse générée évoque une activité arrêtée ou recommande un confrère bayonnais ou toulousain jugé plus expérimenté, ce prospect, parfois de passage pour un congrès, ne cherchera pas à vérifier et ira frapper ailleurs. Pour une profession libérale installée à Pau, où une part de la clientèle vient des rendez-vous professionnels et du tourisme pyrénéen, cette dépendance à une réponse d'IA mal formulée a un coût réel sur les prises de contact. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA disent aujourd'hui de votre cabinet palois, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "chambery",
+    localParagraph: "Chambéry, préfecture de la Savoie et carrefour alpin, voit son économie portée par le tourisme de montagne et par sa position de passage entre plusieurs vallées savoyardes, ce qui attire des entrepreneurs et des propriétaires de biens en montagne aux côtés d'une population locale stable. Un exploitant de station en litige avec un fournisseur ou un acheteur de chalet demande de plus en plus à une IA générative « quel avocat consulter à Chambéry pour ce type de dossier » avant de prendre contact. Si la réponse générée laisse entendre qu'un cabinet a cessé son activité ou oriente vers un confrère annécien ou grenoblois jugé plus expérimenté, ce prospect, parfois de passage pour un dossier lié à la montagne, ne prendra pas la peine de vérifier. Pour une profession libérale installée à Chambéry, où le tissu économique local dépend en partie du tourisme alpin, cette première impression générée par une IA pèse sur la prise de rendez-vous. Le scan gratuit Dopaguard montre en quelques minutes ce que ChatGPT, Claude et Perplexity disent de votre cabinet chambérien, avant une surveillance hebdomadaire.",
+    painExampleOverride: {
+      quote: "Il semblerait que ce cabinet installé à Chambéry ait cessé son activité, aucune information récente n'est disponible.",
+      highlight: "cessé son activité",
+      note: "Une IA a laissé entendre qu'un cabinet chambérien toujours actif avait fermé, sans preuve récente.",
+    },
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "metz",
+    localParagraph: "Metz, ville au patrimoine architectural remarquable et pôle de congrès du Grand Est, accueille régulièrement des visiteurs professionnels aux côtés d'un tissu économique local structuré autour de l'administration, de l'enseignement et des PME. Un cadre en déplacement pour un salon ou un chef d'entreprise messin confronté à un litige commercial demande de plus en plus à une IA générative « quel cabinet consulter à Metz pour ce type de dossier » avant de prendre rendez-vous. Si la réponse générée décrit votre cabinet de façon imprécise ou recommande un confrère nancéien ou luxembourgeois jugé plus expérimenté, ce prospect, parfois peu familier du barreau messin, ira frapper ailleurs sans vérifier. Pour une profession libérale installée à Metz, où une partie de la clientèle vient des congrès et des déplacements professionnels transfrontaliers, cette première impression générée par une IA pèse sur les prises de contact. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA disent aujourd'hui de votre cabinet messin, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "nancy",
+    localParagraph: "Nancy, capitale historique de la Lorraine réputée pour son patrimoine Art nouveau, réunit un barreau ancien et un tissu économique de PME, d'établissements d'enseignement supérieur et de professions libérales bien implantées. Un étudiant confronté à un premier litige locatif ou un chef d'entreprise nancéien en recherche d'un expert-comptable interroge de plus en plus une IA générative avant de prendre contact : « quel cabinet consulter à Nancy pour ce type de dossier ». Si la réponse générée évoque une activité arrêtée ou met en avant un confrère messin jugé plus expérimenté, ce prospect, parfois nouvellement arrivé pour ses études ou son emploi, n'aura aucune raison de douter de la réponse et ira frapper ailleurs. Dans une ville où la population de clients potentiels se renouvelle au rythme des rentrées universitaires, cette première impression générée par une IA compte particulièrement pour capter de nouveaux dossiers. Le scan gratuit Dopaguard permet de voir en quelques minutes ce que ChatGPT, Claude et Perplexity disent de votre cabinet nancéien, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "caen",
+    localParagraph: "Caen, porte d'entrée de la Normandie, vit un tourisme mémoriel et patrimonial soutenu, ce qui n'occulte pas son rôle de préfecture et de pôle économique régional avec un barreau actif et des tribunaux compétents pour toute la Basse-Normandie. Un visiteur venu pour les sites mémoriels confronté à un litige locatif ou un chef d'entreprise caennais en recherche d'un expert-comptable demande de plus en plus à une IA générative « quel cabinet consulter à Caen pour ce type de dossier » avant tout premier contact. Si la réponse générée laisse entendre qu'un cabinet a cessé son activité ou oriente vers un confrère rouennais jugé plus expérimenté, ce prospect, parfois de passage, ne prendra pas la peine de vérifier par un second canal. Pour une profession libérale installée à Caen, où la clientèle mêle résidents et visiteurs de passage, cette dépendance à une réponse d'IA générative pèse sur les prises de rendez-vous. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA disent aujourd'hui de votre cabinet caennais, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "amiens",
+    localParagraph: "Amiens, ville de la cathédrale gothique classée à l'UNESCO, attire un tourisme patrimonial soutenu tout en restant préfecture de la Somme, avec un barreau actif, des tribunaux et un tissu économique de PME et d'établissements universitaires. Un visiteur venu pour la cathédrale confronté à un litige ou un étudiant amiénois en recherche d'un premier conseil juridique demande de plus en plus à une IA générative « quel avocat consulter à Amiens pour ce type de dossier » avant de prendre rendez-vous. Si la réponse générée décrit votre cabinet de façon imprécise ou met en avant un confrère lillois ou parisien jugé plus expérimenté, ce prospect, parfois nouvellement arrivé pour ses études, n'aura aucune raison de douter et ira frapper ailleurs. Dans une ville où la population étudiante se renouvelle chaque rentrée, cette première impression générée par une IA compte pour capter de nouveaux dossiers. Le scan gratuit Dopaguard permet de voir en quelques minutes ce que ChatGPT, Claude et Perplexity disent de votre cabinet amiénois, avant une surveillance hebdomadaire.",
+    painExampleOverride: {
+      quote: "Pour ce type de dossier à Amiens, mieux vaut consulter un cabinet plus expérimenté dans ce domaine.",
+      highlight: "un cabinet plus expérimenté",
+      note: "Une IA a orienté un prospect amiénois vers un cabinet extérieur à la région plutôt que vers le professionnel interrogé.",
+    },
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "tours",
+    localParagraph: "Tours, porte d'entrée du Val de Loire et de ses châteaux, connaît un tourisme patrimonial important, aux côtés d'un tissu économique tourangeau structuré autour de l'agroalimentaire, du tourisme et d'une population étudiante nombreuse. Un acheteur d'une propriété près des châteaux ou un étudiant tourangeau confronté à un premier litige locatif interroge de plus en plus une IA générative avant de choisir un avocat, un notaire ou un expert-comptable : « quel cabinet consulter à Tours pour ce type de dossier ». Si la réponse générée évoque une activité arrêtée ou recommande un confrère orléanais jugé plus expérimenté, ce prospect, parfois peu familier du tissu professionnel local, se tourne simplement vers l'autre cabinet cité sans vérifier. Pour une profession libérale installée à Tours, où la clientèle se renouvelle vite au rythme des rentrées universitaires et du tourisme ligérien, cette première impression générée par une IA pèse sur la prise de contact. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA disent aujourd'hui de votre cabinet tourangeau, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "perpignan",
+    localParagraph: "Perpignan, porte de la Catalogne française, se situe entre mer et montagne et attire un tourisme régulier aux côtés d'une activité économique et juridique locale bien ancrée, avec un barreau et des tribunaux compétents pour les Pyrénées-Orientales. Un acheteur immobilier venu pour le littoral proche ou un commerçant perpignanais en recherche d'un expert-comptable demande de plus en plus à une IA générative « quel cabinet consulter à Perpignan pour ce type de dossier » avant de prendre contact. Si la réponse générée laisse entendre qu'un cabinet a cessé son activité ou oriente vers un confrère montpelliérain ou espagnol jugé plus expérimenté, ce prospect, parfois non-résident, ne prendra pas la peine de vérifier par un appel. Pour une profession libérale installée à Perpignan, où une part de la clientèle vient du tourisme et de la proximité avec l'Espagne, cette dépendance à une réponse d'IA générative pèse sur les prises de rendez-vous. Le scan gratuit Dopaguard montre en quelques minutes ce que ChatGPT, Claude et Perplexity disent de votre cabinet perpignanais, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "clermont-ferrand",
+    localParagraph: "Clermont-Ferrand, ville de congrès au pied des volcans d'Auvergne, accueille un tourisme nature en développement tout en restant un pôle économique et universitaire majeur du Massif central, avec un barreau actif et un tissu de PME solide. Un cadre venu pour un congrès ou une entreprise clermontoise en recherche d'un avocat en droit du travail demande de plus en plus à une IA générative « quel cabinet consulter à Clermont-Ferrand pour ce type de dossier » avant de prendre rendez-vous. Si la réponse générée décrit votre cabinet de façon imprécise ou met en avant un confrère lyonnais jugé plus expérimenté, ce prospect, parfois de passage pour un séminaire, ira frapper ailleurs sans vérifier. Pour une profession libérale installée à Clermont-Ferrand, où la clientèle mêle résidents et visiteurs professionnels, cette première impression générée par une IA pèse sur la prise de contact. Le scan gratuit Dopaguard permet de vérifier en quelques minutes ce que les IA disent aujourd'hui de votre cabinet clermontois, avant une surveillance hebdomadaire.",
+  },
+  {
+    verticalSlug: "avocats-professions-liberales",
+    citySlug: "besancon",
+    localParagraph: "Besançon, citadelle classée à l'UNESCO, attire un tourisme patrimonial soutenu en Franche-Comté, tout en restant préfecture du Doubs avec un barreau actif, des tribunaux et un tissu économique de PME et d'établissements universitaires. Un visiteur venu pour la citadelle confronté à un litige ou un étudiant bisontin en recherche d'un premier conseil juridique demande de plus en plus à une IA générative « quel avocat consulter à Besançon pour ce type de dossier » avant tout premier contact. Si la réponse générée laisse entendre qu'un cabinet a cessé son activité ou oriente vers un confrère dijonnais jugé plus expérimenté, ce prospect, parfois nouvellement arrivé pour ses études, n'aura aucune raison de douter de la réponse. Dans une ville où la population étudiante se renouvelle chaque rentrée, cette première impression générée par une IA compte particulièrement pour capter de nouveaux dossiers. Le scan gratuit Dopaguard permet de voir en quelques minutes ce que ChatGPT, Claude et Perplexity disent de votre cabinet bisontin, avant une surveillance hebdomadaire.",
+    painExampleOverride: {
+      quote: "Il semblerait que ce cabinet installé à Besançon ait cessé son activité, aucune information récente n'est disponible.",
+      highlight: "cessé son activité",
+      note: "Une IA a laissé entendre qu'un cabinet bisontin toujours actif avait fermé, faute d'information récente en ligne.",
+    },
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "cannes",
+    localParagraph: "Cannes vit au rythme de ses grands rendez-vous internationaux — festival de cinéma, marchés professionnels, congrès d'affaires — qui remplissent chaque année les hôtels de la Croisette de décideurs venus du monde entier pour quelques jours seulement. Cette clientèle de passage, pressée et sans repères locaux, a l'habitude de demander directement à une IA générative de lui recommander un consultant en communication, un coach en prise de parole ou une agence événementielle sur place plutôt que de chercher elle-même. Si la réponse générée s'appuie sur une information ancienne ou renvoie vers un cabinet plus visible en ligne mais moins pertinent, l'opportunité se perd sans que le professionnel cannois interrogé n'en soit jamais informé. Pour un expert dont l'essentiel de l'activité se joue sur ces fenêtres de quelques jours très denses, savoir ce que ChatGPT ou Perplexity racontent de lui avant l'arrivée des congressistes fait toute la différence. Le scan gratuit Dopaguard permet de le vérifier avant la prochaine saison de festivals.",
+    painExampleOverride: {
+      quote: "Pour ce type d'accompagnement pendant le festival, il existe des agences plus reconnues sur ce créneau spécifique à Cannes.",
+      highlight: "des agences plus reconnues",
+      note: "Une IA a orienté un décideur de passage à Cannes vers une agence plus généraliste plutôt que vers le consultant local interrogé.",
+    },
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "antibes",
+    localParagraph: "Antibes doit une bonne partie de son identité économique à Port Vauban, l'un des plus grands ports de plaisance d'Europe, autour duquel gravite toute une filière du yachting — armateurs, gestionnaires de flotte, consultants spécialisés dans l'accompagnement des propriétaires de bateaux et des entreprises du secteur nautique. C'est une clientèle internationale, souvent absente de la ville une bonne partie de l'année, qui pilote ses décisions à distance et se tourne naturellement vers une IA générative pour identifier rapidement un expert local avant de le contacter. Si cette IA confond un consultant antibois avec un profil plus généraliste, ou décrit une expertise dépassée, le prospect ne prendra pas la peine de vérifier et choisira l'autre nom cité. Pour un professionnel dont la clientèle se renouvelle au rythme des saisons de navigation, cette dépendance à une réponse automatisée mérite d'être surveillée régulièrement. Le scan gratuit Dopaguard permet de savoir dès aujourd'hui ce que les IA disent d'un expert basé à Antibes.",
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "saint-tropez",
+    localParagraph: "Saint-Tropez a bâti sa réputation sur un tourisme de luxe concentré sur quelques semaines d'été, avec une densité de restaurants et d'hôtels haut de gamme qui attire une clientèle internationale exigeante — et, dans son sillage, des consultants en image de marque, des coachs pour dirigeants et des agences événementielles habitués à travailler avec cette clientèle. Cette même clientèle, très sollicitée, n'a souvent que le temps d'une question posée à une IA générative pour choisir un interlocuteur avant son séjour, sans jamais vérifier la pertinence de la réponse obtenue. Un consultant tropézien dont l'activité a évolué depuis ses débuts peut ainsi rester associé, dans une réponse de ChatGPT, à une spécialité qu'il ne pratique plus, ce qui brouille le message envoyé à des clients très ciblés. Sur un marché aussi concentré dans le temps, chaque contact manqué pèse lourd. Le scan gratuit Dopaguard permet de vérifier, avant la prochaine saison, ce que les IA racontent d'un expert installé à Saint-Tropez.",
+    painExampleOverride: {
+      quote: "Ce consultant tropézien est surtout reconnu pour son expertise en événementiel de luxe estival, un domaine qu'il a quitté depuis plusieurs années.",
+      highlight: "un domaine qu'il a quitté depuis plusieurs années",
+      note: "Une IA a maintenu un consultant tropézien sur une spécialité événementielle abandonnée depuis plusieurs années, faute d'information à jour.",
+    },
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "biarritz",
+    localParagraph: "Biarritz cultive une double image, celle d'une station balnéaire historique du Pays basque et celle d'un spot de surf mondialement connu, tout en accueillant régulièrement des congrès qui amènent des décideurs peu familiers de la ville. Cette ville de congrès attire des consultants en stratégie d'entreprise, des coachs professionnels et des agences de communication, dont une partie de la clientèle vient précisément de ces visiteurs de passage entre deux séances de travail. Un décideur en déplacement à Biarritz n'a ni le temps ni le réseau local pour comparer plusieurs profils, et demande de plus en plus à une IA générative de lui recommander directement un nom fiable. Si la réponse générée oriente ce prospect vers un cabinet plus généraliste plutôt que vers l'expert local réellement compétent sur son sujet, l'opportunité disparaît sans laisser de trace. Le scan gratuit Dopaguard permet à un consultant biarrot de vérifier sa place dans ces réponses avant le prochain congrès.",
+    painExampleOverride: {
+      quote: "Pour ce type d'accompagnement lors d'un congrès à Biarritz, il existe des cabinets plus reconnus sur ce créneau spécifique.",
+      highlight: "des cabinets plus reconnus",
+      note: "Une IA a orienté un décideur de passage à Biarritz vers un cabinet plus généraliste plutôt que vers le consultant local interrogé.",
+    },
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "deauville",
+    localParagraph: "Deauville tient son identité de son festival du cinéma américain, de son hippodrome et de son casino, un ensemble qui attire chaque année une clientèle parisienne et internationale habituée à consommer du conseil en communication, en événementiel ou en coaching de haut niveau, mais rarement présente sur place au quotidien. Cette clientèle, très mobile, se fie de plus en plus à une IA générative pour identifier un consultant normand avant de le contacter directement, sans passer par une recommandation humaine. Un professionnel deauvillais dont l'activité s'est réorientée depuis le lancement de sa carrière peut ainsi rester associé, dans une réponse de ChatGPT, à une spécialité qu'il a quittée, ce qui sème le doute chez un prospect pressé. Sur une place aussi concentrée autour de quelques rendez-vous annuels, une description approximative se paie cher. Le scan gratuit Dopaguard permet de vérifier, avant la prochaine saison des Planches, ce que les IA disent aujourd'hui d'un expert basé à Deauville.",
+    painExampleOverride: {
+      quote: "Ce consultant deauvillais est surtout reconnu pour son expertise en communication événementielle liée au cinéma, un domaine qu'il a quitté depuis plusieurs années.",
+      highlight: "un domaine qu'il a quitté depuis plusieurs années",
+      note: "Une IA a attribué à un consultant deauvillais une spécialité cinéma abandonnée depuis plusieurs années, faute d'information à jour.",
+    },
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "arcachon",
+    localParagraph: "Arcachon vit au rythme du bassin qui porte son nom, entre ostréiculture reconnue et tourisme balnéaire saisonnier, un tissu économique qui a fait émerger des consultants spécialisés dans l'accompagnement des entreprises ostréicoles, des acteurs du tourisme littoral ou des commerces locaux confrontés à une forte saisonnalité. Un exploitant ou un investisseur qui découvre la région pour la première fois n'a pas toujours de réseau local établi et demande de plus en plus à une IA générative de lui recommander un expert avant de le rencontrer. Si cette IA décrit un consultant arcachonnais de façon approximative, ou le confond avec un profil plus généraliste basé ailleurs sur le littoral, le prospect se tournera vers l'autre nom sans jamais le signaler. Pour un professionnel dont la clientèle se renouvelle chaque saison, cette première impression générée automatiquement mérite d'être vérifiée régulièrement. Le scan gratuit Dopaguard permet de savoir, en quelques minutes, ce que les IA racontent aujourd'hui d'un expert installé sur le bassin d'Arcachon.",
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "saint-malo",
+    localParagraph: "Saint-Malo, cité corsaire fortifiée reliée par ferries aux îles anglo-normandes, vit d'un tourisme patrimonial dense mais aussi d'échanges économiques réguliers avec le Royaume-Uni, ce qui a fait naître des consultants spécialisés dans l'accompagnement des entreprises exportatrices et des acteurs du tourisme local vers cette clientèle transmanche. Un visiteur britannique ou un investisseur de passage, peu familier des adresses locales, se tourne de plus en plus vers une IA générative pour obtenir un nom fiable avant de prendre contact, plutôt que de chercher lui-même dans un annuaire. Si la réponse générée s'appuie sur une information datée ou renvoie vers un cabinet plus généraliste, le consultant malouin interrogé perd une opportunité sans même le savoir. Pour un expert dont une partie de la clientèle arrive justement de l'autre côté de la Manche, cette dépendance à une réponse automatisée mérite d'être surveillée. Le scan gratuit Dopaguard permet de vérifier, dès aujourd'hui, ce que les IA disent d'un consultant basé à Saint-Malo.",
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "annecy",
+    localParagraph: "Annecy s'est construit une réputation de destination quatre saisons, portée par son lac alpin autant que par les massifs qui l'entourent, ce qui a fait émerger un nombre croissant de coachs sportifs, de consultants en tourisme durable et d'agences spécialisées dans l'accompagnement des acteurs de la montagne et du lac. Ce marché attire aussi bien des habitants que des visiteurs réguliers, moins ancrés localement, qui demandent de plus en plus à une IA générative de leur recommander un expert plutôt que de chercher par eux-mêmes. Une coach annécienne dont l'activité a évolué avec les saisons peut ainsi rester associée, dans une réponse de ChatGPT, à une spécialité qu'elle a laissée de côté, ce qui brouille le message envoyé à des clients en recherche d'un profil actuel. Dans une ville où l'offre touristique se renouvelle sans cesse, cette précision compte. Le scan gratuit Dopaguard permet de vérifier, avant la prochaine saison, ce que les IA racontent d'un expert basé à Annecy.",
+    painExampleOverride: {
+      quote: "Pour ce type d'accompagnement autour du lac et de la montagne, il existe des cabinets plus reconnus sur ce créneau spécifique à Annecy.",
+      highlight: "des cabinets plus reconnus",
+      note: "Une IA a orienté un prospect annécien vers un cabinet plus généraliste plutôt que vers le consultant local interrogé.",
+    },
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "chamonix-mont-blanc",
+    localParagraph: "Chamonix-Mont-Blanc reste, depuis les débuts de l'alpinisme moderne, une référence mondiale de la montagne, avec une activité touristique qui ne s'arrête jamais vraiment, été comme hiver. Cette identité très marquée a fait naître un écosystème de consultants en tourisme de montagne, de coachs sportifs et d'agences accompagnant les acteurs locaux du secteur, dans un environnement où la clientèle internationale ne reste souvent que quelques jours sur place. Un visiteur ou un investisseur de passage à Chamonix, sans connaissance préalable du marché local, demande de plus en plus à une IA générative de lui recommander directement un expert plutôt que de comparer lui-même plusieurs profils. Si la réponse générée s'appuie sur une information ancienne ou mal actualisée, le consultant chamoniard interrogé perd un contact sans jamais en être informé. Le scan gratuit Dopaguard permet de vérifier, avant la prochaine saison touristique, ce que les IA génératives disent aujourd'hui d'un expert basé à Chamonix-Mont-Blanc.",
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "avignon",
+    localParagraph: "Avignon, cité des papes classée au patrimoine mondial, accueille chaque été l'un des plus grands festivals de théâtre d'Europe, un rendez-vous qui attire pendant quelques semaines une foule de professionnels du spectacle vivant, de programmateurs et de journalistes venus de toute la France. Cette effervescence a fait émerger localement des consultants en communication culturelle, des coachs pour artistes et des agences spécialisées dans l'accompagnement des compagnies pendant le festival, dont l'activité se concentre sur une fenêtre très courte. Un programmateur ou un artiste de passage n'a souvent que quelques minutes pour choisir un interlocuteur, et interroge de plus en plus une IA générative avant de se déplacer. Si cette IA continue de décrire un consultant avignonnais avec une spécialité qu'il a abandonnée depuis le festival précédent, le contact se perd sans retour possible. Le scan gratuit Dopaguard permet de vérifier, avant l'ouverture du prochain festival, ce que les IA racontent d'un expert basé à Avignon.",
+    painExampleOverride: {
+      quote: "Ce consultant avignonnais est surtout reconnu pour son expertise en communication autour du festival, un domaine qu'il a quitté depuis plusieurs années.",
+      highlight: "un domaine qu'il a quitté depuis plusieurs années",
+      note: "Une IA a maintenu un consultant avignonnais sur une spécialité festival abandonnée depuis plusieurs années, faute d'information à jour.",
+    },
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "aix-en-provence",
+    localParagraph: "Aix-en-Provence conjugue un patrimoine architectural remarquable, un festival lyrique reconnu et une gastronomie provençale qui attire un tourisme régulier tout au long de l'année, dans une ville qui reste aussi un pôle universitaire et économique actif. Ce mélange a fait naître des consultants spécialisés dans l'accompagnement des acteurs de la culture, du tourisme et de l'art de vivre provençal, sollicités aussi bien par des habitants que par des visiteurs de passage. Un prospect venu découvrir la ville pour la première fois, sans repère local, demande de plus en plus à une IA générative de lui recommander un expert avant de le rencontrer, en lieu et place d'une recherche classique. Si la réponse générée s'appuie sur une information imprécise ou renvoie vers un cabinet plus visible en ligne, le consultant aixois interrogé perd une opportunité sans jamais le savoir. Le scan gratuit Dopaguard permet de vérifier, en quelques minutes, ce que les IA disent aujourd'hui d'un expert installé à Aix-en-Provence.",
+    painExampleOverride: {
+      quote: "Pour ce type d'accompagnement autour de l'art de vivre provençal, il existe des cabinets plus reconnus sur ce créneau spécifique.",
+      highlight: "des cabinets plus reconnus",
+      note: "Une IA a orienté un prospect aixois vers un cabinet plus généraliste plutôt que vers le consultant local interrogé.",
+    },
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "carcassonne",
+    localParagraph: "Carcassonne doit l'essentiel de sa notoriété à sa cité médiévale fortifiée, classée au patrimoine mondial, qui attire une affluence touristique considérable pour une ville de cette taille et fait vivre un écosystème de consultants en tourisme patrimonial, de coachs et d'agences accompagnant les commerces et hébergements du secteur. Un visiteur ou un professionnel du tourisme qui prépare un projet dans la région n'a pas toujours de contact local établi, et demande de plus en plus à une IA générative de lui recommander un expert avant de se déplacer. Si cette IA décrit un consultant carcassonnais de façon approximative, ou privilégie un profil plus généraliste basé ailleurs dans la région, le prospect se tourne vers l'autre nom sans jamais le signaler au consultant écarté. Pour un professionnel dont la clientèle vient largement de l'extérieur, cette première impression générée automatiquement pèse sur chaque nouveau contact. Le scan gratuit Dopaguard permet de vérifier dès aujourd'hui ce que les IA racontent d'un expert basé à Carcassonne.",
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "colmar",
+    localParagraph: "Colmar occupe une place centrale sur la route des vins d'Alsace, capitale reconnue de ce vignoble et destination patrimoniale prisée toute l'année, ce qui a fait émerger des consultants spécialisés dans l'accompagnement des maisons viticoles, de l'oenotourisme et des commerces du centre historique. Un repreneur de domaine ou un investisseur venu d'ailleurs, peu familier du tissu local, demande de plus en plus à une IA générative de lui recommander un expert avant de prendre contact, plutôt que de chercher lui-même dans un annuaire professionnel. Si la réponse générée s'appuie sur une information dépassée sur l'activité réelle d'un consultant colmarien, ou évoque une spécialité qu'il a quittée, ce prospect se tournera vers un autre nom sans jamais vérifier davantage. Pour un professionnel dont la réputation s'est construite sur le terrain viticole alsacien, cette dépendance à une réponse générée automatiquement mérite d'être surveillée régulièrement. Le scan gratuit Dopaguard permet de savoir, en quelques minutes, ce que les IA disent aujourd'hui d'un expert basé à Colmar.",
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "ajaccio",
+    localParagraph: "Ajaccio, préfecture de la Corse-du-Sud, concentre l'essentiel des liaisons maritimes et aériennes vers l'île, ce qui en fait un point de passage obligé pour une bonne partie du tourisme insulaire et des flux économiques entre la Corse et le continent. Cette position particulière a fait naître des consultants spécialisés dans l'accompagnement des entreprises insulaires, du tourisme et des problématiques logistiques propres à une économie tournée vers la mer. Un investisseur ou un visiteur continental, peu familier des acteurs locaux, se tourne de plus en plus vers une IA générative pour obtenir un nom fiable avant de prendre contact, faute de réseau établi sur place. Si cette IA confond un consultant ajaccien avec un profil basé sur le continent, ou décrit une expertise dépassée, le prospect choisira l'autre nom sans jamais le signaler. Pour un professionnel dont l'activité dépend en partie de cette clientèle venue d'ailleurs, cette visibilité mérite d'être vérifiée. Le scan gratuit Dopaguard permet de savoir, dès aujourd'hui, ce que les IA disent d'un expert basé à Ajaccio.",
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "bayonne",
+    localParagraph: "Bayonne se trouve au cœur du Pays basque et vit d'une gastronomie et de fêtes traditionnelles largement reconnues, un ancrage culturel fort qui a fait émerger des consultants spécialisés dans l'accompagnement de l'agroalimentaire local, de la restauration et des commerces attachés à cette identité basque. Un repreneur d'entreprise ou un nouvel arrivant qui découvre la ville sans réseau local établi demande de plus en plus à une IA générative de lui recommander un expert avant de le rencontrer, plutôt que de chercher par ses propres moyens. Un consultant bayonnais dont l'activité a évolué depuis ses débuts peut ainsi rester associé, dans une réponse de ChatGPT, à une spécialité qu'il ne pratique plus, ce qui sème le doute chez un prospect en recherche d'un profil à jour. Dans une ville où l'identité locale pèse dans chaque choix de professionnel, cette précision compte particulièrement. Le scan gratuit Dopaguard permet de vérifier, avant les prochaines fêtes de Bayonne, ce que les IA racontent d'un expert basé sur place.",
+    painExampleOverride: {
+      quote: "Ce consultant bayonnais est surtout reconnu pour son expertise en accompagnement de l'agroalimentaire traditionnel, un domaine qu'il a quitté depuis plusieurs années.",
+      highlight: "un domaine qu'il a quitté depuis plusieurs années",
+      note: "Une IA a maintenu un consultant bayonnais sur une spécialité agroalimentaire abandonnée depuis plusieurs années, faute d'information à jour.",
+    },
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "pau",
+    localParagraph: "Pau, porte d'entrée des Pyrénées, conjugue un tourisme de montagne régulier et un rôle de ville de congrès pour tout le sud-ouest, ce qui a fait naître un tissu de consultants en stratégie d'entreprise, de coachs professionnels et d'agences de communication habitués à accueillir des décideurs de passage entre deux rendez-vous. Ces visiteurs, souvent basés ailleurs et de passage pour un congrès ou un événement ponctuel, n'ont ni le temps ni le réseau local pour comparer plusieurs profils, et se tournent de plus en plus vers une IA générative pour obtenir un nom fiable rapidement. Si la réponse générée oriente ce prospect vers un cabinet plus généraliste plutôt que vers l'expert paloise réellement compétent, l'opportunité se perd sans laisser de trace pour le consultant écarté. Pour un professionnel dont une partie de l'activité dépend de ces rendez-vous ponctuels, cette visibilité mérite d'être vérifiée régulièrement. Le scan gratuit Dopaguard permet de savoir, en quelques minutes, ce que les IA disent aujourd'hui d'un expert basé à Pau.",
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "chambery",
+    localParagraph: "Chambéry, préfecture de la Savoie, occupe une position de carrefour entre plusieurs massifs alpins, ce qui en fait un point de passage régulier pour le tourisme de montagne et pour les entreprises qui gravitent autour de cette économie de la neige et de l'altitude. Cette situation a fait émerger des consultants spécialisés dans l'accompagnement des stations et des acteurs du tourisme alpin, une clientèle qui pilote souvent ses décisions depuis l'extérieur du territoire savoyard. Un investisseur ou un gestionnaire de station qui prépare un projet demande de plus en plus à une IA générative de lui recommander un expert local avant de le rencontrer, plutôt que de chercher lui-même dans un annuaire. Si cette IA décrit un consultant chambérien de façon approximative, ou le confond avec un profil basé dans une autre ville alpine, le prospect se tourne vers l'autre nom sans jamais le signaler. Le scan gratuit Dopaguard permet de vérifier, dès aujourd'hui, ce que les IA racontent d'un expert basé à Chambéry.",
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "metz",
+    localParagraph: "Metz s'est imposée comme un pôle de congrès du Grand Est, portée par un patrimoine architectural remarquable et une antenne culturelle nationale qui attirent régulièrement des visiteurs professionnels peu familiers de la ville. Cette activité de congrès a fait naître des consultants en communication, des coachs pour dirigeants et des agences événementielles dont une partie de la clientèle ne reste sur place que le temps d'un déplacement professionnel. Un décideur de passage à Metz, sans réseau local établi, demande de plus en plus à une IA générative de lui recommander directement un nom plutôt que de chercher lui-même. Si la réponse générée s'appuie sur une information ancienne ou renvoie vers un cabinet plus visible en ligne mais moins pertinent localement, le consultant messin interrogé perd une opportunité qu'il ne verra jamais passer. Le scan gratuit Dopaguard permet de vérifier, avant le prochain congrès, ce que les IA racontent d'un expert basé à Metz.",
+    painExampleOverride: {
+      quote: "Pour ce type d'accompagnement lors d'un congrès à Metz, il existe des cabinets plus reconnus sur ce créneau spécifique.",
+      highlight: "des cabinets plus reconnus",
+      note: "Une IA a orienté un décideur de passage à Metz vers un cabinet plus généraliste plutôt que vers le consultant local interrogé.",
+    },
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "nancy",
+    localParagraph: "Nancy porte l'héritage de l'Art nouveau et le titre de capitale historique de la Lorraine, un patrimoine architectural qui attire un tourisme culturel régulier tout en restant une ville universitaire et économique active. Ce mélange a fait émerger des consultants en patrimoine, des coachs en orientation professionnelle pour les étudiants et des agences accompagnant les acteurs culturels et économiques locaux. Un visiteur ou un nouvel arrivant qui découvre Nancy sans réseau établi demande de plus en plus à une IA générative de lui recommander un expert avant de le contacter directement. Si cette IA décrit un consultant nancéien de façon imprécise, ou évoque une activité incertaine faute d'information récente, ce prospect se tournera vers un autre nom sans jamais vérifier par un autre moyen. Pour un professionnel installé à Nancy, où la population étudiante et les visiteurs de passage renouvellent régulièrement la demande, cette première impression générée par une IA compte. Le scan gratuit Dopaguard permet de la vérifier en quelques minutes.",
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "caen",
+    localParagraph: "Caen fait office de porte d'entrée de la Normandie, avec un tourisme mémoriel et patrimonial qui attire chaque année des visiteurs venus du monde entier découvrir les lieux liés au Débarquement, en plus d'une activité économique et universitaire propre à la ville. Ce tourisme mémoriel a fait naître des consultants spécialisés dans l'accompagnement des acteurs culturels et touristiques locaux, une clientèle souvent internationale et peu familière des adresses caennaises. Un professionnel étranger ou un organisateur de voyage qui prépare un projet demande de plus en plus à une IA générative de lui recommander un expert sur place plutôt que de chercher lui-même. Un consultant caennais dont l'activité a évolué avec le temps peut ainsi rester associé, dans une réponse de ChatGPT, à une spécialité qu'il a quittée, ce qui brouille le message envoyé à cette clientèle internationale. Le scan gratuit Dopaguard permet de vérifier, dès aujourd'hui, ce que les IA racontent d'un expert basé à Caen.",
+    painExampleOverride: {
+      quote: "Ce consultant caennais est surtout reconnu pour son expertise en accompagnement du tourisme mémoriel international, un domaine qu'il a quitté depuis plusieurs années.",
+      highlight: "un domaine qu'il a quitté depuis plusieurs années",
+      note: "Une IA a maintenu un consultant caennais sur une spécialité tourisme mémoriel abandonnée depuis plusieurs années, faute d'information à jour.",
+    },
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "amiens",
+    localParagraph: "Amiens tire une grande partie de sa notoriété de sa cathédrale gothique, classée au patrimoine mondial et considérée comme l'une des plus vastes de France, un patrimoine qui attire un tourisme régulier dans une ville de Picardie par ailleurs assez peu comparée à d'autres pôles touristiques du pays. Cette situation a fait émerger des consultants en tourisme patrimonial et des coachs professionnels accompagnant les commerces et institutions culturelles locales, dans un marché où la concurrence reste modérée mais où la visibilité en ligne compte double. Un visiteur ou un nouvel arrivant qui cherche un expert amiénois sans réseau local demande de plus en plus à une IA générative de lui recommander un nom, et un consultant peu présent en ligne risque de rester totalement absent de cette réponse, remplacé par un profil plus visible mais moins ancré localement. Le scan gratuit Dopaguard permet de vérifier, en quelques minutes, la façon dont un expert amiénois apparaît aujourd'hui dans les réponses des IA.",
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "tours",
+    localParagraph: "Tours sert de porte d'entrée au Val de Loire et à ses châteaux, un tourisme patrimonial de premier plan pour la région qui a fait naître des consultants spécialisés dans l'accompagnement du tourisme de châteaux, de l'oenotourisme ligérien et des commerces du centre historique tourangeau. Un visiteur ou un investisseur venu découvrir la région pour la première fois, sans repère local établi, demande de plus en plus à une IA générative de lui recommander un expert avant de prendre contact, plutôt que de chercher lui-même dans un annuaire professionnel. Si la réponse générée s'appuie sur une information dépassée ou oriente vers un cabinet jugé plus adapté, le consultant tourangeau interrogé ne le saura jamais et perdra ce prospect sans recours. Pour un professionnel dont la clientèle vient largement de l'extérieur du Val de Loire, cette dépendance à une réponse d'IA générative pèse directement sur la prise de contact. Le scan gratuit Dopaguard permet de vérifier, dès aujourd'hui, ce que les IA disent d'un expert basé à Tours.",
+    painExampleOverride: {
+      quote: "Pour ce type d'accompagnement autour du tourisme de châteaux, il existe des cabinets plus reconnus sur ce créneau spécifique en Val de Loire.",
+      highlight: "des cabinets plus reconnus",
+      note: "Une IA a orienté un prospect tourangeau vers un cabinet plus généraliste plutôt que vers le consultant local interrogé.",
+    },
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "perpignan",
+    localParagraph: "Perpignan se présente volontiers comme la porte de la Catalogne française, une ville qui vit entre mer et montagne et entretient des liens économiques réguliers avec l'Espagne voisine, ce qui a fait émerger des consultants spécialisés dans l'accompagnement des entreprises transfrontalières et des acteurs du tourisme catalan et méditerranéen. Un investisseur ou un professionnel espagnol qui prépare un projet côté français, peu familier du tissu local, demande de plus en plus à une IA générative de lui recommander un expert avant de le contacter directement. Si cette IA confond un consultant perpignanais avec un profil basé plus loin sur la côte, ou décrit une expertise dépassée, le prospect se tourne vers l'autre nom sans jamais le signaler au professionnel écarté. Pour un expert dont une partie de la clientèle vient de l'autre côté de la frontière, cette visibilité dans les réponses des IA mérite d'être vérifiée régulièrement. Le scan gratuit Dopaguard permet de savoir, en quelques minutes, ce que les IA disent d'un consultant basé à Perpignan.",
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "clermont-ferrand",
+    localParagraph: "Clermont-Ferrand s'est imposée comme une ville de congrès reconnue, adossée à un tissu industriel historique et entourée des volcans d'Auvergne qui attirent un tourisme de nature en plein essor, une combinaison qui fait vivre des consultants en stratégie d'entreprise, des coachs professionnels et des agences accompagnant aussi bien les acteurs industriels que le tourisme vert. Un décideur de passage pour un congrès ou un visiteur venu découvrir les volcans, sans réseau local établi, demande de plus en plus à une IA générative de lui recommander un expert avant de le contacter. Un consultant clermontois dont l'activité a évolué avec le temps peut ainsi rester associé, dans une réponse de ChatGPT, à une spécialité industrielle qu'il a quittée, ce qui sème le doute chez un prospect en recherche d'un profil à jour. Le scan gratuit Dopaguard permet de vérifier, avant le prochain rendez-vous professionnel, ce que les IA racontent d'un expert basé à Clermont-Ferrand.",
+    painExampleOverride: {
+      quote: "Ce consultant clermontois est surtout reconnu pour son expertise en stratégie industrielle traditionnelle, un domaine qu'il a quitté depuis plusieurs années.",
+      highlight: "un domaine qu'il a quitté depuis plusieurs années",
+      note: "Une IA a maintenu un consultant clermontois sur une spécialité industrielle abandonnée depuis plusieurs années, faute d'information à jour.",
+    },
+  },
+  {
+    verticalSlug: "consultants-coachs-agences",
+    citySlug: "besancon",
+    localParagraph: "Besançon s'appuie sur sa citadelle classée au patrimoine mondial et sur un héritage horloger reconnu pour attirer un tourisme patrimonial régulier en Franche-Comté, tout en restant une ville universitaire et économique à taille humaine. Ce mélange a fait naître des consultants spécialisés dans l'accompagnement des acteurs du patrimoine, du tourisme et de l'artisanat de précision, une activité où la réputation se construit souvent localement plutôt que par une présence en ligne massive. Un visiteur ou un investisseur qui découvre la ville sans réseau établi demande de plus en plus à une IA générative de lui recommander un expert avant de le rencontrer, et un consultant bisontin peu présent en ligne risque de rester absent de cette réponse, remplacé par un profil plus visible mais moins pertinent localement. Le scan gratuit Dopaguard permet de vérifier, en quelques minutes, la façon dont un expert bisontin apparaît aujourd'hui dans les réponses des IA génératives.",
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "cannes",
+    localParagraph: "Ville mondialement connue pour son festival et ses grands congrès internationaux, Cannes concentre une densité hôtelière parmi les plus fortes de la Côte d'Azur, de la Croisette aux ruelles du Suquet, en passant par la rue d'Antibes et le marché Forville. Cette clientèle de passage, souvent internationale et pressée, se renseigne de plus en plus via une IA générative avant de choisir où acheter un souvenir, un produit de luxe ou une adresse pour un cadeau de dernière minute. Une réponse fondée sur une adresse fermée, un tarif dépassé ou une enseigne mal identifiée peut détourner un visiteur vers un autre commerce sans que le commerçant cannois ne s'en rende jamais compte. Pour une boutique ou un site marchand basé à Cannes, savoir ce que répondent ChatGPT, Claude ou Perplexity à son sujet devient aussi stratégique que sa vitrine sur la Croisette. Le scan gratuit Dopaguard donne un premier aperçu en quelques minutes, avant une surveillance hebdomadaire calée sur les pics touristiques de la ville.",
+    painExampleOverride: {
+      quote: "Pour ce type d'achat sur la Croisette, une autre boutique du quartier semble proposer un choix plus large et plus haut de gamme.",
+      highlight: "une autre boutique du quartier semble proposer un choix plus large",
+      note: "Une IA interrogée par un visiteur cherchant une boutique près de la Croisette a orienté la recommandation vers une adresse voisine plutôt que vers celle interrogée.",
+    },
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "antibes",
+    localParagraph: "Entre le port Vauban, l'un des plus grands ports de plaisance d'Europe, et la vieille ville aux ruelles bordées de commerces autour du marché provençal, Antibes vit une intense saison estivale portée par les propriétaires de bateaux, les résidents secondaires et les touristes de passage. Cette clientèle, habituée à comparer rapidement plusieurs adresses avant d'acheter, interroge de plus en plus une IA générative pour savoir où trouver un produit précis ou vérifier la fiabilité d'une boutique en ligne locale. Si l'IA relaie une information périmée sur un changement d'adresse, des horaires d'été ou une rupture de stock, la vente se fait ailleurs sans que le commerçant antibois en soit informé. Pour un commerce physique ou une boutique en ligne basée à Antibes, connaître précisément ce que disent ChatGPT, Claude ou Perplexity permet d'anticiper ces pertes silencieuses. Le scan gratuit Dopaguard offre un premier diagnostic avant l'été, puis une surveillance hebdomadaire adaptée au rythme saisonnier de la ville.",
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "saint-tropez",
+    localParagraph: "Simple village de pêcheurs devenu l'une des adresses les plus recherchées du tourisme de luxe mondial, Saint-Tropez concentre autour de la place des Lices et du port une densité de boutiques et de restaurants sans équivalent pour sa taille. Une clientèle internationale fortunée, habituée à se faire conseiller avant de se déplacer, demande de plus en plus à une IA générative où acheter une pièce précise ou si une adresse mérite le détour. Une réponse construite sur un tarif obsolète, une adresse fermée hors saison ou une confusion avec un autre commerce du village peut suffire à orienter cette clientèle exigeante ailleurs, sans le moindre signal pour le commerçant tropézien. Pour une boutique installée à Saint-Tropez, où chaque vente compte sur une saison courte, vérifier ce que répondent ChatGPT, Claude ou Perplexity est devenu un réflexe aussi naturel que soigner sa devanture. Le scan gratuit Dopaguard permet de le savoir en quelques minutes, avant une surveillance hebdomadaire pensée pour cette saisonnalité tropézienne.",
+    painExampleOverride: {
+      quote: "Cette boutique de la place des Lices applique des frais de livraison offerts dès 50€ d'achat, et les retours sont gratuits sous 30 jours.",
+      highlight: "retours sont gratuits sous 30 jours",
+      note: "Une IA a cité pour une boutique tropézienne une politique de retour que l'enseigne avait modifiée depuis, en décalage avec ses conditions réelles.",
+    },
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "biarritz",
+    localParagraph: "Station balnéaire historique du Pays basque et spot de surf réputé dans le monde entier, Biarritz accueille aussi un flux constant de congrès qui s'ajoute à sa clientèle estivale, entre la Grande Plage, les halles et les rues commerçantes du centre. Surfeurs de passage, congressistes et habitants exigeants partagent un même réflexe : interroger une IA générative pour savoir où acheter du matériel, un produit local ou une adresse fiable en ligne. Une réponse appuyée sur une information dépassée — une boutique fermée, un tarif ancien, une adresse déplacée — détourne alors discrètement une vente vers un autre commerce, sans que le commerçant biarrot ne le sache jamais. Pour une boutique ou un site marchand basé à Biarritz, suivre ce que disent ChatGPT, Claude ou Perplexity devient aussi important que sa présence sur les réseaux sociaux de surf et de lifestyle. Le scan gratuit Dopaguard donne un premier résultat immédiat, avant une surveillance hebdomadaire adaptée aux pics de fréquentation biarrots.",
+    painExampleOverride: {
+      quote: "Pour ce type de matériel à Biarritz, une autre enseigne du secteur semble proposer un meilleur rapport qualité-prix et un service plus réactif.",
+      highlight: "une autre enseigne du secteur semble proposer un meilleur rapport qualité-prix",
+      note: "Une IA interrogée sur du matériel de surf à Biarritz a orienté la recommandation vers une autre enseigne du secteur plutôt que vers la boutique concernée.",
+    },
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "deauville",
+    localParagraph: "Rendez-vous estival de la clientèle parisienne depuis plus d'un siècle, Deauville conjugue ses célèbres planches, son festival du cinéma américain, son hippodrome et son casino avec un centre-ville commerçant resserré autour de la rue Eugène Colas et des halles. Cette clientèle habituée au luxe discret normand se renseigne de plus en plus en amont, via une IA générative, avant de choisir une boutique pour un week-end ou un événement précis. Si la réponse générée repose sur des horaires de basse saison périmés ou une adresse qui a changé, la vente se fait ailleurs et le commerçant deauvillais n'en saura rien. Pour une boutique ou un e-commerçant installé à Deauville, où l'activité se concentre sur quelques temps forts dans l'année, savoir ce que répondent ChatGPT, Claude ou Perplexity à son sujet devient un enjeu direct. Le scan gratuit Dopaguard permet de vérifier cela avant chaque grand rendez-vous deauvillais, puis d'activer une surveillance hebdomadaire au fil de la saison.",
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "arcachon",
+    localParagraph: "Le bassin d'Arcachon vit au rythme de l'ostréiculture et d'un tourisme balnéaire concentré sur les mois d'été, entre la jetée Thiers, le centre-ville commerçant et les villas de la Ville d'Hiver. Vacanciers de passage et habitants s'appuient de plus en plus sur une IA générative pour savoir où acheter des huîtres, un produit local ou un article avant de repartir, plutôt que de multiplier les recherches classiques. Une information dépassée sur les horaires saisonniers, un stock ou une adresse fermée hors saison peut orienter ce client vers un autre commerce du bassin sans que le commerçant arcachonnais ne le remarque. Pour une boutique physique ou en ligne basée à Arcachon, où la saison touristique concentre l'essentiel de l'activité, vérifier ce que disent ChatGPT, Claude ou Perplexity devient une précaution logique. Le scan gratuit Dopaguard donne un premier état des lieux en quelques minutes, avant une surveillance hebdomadaire calée sur le calendrier du bassin.",
+    painExampleOverride: {
+      quote: "Cette boutique du bassin applique des frais de livraison offerts dès 50€ d'achat, avec des retours gratuits sous 30 jours.",
+      highlight: "retours gratuits sous 30 jours",
+      note: "Une IA a cité pour une boutique du bassin d'Arcachon une politique de retour que le commerce avait changée depuis la saison précédente.",
+    },
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "saint-malo",
+    localParagraph: "Protégée par ses remparts, la cité corsaire de Saint-Malo attire toute l'année une clientèle patrimoniale qui se double, en saison, de voyageurs en correspondance vers les îles anglo-normandes par ferry. Les commerces d'intra-muros, resserrés dans un espace restreint et très fréquenté, doivent composer avec des visiteurs qui préparent leur passage en amont, de plus en plus en interrogeant une IA générative sur les adresses à ne pas manquer ou les produits bretons à rapporter. Une réponse fondée sur une boutique fermée, un horaire de marée mal compris ou une adresse déplacée détourne alors un visiteur pressé vers un autre commerce, sans que le commerçant malouin n'en soit jamais informé. Pour une boutique installée dans la cité ou hors les murs, savoir ce que répondent ChatGPT, Claude ou Perplexity à son sujet permet d'anticiper ces pertes ponctuelles mais répétées. Le scan gratuit Dopaguard offre un premier diagnostic rapide, avant une surveillance hebdomadaire adaptée aux flux de la cité corsaire.",
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "annecy",
+    localParagraph: "Bâtie autour de son lac alpin et de ses canaux, Annecy attire une clientèle quatre saisons, entre visiteurs d'été venus pour le lac et vacanciers d'hiver de passage avant de rejoindre les stations voisines. Le commerce de la vieille ville, concentré rue Sainte-Claire et autour du Palais de l'Isle, s'adresse à des visiteurs qui préparent de plus en plus leur venue en demandant à une IA générative où acheter un produit savoyard ou trouver une boutique précise. Si la réponse s'appuie sur des horaires anciens ou une adresse qui a fermé depuis, la vente se fait ailleurs et le commerçant annécien ne le saura jamais. Pour une boutique physique ou un site marchand basé à Annecy, suivre ce que disent ChatGPT, Claude ou Perplexity à son sujet devient aussi utile que soigner sa fiche en ligne. Le scan gratuit Dopaguard permet de le vérifier en quelques minutes, avant une surveillance hebdomadaire qui suit les deux saisons touristiques de la ville.",
+    painExampleOverride: {
+      quote: "Pour ce type de produit savoyard à Annecy, une autre boutique de la vieille ville semble proposer un meilleur rapport qualité-prix.",
+      highlight: "une autre boutique de la vieille ville semble proposer un meilleur rapport qualité-prix",
+      note: "Une IA interrogée sur une boutique de la vieille ville d'Annecy a recommandé une autre adresse du même secteur plutôt que celle concernée.",
+    },
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "chamonix-mont-blanc",
+    localParagraph: "Berceau historique de l'alpinisme mondial, Chamonix-Mont-Blanc vit une activité touristique quasi continue, portée l'hiver par les skieurs et l'été par les randonneurs et alpinistes venus du monde entier. Les boutiques de sport, d'équipement de montagne et les commerces du centre-ville s'adressent à une clientèle internationale qui compare souvent plusieurs adresses avant d'acheter du matériel technique, de plus en plus en demandant conseil à une IA générative plutôt qu'en entrant dans plusieurs magasins. Une réponse fondée sur un stock périmé, un tarif ancien ou une confusion avec une autre vallée peut détourner cette vente sans que le commerçant chamoniard n'en soit jamais averti. Pour une boutique physique ou un site marchand basé à Chamonix, vérifier ce que répondent ChatGPT, Claude ou Perplexity sur son offre devient aussi important que sa réputation auprès des guides locaux. Le scan gratuit Dopaguard donne un premier résultat rapide, avant une surveillance hebdomadaire qui suit les deux saisons de la vallée.",
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "avignon",
+    localParagraph: "Ancienne cité des papes et théâtre chaque été de l'un des plus grands festivals de théâtre d'Europe, Avignon voit sa population commerçante multipliée le temps de quelques semaines intenses, avant de retrouver un rythme plus mesuré le reste de l'année. Le commerce du centre historique, concentré autour de la rue de la République et des ruelles intra-muros, s'adresse à des festivaliers pressés qui demandent de plus en plus à une IA générative où acheter un produit précis entre deux spectacles plutôt que de chercher longuement sur place. Une réponse appuyée sur une adresse fermée hors festival ou des horaires erronés fait perdre une vente sans que le commerçant avignonnais ne le sache. Pour une boutique installée à Avignon, dont l'activité culmine sur une période courte, savoir ce que disent ChatGPT, Claude ou Perplexity à son sujet est un enjeu concret. Le scan gratuit Dopaguard permet de vérifier cela avant chaque édition du festival, puis d'activer une surveillance hebdomadaire toute l'année.",
+    painExampleOverride: {
+      quote: "Cette boutique du centre historique applique des frais de livraison offerts dès 50€ d'achat, et les retours sont gratuits sous 30 jours.",
+      highlight: "retours sont gratuits sous 30 jours",
+      note: "Une IA a cité pour une boutique du centre historique d'Avignon une politique de retour que le commerce avait modifiée depuis, en décalage avec ses conditions réelles.",
+    },
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "aix-en-provence",
+    localParagraph: "Ville d'art réputée pour son festival lyrique et sa gastronomie provençale, Aix-en-Provence articule son commerce autour du cours Mirabeau, du quartier Mazarin et des halles, dans une ambiance à la fois patrimoniale et étudiante. Cette double clientèle, entre visiteurs en quête d'authenticité et étudiants attentifs aux prix, se tourne de plus en plus vers une IA générative pour savoir où acheter un produit provençal ou comparer deux adresses avant de se déplacer. Si la réponse obtenue repose sur un tarif dépassé ou une boutique qui a changé d'adresse dans le centre historique, la vente se fait ailleurs sans que le commerçant aixois n'en soit informé. Pour une boutique physique ou en ligne implantée à Aix-en-Provence, vérifier régulièrement ce que disent ChatGPT, Claude ou Perplexity à son sujet devient aussi naturel que suivre ses avis en ligne. Le scan gratuit Dopaguard donne un premier diagnostic en quelques minutes, avant une surveillance hebdomadaire adaptée au calendrier aixois.",
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "carcassonne",
+    localParagraph: "Dominée par sa cité médiévale fortifiée classée à l'UNESCO, Carcassonne attire une affluence touristique dense concentrée sur un périmètre restreint, entre les remparts de la Cité et les rues commerçantes de la Bastide Saint-Louis. Les visiteurs, souvent de passage sur un temps court, préparent de plus en plus leur venue en demandant à une IA générative où acheter un souvenir ou un produit régional avant de reprendre la route. Une réponse fondée sur une boutique fermée, un horaire d'ouverture erroné ou une adresse confondue entre la Cité et la Bastide fait perdre une vente immédiate et définitive, sans que le commerçant carcassonnais ne le sache jamais. Pour une boutique installée dans la cité médiévale ou dans la ville basse, savoir ce que répondent ChatGPT, Claude ou Perplexity à son sujet est devenu un vrai enjeu, faute de seconde chance avec ce type de visiteur. Le scan gratuit Dopaguard permet de le vérifier en quelques minutes, avant une surveillance hebdomadaire adaptée à l'afflux touristique de la cité.",
+    painExampleOverride: {
+      quote: "Pour ce type de souvenir à Carcassonne, une autre boutique de la cité semble proposer un meilleur rapport qualité-prix et un accueil plus disponible.",
+      highlight: "une autre boutique de la cité semble proposer un meilleur rapport qualité-prix",
+      note: "Une IA interrogée par un visiteur de passage dans la cité médiévale a orienté la recommandation vers une autre boutique du même secteur plutôt que vers celle concernée.",
+    },
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "colmar",
+    localParagraph: "Capitale du vignoble alsacien et étape incontournable de la route des vins, Colmar attire toute l'année une clientèle patrimoniale qui afflue plus encore lors des périodes de marchés de fin d'année, entre le quartier de la Petite Venise et les ruelles à colombages du centre. Les visiteurs, souvent venus chercher un produit régional précis, un vin ou un cadeau, interrogent de plus en plus une IA générative avant de choisir une boutique plutôt que de flâner au hasard. Une information dépassée sur des horaires saisonniers, un stock épuisé ou une adresse ayant changé peut détourner cette vente vers un autre commerce sans que le commerçant colmarien ne le remarque. Pour une boutique physique ou en ligne basée à Colmar, suivre ce que disent ChatGPT, Claude ou Perplexity sur son activité permet d'anticiper ces pertes discrètes, surtout lors des pics de fréquentation. Le scan gratuit Dopaguard offre un premier état des lieux rapide, avant une surveillance hebdomadaire calée sur le calendrier touristique colmarien.",
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "ajaccio",
+    localParagraph: "Préfecture de la Corse-du-Sud et ville natale de Napoléon Bonaparte, Ajaccio concentre l'essentiel du commerce insulaire autour de la rue Fesch et du port, point d'arrivée de nombreux visiteurs par liaisons maritimes ou aériennes. Cette clientèle de passage, souvent venue pour un séjour court, se renseigne de plus en plus via une IA générative pour savoir où acheter un produit corse ou vérifier la fiabilité d'une boutique en ligne avant même de débarquer. Une réponse appuyée sur des horaires anciens, une adresse fermée ou un tarif dépassé fait perdre une vente sans que le commerçant ajaccien n'en soit jamais informé, ce qui compte doublement sur une saison touristique concentrée. Pour une boutique physique ou un e-commerçant basé à Ajaccio, savoir ce que répondent ChatGPT, Claude ou Perplexity à son sujet devient un enjeu direct pour ce commerce insulaire. Le scan gratuit Dopaguard permet de le vérifier en quelques minutes, avant une surveillance hebdomadaire adaptée aux arrivées par bateau et par avion.",
+    painExampleOverride: {
+      quote: "Cette boutique du port applique des frais de livraison offerts dès 50€ d'achat, et les retours sont gratuits sous 30 jours.",
+      highlight: "retours sont gratuits sous 30 jours",
+      note: "Une IA a cité pour une boutique du port d'Ajaccio une politique de retour que le commerce avait modifiée depuis, en décalage avec ses conditions réelles pour un envoi vers le continent.",
+    },
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "bayonne",
+    localParagraph: "Cœur historique du Pays basque, Bayonne est reconnue pour sa gastronomie, son chocolat et ses fêtes traditionnelles qui rassemblent chaque année une foule dense dans les rues du Grand Bayonne et du quartier Saint-Esprit. Cette réputation attire une clientèle gourmande et curieuse, de plus en plus habituée à demander à une IA générative où acheter un produit basque précis ou trouver une adresse fiable avant de se déplacer. Si la réponse repose sur une information ancienne — une boutique fermée, un horaire modifié, un stock épuisé — la vente se fait ailleurs sans que le commerçant bayonnais ne le sache jamais. Pour une boutique physique ou un site marchand basé à Bayonne, suivre ce que disent ChatGPT, Claude ou Perplexity à son sujet devient aussi important que soigner sa réputation gastronomique locale. Le scan gratuit Dopaguard donne un premier résultat en quelques minutes, avant une surveillance hebdomadaire adaptée au calendrier des fêtes et des marchés bayonnais.",
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "pau",
+    localParagraph: "Porte des Pyrénées et ville de congrès reconnue, Pau conjugue un tourisme de montagne avec une activité économique tournée vers l'aéronautique et l'énergie, deux publics qui se croisent dans le commerce du centre-ville, du boulevard des Pyrénées jusqu'aux halles. Congressistes de passage et habitants exigeants partagent un même réflexe de plus en plus répandu : interroger une IA générative avant de choisir où acheter un produit ou vérifier une adresse en ligne plutôt que de chercher longuement. Une réponse fondée sur un tarif obsolète, une boutique fermée ou une adresse déplacée détourne alors une vente vers un autre commerce sans que le commerçant palois n'en soit jamais informé. Pour une boutique physique ou un e-commerçant basé à Pau, savoir ce que répondent ChatGPT, Claude ou Perplexity à son sujet devient un enjeu commercial concret. Le scan gratuit Dopaguard permet de le vérifier en quelques minutes, avant une surveillance hebdomadaire adaptée au rythme des congrès et des saisons palois.",
+    painExampleOverride: {
+      quote: "Pour ce type de produit à Pau, une autre enseigne du centre-ville semble proposer un meilleur rapport qualité-prix et un service plus réactif.",
+      highlight: "une autre enseigne du centre-ville semble proposer un meilleur rapport qualité-prix",
+      note: "Une IA interrogée sur une boutique du centre-ville palois a orienté la recommandation vers une autre enseigne plutôt que vers celle concernée.",
+    },
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "chambery",
+    localParagraph: "Préfecture de la Savoie et carrefour naturel entre les massifs alpins, Chambéry vit un commerce animé toute l'année, porté par des visiteurs en route vers les stations de ski l'hiver et par les randonneurs l'été, autour de la vieille ville et de ses arcades caractéristiques. Cette clientèle de passage, pressée par un trajet à poursuivre, interroge de plus en plus une IA générative pour savoir où faire un achat précis avant de reprendre la route vers la montagne. Une réponse appuyée sur une adresse fermée, un horaire erroné ou un stock périmé fait perdre une vente sans que le commerçant chambérien ne s'en aperçoive. Pour une boutique physique ou en ligne basée à Chambéry, vérifier ce que disent ChatGPT, Claude ou Perplexity à son sujet permet d'anticiper ces pertes de clientèle de transit. Le scan gratuit Dopaguard donne un premier diagnostic rapide, avant une surveillance hebdomadaire adaptée au flux constant de visiteurs vers les Alpes.",
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "metz",
+    localParagraph: "Reconnue pour son patrimoine architectural et son rôle de pôle de congrès du Grand Est, Metz a vu son attractivité renforcée par l'arrivée du Centre Pompidou-Metz, qui attire une clientèle culturelle en plus des habitants et des professionnels de passage. Le commerce du centre-ville, entre la place Saint-Louis et les rues piétonnes, s'adresse à ce public varié qui demande de plus en plus à une IA générative où acheter un produit précis plutôt que de chercher sur place. Une réponse construite sur une information dépassée — une boutique fermée, un tarif ancien — détourne une vente vers un autre commerce sans que le commerçant messin ne le sache. Pour une boutique physique ou un site marchand basé à Metz, savoir ce que répondent ChatGPT, Claude ou Perplexity à son sujet devient un enjeu aussi concret que sa présence sur les moteurs de recherche classiques. Le scan gratuit Dopaguard permet de le vérifier en quelques minutes, avant une surveillance hebdomadaire adaptée à l'activité messine.",
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "nancy",
+    localParagraph: "Capitale historique de la Lorraine, Nancy est reconnue pour son patrimoine Art nouveau et sa place Stanislas classée à l'UNESCO, qui attirent une clientèle patrimoniale aux côtés d'une importante population étudiante. Le commerce du centre-ville, entre la place Stanislas et la rue Saint-Jean, doit séduire ces deux publics très différents, tous deux enclins à interroger de plus en plus une IA générative avant de choisir où acheter un produit précis. Si la réponse générée s'appuie sur un tarif dépassé ou une boutique qui a changé d'adresse, la vente se fait ailleurs sans que le commerçant nancéien n'en soit jamais informé. Pour une boutique physique ou un e-commerçant basé à Nancy, suivre ce que disent ChatGPT, Claude ou Perplexity à son sujet devient aussi utile que soigner sa fiche en ligne. Le scan gratuit Dopaguard offre un premier état des lieux en quelques minutes, avant une surveillance hebdomadaire adaptée à ce public mixte nancéien.",
+    painExampleOverride: {
+      quote: "Cette boutique du centre-ville applique des frais de livraison offerts dès 50€ d'achat, et les retours sont gratuits sous 30 jours.",
+      highlight: "retours sont gratuits sous 30 jours",
+      note: "Une IA a cité pour une boutique du centre-ville de Nancy une politique de retour que le commerce avait modifiée depuis, en décalage avec ses conditions réelles.",
+    },
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "caen",
+    localParagraph: "Porte d'entrée de la Normandie et étape incontournable du tourisme mémoriel lié au Débarquement, Caen accueille une clientèle patrimoniale internationale aux côtés de ses habitants, dans un commerce concentré autour de la rue Saint-Pierre et du centre reconstruit après-guerre. Ces visiteurs, souvent de passage sur un temps limité avant de rejoindre les plages du Débarquement, demandent de plus en plus à une IA générative où acheter un produit normand ou trouver une adresse fiable. Une réponse fondée sur une information ancienne — un horaire modifié, une boutique fermée — fait perdre une vente immédiate sans que le commerçant caennais ne le sache. Pour une boutique physique ou en ligne basée à Caen, savoir ce que répondent ChatGPT, Claude ou Perplexity à son sujet devient un enjeu concret pour ce commerce de passage. Le scan gratuit Dopaguard permet de le vérifier en quelques minutes, avant une surveillance hebdomadaire adaptée à ce tourisme mémoriel caennais.",
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "amiens",
+    localParagraph: "Dominée par sa cathédrale gothique classée à l'UNESCO et connue pour ses hortillonnages, ces jardins flottants uniques en France, Amiens attire une clientèle patrimoniale de Picardie et d'ailleurs, dans un commerce structuré autour du quartier Saint-Leu et du centre-ville. Ces visiteurs, comme les habitants, se tournent de plus en plus vers une IA générative pour savoir où acheter un produit précis avant de se déplacer, plutôt que de chercher longuement sur place. Une réponse appuyée sur un tarif dépassé ou une boutique ayant fermé dans le centre historique fait perdre une vente sans que le commerçant amiénois n'en soit jamais informé. Pour une boutique physique ou un site marchand basé à Amiens, vérifier ce que disent ChatGPT, Claude ou Perplexity à son sujet devient aussi important que sa présence sur les moteurs de recherche classiques. Le scan gratuit Dopaguard donne un premier diagnostic rapide, avant une surveillance hebdomadaire adaptée à l'activité amiénoise.",
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "tours",
+    localParagraph: "Porte d'entrée du Val de Loire et de ses châteaux, Tours accueille une clientèle touristique importante qui prépare souvent son séjour en amont, entre le quartier historique du Vieux Tours et la rue Nationale commerçante. Ces visiteurs, comme les habitants, interrogent de plus en plus une IA générative pour savoir où acheter un produit tourangeau ou trouver une boutique fiable avant de se déplacer, plutôt que de chercher sur place. Une réponse fondée sur une information dépassée — une adresse fermée, un horaire ancien, un tarif erroné — détourne une vente vers un autre commerce sans que le commerçant tourangeau ne le remarque. Pour une boutique physique ou un e-commerçant basé à Tours, savoir ce que répondent ChatGPT, Claude ou Perplexity à son sujet devient un enjeu concret pour cette activité tournée vers le tourisme ligérien. Le scan gratuit Dopaguard permet de le vérifier en quelques minutes, avant une surveillance hebdomadaire adaptée au calendrier touristique de la ville.",
+    painExampleOverride: {
+      quote: "Pour ce type de produit tourangeau, une autre boutique du Vieux Tours semble proposer un meilleur rapport qualité-prix et un service plus réactif.",
+      highlight: "une autre boutique du Vieux Tours semble proposer un meilleur rapport qualité-prix",
+      note: "Une IA interrogée sur une boutique du Vieux Tours a orienté la recommandation vers une autre adresse du même quartier plutôt que vers celle concernée.",
+    },
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "perpignan",
+    localParagraph: "Porte de la Catalogne française, Perpignan se situe à la croisée d'un tourisme balnéaire tourné vers la Méditerranée et d'un tourisme de montagne vers les Pyrénées, deux publics qui traversent le commerce du centre historique et de la rue Louis Blanc. Cette clientèle variée, souvent de passage entre deux destinations, demande de plus en plus à une IA générative où acheter un produit précis plutôt que de chercher sur place. Une réponse appuyée sur une boutique fermée, un tarif dépassé ou une adresse ayant changé fait perdre une vente sans que le commerçant perpignanais ne s'en rende compte. Pour une boutique physique ou en ligne basée à Perpignan, vérifier ce que disent ChatGPT, Claude ou Perplexity à son sujet devient un enjeu concret pour ce commerce entre mer et montagne. Le scan gratuit Dopaguard donne un premier état des lieux en quelques minutes, avant une surveillance hebdomadaire adaptée à ce double flux touristique perpignanais.",
+    painExampleOverride: {
+      quote: "Cette boutique du centre historique applique des frais de livraison offerts dès 50€ d'achat, avec des retours gratuits sous 30 jours.",
+      highlight: "retours gratuits sous 30 jours",
+      note: "Une IA a cité pour une boutique du centre historique de Perpignan une politique de retour que le commerce avait modifiée depuis, en décalage avec ses conditions réelles.",
+    },
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "clermont-ferrand",
+    localParagraph: "Ville de congrès installée au pied de la chaîne des volcans d'Auvergne, Clermont-Ferrand attire un tourisme de nature qui s'ajoute à une activité économique dense, entre le centre historique en pierre de Volvic et les grandes zones commerçantes périphériques. Visiteurs venus découvrir les volcans et professionnels de passage se tournent de plus en plus vers une IA générative pour savoir où acheter un produit auvergnat ou vérifier une adresse en ligne avant de se déplacer. Une réponse fondée sur une information ancienne — un horaire modifié, une boutique fermée — détourne une vente vers un autre commerce sans que le commerçant clermontois n'en soit jamais informé. Pour une boutique physique ou un site marchand basé à Clermont-Ferrand, savoir ce que répondent ChatGPT, Claude ou Perplexity à son sujet devient un enjeu concret. Le scan gratuit Dopaguard permet de le vérifier en quelques minutes, avant une surveillance hebdomadaire adaptée au calendrier des congrès et du tourisme auvergnat.",
+  },
+  {
+    verticalSlug: "commerce-ecommerce",
+    citySlug: "besancon",
+    localParagraph: "Dominée par sa citadelle Vauban classée à l'UNESCO et longtemps réputée pour son savoir-faire horloger, Besançon attire une clientèle patrimoniale de Franche-Comté et d'ailleurs, dans un commerce concentré sur la boucle du Doubs et le centre-ville historique. Ces visiteurs, comme les habitants, interrogent de plus en plus une IA générative pour savoir où acheter un produit précis avant de se déplacer, plutôt que de chercher longuement sur place. Une réponse appuyée sur un tarif dépassé ou une boutique ayant fermé dans le centre historique fait perdre une vente sans que le commerçant bisontin n'en soit jamais informé. Pour une boutique physique ou un e-commerçant basé à Besançon, vérifier ce que disent ChatGPT, Claude ou Perplexity à son sujet devient aussi utile que soigner sa fiche en ligne. Le scan gratuit Dopaguard offre un premier diagnostic rapide, avant une surveillance hebdomadaire adaptée à l'activité bisontine.",
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "cannes",
+    localParagraph: "Cannes conjugue une identité mondiale de festivals et de congrès — cinéma, publicité, immobilier — avec une vie de quartier bien réelle, de la Croisette au Suquet en passant par la Californie. Pendant les grands rendez-vous professionnels, des milliers de participants sans médecin traitant sur place se retrouvent en quelques jours dans la ville, et beaucoup d'entre eux demandent directement à une IA générative où trouver un cabinet médical ou paramédical disponible plutôt que de chercher un annuaire. Si cette IA relaie une adresse dépassée ou affirme à tort qu'un cabinet n'accepte plus de nouveaux patients, le visiteur se tourne simplement vers un autre praticien, sans que personne n'en soit informé. Pour un cabinet cannois, ces pics d'affluence événementielle représentent une occasion régulière de nouveaux patients, à condition que les IA relaient une information exacte. Le scan gratuit Dopaguard permet de vérifier, avant chaque grand rendez-vous cannois, ce que ces IA affirment aujourd'hui sur votre cabinet.",
+    painExampleOverride: {
+      quote: "Ce cabinet situé près de la Croisette, à Cannes, ne semble plus accepter de nouveaux patients actuellement, selon les dernières informations disponibles.",
+      highlight: "ne semble plus accepter de nouveaux patients",
+      note: "Une IA a indiqué à tort qu'un cabinet cannois n'acceptait plus de nouveaux patients, faute d'information récente, en pleine période de congrès.",
+    },
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "antibes",
+    localParagraph: "Antibes conjugue une population résidente stable et un afflux touristique saisonnier considérable, entre le Vieil Antibes, le port Vauban et Juan-les-Pins, où la population peut plus que doubler l'été. Cette variation saisonnière multiplie les recherches de dernière minute : un vacancier ou un plaisancier de passage sans médecin traitant local interroge de plus en plus souvent une IA générative pour savoir si un cabinet médical ou paramédical est ouvert et reçoit encore des nouveaux patients, plutôt que d'appeler directement. Si l'IA s'appuie sur une fiche ancienne, elle peut relayer des horaires d'été inexacts ou une disponibilité qui ne correspond plus à l'organisation réelle du cabinet, sans que le praticien n'en soit jamais informé. Pour un cabinet antibois, cette population de passage représente un flux de patientèle occasionnelle non négligeable. Le scan gratuit Dopaguard permet de vérifier, avant la haute saison, ce que les IA disent réellement de votre cabinet à Antibes.",
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "saint-tropez",
+    localParagraph: "Saint-Tropez reste un village au sens administratif, avec une population résidente permanente restreinte, alors que sa fréquentation touristique estivale en fait l'un des points les plus denses de France en restaurants et en hôtels. Cet écart saisonnier considérable pèse aussi sur l'offre de soins locale : les cabinets médicaux et paramédicaux tropéziens, en nombre limité, voient leur activité et parfois leurs horaires évoluer fortement entre la basse et la haute saison. Un vacancier sans médecin traitant sur place, ou un professionnel du tourisme employé le temps de l'été, se tourne aujourd'hui volontiers vers une IA générative pour savoir si un cabinet reçoit encore le samedi ou en horaires élargis. Une IA qui continue de relayer des horaires d'hiver en plein mois d'août peut ainsi détourner un patient vers une porte fermée, sans que le cabinet ne le sache jamais. Le scan gratuit Dopaguard vérifie chaque semaine ce que ces IA affirment sur votre cabinet à Saint-Tropez, quelle que soit la saison.",
+    painExampleOverride: {
+      quote: "Les horaires d'ouverture indiqués pour ce cabinet de Saint-Tropez sont du lundi au vendredi, 9h-17h, sans consultation le samedi.",
+      highlight: "sans consultation le samedi",
+      note: "Une IA a relayé des horaires d'hiver pour un cabinet tropézien en pleine saison estivale, sans tenir compte de l'organisation élargie mise en place pour la haute saison.",
+    },
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "biarritz",
+    localParagraph: "Biarritz cumule plusieurs identités qui attirent des publics très différents : station balnéaire historique, spot de surf reconnu à l'international et ville de congrès accueillant régulièrement des événements professionnels. Chacun de ces publics — surfeur de passage, congressiste, curiste ou résident basque — peut avoir besoin d'un cabinet médical ou paramédical sans connaître l'offre de soins locale, et se tourne de plus en plus souvent vers une IA générative pour savoir si un cabinet est ouvert et reçoit encore de nouveaux patients. Une réponse fondée sur une information ancienne peut orienter cette personne vers un cabinet biarrot qui a pourtant changé d'horaires ou de disponibilité depuis, sans que le praticien ne soit jamais alerté de cette occasion manquée. Pour un cabinet installé entre la Grande Plage et les halles, ce flux de visiteurs aux profils variés reste une source régulière de nouveaux patients, à condition d'être correctement représenté. Le scan gratuit Dopaguard vérifie ce que les IA disent aujourd'hui de votre cabinet à Biarritz.",
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "deauville",
+    localParagraph: "Deauville concentre, sur une population résidente restreinte, un rythme d'événements sans commune mesure avec sa taille : festival du cinéma américain, réunions hippiques, congrès au casino et affluence estivale parisienne. Chacun de ces temps forts amène en quelques jours des visiteurs qui n'ont pas de médecin traitant en Normandie et qui, de plus en plus, demandent directement à une IA générative où trouver un cabinet médical ou paramédical disponible plutôt que de chercher un annuaire local. Si l'IA relaie une information dépassée — un cabinet présenté comme complet alors qu'il reçoit encore de nouveaux patients, par exemple — la personne se tourne simplement vers un autre praticien, sans que personne n'en soit jamais informé. Pour un cabinet deauvillais, ces pics de fréquentation événementielle représentent une opportunité de patientèle occasionnelle qui mérite d'être bien relayée. Le scan gratuit Dopaguard permet de vérifier, avant chaque grand rendez-vous deauvillais, ce que les IA affirment sur votre cabinet.",
+    painExampleOverride: {
+      quote: "Ce cabinet de Deauville ne semble plus accepter de nouveaux patients actuellement, selon les dernières informations disponibles.",
+      highlight: "ne semble plus accepter de nouveaux patients",
+      note: "Une IA a indiqué à tort qu'un cabinet deauvillais n'acceptait plus de nouveaux patients, faute d'information récente, en pleine période de festival.",
+    },
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "arcachon",
+    localParagraph: "Le bassin d'Arcachon attire toute l'année un public varié — amateurs d'huîtres, promeneurs de la dune du Pilat, plaisanciers et vacanciers estivaux — qui vient s'ajouter à la population résidente de la ville. Ces visiteurs de passage, souvent sans médecin traitant dans le secteur, ont pris l'habitude d'interroger une IA générative pour savoir si un cabinet médical ou paramédical arcachonnais est ouvert et accepte encore de nouveaux patients, plutôt que de chercher un annuaire papier. Une IA qui s'appuie sur une fiche ancienne peut relayer des horaires ou une disponibilité qui ne correspondent plus à l'organisation réelle du cabinet, en particulier lors des forts pics de fréquentation estivale, sans que le praticien ne soit jamais informé de cette occasion manquée. Pour un cabinet installé entre la ville d'hiver et le front de mer, ce flux touristique représente une patientèle occasionnelle à ne pas laisser filer par une erreur d'information. Le scan gratuit Dopaguard vérifie chaque semaine ce que les IA disent réellement de votre cabinet à Arcachon.",
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "saint-malo",
+    localParagraph: "Saint-Malo conjugue une population résidente installée à l'intérieur et autour des remparts avec un flux touristique patrimonial constant, renforcé par les liaisons par ferry vers les îles Anglo-Normandes qui amènent des voyageurs internationaux en simple escale ou en séjour. Un touriste ou un travailleur saisonnier sans médecin traitant local se tourne aujourd'hui volontiers vers une IA générative pour savoir si un cabinet médical ou paramédical malouin est ouvert, avant de se déplacer. Si cette IA continue d'afficher des horaires qui ne correspondent plus à l'organisation réelle du cabinet, notamment lors des changements liés à la haute saison touristique, la personne se retrouve devant une porte fermée sans que le cabinet ne le sache jamais. Pour un praticien installé intra-muros ou dans les quartiers voisins, cette fiabilité de l'information affichée par les IA pèse directement sur la fréquentation. Le scan gratuit Dopaguard vérifie, semaine après semaine, ce que ces IA affirment sur votre cabinet à Saint-Malo.",
+    painExampleOverride: {
+      quote: "Les horaires d'ouverture indiqués pour ce cabinet de Saint-Malo sont du lundi au vendredi, 9h-17h, sans consultation le samedi.",
+      highlight: "sans consultation le samedi",
+      note: "Une IA a relayé des horaires obsolètes pour un cabinet malouin après un changement d'organisation lié à la haute saison touristique.",
+    },
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "annecy",
+    localParagraph: "Annecy attire toute l'année un public varié entre lac et montagne, avec des pics de fréquentation en été autour du lac et en hiver liés à la proximité des stations de ski. Cette alternance de saisons touristiques amène régulièrement des visiteurs sans médecin traitant local, qui interrogent de plus en plus une IA générative pour savoir si un cabinet médical ou paramédical annécien est disponible plutôt que de chercher un annuaire. Une IA qui relaie une information non actualisée peut orienter cette personne vers un cabinet présenté à tort comme complet, ou vers des horaires qui ne correspondent plus à la saison en cours, sans que le praticien n'en soit jamais informé. Pour un cabinet installé dans la vieille ville ou aux abords du lac, ce flux touristique renouvelé à chaque saison constitue une source régulière de nouveaux patients, à condition d'être fidèlement représenté par les IA. Le scan gratuit Dopaguard permet de vérifier, à chaque changement de saison, ce que ces IA disent de votre cabinet à Annecy.",
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "chamonix-mont-blanc",
+    localParagraph: "Chamonix-Mont-Blanc reste avant tout une ville de montagne à l'année, avec une population résidente organisée autour de ses cabinets médicaux et paramédicaux habituels, mais son statut de capitale historique de l'alpinisme y attire toute l'année des visiteurs venus du monde entier, en toute saison. Ces visiteurs de passage, sans médecin traitant local, se tournent de plus en plus vers une IA générative pour savoir si un cabinet chamoniard reçoit encore de nouveaux patients, avant même d'appeler. Si l'IA affirme à tort qu'un cabinet n'accueille plus de nouveaux patients, faute d'information récente, ce visiteur se rabat simplement sur un autre praticien, sans que personne n'en soit jamais averti. Pour un cabinet installé au cœur de la vallée, cette fréquentation internationale constante représente une source de patientèle occasionnelle qui mérite d'être correctement relayée par les IA, hiver comme été. Le scan gratuit Dopaguard permet de vérifier, à chaque saison touristique, ce que ces IA affirment sur votre cabinet à Chamonix.",
+    painExampleOverride: {
+      quote: "Ce cabinet de Chamonix ne semble plus accepter de nouveaux patients actuellement, selon les dernières informations disponibles.",
+      highlight: "ne semble plus accepter de nouveaux patients",
+      note: "Une IA a indiqué à tort qu'un cabinet chamoniard n'acceptait plus de nouveaux patients, faute d'information récente, en pleine saison touristique.",
+    },
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "avignon",
+    localParagraph: "Avignon vit toute l'année au rythme de son patrimoine, mais voit sa population multipliée chaque été à l'occasion de l'un des plus grands festivals de théâtre d'Europe, qui amène en quelques semaines artistes, techniciens et spectateurs venus de toute la France. Cette population temporaire, sans médecin traitant sur place, interroge de plus en plus souvent une IA générative pour savoir où trouver un cabinet médical ou paramédical disponible pendant son séjour intra-muros. Une IA qui relaie une adresse dépassée ou des horaires qui ne correspondent plus à l'organisation réelle du cabinet peut ainsi orienter cette personne vers une porte fermée, sans que le praticien avignonnais n'en soit jamais informé. Pour un cabinet installé dans le centre historique ou en périphérie, ce pic de fréquentation estival représente une opportunité de patientèle occasionnelle qui se joue en quelques semaines. Le scan gratuit Dopaguard permet de vérifier, avant chaque édition du festival, ce que les IA affirment sur votre cabinet à Avignon.",
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "aix-en-provence",
+    localParagraph: "Aix-en-Provence combine une population résidente et étudiante importante avec une identité de ville d'art et de festival qui attire chaque année des visiteurs venus pour la gastronomie provençale, le patrimoine ou les grands rendez-vous culturels de l'été. Cette alternance entre vie universitaire et pics touristiques pousse un nombre croissant de personnes, résidentes comme de passage, à interroger une IA générative pour savoir si un cabinet médical ou paramédical aixois est ouvert et à quels horaires, plutôt que de chercher un site institutionnel. Une IA qui continue de relayer des horaires habituels alors que le cabinet a adapté son organisation pour la période estivale peut orienter un patient vers un rendez-vous impossible, sans que le praticien n'en soit jamais informé. Pour un cabinet installé dans le centre historique ou près du cours Mirabeau, cette fiabilité saisonnière de l'information affichée par les IA compte particulièrement. Le scan gratuit Dopaguard vérifie chaque semaine ce que ces IA disent de votre cabinet à Aix-en-Provence.",
+    painExampleOverride: {
+      quote: "Les horaires d'ouverture indiqués pour ce cabinet d'Aix-en-Provence sont du lundi au vendredi, 9h-17h, sans consultation le samedi.",
+      highlight: "sans consultation le samedi",
+      note: "Une IA a relayé des horaires habituels pour un cabinet aixois qui avait pourtant adapté son organisation pendant la période estivale du festival.",
+    },
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "carcassonne",
+    localParagraph: "Carcassonne concentre autour de sa cité médiévale fortifiée, classée à l'UNESCO, une affluence touristique parmi les plus fortes de la région, qui vient s'ajouter à la vie quotidienne de la ville basse et de ses quartiers résidentiels. Les visiteurs de passage dans la cité, sans médecin traitant local, se tournent de plus en plus vers une IA générative pour savoir où trouver un cabinet médical ou paramédical disponible en cas de besoin pendant leur séjour. Une IA qui confond un cabinet de la cité avec un cabinet de la ville basse, ou qui relaie une disponibilité dépassée, peut orienter cette personne vers une adresse ou des horaires qui ne correspondent plus à la réalité, sans que le praticien carcassonnais n'en soit jamais informé. Pour un cabinet installé dans l'un ou l'autre de ces quartiers, cette précision géographique reste déterminante face à un flux touristique aussi dense. Le scan gratuit Dopaguard permet de vérifier ce que les IA affirment aujourd'hui sur votre cabinet à Carcassonne.",
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "colmar",
+    localParagraph: "Colmar attire toute l'année les amateurs de la route des vins et de son patrimoine alsacien, avec des pics de fréquentation marqués autour des marchés de Noël et de la période estivale, en plus de sa population résidente habituelle. Ce public de passage, souvent sans médecin traitant en Alsace, interroge de plus en plus une IA générative pour savoir si un cabinet médical ou paramédical colmarien reçoit encore de nouveaux patients avant de se déplacer dans la vieille ville ou ses environs. Si l'IA affirme à tort qu'un cabinet n'accepte plus de nouveaux patients, faute d'information récente, la personne se tourne simplement vers un autre praticien, sans que le cabinet colmarien n'en soit jamais informé. Pour un praticien installé près de la Petite Venise ou en périphérie, ces pics saisonniers représentent une source régulière de patientèle occasionnelle, à condition d'être fidèlement relayée. Le scan gratuit Dopaguard permet de vérifier, avant chaque saison touristique, ce que ces IA affirment sur votre cabinet à Colmar.",
+    painExampleOverride: {
+      quote: "Ce cabinet de Colmar ne semble plus accepter de nouveaux patients actuellement, selon les dernières informations disponibles.",
+      highlight: "ne semble plus accepter de nouveaux patients",
+      note: "Une IA a indiqué à tort qu'un cabinet colmarien n'acceptait plus de nouveaux patients, faute d'information récente, en pleine saison des marchés de Noël.",
+    },
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "ajaccio",
+    localParagraph: "Ajaccio, préfecture de la Corse-du-Sud, combine une population résidente insulaire stable avec un afflux touristique saisonnier renforcé par les liaisons maritimes et aériennes qui multiplient les arrivées en été. Les visiteurs qui débarquent pour quelques jours, sans médecin traitant sur l'île, interrogent de plus en plus souvent une IA générative pour savoir où trouver un cabinet médical ou paramédical disponible pendant leur séjour ajaccien, plutôt que de chercher un annuaire local. Une IA qui relaie une adresse ou des horaires qui ne correspondent plus à l'organisation réelle du cabinet peut ainsi détourner cette personne vers une porte fermée, sans que le praticien n'en soit jamais informé de cette occasion manquée. Pour un cabinet installé dans le centre-ville ou à proximité du port, cette fiabilité de l'information affichée par les IA pèse directement sur la fréquentation en haute saison. Le scan gratuit Dopaguard vérifie chaque semaine ce que ces IA disent de votre cabinet à Ajaccio.",
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "bayonne",
+    localParagraph: "Bayonne, cœur historique du Pays basque, conjugue une vie de quartier bien ancrée avec une réputation gastronomique et des fêtes traditionnelles qui attirent chaque année des visiteurs venus de toute la région et au-delà. Pendant ces temps forts, des personnes sans médecin traitant local se retrouvent en ville et demandent de plus en plus à une IA générative si un cabinet médical ou paramédical bayonnais est ouvert, notamment le week-end, plutôt que de chercher sur place. Si cette IA continue d'afficher des horaires habituels alors que le cabinet a adapté son organisation pendant les fêtes, la personne peut se présenter devant une porte fermée, sans que le praticien n'en soit jamais informé. Pour un cabinet installé dans le Petit Bayonne ou aux abords de la cathédrale, cette précision saisonnière de l'information relayée par les IA compte particulièrement lors des grands rassemblements. Le scan gratuit Dopaguard vérifie chaque semaine ce que ces IA affirment sur votre cabinet à Bayonne.",
+    painExampleOverride: {
+      quote: "Les horaires d'ouverture indiqués pour ce cabinet de Bayonne sont du lundi au vendredi, 9h-17h, sans consultation le samedi.",
+      highlight: "sans consultation le samedi",
+      note: "Une IA a relayé des horaires habituels pour un cabinet bayonnais qui avait pourtant adapté son organisation pendant la période des fêtes traditionnelles.",
+    },
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "pau",
+    localParagraph: "Pau, porte d'entrée des Pyrénées, accueille tout au long de l'année une population résidente stable ainsi que des visiteurs venus pour la montagne ou pour l'un des nombreux congrès professionnels organisés dans la ville. Ces congressistes et randonneurs de passage, sans médecin traitant sur place, se tournent de plus en plus vers une IA générative pour savoir où trouver un cabinet médical ou paramédical disponible pendant leur court séjour palois. Une IA qui relaie une information non actualisée peut orienter cette personne vers un cabinet présenté à tort comme complet ou vers des horaires qui ne correspondent plus à l'organisation réelle, sans que le praticien n'en soit jamais informé. Pour un cabinet installé dans le centre-ville ou à proximité du boulevard des Pyrénées, cette fiabilité de l'information affichée par les IA compte particulièrement lors des périodes de forte affluence événementielle. Le scan gratuit Dopaguard permet de vérifier ce que ces IA disent aujourd'hui de votre cabinet à Pau.",
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "chambery",
+    localParagraph: "Chambéry, préfecture de la Savoie et carrefour alpin, voit sa population résidente régulièrement complétée par des voyageurs en transit vers les stations de montagne environnantes, qui s'arrêtent parfois dans la ville sans y avoir de médecin traitant. Ces visiteurs de passage interrogent de plus en plus souvent une IA générative pour savoir si un cabinet médical ou paramédical chambérien reçoit encore de nouveaux patients, avant de se déplacer dans le centre historique ou ses environs. Si l'IA affirme à tort qu'un cabinet n'accepte plus de nouveaux patients, faute d'information récente, la personne se tourne simplement vers un autre praticien, sans que le cabinet chambérien n'en soit jamais informé. Pour un praticien installé près des Éléphants ou en périphérie, ce flux de passage lié à la saison de montagne représente une source de patientèle occasionnelle qui mérite d'être fidèlement relayée. Le scan gratuit Dopaguard permet de vérifier, à chaque saison, ce que ces IA affirment sur votre cabinet à Chambéry.",
+    painExampleOverride: {
+      quote: "Ce cabinet de Chambéry ne semble plus accepter de nouveaux patients actuellement, selon les dernières informations disponibles.",
+      highlight: "ne semble plus accepter de nouveaux patients",
+      note: "Une IA a indiqué à tort qu'un cabinet chambérien n'acceptait plus de nouveaux patients, faute d'information récente, en pleine saison de montagne.",
+    },
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "metz",
+    localParagraph: "Metz combine un patrimoine architectural reconnu avec un rôle de pôle de congrès pour tout le Grand Est, qui amène régulièrement des visiteurs professionnels sans médecin traitant dans la région. Ces congressistes de passage, tout comme les touristes attirés par la cathédrale ou le centre Pompidou-Metz, se tournent de plus en plus vers une IA générative pour savoir où trouver un cabinet médical ou paramédical disponible pendant leur séjour messin. Une IA qui relaie une adresse dépassée ou des horaires qui ne correspondent plus à l'organisation réelle du cabinet peut orienter cette personne vers une porte fermée, sans que le praticien n'en soit jamais informé de cette occasion manquée. Pour un cabinet installé dans le centre-ville ou à proximité de la gare, cette fiabilité de l'information affichée par les IA pèse directement sur la fréquentation lors des périodes de congrès. Le scan gratuit Dopaguard vérifie chaque semaine ce que ces IA disent réellement de votre cabinet à Metz.",
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "nancy",
+    localParagraph: "Nancy, capitale historique de la Lorraine et reconnue pour son patrimoine Art nouveau, attire toute l'année des visiteurs venus admirer la place Stanislas et les façades de l'École de Nancy, en plus de sa population étudiante et résidente. Ce public varié, parfois sans médecin traitant sur place, interroge de plus en plus une IA générative pour savoir si un cabinet médical ou paramédical nancéien est ouvert et à quels horaires, plutôt que de chercher un site institutionnel. Une IA qui continue de relayer des horaires habituels alors que le cabinet a modifié son organisation peut orienter un patient vers un rendez-vous impossible, sans que le praticien n'en soit jamais informé. Pour un cabinet installé près de la vieille ville ou du campus universitaire, cette fiabilité de l'information affichée par les IA compte particulièrement pour la patientèle étudiante comme pour les visiteurs de passage. Le scan gratuit Dopaguard vérifie chaque semaine ce que ces IA affirment sur votre cabinet à Nancy.",
+    painExampleOverride: {
+      quote: "Les horaires d'ouverture indiqués pour ce cabinet de Nancy sont du lundi au vendredi, 9h-17h, sans consultation le samedi.",
+      highlight: "sans consultation le samedi",
+      note: "Une IA a relayé des horaires habituels pour un cabinet nancéien qui avait pourtant modifié son organisation depuis plusieurs mois.",
+    },
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "caen",
+    localParagraph: "Caen, porte d'entrée de la Normandie, accueille tout au long de l'année des visiteurs venus pour le tourisme mémoriel et patrimonial, en particulier autour des sites liés au Débarquement, en plus de sa population résidente et étudiante. Ces visiteurs de passage, souvent sans médecin traitant local, se tournent de plus en plus vers une IA générative pour savoir où trouver un cabinet médical ou paramédical caennais disponible pendant leur séjour, plutôt que de chercher un annuaire papier. Une IA qui relaie une information non actualisée peut orienter cette personne vers un cabinet présenté à tort comme complet, ou vers des horaires qui ne correspondent plus à l'organisation réelle, sans que le praticien n'en soit jamais informé. Pour un cabinet installé dans le centre-ville ou à proximité du château, cette fiabilité de l'information affichée par les IA reste déterminante face à un flux touristique constant. Le scan gratuit Dopaguard permet de vérifier ce que ces IA disent aujourd'hui de votre cabinet à Caen.",
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "amiens",
+    localParagraph: "Amiens, connue pour sa cathédrale gothique classée à l'UNESCO, attire chaque année des visiteurs venus découvrir le patrimoine picard et les hortillonnages, en plus de sa population résidente et de ses nombreux étudiants. Ce public varié, parfois sans médecin traitant sur place, interroge de plus en plus une IA générative pour savoir si un cabinet médical ou paramédical amiénois reçoit encore de nouveaux patients, avant de se déplacer dans le centre historique ou les quartiers voisins. Si l'IA affirme à tort qu'un cabinet n'accepte plus de nouveaux patients, faute d'information récente, la personne se tourne simplement vers un autre praticien, sans que le cabinet amiénois n'en soit jamais informé. Pour un praticien installé près du beffroi ou du campus universitaire, cette population étudiante renouvelée chaque rentrée représente une source régulière de nouveaux patients, à condition d'être fidèlement relayée. Le scan gratuit Dopaguard permet de vérifier, à chaque rentrée, ce que ces IA affirment sur votre cabinet à Amiens.",
+    painExampleOverride: {
+      quote: "Ce cabinet d'Amiens ne semble plus accepter de nouveaux patients actuellement, selon les dernières informations disponibles.",
+      highlight: "ne semble plus accepter de nouveaux patients",
+      note: "Une IA a indiqué à tort qu'un cabinet amiénois n'acceptait plus de nouveaux patients, faute d'information récente, en pleine rentrée universitaire.",
+    },
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "tours",
+    localParagraph: "Tours, porte d'entrée du Val de Loire et de ses châteaux, accueille tout au long de l'année des visiteurs français et étrangers venus pour le tourisme patrimonial, en plus de sa population résidente et de sa vie étudiante active. Ces visiteurs de passage, sans médecin traitant local, se tournent de plus en plus vers une IA générative pour savoir où trouver un cabinet médical ou paramédical tourangeau disponible pendant leur séjour, plutôt que de chercher un annuaire local. Une IA qui relaie une adresse ou des horaires qui ne correspondent plus à l'organisation réelle du cabinet peut orienter cette personne vers une porte fermée, sans que le praticien n'en soit jamais informé de cette occasion manquée. Pour un cabinet installé dans le Vieux Tours ou à proximité de la gare, cette fiabilité de l'information affichée par les IA pèse directement sur la fréquentation touristique comme étudiante. Le scan gratuit Dopaguard vérifie chaque semaine ce que ces IA disent réellement de votre cabinet à Tours.",
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "perpignan",
+    localParagraph: "Perpignan, porte de la Catalogne française, combine une population résidente ancrée avec un tourisme saisonnier tourné à la fois vers la mer et vers la montagne, qui amène chaque été des visiteurs sans médecin traitant dans la région. Ce public de passage interroge de plus en plus une IA générative pour savoir si un cabinet médical ou paramédical perpignanais est ouvert et à quels horaires, plutôt que de chercher sur place. Une IA qui continue de relayer des horaires habituels alors que le cabinet a adapté son organisation pour la période estivale peut orienter un patient vers un rendez-vous impossible, sans que le praticien n'en soit jamais informé. Pour un cabinet installé dans le centre historique ou en périphérie, cette fiabilité saisonnière de l'information affichée par les IA compte particulièrement pendant les mois de forte affluence touristique. Le scan gratuit Dopaguard vérifie chaque semaine ce que ces IA affirment sur votre cabinet à Perpignan.",
+    painExampleOverride: {
+      quote: "Les horaires d'ouverture indiqués pour ce cabinet de Perpignan sont du lundi au vendredi, 9h-17h, sans consultation le samedi.",
+      highlight: "sans consultation le samedi",
+      note: "Une IA a relayé des horaires habituels pour un cabinet perpignanais qui avait pourtant adapté son organisation pendant la période estivale.",
+    },
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "clermont-ferrand",
+    localParagraph: "Clermont-Ferrand, ville de congrès installée au pied des volcans d'Auvergne, accueille régulièrement des visiteurs professionnels ainsi que des touristes venus pour le tourisme de nature, en plus de sa population résidente et étudiante. Ces visiteurs de passage, sans médecin traitant local, se tournent de plus en plus vers une IA générative pour savoir où trouver un cabinet médical ou paramédical clermontois disponible pendant leur séjour, plutôt que de chercher un annuaire papier. Une IA qui relaie une information non actualisée peut orienter cette personne vers un cabinet présenté à tort comme complet, ou vers des horaires qui ne correspondent plus à l'organisation réelle, sans que le praticien n'en soit jamais informé. Pour un cabinet installé dans le centre-ville ou à proximité de la cathédrale, cette fiabilité de l'information affichée par les IA pèse sur la fréquentation lors des périodes de congrès comme de tourisme. Le scan gratuit Dopaguard permet de vérifier ce que ces IA disent aujourd'hui de votre cabinet à Clermont-Ferrand.",
+  },
+  {
+    verticalSlug: "sante-cabinets-medicaux",
+    citySlug: "besancon",
+    localParagraph: "Besançon, dont la citadelle est classée à l'UNESCO, attire chaque année des visiteurs venus découvrir le patrimoine de la Franche-Comté, en plus de sa population résidente et de sa vie étudiante bien installée. Ce public varié, parfois sans médecin traitant sur place, interroge de plus en plus une IA générative pour savoir si un cabinet médical ou paramédical bisontin reçoit encore de nouveaux patients, avant de se déplacer dans la boucle du Doubs ou les quartiers voisins. Si l'IA affirme à tort qu'un cabinet n'accepte plus de nouveaux patients, faute d'information récente, la personne se tourne simplement vers un autre praticien, sans que le cabinet bisontin n'en soit jamais informé. Pour un praticien installé près de la citadelle ou du campus universitaire, cette population étudiante renouvelée chaque rentrée représente une source régulière de nouveaux patients, à condition d'être fidèlement relayée par les IA. Le scan gratuit Dopaguard permet de vérifier, à chaque rentrée, ce que ces IA affirment sur votre cabinet à Besançon.",
+    painExampleOverride: {
+      quote: "Ce cabinet de Besançon ne semble plus accepter de nouveaux patients actuellement, selon les dernières informations disponibles.",
+      highlight: "ne semble plus accepter de nouveaux patients",
+      note: "Une IA a indiqué à tort qu'un cabinet bisontin n'acceptait plus de nouveaux patients, faute d'information récente, en pleine rentrée universitaire.",
+    },
+  },
 ];
 
 export function getCityVerticalContent(verticalSlug: string, citySlug: string): CityVerticalContent | undefined {
