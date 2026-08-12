@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { getAppUrl } from "@/lib/app-url";
 import { BLOG_ARTICLES } from "@/lib/blog/articles";
 import { VERTICALS } from "@/lib/verticals";
+import { CITIES } from "@/lib/cities";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const appUrl = getAppUrl();
@@ -28,5 +29,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  return [...staticPages, ...verticalPages, ...articlePages];
+  const cityVerticalPages: MetadataRoute.Sitemap = VERTICALS.flatMap((vertical) =>
+    CITIES.map((city) => ({
+      url: `${appUrl}/secteurs/${vertical.slug}/${city.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+  );
+
+  return [...staticPages, ...verticalPages, ...cityVerticalPages, ...articlePages];
 }

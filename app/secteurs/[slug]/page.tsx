@@ -7,6 +7,7 @@ import { ORGANIZATION_JSON_LD, PRODUCT_JSON_LD } from "@/lib/jsonld";
 import { VerticalHero } from "@/components/verticals/VerticalHero";
 import { VerticalPainPoints } from "@/components/verticals/VerticalPainPoints";
 import { VerticalFaq } from "@/components/verticals/VerticalFaq";
+import { VerticalCityLinks } from "@/components/verticals/VerticalCityLinks";
 import { WhyContinuousMonitoring } from "@/components/landing/WhyContinuousMonitoring";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { PricingTable } from "@/components/landing/PricingTable";
@@ -57,6 +58,7 @@ export default function VerticalPage({ params }: { params: { slug: string } }) {
       <HowItWorks />
       <PricingTable />
       <VerticalFaq vertical={vertical} />
+      <VerticalCityLinks vertical={vertical} />
 
       {relatedArticle && (
         <section className="mx-auto max-w-3xl px-6 pb-14">
