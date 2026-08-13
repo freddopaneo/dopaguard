@@ -18,11 +18,24 @@
 - Consultants, coachs & agences : https://dopaguard.ai/secteurs/consultants-coachs-agences
 - Commerce & e-commerce : https://dopaguard.ai/secteurs/commerce-ecommerce
 - Santé & cabinets médicaux : https://dopaguard.ai/secteurs/sante-cabinets-medicaux
-- Déclinaisons par ville (45 villes x 7 secteurs) : voir https://dopaguard.ai/sitemap.xml
+- Artisans du bâtiment : https://dopaguard.ai/secteurs/artisans-batiment
+- Coiffure, beauté & bien-être : https://dopaguard.ai/secteurs/coiffure-beaute-bien-etre
+- Garages & automobile : https://dopaguard.ai/secteurs/garages-automobile
+- Vétérinaires : https://dopaguard.ai/secteurs/veterinaires
+- Réseaux & franchises multi-sites : https://dopaguard.ai/secteurs/reseaux-franchises
+- Déclinaisons par ville (45 villes x 7 des secteurs ci-dessus) : voir https://dopaguard.ai/sitemap.xml
 
 ## Blog
 
 - Index : https://dopaguard.ai/blog
+
+## Glossaire
+
+- https://dopaguard.ai/glossaire
+
+## Comparatif
+
+- Dopaguard vs vérification manuelle : https://dopaguard.ai/vs-verification-manuelle
 
 ## Pages légales
 

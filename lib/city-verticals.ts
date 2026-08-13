@@ -2343,6 +2343,13 @@ export function getCityVerticalContent(verticalSlug: string, citySlug: string): 
   return CITY_VERTICALS.find((entry) => entry.verticalSlug === verticalSlug && entry.citySlug === citySlug);
 }
 
+// Verticales pour lesquelles un paragraphe local existe reellement (les 7 verticales
+// d'origine). Les verticales ajoutees ensuite (batiment, coiffure, garages,
+// veterinaires, reseaux/franchises) n'ont delibirement pas de declinaison par ville --
+// decision de l'audit SEO/GEO de geler l'extension geographique. Sert a ne generer
+// aucune page ville vide (404) pour ces nouvelles verticales.
+export const CITY_VERTICAL_SLUGS: string[] = Array.from(new Set(CITY_VERTICALS.map((entry) => entry.verticalSlug)));
+
 function stripDiacritics(text: string): string {
   return Array.from(text.normalize("NFD"))
     .filter((char) => {

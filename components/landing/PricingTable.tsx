@@ -72,7 +72,7 @@ const VALUE_STACK = [
   },
   {
     label: "Alertes immédiates sur anomalie critique",
-    value: "le coût d'un seul client perdu dépasse largement l'abonnement",
+    value: "l'Essentiel coûte 828 €/an — évitez la perte d'un seul client et l'abonnement est rentabilisé plusieurs fois",
   },
   {
     label: "Rapport mensuel prêt à partager",

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { VERTICALS, getVerticalBySlug, type VerticalMeta } from "@/lib/verticals";
 import { CITIES, getCityBySlug } from "@/lib/cities";
-import { getCityVerticalContent, mergePainExamples } from "@/lib/city-verticals";
+import { getCityVerticalContent, mergePainExamples, CITY_VERTICAL_SLUGS } from "@/lib/city-verticals";
 import { getArticleBySlug } from "@/lib/blog/articles";
 import { getAppUrl } from "@/lib/app-url";
 import { ORGANIZATION_JSON_LD, PRODUCT_JSON_LD } from "@/lib/jsonld";
@@ -15,6 +15,7 @@ import { HowItWorks } from "@/components/landing/HowItWorks";
 import { PricingTable } from "@/components/landing/PricingTable";
 import { About } from "@/components/landing/About";
 import { Footer } from "@/components/landing/Footer";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 // Un angle H1 par verticale, avec la ville inseree au bon endroit grammaticalement --
 // impossible a generaliser automatiquement vu la diversite des tournures des 7 angles
@@ -46,7 +47,9 @@ const CITY_ANGLE_TEMPLATES: Record<string, (cityName: string) => { angle: string
 };
 
 export function generateStaticParams() {
-  return VERTICALS.flatMap((vertical) => CITIES.map((city) => ({ slug: vertical.slug, ville: city.slug })));
+  return VERTICALS.filter((vertical) => CITY_VERTICAL_SLUGS.includes(vertical.slug)).flatMap((vertical) =>
+    CITIES.map((city) => ({ slug: vertical.slug, ville: city.slug })),
+  );
 }
 
 export function generateMetadata({ params }: { params: { slug: string; ville: string } }): Metadata {
@@ -112,6 +115,18 @@ export default function CityVerticalPage({ params }: { params: { slug: string; v
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(PRODUCT_JSON_LD) }} />
 
       <VerticalHero vertical={cityVertical} />
+
+      <div className="mx-auto max-w-5xl px-6 pt-6">
+        <Breadcrumbs
+          items={[
+            { label: "Accueil", href: "/" },
+            { label: "Secteurs", href: "/secteurs" },
+            { label: vertical.label, href: `/secteurs/${vertical.slug}` },
+            { label: city.name },
+          ]}
+        />
+      </div>
+
       <VerticalCityContext vertical={vertical} city={city} localParagraph={content.localParagraph} />
 
       <WhyContinuousMonitoring />
@@ -151,7 +166,7 @@ export default function CityVerticalPage({ params }: { params: { slug: string; v
           href="#scan-form"
           className="mt-8 inline-flex items-center justify-center rounded-xl bg-dopaguard-navy px-6 py-3 text-sm font-semibold text-white hover:bg-dopaguard-navyMid"
         >
-          Lancer mon scan gratuit (2 min)
+          Lancer mon scan gratuit (3 min)
         </a>
       </section>
 
