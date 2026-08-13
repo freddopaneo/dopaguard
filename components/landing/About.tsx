@@ -15,16 +15,22 @@ const SOLUTIONS = [
 
 const TESTIMONIALS = [
   {
-    quote:
-      "Depuis que nous surveillons notre réputation dans les IA avec Dopaguard, le retour est excellent : nos demandes clients ont augmenté de plus de 30 %.",
+    isQuote: true,
+    text: "Depuis que nous surveillons notre réputation dans les IA avec Dopaguard, le retour est excellent : nos demandes clients ont augmenté de plus de 30 %.",
     author: "Frédéric Dupeyron",
     role: "Associé, Bike2Mobility",
   },
   {
-    quote:
-      "OOM Deco surveille sa réputation avec Dopaguard depuis son lancement. L'entreprise s'en sert pour identifier les bons leviers de positionnement et rester alignée avec ce que ses clients trouvent réellement à son sujet dans les IA génératives.",
+    isQuote: false,
+    text: "OOM Deco surveille sa réputation avec Dopaguard depuis son lancement, pour identifier les bons leviers de positionnement et rester alignée avec ce que ses clients trouvent réellement à son sujet dans les IA génératives.",
     author: "OOM Deco",
     role: "Cliente Dopaguard",
+  },
+  {
+    isQuote: false,
+    text: "Le nom « La Plage » étant très générique, les IA ne rattachaient pas toujours l'établissement à l'Île de Ré — ChatGPT donnait par moments une réponse totalement fausse. Grâce au rapport Dopaguard, le restaurant a adapté sa communication pour ressortir clairement comme un restaurant à Rivedoux-Plage, sur l'Île de Ré.",
+    author: "M. Lagord",
+    role: "Restaurant La Plage, Rivedoux-Plage (Île de Ré)",
   },
 ];
 
@@ -51,17 +57,19 @@ export function About() {
         ))}
       </div>
 
-      <div className="mx-auto mt-16 max-w-3xl">
+      <div className="mx-auto mt-16 max-w-5xl">
         <p className="text-center text-xs font-semibold uppercase tracking-wide text-dopaguard-teal">
           Ils surveillent leur réputation avec Dopaguard
         </p>
-        <div className="mt-6 grid gap-6 sm:grid-cols-2">
+        <div className="mt-6 grid gap-6 sm:grid-cols-3">
           {TESTIMONIALS.map((testimonial) => (
             <div
               key={testimonial.author}
               className="flex flex-col gap-4 rounded-2xl border-l-4 border-dopaguard-lime bg-white p-6"
             >
-              <p className="text-sm leading-relaxed text-dopaguard-navyMid">&laquo; {testimonial.quote} &raquo;</p>
+              <p className="text-sm leading-relaxed text-dopaguard-navyMid">
+                {testimonial.isQuote ? `« ${testimonial.text} »` : testimonial.text}
+              </p>
               <div>
                 <p className="text-sm font-semibold text-dopaguard-navy">{testimonial.author}</p>
                 <p className="text-xs text-dopaguard-navyMid/60">{testimonial.role}</p>
