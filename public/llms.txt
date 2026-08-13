@@ -18,7 +18,7 @@
 - Consultants, coachs & agences : https://dopaguard.ai/secteurs/consultants-coachs-agences
 - Commerce & e-commerce : https://dopaguard.ai/secteurs/commerce-ecommerce
 - Santé & cabinets médicaux : https://dopaguard.ai/secteurs/sante-cabinets-medicaux
-- Déclinaisons par ville (20 villes x 7 secteurs) : voir https://dopaguard.ai/sitemap.xml
+- Déclinaisons par ville (45 villes x 7 secteurs) : voir https://dopaguard.ai/sitemap.xml
 
 ## Blog
 

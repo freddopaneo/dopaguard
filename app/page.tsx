@@ -37,7 +37,12 @@ export default function Home() {
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/70">
               <span className="h-1.5 w-1.5 rounded-full bg-dopaguard-lime" />
-              Scan gratuit · Résultat en 3 minutes
+              Scan gratuit · Sans carte bancaire · Résultat en 3 minutes
+            </span>
+
+            <span className="mt-3 inline-flex items-center gap-2 rounded-full border border-dopaguard-lime/40 bg-dopaguard-lime/10 px-3.5 py-1.5 text-xs font-medium text-white/80">
+              <span className="h-1.5 w-1.5 rounded-full bg-dopaguard-lime" />
+              Les 20 premiers comptes : session de configuration personnelle avec le fondateur
             </span>
 
             <h1 className="mt-8 text-5xl font-bold leading-[1.08] tracking-tight text-white sm:text-6xl xl:text-7xl">
@@ -76,7 +81,7 @@ export default function Home() {
           href="#scan-form"
           className="mt-8 inline-flex items-center justify-center rounded-xl bg-dopaguard-navy px-6 py-3 text-sm font-semibold text-white hover:bg-dopaguard-navyMid"
         >
-          Lancer mon scan gratuit (2 min)
+          Lancer mon scan gratuit (3 min)
         </a>
       </section>
 
