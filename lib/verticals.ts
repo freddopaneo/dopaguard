@@ -365,6 +365,248 @@ export const VERTICALS: VerticalMeta[] = [
       "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre cabinet médical, et surveillez vos informations pratiques dans les IA chaque semaine.",
     accent: "teal",
   },
+  {
+    slug: "artisans-batiment",
+    label: "Artisans du bâtiment",
+    angle: "Quel artisan une IA recommande-t-elle pour vos travaux ?",
+    heroHighlight: "une IA",
+    heroKicker: "Scan gratuit · Artisans du bâtiment",
+    heroSubtitle:
+      "Avant d'appeler, un client demande de plus en plus à une IA : « quel plombier ou quel électricien recommandez-vous près de chez moi ? », souvent en urgence. Quand l'IA se trompe — un artisan déclaré indisponible, un numéro obsolète, le concurrent d'en face recommandé à votre place — l'appel qui aurait dû arriver ne vient jamais.",
+    painExamples: [
+      {
+        quote: "Cet artisan ne semble plus intervenir dans ce secteur, aucune disponibilité récente n'a été signalée.",
+        highlight: "ne semble plus intervenir dans ce secteur",
+        note: "Une IA a laissé entendre qu'un artisan toujours en activité avait cessé d'intervenir dans sa zone, faute d'information récente.",
+      },
+      {
+        quote: "Pour une intervention en urgence, un autre professionnel du secteur semble plus rapidement disponible.",
+        highlight: "un autre professionnel du secteur semble plus rapidement disponible",
+        note: "Une IA a orienté un client vers un concurrent plutôt que vers l'artisan interrogé, sur un métier où l'urgence pèse fortement dans la décision.",
+      },
+    ],
+    faqItems: [
+      {
+        question: "Est-ce adapté à un artisan indépendant, pas seulement aux entreprises du bâtiment structurées ?",
+        answer:
+          "Oui, en particulier. Un artisan seul n'a pas de service marketing pour surveiller ce que les IA disent de lui — Dopaguard le fait à sa place.",
+      },
+      {
+        question: "Les IA sont-elles vraiment consultées pour trouver un artisan ?",
+        answer:
+          "De plus en plus, notamment en urgence (fuite d'eau, panne électrique), où le client veut une réponse immédiate plutôt que de comparer plusieurs sites.",
+      },
+      {
+        question: "Que se passe-t-il si Dopaguard détecte une erreur sur ma disponibilité ou ma zone d'intervention ?",
+        answer:
+          "Vous recevez une alerte avec l'extrait exact de ce que l'IA a dit, la vérité attendue que vous avez validée, et une recommandation pour corriger la source.",
+      },
+      {
+        question: "Combien de temps avant de voir un premier résultat ?",
+        answer:
+          "Le scan gratuit donne un résultat en quelques minutes. La surveillance hebdomadaire démarre dès la semaine suivant votre inscription.",
+      },
+    ],
+    relatedArticleSlug: "reputation-ia-guide-complet-tpe-pme",
+    metaTitle: "Surveillance réputation IA — Artisans du bâtiment",
+    metaDescription:
+      "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre entreprise du bâtiment, et surveillez votre réputation dans les IA chaque semaine.",
+    accent: "lime",
+  },
+  {
+    slug: "coiffure-beaute-bien-etre",
+    label: "Coiffure, beauté & bien-être",
+    angle: "Quel salon une IA recommande-t-elle à votre place ?",
+    heroHighlight: "une IA",
+    heroKicker: "Scan gratuit · Coiffure, beauté & bien-être",
+    heroSubtitle:
+      "Avant de prendre rendez-vous, de plus en plus de clients demandent à une IA : « quel salon recommandez-vous pour... ? » — une décision souvent impulsive, où la confiance immédiate compte double. Quand l'IA se trompe — un avis ancien présenté comme récent, un salon concurrent mis en avant à votre place — le rendez-vous se prend ailleurs, sans que vous le sachiez jamais.",
+    painExamples: [
+      {
+        quote: "Ce salon a reçu plusieurs retours mentionnant un accueil décevant ces derniers temps.",
+        highlight: "un accueil décevant ces derniers temps",
+        note: "Une IA a relayé un avis ancien et isolé comme s'il reflétait l'ambiance actuelle du salon.",
+      },
+      {
+        quote:
+          "Pour ce type de prestation, un autre établissement du quartier semble bénéficier d'un meilleur bouche-à-oreille récemment.",
+        highlight: "un autre établissement du quartier semble bénéficier d'un meilleur bouche-à-oreille",
+        note: "Une IA a orienté un client potentiel vers un établissement concurrent plutôt que vers celui interrogé.",
+      },
+    ],
+    faqItems: [
+      {
+        question: "Ça concerne quels types d'établissements ?",
+        answer:
+          "Salons de coiffure, instituts de beauté, spas, salles de sport, praticiens du bien-être — tout établissement dont la clientèle se décide en partie sur la réputation perçue.",
+      },
+      {
+        question: "Une IA peut-elle vraiment influencer une prise de rendez-vous ?",
+        answer:
+          "De plus en plus. Une réponse formulée avec assurance par une IA peut orienter le choix d'un client avant même qu'il consulte votre site ou vos avis.",
+      },
+      {
+        question: "Que se passe-t-il si Dopaguard détecte un avis obsolète relayé par une IA ?",
+        answer:
+          "Vous recevez une alerte avec l'extrait exact de ce que l'IA a dit, la vérité attendue que vous avez validée, et une recommandation pour corriger la source.",
+      },
+      {
+        question: "Combien de temps avant de voir un premier résultat ?",
+        answer:
+          "Le scan gratuit donne un résultat en quelques minutes. La surveillance hebdomadaire démarre dès la semaine suivant votre inscription.",
+      },
+    ],
+    relatedArticleSlug: "chatgpt-dit-du-mal-de-mon-entreprise-sentiment-negatif",
+    metaTitle: "Surveillance réputation IA — Coiffure, beauté & bien-être",
+    metaDescription:
+      "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre salon, et surveillez votre réputation dans les IA chaque semaine.",
+    accent: "teal",
+  },
+  {
+    slug: "garages-automobile",
+    label: "Garages & automobile",
+    angle: "Quel garage une IA recommande-t-elle près de chez vous ?",
+    heroHighlight: "une IA",
+    heroKicker: "Scan gratuit · Garages & automobile",
+    heroSubtitle:
+      "Avant de confier leur véhicule, de plus en plus d'automobilistes demandent à une IA : « quel garage recommandez-vous pour... ? ». Quand l'IA se trompe — un garage déclaré fermé, des tarifs obsolètes, un concurrent recommandé à votre place — le client prend rendez-vous ailleurs sans jamais vous appeler.",
+    painExamples: [
+      {
+        quote: "Ce garage semble avoir cessé son activité à cette adresse, aucune information récente n'est disponible.",
+        highlight: "semble avoir cessé son activité",
+        note: "Une IA a laissé entendre qu'un garage en pleine activité avait fermé, faute d'information récente.",
+      },
+      {
+        quote: "Les tarifs de révision de ce garage démarrent autour de 80€, selon les données disponibles.",
+        highlight: "démarrent autour de 80€",
+        note: "Une IA a cité un tarif obsolète, en décalage avec la grille tarifaire actuelle du garage.",
+      },
+    ],
+    faqItems: [
+      {
+        question: "Ça s'applique aussi aux garages indépendants, pas seulement aux réseaux de marque ?",
+        answer:
+          "Oui, en particulier. Un garage indépendant n'a pas de service communication pour surveiller ce que les IA disent de lui — Dopaguard le fait à sa place.",
+      },
+      {
+        question: "Les IA sont-elles vraiment consultées pour trouver un garage ?",
+        answer:
+          "De plus en plus, notamment pour un dépannage ou une réparation urgente, où le client veut une réponse rapide plutôt que de comparer plusieurs avis.",
+      },
+      {
+        question: "Que se passe-t-il si Dopaguard détecte une erreur sur mes tarifs ou ma disponibilité ?",
+        answer:
+          "Vous recevez une alerte avec l'extrait exact de ce que l'IA a dit, la vérité attendue que vous avez validée, et une recommandation pour corriger la source.",
+      },
+      {
+        question: "Combien de temps avant de voir un premier résultat ?",
+        answer:
+          "Le scan gratuit donne un résultat en quelques minutes. La surveillance hebdomadaire démarre dès la semaine suivant votre inscription.",
+      },
+    ],
+    relatedArticleSlug: "ia-declare-entreprise-fermee-a-tort",
+    metaTitle: "Surveillance réputation IA — Garages & automobile",
+    metaDescription:
+      "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre garage, et surveillez votre réputation dans les IA chaque semaine.",
+    accent: "navy",
+  },
+  {
+    slug: "veterinaires",
+    label: "Vétérinaires",
+    angle: "Que répond une IA quand un propriétaire cherche votre cabinet ?",
+    heroHighlight: "une IA",
+    heroKicker: "Scan gratuit · Vétérinaires",
+    heroSubtitle:
+      "Avant d'appeler, un propriétaire d'animal demande de plus en plus à une IA : « ce cabinet vétérinaire est-il ouvert le week-end ? », « accepte-t-il les urgences ? ». Quand l'IA répond à tort que le cabinet est fermé ou complet, l'appel qui aurait dû avoir lieu n'a jamais lieu.",
+    painExamples: [
+      {
+        quote:
+          "Ce cabinet vétérinaire ne semble plus prendre de nouveaux patients actuellement, selon les dernières informations disponibles.",
+        highlight: "ne semble plus prendre de nouveaux patients",
+        note: "Une IA a indiqué à tort qu'un cabinet en activité n'acceptait plus de nouveaux animaux, faute d'information récente.",
+      },
+      {
+        quote: "Les horaires d'ouverture indiqués sont du lundi au vendredi, sans permanence le week-end.",
+        highlight: "sans permanence le week-end",
+        note: "Une IA a relayé des horaires obsolètes après un changement d'organisation du cabinet.",
+      },
+    ],
+    faqItems: [
+      {
+        question: "Est-ce que Dopaguard analyse du contenu vétérinaire ou clinique ?",
+        answer:
+          "Non, jamais. Dopaguard se limite strictement aux informations pratiques et organisationnelles — horaires, adresse, coordonnées, disponibilité pour de nouveaux patients — jamais au contenu clinique.",
+      },
+      {
+        question: "Ça concerne quels types de structures ?",
+        answer:
+          "Cabinets vétérinaires indépendants, cliniques, et plus largement toute structure dont des propriétaires d'animaux se renseignent en ligne avant de prendre contact.",
+      },
+      {
+        question: "Que se passe-t-il si une IA affirme à tort que mon cabinet est fermé ou complet ?",
+        answer:
+          "Vous recevez une alerte avec l'extrait exact de ce que l'IA a dit, la vérité attendue que vous avez validée, et une recommandation pour corriger la source.",
+      },
+      {
+        question: "Combien de temps avant de voir un premier résultat ?",
+        answer:
+          "Le scan gratuit donne un résultat en quelques minutes. La surveillance hebdomadaire démarre dès la semaine suivant votre inscription.",
+      },
+    ],
+    relatedArticleSlug: "reputation-ia-cabinets-medicaux",
+    metaTitle: "Surveillance réputation IA — Vétérinaires",
+    metaDescription:
+      "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre cabinet vétérinaire, et surveillez vos informations pratiques dans les IA chaque semaine.",
+    accent: "lime",
+  },
+  {
+    slug: "reseaux-franchises",
+    label: "Réseaux & franchises multi-sites",
+    angle: "Vos établissements disent-ils tous la même chose aux IA ?",
+    heroHighlight: "les IA",
+    heroKicker: "Scan gratuit · Réseaux & franchises multi-sites",
+    heroSubtitle:
+      "Chaque établissement d'un réseau a sa propre existence aux yeux d'une IA générative : un client qui demande « ce point de vente est-il ouvert ? » obtient une réponse propre à cette adresse, pas au réseau dans son ensemble. Un établissement mal représenté, ce sont des clients perdus sur ce site précis — sans que le siège ne s'en aperçoive, faute de vue d'ensemble.",
+    painExamples: [
+      {
+        quote: "Ce point de vente du réseau semble avoir fermé, aucune activité récente n'est visible à cette adresse.",
+        highlight: "semble avoir fermé",
+        note: "Une IA a confondu un établissement du réseau avec un autre point de vente proche, ou n'a pas intégré une réouverture récente.",
+      },
+      {
+        quote: "Les horaires de ce point de vente sont ceux du siège national, qui peuvent différer de l'agence locale.",
+        highlight: "ceux du siège national",
+        note: "Une IA a appliqué à un établissement précis une information valable pour le réseau dans son ensemble, sans distinguer les spécificités locales.",
+      },
+    ],
+    faqItems: [
+      {
+        question: "Combien d'établissements Dopaguard peut-il surveiller à la fois ?",
+        answer:
+          "Jusqu'à 10 marques ou points de vente distincts avec la formule Agence, chacun avec sa propre fiche de vérité et son propre suivi hebdomadaire.",
+      },
+      {
+        question: "Peut-on avoir des rapports en marque blanche pour chaque site ou client final ?",
+        answer:
+          "Oui, la formule Agence inclut des rapports en marque blanche — utile pour une centrale qui veut restituer un suivi propre à chaque franchisé ou point de vente.",
+      },
+      {
+        question: "Un problème détecté sur un établissement remonte-t-il automatiquement aux autres ?",
+        answer:
+          "Non : chaque établissement est surveillé et alerté indépendamment, pour ne jamais masquer un problème local derrière une vue d'ensemble rassurante.",
+      },
+      {
+        question: "Combien de temps avant de voir un premier résultat ?",
+        answer:
+          "Le scan gratuit donne un résultat en quelques minutes. La surveillance hebdomadaire démarre dès la semaine suivant votre inscription.",
+      },
+    ],
+    relatedArticleSlug: "cout-mauvaise-reputation-ia-entreprise",
+    metaTitle: "Surveillance réputation IA — Réseaux & franchises multi-sites",
+    metaDescription:
+      "Surveillez ce que ChatGPT, Claude et Perplexity disent de chacun de vos établissements, avec des rapports en marque blanche pour vos franchisés ou points de vente.",
+    accent: "navy",
+  },
 ];
 
 export function getVerticalBySlug(slug: string): VerticalMeta | undefined {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { VERTICALS, getVerticalBySlug, type VerticalMeta } from "@/lib/verticals";
 import { CITIES, getCityBySlug } from "@/lib/cities";
-import { getCityVerticalContent, mergePainExamples } from "@/lib/city-verticals";
+import { getCityVerticalContent, mergePainExamples, CITY_VERTICAL_SLUGS } from "@/lib/city-verticals";
 import { getArticleBySlug } from "@/lib/blog/articles";
 import { getAppUrl } from "@/lib/app-url";
 import { ORGANIZATION_JSON_LD, PRODUCT_JSON_LD } from "@/lib/jsonld";
@@ -47,7 +47,9 @@ const CITY_ANGLE_TEMPLATES: Record<string, (cityName: string) => { angle: string
 };
 
 export function generateStaticParams() {
-  return VERTICALS.flatMap((vertical) => CITIES.map((city) => ({ slug: vertical.slug, ville: city.slug })));
+  return VERTICALS.filter((vertical) => CITY_VERTICAL_SLUGS.includes(vertical.slug)).flatMap((vertical) =>
+    CITIES.map((city) => ({ slug: vertical.slug, ville: city.slug })),
+  );
 }
 
 export function generateMetadata({ params }: { params: { slug: string; ville: string } }): Metadata {
@@ -164,7 +166,7 @@ export default function CityVerticalPage({ params }: { params: { slug: string; v
           href="#scan-form"
           className="mt-8 inline-flex items-center justify-center rounded-xl bg-dopaguard-navy px-6 py-3 text-sm font-semibold text-white hover:bg-dopaguard-navyMid"
         >
-          Lancer mon scan gratuit (2 min)
+          Lancer mon scan gratuit (3 min)
         </a>
       </section>
 

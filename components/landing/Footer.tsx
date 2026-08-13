@@ -13,6 +13,10 @@ export function Footer() {
           Glossaire
         </a>
         <span aria-hidden>·</span>
+        <a href="/vs-verification-manuelle" className="hover:text-dopaguard-navyMid">
+          Pourquoi pas juste vérifier soi-même ?
+        </a>
+        <span aria-hidden>·</span>
         <a href="/mentions-legales" className="hover:text-dopaguard-navyMid">
           Mentions légales
         </a>

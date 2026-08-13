@@ -27,6 +27,14 @@ export function BlogLayout({ meta, children }: { meta: BlogArticleMeta; children
             Lancer mon scan gratuit →
           </Link>
         </div>
+
+        <p className="mt-6 text-center text-sm text-dopaguard-navyMid/60">
+          Votre activité a son propre angle :{" "}
+          <Link href="/secteurs" className="font-medium text-dopaguard-navy underline underline-offset-2">
+            découvrez les pages par secteur
+          </Link>
+          .
+        </p>
       </div>
     </div>
   );

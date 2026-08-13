@@ -76,7 +76,7 @@ export default function Home() {
           href="#scan-form"
           className="mt-8 inline-flex items-center justify-center rounded-xl bg-dopaguard-navy px-6 py-3 text-sm font-semibold text-white hover:bg-dopaguard-navyMid"
         >
-          Lancer mon scan gratuit (2 min)
+          Lancer mon scan gratuit (3 min)
         </a>
       </section>
 
