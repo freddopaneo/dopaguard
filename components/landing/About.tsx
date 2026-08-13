@@ -38,14 +38,26 @@ export function About() {
   return (
     <section id="a-propos" className="mx-auto max-w-5xl scroll-mt-24 px-6 py-14 sm:py-24">
       <div className="mx-auto max-w-2xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-wide text-dopaguard-teal">Fondateur</p>
-        <h2 className="mt-2 text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">Frédéric Dubois</h2>
-        <p className="mt-4 text-lg leading-relaxed text-dopaguard-navyMid/80">
-          Entrepreneur dans la tech et la mobilité depuis plus de 15 ans, toujours à la recherche de nouvelles façons
-          d&apos;optimiser ses entreprises et curieux de partager cette expertise avec ses clients. Il a fondé
-          Dopaneo.ai pour transformer cette approche en solutions concrètes, avec un accompagnement dans la durée
-          plutôt qu&apos;un outil livré et laissé de côté.
+        <h2 className="text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">Le mot du fondateur</h2>
+      </div>
+
+      <div className="mx-auto mt-8 max-w-2xl rounded-2xl border-l-4 border-dopaguard-lime bg-white p-7 sm:p-8">
+        <p className="text-base leading-relaxed text-dopaguard-navyMid">
+          &laquo;&nbsp;Entrepreneur dans la tech et la mobilité depuis plus de 20 ans, je cherche en permanence à
+          optimiser mes entreprises — et à partager ce qui fonctionne avec nos clients. C&apos;est pour cela que
+          j&apos;ai fondé Dopaneo.ai : avec une équipe d&apos;experts à mes côtés, nous construisons des solutions IA
+          concrètes et nous accompagnons leur mise en place dans la durée, plutôt que de livrer un outil et de passer
+          au suivant.&nbsp;&raquo;
         </p>
+        <div className="mt-5 flex items-center gap-3">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-dopaguard-navy text-sm font-bold text-dopaguard-lime">
+            FD
+          </span>
+          <div>
+            <p className="text-sm font-semibold text-dopaguard-navy">Frédéric Dubois</p>
+            <p className="text-xs text-dopaguard-navyMid/60">Fondateur, Dopaneo.ai</p>
+          </div>
+        </div>
       </div>
 
       <div className="mt-14 grid gap-6 sm:grid-cols-3">
