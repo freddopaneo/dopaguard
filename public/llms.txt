@@ -24,6 +24,10 @@
 
 - Index : https://dopaguard.ai/blog
 
+## Glossaire
+
+- https://dopaguard.ai/glossaire
+
 ## Pages légales
 
 - Mentions légales : https://dopaguard.ai/mentions-legales

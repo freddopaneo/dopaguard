@@ -162,10 +162,9 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
           <div className="flex flex-col justify-center gap-3">
             <ScanProviderSummary responses={responses} />
             <p className="text-xs leading-relaxed text-dopaguard-navyMid/60">
-              Ce score compte la proportion de réponses sans écart détecté sur les 3 IA interrogées. Un écart n&apos;est
-              pas toujours une erreur factuelle : il peut aussi s&apos;agir d&apos;une IA qui hésite ou manque
-              d&apos;informations récentes sur vous — un signal de fragilité de visibilité, pas forcément une
-              affirmation fausse. Le détail de chaque écart est visible plus bas, catégorie par catégorie.
+              Ce score compte la proportion de réponses sans écart détecté sur les 3 IA interrogées. Ce type
+              d&apos;écart est fréquent : la plupart des entreprises que nous analysons découvrent au moins un point
+              à corriger. Le détail de chaque écart est visible plus bas, catégorie par catégorie.
             </p>
           </div>
         </div>
@@ -183,7 +182,13 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
           <ScanCategoryAccordion responses={responses} />
         </div>
 
-        <div className="mt-16 flex flex-col items-center gap-4 rounded-2xl bg-dopaguard-navy p-10 text-center">
+        <p className="mt-6 text-xs leading-relaxed text-dopaguard-navyMid/60">
+          Un écart n&apos;est pas toujours une erreur factuelle : il peut aussi s&apos;agir d&apos;une IA qui hésite ou
+          manque d&apos;informations récentes sur vous — un signal de fragilité de visibilité, pas forcément une
+          affirmation fausse.
+        </p>
+
+        <div className="mt-10 flex flex-col items-center gap-4 rounded-2xl bg-dopaguard-navy p-10 text-center">
           <h2 className="max-w-lg text-2xl font-bold text-white sm:text-3xl">
             Ce que vous venez de voir n&apos;est qu&apos;une photo — à un instant T.
           </h2>

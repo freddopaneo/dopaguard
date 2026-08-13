@@ -74,7 +74,7 @@ export const VERTICALS: VerticalMeta[] = [
       },
     ],
     relatedArticleSlug: "reputation-ia-hotellerie-restauration",
-    metaTitle: "ChatGPT recommande-t-il votre hôtel ?",
+    metaTitle: "Surveillance réputation IA — Hôtels",
     metaDescription:
       "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre hôtel, et surveillez votre réputation dans les IA chaque semaine.",
     accent: "lime",
@@ -122,7 +122,7 @@ export const VERTICALS: VerticalMeta[] = [
       },
     ],
     relatedArticleSlug: "reputation-ia-hotellerie-restauration",
-    metaTitle: "Quelle adresse l'IA recommande-t-elle à votre place ?",
+    metaTitle: "Surveillance réputation IA — Restaurants",
     metaDescription:
       "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre restaurant, et surveillez votre réputation dans les IA chaque semaine.",
     accent: "teal",
@@ -169,7 +169,7 @@ export const VERTICALS: VerticalMeta[] = [
       },
     ],
     relatedArticleSlug: "reputation-ia-agences-immobilieres",
-    metaTitle: "Quelle agence ChatGPT recommande-t-il dans votre ville ?",
+    metaTitle: "Surveillance réputation IA — Immobilier",
     metaDescription:
       "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre agence immobilière, et surveillez votre réputation dans les IA chaque semaine.",
     accent: "navy",
@@ -216,7 +216,7 @@ export const VERTICALS: VerticalMeta[] = [
       },
     ],
     relatedArticleSlug: "reputation-ia-professions-liberales",
-    metaTitle: "Que dit une IA quand un prospect demande qui vous êtes ?",
+    metaTitle: "Surveillance réputation IA — Avocats & professions libérales",
     metaDescription:
       "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre cabinet, et surveillez votre réputation dans les IA chaque semaine.",
     accent: "teal",
@@ -264,7 +264,7 @@ export const VERTICALS: VerticalMeta[] = [
       },
     ],
     relatedArticleSlug: "reputation-ia-services-entreprises",
-    metaTitle: "Êtes-vous visible quand un prospect cherche un expert via une IA ?",
+    metaTitle: "Surveillance réputation IA — Consultants, coachs & agences",
     metaDescription:
       "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre expertise, et surveillez votre réputation dans les IA chaque semaine.",
     accent: "lime",
@@ -312,7 +312,7 @@ export const VERTICALS: VerticalMeta[] = [
       },
     ],
     relatedArticleSlug: "reputation-ia-commerce-ecommerce",
-    metaTitle: "Quelle boutique en ligne l'IA recommande-t-elle à votre place ?",
+    metaTitle: "Surveillance réputation IA — Commerce & e-commerce",
     metaDescription:
       "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre boutique en ligne, et surveillez votre réputation dans les IA chaque semaine.",
     accent: "navy",
@@ -360,7 +360,7 @@ export const VERTICALS: VerticalMeta[] = [
       },
     ],
     relatedArticleSlug: "reputation-ia-cabinets-medicaux",
-    metaTitle: "Que répond une IA quand un patient cherche votre cabinet ?",
+    metaTitle: "Surveillance réputation IA — Santé & cabinets médicaux",
     metaDescription:
       "Découvrez gratuitement ce que ChatGPT, Claude et Perplexity disent de votre cabinet médical, et surveillez vos informations pratiques dans les IA chaque semaine.",
     accent: "teal",

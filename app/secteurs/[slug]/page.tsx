@@ -8,6 +8,7 @@ import { VerticalHero } from "@/components/verticals/VerticalHero";
 import { VerticalPainPoints } from "@/components/verticals/VerticalPainPoints";
 import { VerticalFaq } from "@/components/verticals/VerticalFaq";
 import { VerticalCityLinks } from "@/components/verticals/VerticalCityLinks";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { WhyContinuousMonitoring } from "@/components/landing/WhyContinuousMonitoring";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { PricingTable } from "@/components/landing/PricingTable";
@@ -52,6 +53,12 @@ export default function VerticalPage({ params }: { params: { slug: string } }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(PRODUCT_JSON_LD) }} />
 
       <VerticalHero vertical={vertical} />
+
+      <div className="mx-auto max-w-5xl px-6 pt-6">
+        <Breadcrumbs
+          items={[{ label: "Accueil", href: "/" }, { label: "Secteurs", href: "/secteurs" }, { label: vertical.label }]}
+        />
+      </div>
 
       <WhyContinuousMonitoring />
       <VerticalPainPoints vertical={vertical} />

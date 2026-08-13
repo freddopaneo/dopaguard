@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { CATEGORY_LABELS, type BlogArticleMeta } from "@/lib/blog/articles";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 export function BlogLayout({ meta, children }: { meta: BlogArticleMeta; children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-dopaguard-cream px-6 py-12 text-dopaguard-navy">
       <div className="mx-auto max-w-2xl">
-        <Link href="/blog" className="text-xs font-semibold text-dopaguard-navyMid/60 hover:text-dopaguard-navyMid">
-          ← Blog {process.env.NEXT_PUBLIC_APP_NAME || "Dopaguard"}
-        </Link>
+        <Breadcrumbs
+          items={[{ label: "Accueil", href: "/" }, { label: "Blog", href: "/blog" }, { label: meta.title }]}
+        />
         <p className="mt-6 text-xs font-semibold uppercase tracking-wide text-dopaguard-teal">
           {CATEGORY_LABELS[meta.category]}
         </p>

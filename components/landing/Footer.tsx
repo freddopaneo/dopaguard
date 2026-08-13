@@ -9,6 +9,10 @@ export function Footer() {
           Blog
         </a>
         <span aria-hidden>·</span>
+        <a href="/glossaire" className="hover:text-dopaguard-navyMid">
+          Glossaire
+        </a>
+        <span aria-hidden>·</span>
         <a href="/mentions-legales" className="hover:text-dopaguard-navyMid">
           Mentions légales
         </a>

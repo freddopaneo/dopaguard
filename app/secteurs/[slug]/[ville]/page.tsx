@@ -15,6 +15,7 @@ import { HowItWorks } from "@/components/landing/HowItWorks";
 import { PricingTable } from "@/components/landing/PricingTable";
 import { About } from "@/components/landing/About";
 import { Footer } from "@/components/landing/Footer";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 // Un angle H1 par verticale, avec la ville inseree au bon endroit grammaticalement --
 // impossible a generaliser automatiquement vu la diversite des tournures des 7 angles
@@ -112,6 +113,18 @@ export default function CityVerticalPage({ params }: { params: { slug: string; v
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(PRODUCT_JSON_LD) }} />
 
       <VerticalHero vertical={cityVertical} />
+
+      <div className="mx-auto max-w-5xl px-6 pt-6">
+        <Breadcrumbs
+          items={[
+            { label: "Accueil", href: "/" },
+            { label: "Secteurs", href: "/secteurs" },
+            { label: vertical.label, href: `/secteurs/${vertical.slug}` },
+            { label: city.name },
+          ]}
+        />
+      </div>
+
       <VerticalCityContext vertical={vertical} city={city} localParagraph={content.localParagraph} />
 
       <WhyContinuousMonitoring />

@@ -19,6 +19,11 @@ import ImportanceRapiditeAlerteReputationIa from "./importance-rapidite-alerte-r
 import EReputationClassiqueVsReputationIaGenerative from "./e-reputation-classique-vs-reputation-ia-generative";
 import CoutMauvaiseReputationIaEntreprise from "./cout-mauvaise-reputation-ia-entreprise";
 import AuditerGratuitementReputationIa3Minutes from "./auditer-gratuitement-reputation-ia-3-minutes";
+import CommentApparaitreDansLesReponsesChatgpt from "./comment-apparaitre-dans-les-reponses-chatgpt";
+import MonEntrepriseInvisibleDansChatgpt from "./mon-entreprise-invisible-dans-chatgpt";
+import ChatgptDitDuMalDeMonEntrepriseSentimentNegatif from "./chatgpt-dit-du-mal-de-mon-entreprise-sentiment-negatif";
+import QueDitPerplexityDeMonEntreprise from "./que-dit-perplexity-de-mon-entreprise";
+import IaConfondMonEntrepriseAvecUneAutre from "./ia-confond-mon-entreprise-avec-une-autre";
 
 // Registre slug -> composant de contenu. Doit rester synchrone avec
 // lib/blog/articles.ts (un slug de chaque côté) -- vérifié par un test simple à la
@@ -44,4 +49,9 @@ export const ARTICLE_COMPONENTS: Record<string, ComponentType> = {
   "e-reputation-classique-vs-reputation-ia-generative": EReputationClassiqueVsReputationIaGenerative,
   "cout-mauvaise-reputation-ia-entreprise": CoutMauvaiseReputationIaEntreprise,
   "auditer-gratuitement-reputation-ia-3-minutes": AuditerGratuitementReputationIa3Minutes,
+  "comment-apparaitre-dans-les-reponses-chatgpt": CommentApparaitreDansLesReponsesChatgpt,
+  "mon-entreprise-invisible-dans-chatgpt": MonEntrepriseInvisibleDansChatgpt,
+  "chatgpt-dit-du-mal-de-mon-entreprise-sentiment-negatif": ChatgptDitDuMalDeMonEntrepriseSentimentNegatif,
+  "que-dit-perplexity-de-mon-entreprise": QueDitPerplexityDeMonEntreprise,
+  "ia-confond-mon-entreprise-avec-une-autre": IaConfondMonEntrepriseAvecUneAutre,
 };

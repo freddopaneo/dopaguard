@@ -218,6 +218,51 @@ export const BLOG_ARTICLES: BlogArticleMeta[] = [
     keywords: ["scan gratuit réputation IA", "audit réputation ChatGPT gratuit"],
     publishedAt: "2026-07-19",
   },
+  {
+    slug: "mon-entreprise-invisible-dans-chatgpt",
+    title: "Mon entreprise est invisible dans ChatGPT : le problème le plus fréquent et le moins visible",
+    description:
+      "Votre entreprise n'apparaît jamais quand un client demande une recommandation à une IA. Pourquoi cette invisibilité est plus fréquente qu'une erreur, et comment la détecter.",
+    category: "guide-pratique",
+    keywords: ["invisibilité IA entreprise", "ChatGPT ne me recommande pas", "absence recommandation IA générative"],
+    publishedAt: "2026-08-13",
+  },
+  {
+    slug: "chatgpt-dit-du-mal-de-mon-entreprise-sentiment-negatif",
+    title: "ChatGPT dit du mal de votre entreprise : que faire face à un ton négatif ?",
+    description:
+      "Un dirigeant demande à ChatGPT ce qu'il pense de son entreprise et découvre un ton défavorable. Pas d'erreur factuelle, mais un signal à vérifier avant de s'inquiéter.",
+    category: "guide-pratique",
+    keywords: ["sentiment négatif IA", "ton défavorable ChatGPT", "e-réputation intelligence artificielle"],
+    publishedAt: "2026-08-13",
+  },
+  {
+    slug: "que-dit-perplexity-de-mon-entreprise",
+    title: "Ce que dit Perplexity de votre entreprise (et pourquoi le vérifier séparément)",
+    description:
+      "Perplexity cite ses sources dans chaque réponse, contrairement aux autres IA. Découvrez comment vérifier et corriger ce qu'il dit de votre entreprise.",
+    category: "guide-pratique",
+    keywords: ["Perplexity entreprise", "sources IA", "réputation IA"],
+    publishedAt: "2026-08-13",
+  },
+  {
+    slug: "ia-confond-mon-entreprise-avec-une-autre",
+    title: "Quand une IA confond votre entreprise avec une autre (homonyme, franchise, rachat)",
+    description:
+      "Homonymie, franchise, rachat non intégré : découvrez comment une IA générative peut mélanger votre entreprise avec une autre entité réelle, et comment détecter ce risque discret.",
+    category: "guide-pratique",
+    keywords: ["confusion d'entités IA", "homonymie entreprise", "franchise et réseau IA"],
+    publishedAt: "2026-08-13",
+  },
+  {
+    slug: "comment-apparaitre-dans-les-reponses-chatgpt",
+    title: "Comment mieux apparaître dans les réponses de ChatGPT et des IA génératives",
+    description:
+      "Le référencement Google ne suffit plus. Voici les leviers raisonnables pour être mieux décrit, mieux recommandé et mieux compris par les IA génératives.",
+    category: "reputation-ia",
+    keywords: ["apparaître dans ChatGPT", "être recommandé par une IA", "optimiser sa présence IA générative"],
+    publishedAt: "2026-08-13",
+  },
 ];
 
 export function getArticleBySlug(slug: string): BlogArticleMeta | undefined {
