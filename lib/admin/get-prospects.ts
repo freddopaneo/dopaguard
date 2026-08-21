@@ -26,10 +26,25 @@ function countFlags(results: unknown): number | null {
   return responses.reduce((total, response) => total + (response.flags?.length ?? 0), 0);
 }
 
+export interface ProspectsResult {
+  prospects: ProspectRow[];
+  /** Message technique si la lecture a echoue -- affiche tel quel dans l'admin
+   *  plutot que de laisser croire a une liste vide. */
+  error: string | null;
+}
+
 // Service_role : lit tous les scans gratuits et tous les comptes, reserve a
 // l'espace admin (jamais appele sans verification prealable de
 // profiles.role = 'admin' dans app/admin/layout.tsx).
-export async function getProspects(): Promise<ProspectRow[]> {
+export async function getProspects(): Promise<ProspectsResult> {
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return {
+      prospects: [],
+      error:
+        "Variables d'environnement Supabase absentes sur ce déploiement (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY).",
+    };
+  }
+
   const admin = createAdminClient();
 
   const [scansResult, profilesResult] = await Promise.all([
@@ -42,13 +57,17 @@ export async function getProspects(): Promise<ProspectRow[]> {
     admin.from("profiles").select("email"),
   ]);
 
+  if (scansResult.error) {
+    return { prospects: [], error: scansResult.error.message };
+  }
+
   const customerEmails = new Set(
     (profilesResult.data ?? [])
       .map((profile: { email: string | null }) => profile.email?.toLowerCase())
       .filter((email): email is string => Boolean(email)),
   );
 
-  return (scansResult.data ?? []).map((row: Record<string, unknown>) => {
+  const prospects = (scansResult.data ?? []).map((row: Record<string, unknown>) => {
     const email = row.email as string;
     const flaggedCount = countFlags(row.results);
 
@@ -64,4 +83,6 @@ export async function getProspects(): Promise<ProspectRow[]> {
       createdAt: row.created_at as string,
     };
   });
+
+  return { prospects, error: null };
 }
