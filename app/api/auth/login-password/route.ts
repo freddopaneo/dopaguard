@@ -25,11 +25,22 @@ export async function POST(request: NextRequest) {
   // de mot de passe custom ici. Message générique dans tous les cas : ne révèle jamais
   // si l'email correspond à un compte existant, même logique que le lien magique.
   const supabase = createServerSupabaseClient();
-  const { error } = await supabase.auth.signInWithPassword(parsed.data);
+  const { data, error } = await supabase.auth.signInWithPassword(parsed.data);
 
   if (error) {
     return NextResponse.json({ error: "Email ou mot de passe incorrect." }, { status: 401 });
   }
 
-  return NextResponse.json({ ok: true });
+  // Un compte admin est renvoye vers son espace plutot que vers le parcours client :
+  // sans cela il atterrit sur /dashboard, qui le rebascule vers l'onboarding tant
+  // qu'aucune marque n'est configuree -- l'espace admin devenait inatteignable.
+  let redirectTo = "/dashboard";
+  if (data.user) {
+    const { data: profile } = await supabase.from("profiles").select("role").eq("id", data.user.id).maybeSingle();
+    if (profile?.role === "admin") {
+      redirectTo = "/admin";
+    }
+  }
+
+  return NextResponse.json({ ok: true, redirectTo });
 }

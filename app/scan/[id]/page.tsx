@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ScanScoreGauge } from "@/components/scan/ScanScoreGauge";
 import { ScanProviderSummary } from "@/components/scan/ScanProviderSummary";
 import { ScanCategoryAccordion } from "@/components/scan/ScanCategoryAccordion";
-import { computeOverallScore } from "@/lib/scan/score";
+import { computeReliabilityScore, computeVisibilityScore, countUnknownResponses } from "@/lib/scan/score";
 
 const PROGRESS_MESSAGES = [
   "Interrogation de ChatGPT…",
@@ -149,6 +149,9 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
     );
   }
 
+  const unknownCount = countUnknownResponses(responses);
+  const usableCount = responses.filter((r) => !r.error).length;
+
   return (
     <div className="min-h-screen bg-dopaguard-cream text-dopaguard-navy">
       <div className="px-6 py-16 text-center" style={HERO_GRADIENT}>
@@ -157,16 +160,21 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
       </div>
 
       <div className="mx-auto max-w-4xl px-6 py-16">
-        <div className="grid gap-6 sm:grid-cols-[auto_1fr] sm:items-start">
-          <ScanScoreGauge score={computeOverallScore(responses).score} />
-          <div className="flex flex-col justify-center gap-3">
-            <ScanProviderSummary responses={responses} />
-            <p className="text-xs leading-relaxed text-dopaguard-navyMid/60">
-              Ce score compte la proportion de réponses sans écart détecté sur les 3 IA interrogées. Ce type
-              d&apos;écart est fréquent : la plupart des entreprises que nous analysons découvrent au moins un point
-              à corriger. Le détail de chaque écart est visible plus bas, catégorie par catégorie.
-            </p>
-          </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <ScanScoreGauge score={computeReliabilityScore(responses).score} kind="reliability" />
+          <ScanScoreGauge score={computeVisibilityScore(responses).score} kind="visibility" />
+        </div>
+
+        <div className="mt-4 flex flex-col gap-3">
+          <ScanProviderSummary responses={responses} />
+          <p className="text-xs leading-relaxed text-dopaguard-navyMid/60">
+            Ces deux notes répondent à des questions différentes. La <strong>fiabilité</strong> mesure, quand les IA
+            parlent de vous, si ce qu&apos;elles disent est exact. La <strong>visibilité</strong> mesure si elles vous
+            connaissent seulement : {unknownCount} réponse{unknownCount > 1 ? "s" : ""} sur {usableCount} montre
+            {unknownCount > 1 ? "nt" : ""} une IA qui déclare ne pas avoir d&apos;information fiable sur vous. Une
+            entreprise inconnue des IA n&apos;a rien fait de mal — mais elle est absente des recommandations faites à
+            vos futurs clients.
+          </p>
         </div>
 
         <div className="mt-6 rounded-2xl border border-dopaguard-muted bg-white px-5 py-4 text-center text-sm text-dopaguard-navyMid">
@@ -184,8 +192,8 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
 
         <p className="mt-6 text-xs leading-relaxed text-dopaguard-navyMid/60">
           Un écart n&apos;est pas toujours une erreur factuelle : il peut aussi s&apos;agir d&apos;une IA qui hésite ou
-          manque d&apos;informations récentes sur vous — un signal de fragilité de visibilité, pas forcément une
-          affirmation fausse.
+          manque d&apos;informations récentes sur vous. Les passages où l&apos;IA déclare simplement ne pas vous
+          connaître sont comptés à part, dans la visibilité — ils ne pénalisent pas votre fiabilité.
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-4 rounded-2xl bg-dopaguard-navy p-10 text-center">

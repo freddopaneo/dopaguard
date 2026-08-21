@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test:llm-gateway": "tsx scripts/test-llm-gateway.ts",
-    "test:rls-isolation": "tsx scripts/rls-isolation-test.ts"
+    "test:rls-isolation": "tsx scripts/rls-isolation-test.ts",
+    "rejudge:free-scans": "tsx scripts/rejudge-free-scans.ts"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.5.1",
