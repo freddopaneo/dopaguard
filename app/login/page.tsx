@@ -54,7 +54,7 @@ export default function LoginPage() {
         setStatus("error");
         return;
       }
-      router.push("/dashboard");
+      router.push(typeof data.redirectTo === "string" ? data.redirectTo : "/dashboard");
       router.refresh();
     } catch {
       setErrorMessage("Une erreur est survenue.");
