@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { getAppUrl } from "@/lib/app-url";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,8 +15,20 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Dopaguard",
+  metadataBase: new URL(getAppUrl()),
+  title: {
+    default: "Dopaguard",
+    template: "%s | Dopaguard",
+  },
   description: "Surveillance de réputation de marque dans les LLM",
+  openGraph: {
+    siteName: "Dopaguard",
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({

@@ -9,7 +9,7 @@ interface NavItem {
   enabled: boolean;
 }
 
-const NAV_ITEMS: NavItem[] = [
+const BASE_NAV_ITEMS: NavItem[] = [
   { href: "/dashboard", label: "Vue d'ensemble", enabled: true },
   { href: "/dashboard/anomalies", label: "Anomalies", enabled: true },
   { href: "/dashboard/reponses", label: "Réponses brutes", enabled: true },
@@ -17,12 +17,18 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/dashboard/parametres", label: "Paramètres", enabled: true },
 ];
 
-export function DashboardNav() {
+const AGENCE_NAV_ITEM: NavItem = { href: "/dashboard/marques", label: "Marques", enabled: true };
+
+export function DashboardNav({ isAgence }: { isAgence: boolean }) {
   const pathname = usePathname();
+
+  const navItems = isAgence
+    ? [BASE_NAV_ITEMS[0], AGENCE_NAV_ITEM, ...BASE_NAV_ITEMS.slice(1)]
+    : BASE_NAV_ITEMS;
 
   return (
     <nav className="flex gap-1 overflow-x-auto border-b border-white/10 px-6">
-      {NAV_ITEMS.map((item) => {
+      {navItems.map((item) => {
         if (!item.enabled) {
           return (
             <span
@@ -35,7 +41,7 @@ export function DashboardNav() {
           );
         }
 
-        const isActive = pathname === item.href;
+        const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
         return (
           <Link

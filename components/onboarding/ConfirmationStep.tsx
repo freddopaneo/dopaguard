@@ -2,6 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { PROVIDER_ORDER, ALL_PROVIDERS, PROVIDER_LABELS } from "@/lib/providers";
+
+function providersForPlan(plan: string | null): string[] {
+  const providers = plan === "essentiel" ? PROVIDER_ORDER : ALL_PROVIDERS;
+  return providers.map((p) => PROVIDER_LABELS[p]);
+}
 
 export function ConfirmationStep({
   brandId,
@@ -12,11 +18,12 @@ export function ConfirmationStep({
   brandId: string;
   brandName: string;
   promptCount: number;
-  onDone: () => void;
+  onDone: (plan: string | null) => void;
 }) {
   const [loading, setLoading] = useState(true);
   const [brandName, setBrandName] = useState(initialBrandName);
   const [promptCount, setPromptCount] = useState(initialPromptCount);
+  const [plan, setPlan] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
@@ -32,6 +39,7 @@ export function ConfirmationStep({
         if (cancelled) return;
         setBrandName(data.brandName ?? "");
         setPromptCount(data.promptCount ?? 0);
+        setPlan(data.plan ?? null);
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -60,7 +68,19 @@ export function ConfirmationStep({
         return;
       }
 
-      onDone();
+      // Déclenchée sans attendre sa réponse : pour un plan Pro/Agence (5 IA), cette
+      // analyse peut prendre plusieurs minutes -- bien trop long pour que le
+      // navigateur reste bloqué dessus. Elle continue de tourner côté serveur
+      // indépendamment de la navigation qui suit.
+      fetch("/api/onboarding/run-first-scan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ brandId }),
+      }).catch(() => {
+        // Un échec ici n'empêche jamais la suite : le prochain cron hebdomadaire rattrapera.
+      });
+
+      onDone(plan);
     } catch {
       setError("Une erreur est survenue.");
       setSaving(false);
@@ -75,6 +95,8 @@ export function ConfirmationStep({
     );
   }
 
+  const providers = providersForPlan(plan);
+
   return (
     <div className="flex flex-col gap-4 text-center">
       <h2 className="text-lg font-semibold text-dopaguard-navy">Récapitulatif</h2>
@@ -87,6 +109,9 @@ export function ConfirmationStep({
         </p>
         <p className="mt-1">
           <span className="font-medium">Fiche de vérité :</span> validée
+        </p>
+        <p className="mt-1">
+          <span className="font-medium">IA interrogées :</span> {providers.join(", ")}
         </p>
       </div>
       <Button type="button" onClick={handleConfirm} disabled={saving}>

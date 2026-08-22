@@ -7,9 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:llm-gateway": "tsx scripts/test-llm-gateway.ts"
+    "test:llm-gateway": "tsx scripts/test-llm-gateway.ts",
+    "test:rls-isolation": "tsx scripts/rls-isolation-test.ts",
+    "rejudge:free-scans": "tsx scripts/rejudge-free-scans.ts"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^4.5.1",
     "@supabase/ssr": "^0.12.3",
     "@supabase/supabase-js": "^2.109.0",
     "next": "14.2.35",

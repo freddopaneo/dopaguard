@@ -1,20 +1,13 @@
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { getCurrentBrand, SELECTED_BRAND_COOKIE } from "@/lib/dashboard/get-current-brand";
 import { getSettings } from "@/lib/dashboard/get-settings";
 import { NotificationSettings } from "@/components/dashboard/NotificationSettings";
+import { PasswordSettings } from "@/components/dashboard/PasswordSettings";
+import { AccountDeletion } from "@/components/dashboard/AccountDeletion";
 import { Button } from "@/components/ui/Button";
-import { PLAN_LABELS } from "@/lib/stripe/plans";
-
-const SUBSCRIPTION_STATUS_LABELS: Record<string, string> = {
-  active: "Actif",
-  trialing: "Période d'essai",
-  past_due: "Paiement en retard",
-  canceled: "Résilié",
-  incomplete: "Incomplet",
-  incomplete_expired: "Expiré",
-  paused: "En pause",
-  unpaid: "Impayé",
-};
+import { PLAN_LABELS, SUBSCRIPTION_STATUS_LABELS } from "@/lib/stripe/plans";
 
 function formatDate(isoDate: string): string {
   return new Date(isoDate).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
@@ -30,19 +23,13 @@ export default async function ParametresPage() {
     redirect("/login");
   }
 
-  const { data: brand } = await supabase
-    .from("brands")
-    .select("id")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+  const selectedBrandId = cookies().get(SELECTED_BRAND_COOKIE)?.value ?? null;
+  const brand = await getCurrentBrand(supabase, user.id, selectedBrandId);
+  const settings = await getSettings(supabase, user.id);
 
   if (!brand) {
-    redirect("/onboarding");
+    redirect(settings.subscription?.plan === "agence" ? "/dashboard/marques" : "/onboarding");
   }
-
-  const settings = await getSettings(supabase, user.id);
 
   return (
     <div>
@@ -76,12 +63,37 @@ export default async function ParametresPage() {
         )}
       </section>
 
-      <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+      <section className="mb-6 rounded-2xl border border-white/10 bg-white/[0.04] p-6">
         <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-white/40">Notifications</h2>
         <NotificationSettings
           initialNotifyCriticalAlerts={settings.notifications.notifyCriticalAlerts}
           initialNotifyWeeklyDigest={settings.notifications.notifyWeeklyDigest}
         />
+      </section>
+
+      <section className="mb-6 rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-white/40">Sécurité</h2>
+        <PasswordSettings />
+      </section>
+
+      <section className="mb-6 rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-white/40">Documents légaux</h2>
+        <div className="flex flex-wrap gap-4 text-sm">
+          <a href="/mentions-legales" target="_blank" rel="noreferrer" className="text-white/70 underline hover:text-white">
+            Mentions légales
+          </a>
+          <a href="/cgv" target="_blank" rel="noreferrer" className="text-white/70 underline hover:text-white">
+            CGV
+          </a>
+          <a href="/confidentialite" target="_blank" rel="noreferrer" className="text-white/70 underline hover:text-white">
+            Politique de confidentialité
+          </a>
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-white/40">Compte</h2>
+        <AccountDeletion initialHasPendingRequest={settings.hasPendingDeletionRequest} />
       </section>
     </div>
   );

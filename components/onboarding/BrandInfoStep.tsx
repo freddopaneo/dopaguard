@@ -47,8 +47,8 @@ export function BrandInfoStep({ onDone }: { onDone: (brandId: string, brandName:
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <h2 className="text-lg font-semibold text-dopaguard-navy">Informations sur votre marque</h2>
-      <TextField id="name" name="name" label="Nom de la marque" required placeholder="Dopaneo" />
-      <TextField id="website" name="website" label="Site web" required placeholder="www.dopaneo.ai" />
+      <TextField id="name" name="name" label="Nom de la marque" required placeholder="Dopaguard" />
+      <TextField id="website" name="website" label="Site web" required placeholder="www.dopaguard.ai" />
       <div className="flex flex-col gap-1.5 text-left">
         <label htmlFor="sector" className="text-xs font-medium uppercase tracking-wide text-slate-400">
           Secteur

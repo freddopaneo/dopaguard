@@ -11,6 +11,10 @@ export interface TruthSheetValues {
   differentiators: string;
   knownCompetitors: string[];
   forbiddenClaims: string;
+  openingHours: string;
+  address: string;
+  officialLinks: string;
+  certifications: string;
 }
 
 interface TruthSheetFormProps {
@@ -70,6 +74,10 @@ export function TruthSheetForm({ initialValues, onSave, submitLabel, savingLabel
         .map((c) => c.trim())
         .filter(Boolean),
       forbiddenClaims,
+      openingHours: String(formData.get("openingHours") ?? ""),
+      address: String(formData.get("address") ?? ""),
+      officialLinks: String(formData.get("officialLinks") ?? ""),
+      certifications: String(formData.get("certifications") ?? ""),
     };
 
     const result = await onSave(values);
@@ -91,6 +99,20 @@ export function TruthSheetForm({ initialValues, onSave, submitLabel, savingLabel
         name="differentiators"
         label="Points forts"
         defaultValue={initialValues.differentiators}
+      />
+      <TextAreaField id="openingHours" name="openingHours" label="Horaires d'ouverture" defaultValue={initialValues.openingHours} />
+      <TextAreaField id="address" name="address" label="Adresse / coordonnées officielles" defaultValue={initialValues.address} />
+      <TextAreaField
+        id="officialLinks"
+        name="officialLinks"
+        label="Site et réseaux officiels (un lien par ligne)"
+        defaultValue={initialValues.officialLinks}
+      />
+      <TextAreaField
+        id="certifications"
+        name="certifications"
+        label="Certifications / labels"
+        defaultValue={initialValues.certifications}
       />
       <div className="flex flex-col gap-1.5 text-left">
         <label htmlFor="competitors" className="text-xs font-medium uppercase tracking-wide text-slate-400">

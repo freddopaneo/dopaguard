@@ -5,6 +5,10 @@
     {
       "path": "/api/cron/weekly-scan",
       "schedule": "0 5 * * 1"
+    },
+    {
+      "path": "/api/cron/monthly-reports",
+      "schedule": "0 6 1 * *"
     }
   ]
 }

@@ -276,3 +276,135 @@ export async function sendRetentionOfferEmail({
     throw new Error(`Resend: ${error.message}`);
   }
 }
+
+function monthlyReportEmailHtml(brandName: string, monthLabel: string, pdfUrl: string, dashboardUrl: string): string {
+  return `
+    <div style="font-family: Arial, Helvetica, sans-serif; max-width: 480px; margin: 0 auto; color: #133742;">
+      <h1 style="font-size: 20px;">Votre rapport mensuel est prêt</h1>
+      <p>Bonjour,</p>
+      <p>
+        Le rapport de réputation IA de <strong>${brandName}</strong> pour <strong>${monthLabel}</strong> est disponible.
+      </p>
+      <p style="text-align: center; margin: 32px 0;">
+        <a
+          href="${pdfUrl}"
+          style="background: #c7ff98; color: #133742; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block;"
+        >
+          Télécharger le rapport PDF
+        </a>
+      </p>
+      <p style="text-align: center; font-size: 13px;">
+        <a href="${dashboardUrl}" style="color: #1e4d5e;">Voir mon espace Dopaguard</a>
+      </p>
+    </div>
+  `;
+}
+
+export async function sendMonthlyReportEmail({
+  to,
+  brandName,
+  monthLabel,
+  pdfUrl,
+  dashboardUrl,
+}: {
+  to: string;
+  brandName: string;
+  monthLabel: string;
+  pdfUrl: string;
+  dashboardUrl: string;
+}) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  const { error } = await resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL!,
+    to,
+    subject: `Votre rapport mensuel Dopaguard — ${brandName} (${monthLabel})`,
+    html: monthlyReportEmailHtml(brandName, monthLabel, pdfUrl, dashboardUrl),
+  });
+
+  if (error) {
+    throw new Error(`Resend: ${error.message}`);
+  }
+}
+
+function accountDeletionConfirmationEmailHtml(): string {
+  return `
+    <div style="font-family: Arial, Helvetica, sans-serif; max-width: 480px; margin: 0 auto; color: #133742;">
+      <h1 style="font-size: 20px;">Votre demande de suppression a bien été reçue</h1>
+      <p>Bonjour,</p>
+      <p>
+        Nous avons bien reçu votre demande de suppression de compte. Conformément à
+        notre politique de confidentialité, toutes vos données seront supprimées
+        sous 30 jours.
+      </p>
+      <p style="font-size: 13px; color: #1e4d5e;">
+        Si vous changez d'avis avant que la suppression soit effective, contactez-nous
+        simplement à contact@dopaneo.ai.
+      </p>
+    </div>
+  `;
+}
+
+export async function sendAccountDeletionConfirmationEmail({ to }: { to: string }) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  const { error } = await resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL!,
+    to,
+    subject: "Votre demande de suppression de compte Dopaguard",
+    html: accountDeletionConfirmationEmailHtml(),
+  });
+
+  if (error) {
+    throw new Error(`Resend: ${error.message}`);
+  }
+}
+
+// Notification interne (pas au client) : alerte l'équipe qu'une suppression est à
+// traiter manuellement dans les 30 jours (RGPD, CDC section 7).
+export async function sendAccountDeletionNotificationEmail({ clientEmail }: { clientEmail: string }) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  const { error } = await resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL!,
+    to: "contact@dopaneo.ai",
+    subject: `Demande de suppression de compte — ${clientEmail}`,
+    html: `<p>Le compte <strong>${clientEmail}</strong> a demandé la suppression de ses données. À traiter sous 30 jours.</p>`,
+  });
+
+  if (error) {
+    throw new Error(`Resend: ${error.message}`);
+  }
+}
+
+// Notification interne (pas au visiteur) : prévient l'équipe qu'un scan gratuit
+// vient de se terminer, pour suivre les prospects entrants.
+export async function sendFreeScanCompletedNotificationEmail({
+  brandName,
+  email,
+  website,
+}: {
+  brandName: string;
+  email: string;
+  website: string | null;
+}) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  const { error } = await resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL!,
+    to: "fred@dopaneo.ai",
+    subject: `Nouveau scan gratuit terminé — ${brandName}`,
+    html: `
+      <div style="font-family: Arial, Helvetica, sans-serif; max-width: 480px; margin: 0 auto; color: #133742;">
+        <h1 style="font-size: 20px;">Un scan gratuit vient de se terminer</h1>
+        <p><strong>Marque :</strong> ${brandName}</p>
+        <p><strong>Email :</strong> ${email}</p>
+        ${website ? `<p><strong>Site web :</strong> ${website}</p>` : ""}
+      </div>
+    `,
+  });
+
+  if (error) {
+    throw new Error(`Resend: ${error.message}`);
+  }
+}

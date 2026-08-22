@@ -89,6 +89,7 @@ async function syncSubscription(supabase: AdminClient, subscription: Stripe.Subs
     .update({
       status: subscription.status,
       current_period_end: subscriptionPeriodEnd(subscription),
+      canceled_at: subscription.canceled_at ? new Date(subscription.canceled_at * 1000).toISOString() : null,
       ...(plan ? { plan } : {}),
     })
     .eq("id", existing.id);
@@ -105,7 +106,14 @@ async function syncSubscription(supabase: AdminClient, subscription: Stripe.Subs
             : null;
 
     if (brandStatus) {
-      const { error: brandError } = await supabase.from("brands").update({ status: brandStatus }).eq("id", existing.brand_id);
+      // Résout owner_id via la marque déjà liée, pour propager le statut à TOUTES les
+      // marques du compte -- pertinent pour un compte Agence avec jusqu'à 10 marques
+      // sous un même abonnement, pas seulement celle historiquement pointée par
+      // brand_id. No-op fonctionnel pour un compte Essentiel/Pro (une seule marque).
+      const { data: linkedBrand } = await supabase.from("brands").select("owner_id").eq("id", existing.brand_id).maybeSingle();
+      const { error: brandError } = linkedBrand
+        ? await supabase.from("brands").update({ status: brandStatus }).eq("owner_id", linkedBrand.owner_id)
+        : await supabase.from("brands").update({ status: brandStatus }).eq("id", existing.brand_id);
       if (brandError) throw brandError;
     }
   }

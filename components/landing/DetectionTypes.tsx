@@ -1,4 +1,4 @@
-import { HighlightedText } from "@/components/HighlightedText";
+import { AiResponseCard } from "@/components/AiResponseCard";
 
 type Accent = "teal" | "lime" | "navy";
 
@@ -14,12 +14,74 @@ const ACCENT_BORDER: Record<Accent, string> = {
   navy: "border-dopaguard-navy/20",
 };
 
+// Icones SVG dessinees a la main, une par type d'anomalie (convention du projet :
+// SVG inline, aucune lib graphique). Traits navy, le rouge reste reserve au petit
+// point d'alerte pour ne pas saturer la section de rouge.
+function FactErrorIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden>
+      <rect x="5" y="3" width="14" height="18" rx="2" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M9 8h6M9 12h6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M9.5 15.5l5 3M14.5 15.5l-5 3" stroke="#EF4444" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function NegativeSentimentIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden>
+      <path
+        d="M4 6a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2h-7l-4 4v-4H6a2 2 0 01-2-2V6z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path d="M8 11c1.2-1.4 2.6-1.4 4 0s2.8 1.4 4 0" stroke="#EF4444" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function CompetitorIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden>
+      <circle cx="7" cy="16" r="3.2" stroke="currentColor" strokeWidth="1.6" />
+      <circle cx="17" cy="7" r="3.2" stroke="#EF4444" strokeWidth="1.6" />
+      <path d="M9.5 13.5L14 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M13.2 8.6l1.6-.4-.4 1.6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function HallucinationIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden>
+      <path
+        d="M7 15a4 4 0 011-7.9A5 5 0 0117.6 9 3.5 3.5 0 0117 15.9H7z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path d="M10.6 11.2c0-.9.7-1.5 1.5-1.5s1.5.6 1.5 1.4c0 1-1.5 1-1.5 2" stroke="#EF4444" strokeWidth="1.6" strokeLinecap="round" />
+      <circle cx="12.1" cy="15.1" r="0.9" fill="#EF4444" />
+    </svg>
+  );
+}
+
+function OutdatedInfoIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden>
+      <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M12 7.5V12l3 2" stroke="#EF4444" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 const ANOMALY_TYPES = [
-  "Erreur factuelle",
-  "Sentiment négatif",
-  "Concurrent recommandé",
-  "Hallucination",
-  "Information datée",
+  { label: "Erreur factuelle", icon: FactErrorIcon },
+  { label: "Sentiment négatif", icon: NegativeSentimentIcon },
+  { label: "Concurrent recommandé", icon: CompetitorIcon },
+  { label: "Hallucination", icon: HallucinationIcon },
+  { label: "Information datée", icon: OutdatedInfoIcon },
 ];
 
 const EXAMPLE_GROUPS: {
@@ -32,13 +94,12 @@ const EXAMPLE_GROUPS: {
     accent: "teal",
     examples: [
       {
-        quote:
-          "Il semblerait que ce cabinet ait cessé son activité, je ne trouve pas d'informations récentes à son sujet.",
+        quote: "Il semblerait que ce cabinet ait cessé son activité, aucune information récente n'est disponible.",
         highlight: "cessé son activité",
-        note: "Une IA a laissé entendre qu'un professionnel indépendant avait arrêté son activité, faute d'informations récentes.",
+        note: "Une IA a laissé entendre qu'un professionnel indépendant avait arrêté son activité, sans preuve récente.",
       },
       {
-        quote: "Pour ce type de dossier, il est recommandé de consulter un cabinet plus expérimenté dans ce domaine.",
+        quote: "Pour ce type de dossier, mieux vaut consulter un cabinet plus expérimenté dans ce domaine.",
         highlight: "un cabinet plus expérimenté",
         note: "Une IA a orienté l'utilisateur vers un concurrent plutôt que vers le professionnel interrogé.",
       },
@@ -49,14 +110,14 @@ const EXAMPLE_GROUPS: {
     accent: "lime",
     examples: [
       {
-        quote: "Cet hôtel a reçu plusieurs avis mentionnant des problèmes de propreté récurrents.",
+        quote: "Cet hôtel a reçu plusieurs avis mentionnant des problèmes de propreté récurrents récemment.",
         highlight: "problèmes de propreté récurrents",
-        note: "Une IA a relayé un sentiment négatif non vérifié sur la qualité de l'établissement.",
+        note: "Une IA a relayé un sentiment négatif non vérifié sur la qualité réelle de l'établissement.",
       },
       {
-        quote: "Les chambres standard sont proposées à partir de 45€ la nuit.",
+        quote: "Les chambres standard sont proposées à partir de 45€ la nuit, selon les dernières données.",
         highlight: "45€ la nuit",
-        note: "Une IA a cité un tarif obsolète, en dessous des prix actuellement pratiqués.",
+        note: "Une IA a cité un tarif obsolète, en dessous des prix actuellement pratiqués par l'hôtel.",
       },
     ],
   },
@@ -65,14 +126,14 @@ const EXAMPLE_GROUPS: {
     accent: "navy",
     examples: [
       {
-        quote: "Cette entreprise a cessé son activité en 2022 et n'est plus opérationnelle.",
+        quote: "Cette entreprise a cessé son activité en 2022 et ne serait plus opérationnelle aujourd'hui.",
         highlight: "cessé son activité en 2022",
-        note: "Une IA a déclaré fermée une entreprise pourtant toujours active.",
+        note: "Une IA a déclaré fermée une entreprise pourtant toujours active et en développement.",
       },
       {
-        quote: "Leurs tarifs démarrent autour de 15€/mois pour l'offre de base.",
-        highlight: "15€/mois",
-        note: "Une IA a cité un tarif obsolète, changé depuis plus d'un an.",
+        quote: "Leurs tarifs démarrent autour de 15€ par mois pour l'offre de base, d'après nos informations.",
+        highlight: "15€ par mois",
+        note: "Une IA a cité un tarif obsolète, changé depuis plus d'un an par cette entreprise.",
       },
     ],
   },
@@ -80,7 +141,7 @@ const EXAMPLE_GROUPS: {
 
 export function DetectionTypes() {
   return (
-    <section className="mx-auto max-w-5xl px-6 py-24">
+    <section className="mx-auto max-w-5xl px-6 py-14 sm:py-24">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
           Ce que Dopaguard détecte
@@ -90,47 +151,57 @@ export function DetectionTypes() {
         </p>
       </div>
 
-      <div className="mt-8 flex flex-wrap justify-center gap-3">
-        {ANOMALY_TYPES.map((type) => (
-          <span
-            key={type}
-            className="rounded-full border border-dopaguard-critical/30 bg-dopaguard-critical/10 px-4 py-1.5 text-sm font-medium text-dopaguard-critical"
-          >
-            {type}
-          </span>
-        ))}
+      <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        {ANOMALY_TYPES.map((type) => {
+          const Icon = type.icon;
+          return (
+            <div
+              key={type.label}
+              className="flex flex-col items-center gap-3 rounded-2xl border border-dopaguard-muted bg-white px-4 py-5 text-center transition-all duration-200 hover:-translate-y-1 hover:border-dopaguard-teal/50 hover:shadow-[0_16px_40px_-20px_rgba(13,46,56,0.35)]"
+            >
+              <span className="relative flex h-12 w-12 items-center justify-center rounded-full bg-dopaguard-muted text-dopaguard-navy">
+                <Icon />
+                <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-white bg-dopaguard-critical" />
+              </span>
+              <span className="text-sm font-semibold leading-tight text-dopaguard-navy">{type.label}</span>
+            </div>
+          );
+        })}
       </div>
 
-      <div className="mt-14 grid gap-10 sm:grid-cols-3">
+      <div className="mt-14 grid items-stretch gap-x-8 gap-y-4 sm:grid-cols-3">
+        {/* Rangee de badges alignee (desktop uniquement -- sur mobile chaque carte
+            porte son badge, sinon les 3 badges s'empilent detaches de leurs cartes). */}
         {EXAMPLE_GROUPS.map((group) => (
-          <div key={group.label} className="flex flex-col gap-4">
-            <span
-              className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-semibold ${ACCENT_BADGE[group.accent]}`}
-            >
-              {group.label}
-            </span>
-
-            {group.examples.map((example) => (
-              <div
-                key={example.note}
-                className={`relative flex flex-col gap-3 overflow-hidden rounded-2xl border bg-white p-5 text-left ${ACCENT_BORDER[group.accent]}`}
-              >
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute -right-3 -top-6 select-none text-7xl font-serif text-dopaguard-muted"
-                >
-                  &ldquo;
-                </span>
-                <p className="relative text-sm leading-relaxed text-dopaguard-navyMid">
-                  <HighlightedText text={example.quote} excerpts={[example.highlight]} />
-                </p>
-                <p className="relative border-t border-dopaguard-muted pt-2.5 text-xs text-dopaguard-navyMid/60">
-                  {example.note}
-                </p>
-              </div>
-            ))}
-          </div>
+          <span
+            key={group.label}
+            className={`hidden w-fit items-center rounded-full px-3 py-1 text-xs font-semibold sm:inline-flex ${ACCENT_BADGE[group.accent]}`}
+          >
+            {group.label}
+          </span>
         ))}
+
+        {[0, 1].map((exampleIndex) =>
+          EXAMPLE_GROUPS.map((group) => {
+            const example = group.examples[exampleIndex];
+            return (
+              <AiResponseCard
+                key={`${group.label}-${exampleIndex}`}
+                quote={example.quote}
+                highlight={example.highlight}
+                note={example.note}
+                borderClassName={ACCENT_BORDER[group.accent]}
+                badge={
+                  <span
+                    className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-semibold sm:hidden ${ACCENT_BADGE[group.accent]}`}
+                  >
+                    {group.label}
+                  </span>
+                }
+              />
+            );
+          }),
+        )}
       </div>
     </section>
   );

@@ -7,6 +7,7 @@ export interface AnomalyWithProvider {
   summary: string | null;
   evidence: string | null;
   expected_truth: string | null;
+  recommended_action: string | null;
   status: string;
   created_at: string;
   llmProvider: string | null;
@@ -18,7 +19,9 @@ export async function getAnomalies(
 ): Promise<AnomalyWithProvider[]> {
   const { data } = await supabase
     .from("anomalies")
-    .select("id, type, severity, summary, evidence, expected_truth, status, created_at, llm_responses(llm_provider)")
+    .select(
+      "id, type, severity, summary, evidence, expected_truth, recommended_action, status, created_at, llm_responses(llm_provider)"
+    )
     .eq("brand_id", brandId)
     .order("created_at", { ascending: false });
 
@@ -29,6 +32,7 @@ export async function getAnomalies(
     summary: row.summary as string | null,
     evidence: row.evidence as string | null,
     expected_truth: row.expected_truth as string | null,
+    recommended_action: row.recommended_action as string | null,
     status: row.status as string,
     created_at: row.created_at as string,
     llmProvider: (row.llm_responses as { llm_provider: string } | null)?.llm_provider ?? null,

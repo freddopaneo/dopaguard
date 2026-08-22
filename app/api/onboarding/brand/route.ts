@@ -39,25 +39,68 @@ export async function POST(request: NextRequest) {
 
   const { name, sector, country } = parsed.data;
   const website = normalizeWebsite(parsed.data.website);
+  const MAX_BRANDS_PER_ACCOUNT = 10;
 
   try {
     const admin = createAdminClient();
     const { data: subscription } = await admin
       .from("subscriptions")
-      .select("plan")
+      .select("plan, brand_id")
       .eq("profile_id", user.id)
       .maybeSingle();
 
+    const { count: brandCount } = await admin
+      .from("brands")
+      .select("id", { count: "exact", head: true })
+      .eq("owner_id", user.id);
+
+    if ((brandCount ?? 0) >= MAX_BRANDS_PER_ACCOUNT) {
+      return NextResponse.json({ error: "Limite de 10 marques atteinte pour ce compte." }, { status: 400 });
+    }
+
+    // Compte Agence : rattache automatiquement la marque à l'agence unique du compte
+    // (créée si elle n'existe pas encore) pour que les réglages white-label du rapport
+    // PDF s'appliquent à toutes ses marques sans étape manuelle.
+    let agencyId: string | null = null;
+    if (subscription?.plan === "agence") {
+      const { data: existingAgency } = await admin.from("agencies").select("id").eq("owner_id", user.id).maybeSingle();
+      if (existingAgency) {
+        agencyId = existingAgency.id;
+      } else {
+        const { data: newAgency, error: agencyError } = await admin
+          .from("agencies")
+          .insert({ owner_id: user.id, name })
+          .select("id")
+          .single();
+        if (agencyError || !newAgency) throw agencyError || new Error("Échec de création de l'agence.");
+        agencyId = newAgency.id;
+      }
+    }
+
     const { data: brand, error: insertError } = await supabase
       .from("brands")
-      .insert({ owner_id: user.id, name, website, sector, country, status: "trial", plan: subscription?.plan ?? null })
+      .insert({
+        owner_id: user.id,
+        name,
+        website,
+        sector,
+        country,
+        status: "trial",
+        plan: subscription?.plan ?? null,
+        agency_id: agencyId,
+      })
       .select("id")
       .single();
 
     if (insertError || !brand) throw insertError || new Error("Échec de création de la marque.");
 
-    const { error: linkError } = await admin.from("subscriptions").update({ brand_id: brand.id }).eq("profile_id", user.id);
-    if (linkError) throw linkError;
+    // Ne repointe subscriptions.brand_id que s'il n'est pas déjà lié à une marque --
+    // évite d'écraser le lien vers une marque déjà configurée lors de l'ajout d'une
+    // 2e à 10e marque (compte Agence).
+    if (subscription && !subscription.brand_id) {
+      const { error: linkError } = await admin.from("subscriptions").update({ brand_id: brand.id }).eq("profile_id", user.id);
+      if (linkError) throw linkError;
+    }
 
     return NextResponse.json({ brandId: brand.id });
   } catch (error) {

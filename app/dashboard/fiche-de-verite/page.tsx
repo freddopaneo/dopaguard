@@ -1,7 +1,14 @@
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { getCurrentBrand, SELECTED_BRAND_COOKIE } from "@/lib/dashboard/get-current-brand";
+import { getSettings } from "@/lib/dashboard/get-settings";
 import { getTruthSheet } from "@/lib/dashboard/get-truth-sheet";
+import { getTruthSheetAttachments } from "@/lib/dashboard/get-attachments";
 import { TruthSheetEditor } from "@/components/dashboard/TruthSheetEditor";
+import { CompetitorTracker } from "@/components/dashboard/CompetitorTracker";
+
+const COMPETITOR_TRACKING_PLANS = ["pro", "agence"];
 
 export default async function FicheDeVeritePage() {
   const supabase = createServerSupabaseClient();
@@ -13,19 +20,18 @@ export default async function FicheDeVeritePage() {
     redirect("/login");
   }
 
-  const { data: brand } = await supabase
-    .from("brands")
-    .select("id, name")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+  const selectedBrandId = cookies().get(SELECTED_BRAND_COOKIE)?.value ?? null;
+  const brand = await getCurrentBrand(supabase, user.id, selectedBrandId);
 
   if (!brand) {
-    redirect("/onboarding");
+    const settings = await getSettings(supabase, user.id);
+    redirect(settings.subscription?.plan === "agence" ? "/dashboard/marques" : "/onboarding");
   }
 
-  const truthSheet = await getTruthSheet(supabase, brand.id);
+  const [truthSheet, attachments] = await Promise.all([
+    getTruthSheet(supabase, brand.id),
+    getTruthSheetAttachments(supabase, brand.id),
+  ]);
 
   return (
     <div>
@@ -43,9 +49,23 @@ export default async function FicheDeVeritePage() {
           differentiators: truthSheet.differentiators,
           knownCompetitors: truthSheet.knownCompetitors,
           forbiddenClaims: truthSheet.forbiddenClaims,
+          openingHours: truthSheet.openingHours,
+          address: truthSheet.address,
+          officialLinks: truthSheet.officialLinks,
+          certifications: truthSheet.certifications,
         }}
         initialLastValidatedAt={truthSheet.lastValidatedAt}
+        initialAttachments={attachments}
       />
+      {COMPETITOR_TRACKING_PLANS.includes(brand.plan ?? "") && (
+        <div className="mt-6">
+          <CompetitorTracker
+            brandId={brand.id}
+            knownCompetitors={truthSheet.knownCompetitors}
+            initialTrackedCompetitor={brand.tracked_competitor}
+          />
+        </div>
+      )}
     </div>
   );
 }

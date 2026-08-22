@@ -8,6 +8,10 @@ export interface TruthSheetRecord {
   differentiators: string;
   knownCompetitors: string[];
   forbiddenClaims: string;
+  openingHours: string;
+  address: string;
+  officialLinks: string;
+  certifications: string;
   lastValidatedAt: string | null;
 }
 
@@ -19,6 +23,10 @@ const EMPTY: TruthSheetRecord = {
   differentiators: "",
   knownCompetitors: [],
   forbiddenClaims: "",
+  openingHours: "",
+  address: "",
+  officialLinks: "",
+  certifications: "",
   lastValidatedAt: null,
 };
 
@@ -30,7 +38,9 @@ export async function getTruthSheet(
 ): Promise<TruthSheetRecord> {
   const { data } = await supabase
     .from("truth_sheets")
-    .select("legal_status, offering, pricing_facts, key_people, differentiators, known_competitors, forbidden_claims, last_validated_at")
+    .select(
+      "legal_status, offering, pricing_facts, key_people, differentiators, known_competitors, forbidden_claims, opening_hours, address, official_links, certifications, last_validated_at"
+    )
     .eq("brand_id", brandId)
     .maybeSingle();
 
@@ -44,6 +54,10 @@ export async function getTruthSheet(
     differentiators: data.differentiators ?? "",
     knownCompetitors: data.known_competitors ?? [],
     forbiddenClaims: data.forbidden_claims ?? "",
+    openingHours: data.opening_hours ?? "",
+    address: data.address ?? "",
+    officialLinks: data.official_links ?? "",
+    certifications: data.certifications ?? "",
     lastValidatedAt: data.last_validated_at,
   };
 }

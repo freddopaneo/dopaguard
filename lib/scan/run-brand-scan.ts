@@ -4,7 +4,7 @@ import { renderPrompt } from "@/lib/prompts";
 import { getIsoWeek } from "./iso-week";
 import { mapWithConcurrency } from "./concurrency";
 
-const PLAN_PROVIDERS: Record<string, LLMProvider[]> = {
+export const PLAN_PROVIDERS: Record<string, LLMProvider[]> = {
   essentiel: ["openai", "anthropic", "perplexity"],
   pro: ["openai", "anthropic", "perplexity", "google", "mistral"],
   agence: ["openai", "anthropic", "perplexity", "google", "mistral"],
@@ -55,7 +55,8 @@ export async function runBrandScan(brand: BrandForScan): Promise<BrandScanSummar
     .select("prompt_template_id, llm_provider")
     .eq("brand_id", brand.id)
     .eq("week_number", week)
-    .eq("year", year);
+    .eq("year", year)
+    .eq("competitor_name", "");
 
   const doneKeys = new Set((existing ?? []).map((row) => `${row.prompt_template_id}:${row.llm_provider}`));
 

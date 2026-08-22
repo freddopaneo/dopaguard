@@ -15,15 +15,32 @@ export async function GET(request: NextRequest) {
         data: { user },
       } = await supabase.auth.getUser();
 
-      const { data: brand } = await supabase
-        .from("brands")
-        .select("onboarding_completed_at")
-        .eq("owner_id", user!.id)
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle();
+      const [{ data: brand }, { data: subscription }, { data: profile }] = await Promise.all([
+        supabase
+          .from("brands")
+          .select("onboarding_completed_at")
+          .eq("owner_id", user!.id)
+          .order("created_at", { ascending: false })
+          .limit(1)
+          .maybeSingle(),
+        supabase.from("subscriptions").select("plan").eq("profile_id", user!.id).maybeSingle(),
+        supabase.from("profiles").select("role").eq("id", user!.id).maybeSingle(),
+      ]);
 
-      const destination = brand?.onboarding_completed_at ? "/dashboard" : "/onboarding";
+      // Un compte admin est renvoye vers son espace plutot que vers le parcours
+      // client, qui le renverrait a l'onboarding faute de marque configuree.
+      if (profile?.role === "admin") {
+        return NextResponse.redirect(new URL("/admin", request.url));
+      }
+
+      let destination = "/onboarding";
+      if (brand?.onboarding_completed_at) {
+        destination = "/dashboard";
+      } else if (!brand && subscription?.plan === "agence") {
+        // Une agence n'a pas de marque à elle -- son point d'entrée est l'espace
+        // de gestion des marques, pas l'assistant de fiche de vérité.
+        destination = "/dashboard/marques";
+      }
       return NextResponse.redirect(new URL(destination, request.url));
     }
   }

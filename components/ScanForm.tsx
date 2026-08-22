@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/Button";
 import { TextField } from "./ui/TextField";
 
@@ -9,6 +9,19 @@ type Status = "idle" | "loading" | "success" | "error";
 export function ScanForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  // Préremplissage depuis l'URL (lien envoyé en prospection). Ex. :
+  //   www.dopaguard.ai/?entreprise=Acme&site=acme.fr&email=jean@acme.fr
+  const [fields, setFields] = useState({ brandName: "", website: "", email: "" });
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search);
+    setFields({
+      brandName: p.get("entreprise") || p.get("brand") || p.get("brandName") || "",
+      website: p.get("site") || p.get("website") || "",
+      email: p.get("email") || "",
+    });
+  }, []);
+  const set = (k: keyof typeof fields) => (e: React.ChangeEvent<HTMLInputElement>) =>
+    setFields((v) => ({ ...v, [k]: e.target.value }));
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -20,6 +33,7 @@ export function ScanForm() {
       brandName: formData.get("brandName"),
       website: formData.get("website"),
       email: formData.get("email"),
+      consent: formData.get("consent") === "on",
     };
 
     try {
@@ -61,18 +75,30 @@ export function ScanForm() {
       className="mx-auto w-full max-w-2xl rounded-2xl bg-white p-6 shadow-[0_20px_60px_-15px_rgba(13,46,56,0.35)] sm:p-8"
     >
       <div className="grid gap-4 sm:grid-cols-3">
-        <TextField id="brandName" name="brandName" label="Nom de marque" required placeholder="Dopaneo" />
+        <TextField id="brandName" name="brandName" label="Nom de marque" required placeholder="Dopaguard" value={fields.brandName} onChange={set("brandName")} />
         <TextField
           id="website"
           name="website"
           label="Site web"
           type="text"
           required
-          placeholder="www.dopaneo.ai"
+          placeholder="www.dopaguard.ai"
+          value={fields.website}
+          onChange={set("website")}
         />
-        <TextField id="email" name="email" label="Email professionnel" type="email" required placeholder="vous@entreprise.fr" />
+        <TextField id="email" name="email" label="Email pro" type="email" required placeholder="vous@entreprise.fr" value={fields.email} onChange={set("email")} />
       </div>
-      <Button type="submit" disabled={status === "loading"} className="mt-5 w-full">
+      <label className="mt-4 flex items-start gap-2 text-left text-xs text-slate-500">
+        <input type="checkbox" name="consent" required className="mt-0.5" />
+        <span>
+          J&apos;accepte que mes données soient traitées conformément à la{" "}
+          <a href="/confidentialite" className="underline hover:text-dopaguard-navy" target="_blank" rel="noreferrer">
+            politique de confidentialité
+          </a>
+          .
+        </span>
+      </label>
+      <Button type="submit" disabled={status === "loading"} className="mt-4 w-full">
         {status === "loading" ? "Envoi en cours…" : "Lancer mon scan gratuit →"}
       </Button>
       {status === "error" && (

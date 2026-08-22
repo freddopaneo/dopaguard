@@ -1,5 +1,9 @@
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { getCurrentBrand, SELECTED_BRAND_COOKIE } from "@/lib/dashboard/get-current-brand";
+import { getSettings } from "@/lib/dashboard/get-settings";
+import { getOnboardingResumeStep, type OnboardingStep } from "@/lib/onboarding/get-resume-step";
 import { OnboardingWizard } from "@/components/onboarding/OnboardingWizard";
 
 export default async function OnboardingPage() {
@@ -12,39 +16,20 @@ export default async function OnboardingPage() {
     redirect("/login");
   }
 
-  const { data: brand } = await supabase
-    .from("brands")
-    .select("id, name, onboarding_completed_at")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+  const selectedBrandId = cookies().get(SELECTED_BRAND_COOKIE)?.value ?? null;
+  const brand = await getCurrentBrand(supabase, user.id, selectedBrandId);
 
-  let initialStep: 1 | 2 | 3 | 4 | "done" = 1;
-
-  if (brand) {
-    if (brand.onboarding_completed_at) {
-      initialStep = "done";
-    } else {
-      const { data: truthSheet } = await supabase
-        .from("truth_sheets")
-        .select("id")
-        .eq("brand_id", brand.id)
-        .maybeSingle();
-
-      if (!truthSheet) {
-        initialStep = 2;
-      } else {
-        const { count } = await supabase
-          .from("brand_prompts")
-          .select("id", { count: "exact", head: true })
-          .eq("brand_id", brand.id)
-          .eq("enabled", true);
-
-        initialStep = count && count > 0 ? 4 : 3;
-      }
+  if (!brand) {
+    // Une agence n'a pas de "marque à elle" -- son point d'entrée est l'espace de
+    // gestion des marques, pas l'assistant de fiche de vérité (réservé aux vraies
+    // marques clientes, créées une par une depuis cet espace).
+    const settings = await getSettings(supabase, user.id);
+    if (settings.subscription?.plan === "agence") {
+      redirect("/dashboard/marques");
     }
   }
+
+  const initialStep: OnboardingStep = brand ? await getOnboardingResumeStep(supabase, brand) : 1;
 
   return (
     <div className="min-h-screen bg-dopaguard-cream px-6 py-10">

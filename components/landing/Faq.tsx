@@ -23,13 +23,50 @@ const FAQ_ITEMS = [
     answer:
       "Oui. Vos informations et vos rapports ne sont jamais partagés. Vous pouvez supprimer votre compte et vos données à tout moment.",
   },
+  {
+    question: "Quelles IA surveillez-vous exactement ?",
+    answer:
+      "ChatGPT (OpenAI), Claude (Anthropic), Gemini (Google), Perplexity et Mistral. Le plan Essentiel couvre 3 IA (ChatGPT, Claude, Perplexity), les plans Pro et Agence couvrent les 5.",
+  },
+  {
+    question: "Combien de temps prend la mise en place ?",
+    answer:
+      "Une dizaine de minutes : vous validez votre fiche de vérité (les faits qui vous concernent) et choisissez les questions à surveiller. Le premier cycle de surveillance démarre dès la semaine suivante.",
+  },
+  {
+    question: "Est-ce adapté à mon secteur d'activité ?",
+    answer:
+      "Oui. Dopaguard s'adresse à toute entreprise ou profession dont des clients potentiels se renseignent en ligne — profession libérale, commerce, hôtellerie, services aux entreprises, immobilier, santé, et bien d'autres. Les questions posées aux IA s'adaptent à votre activité.",
+  },
+  {
+    question: "Comment vérifiez-vous que les informations sont exactes ?",
+    answer:
+      "Chaque réponse d'IA est comparée à votre fiche de vérité, que vous validez vous-même, et peut être corroborée par les documents justificatifs que vous ajoutez (site, avis, certifications). C'est ce qui permet de distinguer une vraie anomalie d'une simple divergence d'opinion.",
+  },
+  {
+    question: "Puis-je résilier à tout moment ?",
+    answer:
+      "Oui, sans engagement de durée. La résiliation se fait directement depuis votre espace client ; l'accès reste actif jusqu'à la fin de la période déjà payée.",
+  },
 ];
+
+const FAQ_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
 
 export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="mx-auto max-w-3xl px-6 py-24">
+    <section id="faq" className="mx-auto max-w-3xl scroll-mt-24 px-6 py-14 sm:py-24">
+      {/* eslint-disable-next-line react/no-danger -- JSON-LD statique, aucune donnée utilisateur. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }} />
       <h2 className="text-center text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
         Questions fréquentes
       </h2>
@@ -48,9 +85,14 @@ export function Faq() {
                 <span className="font-medium text-dopaguard-navy">{item.question}</span>
                 <span className="shrink-0 text-xl text-dopaguard-navyMid/60">{isOpen ? "−" : "+"}</span>
               </button>
-              {isOpen && (
-                <p className="px-5 pb-4 text-sm leading-relaxed text-dopaguard-navyMid/80">{item.answer}</p>
-              )}
+              {/* Toujours présent dans le HTML (visible aux robots qui n'exécutent pas
+                  JS, dont la plupart des robots IA) -- seul l'affichage est contrôlé
+                  par CSS, jamais le rendu React. */}
+              <p
+                className={`px-5 pb-4 text-sm leading-relaxed text-dopaguard-navyMid/80 ${isOpen ? "block" : "hidden"}`}
+              >
+                {item.answer}
+              </p>
             </div>
           );
         })}
