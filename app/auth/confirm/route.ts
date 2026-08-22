@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
         data: { user },
       } = await supabase.auth.getUser();
 
-      const [{ data: brand }, { data: subscription }] = await Promise.all([
+      const [{ data: brand }, { data: subscription }, { data: profile }] = await Promise.all([
         supabase
           .from("brands")
           .select("onboarding_completed_at")
@@ -24,7 +24,14 @@ export async function GET(request: NextRequest) {
           .limit(1)
           .maybeSingle(),
         supabase.from("subscriptions").select("plan").eq("profile_id", user!.id).maybeSingle(),
+        supabase.from("profiles").select("role").eq("id", user!.id).maybeSingle(),
       ]);
+
+      // Un compte admin est renvoye vers son espace plutot que vers le parcours
+      // client, qui le renverrait a l'onboarding faute de marque configuree.
+      if (profile?.role === "admin") {
+        return NextResponse.redirect(new URL("/admin", request.url));
+      }
 
       let destination = "/onboarding";
       if (brand?.onboarding_completed_at) {

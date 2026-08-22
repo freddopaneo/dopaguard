@@ -1,17 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { TruncatedText } from "@/components/ui/TruncatedText";
-import { PROVIDER_LABELS, PROVIDER_ORDER } from "@/lib/providers";
-import { CATEGORY_LABELS, CATEGORY_DESCRIPTIONS } from "@/lib/prompts/types";
+// Ecran d'attente : visualisation animee des vrais evenements du scan.
 import { ScanVisualizer, type ScanProgressEntry } from "@/components/scan/ScanVisualizer";
 import { ScanEventLog } from "@/components/scan/ScanEventLog";
+// Ecran de resultats : refondu sur main pendant que cette branche etait en pause
+// (deux jauges fiabilite/visibilite + accordeon par categorie). L'ancienne grille
+// a 3 colonnes que cette branche connaissait n'existe plus.
+import { ScanScoreGauge } from "@/components/scan/ScanScoreGauge";
+import { ScanProviderSummary } from "@/components/scan/ScanProviderSummary";
+import { ScanCategoryAccordion } from "@/components/scan/ScanCategoryAccordion";
+import { computeReliabilityScore, computeVisibilityScore, countUnknownResponses } from "@/lib/scan/score";
 
 interface ScanResponseEntry {
   provider: string;
   category: string;
   responseText: string | null;
-  flags: { excerpt: string }[];
+  flags: { type: string; excerpt: string; explanation: string }[];
   error: string | null;
 }
 
@@ -26,29 +31,6 @@ function FullScreenCard({ title, body }: { title: string; body: string }) {
         <h1 className="text-xl font-bold text-dopaguard-navy">{title}</h1>
         <p className="mt-3 text-sm leading-relaxed text-dopaguard-navyMid">{body}</p>
       </div>
-    </div>
-  );
-}
-
-function ResponseCard({ entry }: { entry: ScanResponseEntry }) {
-  return (
-    <div className="relative flex flex-col gap-2.5 overflow-hidden rounded-2xl border border-dopaguard-muted bg-white p-4 text-left">
-      <div>
-        <span className="text-xs font-semibold uppercase tracking-wide text-dopaguard-navyMid/60">
-          {CATEGORY_LABELS[entry.category] ?? entry.category}
-        </span>
-        <p className="mt-0.5 text-[11px] text-dopaguard-navyMid/40">{CATEGORY_DESCRIPTIONS[entry.category] ?? ""}</p>
-      </div>
-      {entry.error || !entry.responseText ? (
-        <p className="text-sm text-dopaguard-navyMid/60">Réponse indisponible pour cette question.</p>
-      ) : (
-        <TruncatedText
-          text={entry.responseText}
-          highlightExcerpts={entry.flags.map((f) => f.excerpt)}
-          className="text-sm leading-relaxed text-dopaguard-navyMid"
-          toggleClassName="self-start text-xs font-medium text-dopaguard-navy underline underline-offset-2"
-        />
-      )}
     </div>
   );
 }
@@ -184,6 +166,9 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
     );
   }
 
+  const unknownCount = countUnknownResponses(responses);
+  const usableCount = responses.filter((r) => !r.error).length;
+
   return (
     <div className="min-h-screen bg-dopaguard-cream text-dopaguard-navy">
       <div className="px-6 py-16 text-center" style={HERO_GRADIENT}>
@@ -191,23 +176,44 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
         <h1 className="mt-3 text-3xl font-bold text-white sm:text-4xl">Ce que les IA disent de {brandName}</h1>
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="grid gap-8 sm:grid-cols-3">
-          {PROVIDER_ORDER.map((provider) => (
-            <div key={provider} className="flex flex-col gap-4">
-              <span className="inline-flex w-fit items-center rounded-full bg-dopaguard-navy px-3 py-1 text-xs font-semibold text-white">
-                {PROVIDER_LABELS[provider]}
-              </span>
-              {responses
-                .filter((r) => r.provider === provider)
-                .map((r) => (
-                  <ResponseCard key={r.category} entry={r} />
-                ))}
-            </div>
-          ))}
+      <div className="mx-auto max-w-4xl px-6 py-16">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <ScanScoreGauge score={computeReliabilityScore(responses).score} kind="reliability" />
+          <ScanScoreGauge score={computeVisibilityScore(responses).score} kind="visibility" />
         </div>
 
-        <div className="mt-16 flex flex-col items-center gap-4 rounded-2xl bg-dopaguard-navy p-10 text-center">
+        <div className="mt-4 flex flex-col gap-3">
+          <ScanProviderSummary responses={responses} />
+          <p className="text-xs leading-relaxed text-dopaguard-navyMid/60">
+            Ces deux notes répondent à des questions différentes. La <strong>fiabilité</strong> mesure, quand les IA
+            parlent de vous, si ce qu&apos;elles disent est exact. La <strong>visibilité</strong> mesure si elles vous
+            connaissent seulement : {unknownCount} réponse{unknownCount > 1 ? "s" : ""} sur {usableCount} montre
+            {unknownCount > 1 ? "nt" : ""} une IA qui déclare ne pas avoir d&apos;information fiable sur vous. Une
+            entreprise inconnue des IA n&apos;a rien fait de mal — mais elle est absente des recommandations faites à
+            vos futurs clients.
+          </p>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-dopaguard-muted bg-white px-5 py-4 text-center text-sm text-dopaguard-navyMid">
+          Cette photo a été prise aujourd&apos;hui — ce que dit une IA peut changer la semaine prochaine.{" "}
+          <a href="/#tarifs" className="font-semibold text-dopaguard-navy underline underline-offset-2">
+            Essai 14 jours →
+          </a>
+        </div>
+
+        <h2 className="mt-10 text-lg font-semibold text-dopaguard-navy">Le détail, catégorie par catégorie</h2>
+        <p className="mt-1 text-sm text-dopaguard-navyMid/70">Cliquez sur une catégorie pour voir les réponses complètes des 3 IA.</p>
+        <div className="mt-4">
+          <ScanCategoryAccordion responses={responses} />
+        </div>
+
+        <p className="mt-6 text-xs leading-relaxed text-dopaguard-navyMid/60">
+          Un écart n&apos;est pas toujours une erreur factuelle : il peut aussi s&apos;agir d&apos;une IA qui hésite ou
+          manque d&apos;informations récentes sur vous. Les passages où l&apos;IA déclare simplement ne pas vous
+          connaître sont comptés à part, dans la visibilité — ils ne pénalisent pas votre fiabilité.
+        </p>
+
+        <div className="mt-10 flex flex-col items-center gap-4 rounded-2xl bg-dopaguard-navy p-10 text-center">
           <h2 className="max-w-lg text-2xl font-bold text-white sm:text-3xl">
             Ce que vous venez de voir n&apos;est qu&apos;une photo — à un instant T.
           </h2>
@@ -226,7 +232,7 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
             href="/#tarifs"
             className="mt-2 rounded-lg bg-dopaguard-lime px-6 py-3.5 text-sm font-semibold text-dopaguard-navy transition-all hover:brightness-95"
           >
-            Démarrer mon essai de 14 jours →
+            Démarrer l&apos;essai de 14 jours →
           </a>
           <p className="text-xs text-white/40">Sans engagement, résiliable en un clic.</p>
         </div>

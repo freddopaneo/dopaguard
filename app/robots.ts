@@ -29,12 +29,12 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/dashboard", "/admin", "/api", "/onboarding", "/bienvenue"],
+        disallow: ["/dashboard", "/admin", "/api", "/onboarding", "/bienvenue", "/scan"],
       },
       ...AI_CRAWLERS.map((userAgent) => ({
         userAgent,
         allow: "/",
-        disallow: ["/dashboard", "/admin", "/api", "/onboarding", "/bienvenue"],
+        disallow: ["/dashboard", "/admin", "/api", "/onboarding", "/bienvenue", "/scan"],
       })),
     ],
     sitemap: `${appUrl}/sitemap.xml`,

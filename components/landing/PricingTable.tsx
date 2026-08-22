@@ -7,6 +7,7 @@ type Plan = {
   slug: PlanSlug;
   name: string;
   price: string;
+  audience: string;
   recommended?: boolean;
   brands: string;
   ais: string;
@@ -22,6 +23,7 @@ const PLANS: Plan[] = [
     slug: "essentiel",
     name: "Essentiel",
     price: "69 €/mois",
+    audience: "Pour surveiller une entreprise sur les 3 IA principales.",
     brands: "1",
     ais: "3",
     digest: true,
@@ -34,6 +36,7 @@ const PLANS: Plan[] = [
     slug: "pro",
     name: "Pro",
     price: "149 €/mois",
+    audience: "Pour une couverture complète des 5 IA, avec un concurrent à l'œil.",
     recommended: true,
     brands: "1",
     ais: "5",
@@ -47,6 +50,7 @@ const PLANS: Plan[] = [
     slug: "agence",
     name: "Agence",
     price: "349 €/mois",
+    audience: "Pour les agences, réseaux et franchises jusqu'à 10 marques.",
     brands: "jusqu'à 10",
     ais: "5",
     digest: true,
@@ -72,7 +76,7 @@ const VALUE_STACK = [
   },
   {
     label: "Alertes immédiates sur anomalie critique",
-    value: "le coût d'un seul client perdu dépasse largement l'abonnement",
+    value: "l'Essentiel coûte 828 €/an — évitez la perte d'un seul client et l'abonnement est rentabilisé plusieurs fois",
   },
   {
     label: "Rapport mensuel prêt à partager",
@@ -149,17 +153,23 @@ export function PricingTable() {
         {PLANS.map((plan) => (
           <div
             key={plan.name}
-            className={`relative flex flex-col rounded-2xl border bg-white p-6 ${
-              plan.recommended ? "border-dopaguard-lime shadow-[0_20px_60px_-15px_rgba(13,46,56,0.25)]" : "border-dopaguard-muted"
+            className={`relative flex flex-col rounded-2xl border bg-white p-6 transition-all duration-200 hover:-translate-y-1 ${
+              plan.recommended
+                ? "border-2 border-dopaguard-lime shadow-[0_24px_70px_-15px_rgba(13,46,56,0.35)] lg:scale-[1.04]"
+                : "border-dopaguard-muted hover:shadow-[0_16px_40px_-20px_rgba(13,46,56,0.3)]"
             }`}
           >
             {plan.recommended && (
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-dopaguard-lime px-3 py-1 text-xs font-semibold text-dopaguard-navy">
-                Recommandé
+              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-dopaguard-navy px-3.5 py-1.5 text-xs font-semibold text-dopaguard-lime">
+                ★ Le plus choisi
               </span>
             )}
             <h3 className="text-lg font-semibold text-dopaguard-navy">{plan.name}</h3>
-            <p className="mt-1 text-2xl font-bold text-dopaguard-navy">{plan.price}</p>
+            <p className="mt-1 text-3xl font-bold text-dopaguard-navy">
+              {plan.price.split("/")[0]}
+              <span className="text-base font-medium text-dopaguard-navyMid/60">/mois</span>
+            </p>
+            <p className="mt-2 min-h-[2.5rem] text-xs leading-relaxed text-dopaguard-navyMid/70">{plan.audience}</p>
 
             <dl className="mt-6 flex flex-1 flex-col gap-3 text-sm text-dopaguard-navyMid">
               <div className="flex items-center justify-between border-t border-dopaguard-muted pt-3">
@@ -196,14 +206,17 @@ export function PricingTable() {
               type="button"
               disabled={loadingPlan !== null}
               onClick={() => handleSelectPlan(plan.slug)}
-              className={`mt-6 w-full rounded-xl px-4 py-2.5 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60 ${
+              className={`mt-6 w-full rounded-xl px-4 py-3 text-sm font-semibold transition hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-60 ${
                 plan.recommended
-                  ? "bg-dopaguard-navy text-white"
-                  : "border border-dopaguard-navy/20 text-dopaguard-navy"
+                  ? "bg-dopaguard-lime text-dopaguard-navy shadow-[0_8px_24px_-8px_rgba(199,255,152,0.8)]"
+                  : "bg-dopaguard-navy text-white"
               }`}
             >
               {loadingPlan === plan.slug ? "Redirection…" : "Démarrer l'essai de 14 jours"}
             </button>
+            <p className="mt-2.5 text-center text-[11px] text-dopaguard-navyMid/50">
+              Sans engagement · Jamais débité si vous annulez avant la fin de l&apos;essai
+            </p>
           </div>
         ))}
       </div>

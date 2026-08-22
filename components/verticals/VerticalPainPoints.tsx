@@ -1,4 +1,4 @@
-import { HighlightedText } from "@/components/HighlightedText";
+import { AiResponseCard } from "@/components/AiResponseCard";
 import type { VerticalAccent, VerticalMeta } from "@/lib/verticals";
 
 const ACCENT_BADGE: Record<VerticalAccent, string> = {
@@ -33,23 +33,13 @@ export function VerticalPainPoints({ vertical }: { vertical: VerticalMeta }) {
 
       <div className="mt-10 grid items-stretch gap-6 sm:grid-cols-2">
         {vertical.painExamples.map((example) => (
-          <div
+          <AiResponseCard
             key={example.highlight}
-            className={`relative flex h-full flex-col gap-3 overflow-hidden rounded-2xl border bg-white p-6 text-left ${ACCENT_BORDER[vertical.accent]}`}
-          >
-            <span
-              aria-hidden
-              className="pointer-events-none absolute -right-3 -top-6 select-none text-7xl font-serif text-dopaguard-muted"
-            >
-              &ldquo;
-            </span>
-            <p className="relative flex-1 text-sm leading-relaxed text-dopaguard-navyMid">
-              <HighlightedText text={example.quote} excerpts={[example.highlight]} />
-            </p>
-            <p className="relative border-t border-dopaguard-muted pt-2.5 text-xs text-dopaguard-navyMid/60">
-              {example.note}
-            </p>
-          </div>
+            quote={example.quote}
+            highlight={example.highlight}
+            note={example.note}
+            borderClassName={ACCENT_BORDER[vertical.accent]}
+          />
         ))}
       </div>
     </section>
