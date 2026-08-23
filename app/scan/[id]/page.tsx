@@ -10,6 +10,7 @@ import { ScanEventLog } from "@/components/scan/ScanEventLog";
 import { ScanScoreGauge } from "@/components/scan/ScanScoreGauge";
 import { ScanProviderSummary } from "@/components/scan/ScanProviderSummary";
 import { ScanCategoryAccordion } from "@/components/scan/ScanCategoryAccordion";
+import { ScanClosingPitch } from "@/components/scan/ScanClosingPitch";
 import { computeReliabilityScore, computeVisibilityScore, countUnknownResponses } from "@/lib/scan/score";
 
 interface ScanResponseEntry {
@@ -213,29 +214,12 @@ export default function ScanResultsPage({ params }: { params: { id: string } }) 
           connaître sont comptés à part, dans la visibilité — ils ne pénalisent pas votre fiabilité.
         </p>
 
-        <div className="mt-10 flex flex-col items-center gap-4 rounded-2xl bg-dopaguard-navy p-10 text-center">
-          <h2 className="max-w-lg text-2xl font-bold text-white sm:text-3xl">
-            Ce que vous venez de voir n&apos;est qu&apos;une photo — à un instant T.
-          </h2>
-          <p className="max-w-lg text-sm leading-relaxed text-white/70">
-            Certaines IA connaissent bien votre entreprise, d&apos;autres n&apos;ont presque rien à dire. Ce
-            déséquilibre est en soi un signal : votre présence dans les IA n&apos;est ni acquise, ni figée. Un nouvel
-            avis client, une mise à jour de modèle, ou un concurrent qui progresse — et ce que disent ChatGPT, Claude
-            ou Perplexity de vous peut changer du jour au lendemain, en bien comme en mal.
-          </p>
-          <p className="max-w-lg text-sm font-medium leading-relaxed text-white">
-            Votre réputation est votre actif le plus précieux. La laisser au hasard, c&apos;est laisser d&apos;autres
-            — vos concurrents, ou simplement le silence — décider ce que vos futurs clients entendront de vous.
-            Dopaguard la surveille pour vous, chaque semaine, dans les 5 grandes IA, et vous alerte dès que ça bouge.
-          </p>
-          <a
-            href="/#tarifs"
-            className="mt-2 rounded-lg bg-dopaguard-lime px-6 py-3.5 text-sm font-semibold text-dopaguard-navy transition-all hover:brightness-95"
-          >
-            Démarrer l&apos;essai de 14 jours →
-          </a>
-          <p className="text-xs text-white/40">Sans engagement, résiliable en un clic.</p>
-        </div>
+        <ScanClosingPitch
+          reliability={computeReliabilityScore(responses).score}
+          visibility={computeVisibilityScore(responses).score}
+          unknownCount={unknownCount}
+          usableCount={usableCount}
+        />
       </div>
     </div>
   );

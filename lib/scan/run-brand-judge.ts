@@ -246,6 +246,12 @@ async function updateWeeklyScore(
 
   const globalScore = judgedResponses.reduce((sum, r) => sum + weightedScore(r), 0) / judgedResponses.length;
 
+  // Visibilite : part des reponses ou l'IA a su parler de la marque. Mesure distincte
+  // du score global, qui melange exactitude, sentiment et position -- une marque
+  // inconnue des IA n'a rien fait de mal, mais elle est absente des recommandations.
+  const mentionedCount = judgedResponses.filter((r) => r.recommendation_position !== "not_mentioned").length;
+  const visibilityScore = Math.round((mentionedCount / judgedResponses.length) * 100);
+
   const byProvider: Record<string, { total: number; count: number }> = {};
   for (const r of judgedResponses) {
     const key = r.llm_provider;
@@ -276,6 +282,7 @@ async function updateWeeklyScore(
       year,
       competitor_name: "",
       global_score: roundedGlobalScore,
+      visibility_score: visibilityScore,
       score_by_provider: scoreByProvider,
       anomalies_count: anomaliesCount,
     },

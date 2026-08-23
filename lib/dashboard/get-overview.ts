@@ -4,6 +4,9 @@ export interface WeeklyScorePoint {
   weekNumber: number;
   year: number;
   globalScore: number | null;
+  /** Part des réponses où l'IA a su parler de la marque. null pour les semaines
+   *  calculées avant l'introduction de cette mesure (migration 0033). */
+  visibilityScore: number | null;
   scoreByProvider: Record<string, number>;
 }
 
@@ -26,7 +29,7 @@ export async function getDashboardOverview(
   const [scoresResult, anomaliesResult] = await Promise.all([
     supabase
       .from("scores")
-      .select("week_number, year, global_score, score_by_provider")
+      .select("week_number, year, global_score, visibility_score, score_by_provider")
       .eq("brand_id", brandId)
       .eq("competitor_name", "")
       .order("year", { ascending: false })
@@ -40,6 +43,7 @@ export async function getDashboardOverview(
       weekNumber: row.week_number,
       year: row.year,
       globalScore: row.global_score === null ? null : Number(row.global_score),
+      visibilityScore: row.visibility_score === null ? null : Number(row.visibility_score),
       scoreByProvider: toScoreByProvider(row.score_by_provider),
     }))
     .reverse();
