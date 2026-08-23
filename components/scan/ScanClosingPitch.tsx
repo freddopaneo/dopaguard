@@ -14,7 +14,14 @@ interface ClosingPitchProps {
   usableCount: number;
 }
 
-function buildDiagnosis({ reliability, visibility, unknownCount, usableCount }: ClosingPitchProps) {
+interface Diagnosis {
+  title: string;
+  body: React.ReactNode;
+  /** Passerelle vers Dopageo : uniquement quand le frein est la visibilité. */
+  showDopageoBridge?: boolean;
+}
+
+function buildDiagnosis({ reliability, visibility, unknownCount, usableCount }: ClosingPitchProps): Diagnosis {
   const plural = unknownCount > 1;
 
   // Cas 1 : les IA ne connaissent pas l'entreprise. C'est le constat qui prime,
@@ -31,6 +38,9 @@ function buildDiagnosis({ reliability, visibility, unknownCount, usableCount }: 
           n&apos;occupez pas, quelqu&apos;un d&apos;autre l&apos;occupe.
         </>
       ),
+      // Constater l'invisibilite releve de la surveillance (Dopaguard) ; la corriger
+      // releve de l'optimisation (Dopageo). On oriente sans sortir de notre role.
+      showDopageoBridge: true,
     };
   }
 
@@ -62,7 +72,7 @@ function buildDiagnosis({ reliability, visibility, unknownCount, usableCount }: 
 }
 
 export function ScanClosingPitch(props: ClosingPitchProps) {
-  const { title, body } = buildDiagnosis(props);
+  const { title, body, showDopageoBridge } = buildDiagnosis(props);
 
   return (
     <div className="mt-10 flex flex-col items-center gap-4 rounded-2xl bg-dopaguard-navy p-10 text-center">
@@ -82,6 +92,22 @@ export function ScanClosingPitch(props: ClosingPitchProps) {
         Démarrer l&apos;essai de 14 jours →
       </a>
       <p className="text-xs text-white/40">Sans engagement, résiliable en un clic.</p>
+
+      {showDopageoBridge && (
+        <p className="mt-5 max-w-lg border-t border-white/10 pt-5 text-xs leading-relaxed text-white/50">
+          Dopaguard surveille ce que les IA disent de vous. Pour travailler la cause — être mieux identifié et
+          recommandé par ces mêmes IA —, c&apos;est le métier de{" "}
+          <a
+            href="https://dopageo.ai"
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-dopaguard-lime underline underline-offset-2"
+          >
+            Dopageo
+          </a>
+          , notre solution dédiée au positionnement.
+        </p>
+      )}
     </div>
   );
 }

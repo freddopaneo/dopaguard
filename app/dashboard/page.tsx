@@ -6,6 +6,7 @@ import { getSettings } from "@/lib/dashboard/get-settings";
 import { getDashboardOverview } from "@/lib/dashboard/get-overview";
 import { getCompetitorOverview } from "@/lib/dashboard/get-competitor-overview";
 import { ScoreGauge } from "@/components/dashboard/ScoreGauge";
+import { VisibilityCard } from "@/components/dashboard/VisibilityCard";
 import { ScoreEvolutionChart } from "@/components/dashboard/ScoreEvolutionChart";
 import { ScoreByProviderChart } from "@/components/dashboard/ScoreByProviderChart";
 import { OpenAnomaliesCard } from "@/components/dashboard/OpenAnomaliesCard";
@@ -62,7 +63,10 @@ export default async function DashboardOverviewPage() {
       </div>
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         <ScoreByProviderChart scoreByProvider={latest.scoreByProvider} />
-        <OpenAnomaliesCard count={overview.openAnomaliesCount} />
+        <div className="grid gap-6 sm:grid-cols-2">
+          <VisibilityCard score={latest.visibilityScore} />
+          <OpenAnomaliesCard count={overview.openAnomaliesCount} />
+        </div>
       </div>
       {competitorOverview && (
         <div className="mt-6">
