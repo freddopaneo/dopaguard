@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { runScan } from "@/lib/scan/run-scan";
+import { runScan, type ScanProgressEvent } from "@/lib/scan/run-scan";
 import { sendFreeScanCompletedNotificationEmail } from "@/lib/email/resend";
 
 export const maxDuration = 120;
+// Empêche Next.js de mettre en cache la lecture du statut du scan : le verrou
+// optimiste ci-dessous doit toujours lire l'état le plus récent en base.
+export const dynamic = "force-dynamic";
 
 export async function POST(_request: NextRequest, { params }: { params: { id: string } }) {
   const supabase = createAdminClient();
@@ -56,7 +59,16 @@ export async function POST(_request: NextRequest, { params }: { params: { id: st
   }
 
   try {
-    const result = await runScan(scan.brand_name);
+    const progressEvents: ScanProgressEvent[] = [];
+    const result = await runScan(scan.brand_name, async (event) => {
+      progressEvents.push(event);
+      try {
+        await supabase.from("free_scans").update({ progress: progressEvents }).eq("id", scan.id);
+      } catch {
+        // Le journal d'événements est purement visuel : une écriture ratée ne doit
+        // jamais interrompre le scan lui-même.
+      }
+    });
 
     for (const entry of result.responses) {
       if (entry.error) {

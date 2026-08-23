@@ -12,7 +12,9 @@ const scanRequestSchema = z.object({
   consent: z.literal(true, { message: "Le consentement au traitement des données est requis." }),
 });
 
-const TOKEN_TTL_MS = 30 * 60 * 1000;
+// 7 jours plutôt que 30 minutes : un visiteur qui lit son email en différé ne doit
+// pas perdre l'accès à son scan gratuit.
+const TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 function normalizeWebsite(website: string): string {
   return /^https?:\/\//i.test(website) ? website : `https://${website}`;
