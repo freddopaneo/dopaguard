@@ -24,6 +24,9 @@ import MonEntrepriseInvisibleDansChatgpt from "./mon-entreprise-invisible-dans-c
 import ChatgptDitDuMalDeMonEntrepriseSentimentNegatif from "./chatgpt-dit-du-mal-de-mon-entreprise-sentiment-negatif";
 import QueDitPerplexityDeMonEntreprise from "./que-dit-perplexity-de-mon-entreprise";
 import IaConfondMonEntrepriseAvecUneAutre from "./ia-confond-mon-entreprise-avec-une-autre";
+import QueDitChatgptDeMonEntrepriseSelonLeMode from "./que-dit-chatgpt-de-mon-entreprise-selon-le-mode";
+import QueDitGeminiDeMonEntreprise from "./que-dit-gemini-de-mon-entreprise";
+import QueDitMistralDeMonEntreprise from "./que-dit-mistral-de-mon-entreprise";
 
 // Registre slug -> composant de contenu. Doit rester synchrone avec
 // lib/blog/articles.ts (un slug de chaque côté) -- vérifié par un test simple à la
@@ -54,4 +57,7 @@ export const ARTICLE_COMPONENTS: Record<string, ComponentType> = {
   "chatgpt-dit-du-mal-de-mon-entreprise-sentiment-negatif": ChatgptDitDuMalDeMonEntrepriseSentimentNegatif,
   "que-dit-perplexity-de-mon-entreprise": QueDitPerplexityDeMonEntreprise,
   "ia-confond-mon-entreprise-avec-une-autre": IaConfondMonEntrepriseAvecUneAutre,
+  "que-dit-chatgpt-de-mon-entreprise-selon-le-mode": QueDitChatgptDeMonEntrepriseSelonLeMode,
+  "que-dit-gemini-de-mon-entreprise": QueDitGeminiDeMonEntreprise,
+  "que-dit-mistral-de-mon-entreprise": QueDitMistralDeMonEntreprise,
 };

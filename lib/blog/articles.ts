@@ -263,6 +263,36 @@ export const BLOG_ARTICLES: BlogArticleMeta[] = [
     keywords: ["apparaître dans ChatGPT", "être recommandé par une IA", "optimiser sa présence IA générative"],
     publishedAt: "2026-08-13",
   },
+
+  // -- Une IA à la fois : les recherches se font souvent par nom d'assistant
+  //    (constaté dans la Search Console sur le cluster Perplexity). --
+  {
+    slug: "que-dit-chatgpt-de-mon-entreprise-selon-le-mode",
+    title: "Que dit ChatGPT de mon entreprise ? Cela dépend du mode utilisé",
+    description:
+      "ChatGPT peut répondre depuis sa mémoire d'entraînement ou depuis le web. Deux clients, deux réponses différentes : pourquoi un test unique ne prouve rien.",
+    category: "guide-pratique",
+    keywords: ["que dit ChatGPT de mon entreprise", "réponses ChatGPT variables", "vérifier sa réputation IA"],
+    publishedAt: "2026-08-24",
+  },
+  {
+    slug: "que-dit-gemini-de-mon-entreprise",
+    title: "Ce que dit Gemini de votre entreprise : l'IA sur laquelle vous avez prise",
+    description:
+      "Gemini appartient à l'écosystème Google, où votre fiche d'établissement et vos avis vous appartiennent déjà. Ce que vous pouvez corriger, et ce qui reste hors de portée.",
+    category: "guide-pratique",
+    keywords: ["Gemini entreprise", "fiche Google", "AI Overviews"],
+    publishedAt: "2026-08-24",
+  },
+  {
+    slug: "que-dit-mistral-de-mon-entreprise",
+    title: "Que dit Mistral de mon entreprise ? L'IA française que personne ne vérifie",
+    description:
+      "Mistral est une IA française de plus en plus utilisée en entreprise, et celle que les dirigeants oublient de tester. Pourquoi cet angle mort coûte cher.",
+    category: "guide-pratique",
+    keywords: ["Mistral entreprise", "réputation IA", "souveraineté numérique"],
+    publishedAt: "2026-08-24",
+  },
 ];
 
 export function getArticleBySlug(slug: string): BlogArticleMeta | undefined {
