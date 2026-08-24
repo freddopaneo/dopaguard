@@ -293,6 +293,15 @@ export const BLOG_ARTICLES: BlogArticleMeta[] = [
     keywords: ["Mistral entreprise", "réputation IA", "souveraineté numérique"],
     publishedAt: "2026-08-24",
   },
+  {
+    slug: "que-dit-claude-de-mon-entreprise",
+    title: "Que dit Claude de mon entreprise ? L'IA qui préfère avouer qu'elle ne sait pas",
+    description:
+      "Claude déclare bien plus souvent que les autres IA ne rien savoir d'une entreprise. Pourquoi cette prudence est le meilleur révélateur de votre invisibilité.",
+    category: "guide-pratique",
+    keywords: ["Claude entreprise", "réputation IA", "visibilité IA"],
+    publishedAt: "2026-08-24",
+  },
 ];
 
 export function getArticleBySlug(slug: string): BlogArticleMeta | undefined {
