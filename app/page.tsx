@@ -64,7 +64,7 @@ export default function Home() {
 
           <div id="scan-form" className="relative scroll-mt-24 animate-monte [animation-delay:.3s]">
             {/* Radar animé : la marque de Dopaguard, en mouvement, derrière le formulaire */}
-            <RadarIA className="pointer-events-none absolute -right-10 -top-24 hidden h-56 w-56 opacity-90 lg:block xl:-right-16 xl:-top-28 xl:h-64 xl:w-64" />
+            <RadarIA className="pointer-events-none absolute -right-8 -top-36 hidden h-60 w-60 lg:block xl:-right-14 xl:-top-44 xl:h-72 xl:w-72" />
             <div className="relative">
               <ScanForm />
             </div>

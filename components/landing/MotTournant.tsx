@@ -23,14 +23,14 @@ export function MotTournant({ mots, intervalMs = 2400 }: { mots: string[]; inter
   }, [mots.length, intervalMs]);
 
   return (
-    <span className="mot-tournant marqueur" aria-live="off">
+    <span className="mot-tournant" aria-live="off">
       {mots.map((mot, i) => (
         <span
           key={mot}
-          className={i === index ? "actif" : i === sortant ? "sortant" : undefined}
+          className={`justify-self-start ${i === index ? "actif" : i === sortant ? "sortant" : ""}`}
           aria-hidden={i !== index}
         >
-          {mot}
+          <span className="marqueur">{mot}</span>
         </span>
       ))}
     </span>
