@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { RevealObserver } from "@/components/ui/RevealObserver";
 import { getAppUrl } from "@/lib/app-url";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+// Police commune aux sites Dopaneo / Dopageo / Dopaguard : Open Sans, auto-hébergée
+// (fichiers variables, licence OFL dans app/fonts). Aucune requête externe.
+const openSans = localFont({
+  src: [
+    { path: "./fonts/open-sans-latin-wght-normal.woff2", weight: "300 800", style: "normal" },
+    { path: "./fonts/open-sans-latin-wght-italic.woff2", weight: "300 800", style: "italic" },
+  ],
+  variable: "--font-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -38,10 +39,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${openSans.variable} font-sans antialiased`}>
         {children}
+        <RevealObserver />
       </body>
     </html>
   );

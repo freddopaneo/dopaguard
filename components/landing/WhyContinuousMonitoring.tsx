@@ -75,7 +75,7 @@ const REASONS = [
 export function WhyContinuousMonitoring() {
   return (
     <section className="mx-auto max-w-5xl px-6 py-14 sm:py-24">
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto max-w-2xl text-center" data-reveal>
         <h2 className="text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
           Vérifier une fois ne sert à rien. Votre réputation IA change chaque semaine.
         </h2>
@@ -86,12 +86,14 @@ export function WhyContinuousMonitoring() {
       </div>
 
       <div className="mt-14 grid gap-6 sm:grid-cols-2">
-        {REASONS.map((reason) => {
+        {REASONS.map((reason, index) => {
           const Icon = reason.icon;
           return (
             <div
               key={reason.title}
-              className="flex gap-4 rounded-2xl border border-dopaguard-muted bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_16px_40px_-20px_rgba(13,46,56,0.35)]"
+              data-reveal
+              style={{ "--i": index } as React.CSSProperties}
+              className="card-hover flex gap-4 rounded-2xl border border-dopaguard-muted bg-white/90 p-6 shadow-[0_24px_48px_-32px_rgba(19,55,66,.3)] hover:-translate-y-1 hover:shadow-[0_32px_56px_-28px_rgba(19,55,66,.4)]"
             >
               <span
                 className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-dopaguard-navy ${reason.tint}`}
@@ -107,10 +109,10 @@ export function WhyContinuousMonitoring() {
         })}
       </div>
 
-      <p className="mx-auto mt-12 max-w-2xl rounded-2xl bg-dopaguard-navy px-6 py-6 text-center text-base font-medium leading-relaxed text-white">
+      <p data-reveal className="mx-auto mt-12 max-w-2xl rounded-2xl border border-dopaguard-teal/40 bg-gradient-to-br from-dopaguard-teal/20 via-white to-dopaguard-lime/25 px-6 py-6 text-center text-base font-medium leading-relaxed text-dopaguard-navy shadow-[0_24px_48px_-32px_rgba(19,55,66,.35)]">
         C&apos;est exactement pour cela que Dopaguard ne fait pas qu&apos;un scan : il
         surveille, chaque semaine, et vous prévient.{" "}
-        <span className="text-dopaguard-lime">Une réputation à jour est une réputation surveillée.</span>
+        <span className="marqueur font-semibold">Une réputation à jour est une réputation surveillée.</span>
       </p>
     </section>
   );

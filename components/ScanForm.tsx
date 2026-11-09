@@ -72,7 +72,7 @@ export function ScanForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mx-auto w-full max-w-2xl rounded-2xl bg-white p-6 shadow-[0_20px_60px_-15px_rgba(13,46,56,0.35)] sm:p-8"
+      className="mx-auto w-full max-w-2xl rounded-3xl border border-dopaguard-navy/10 bg-white/95 p-6 shadow-[0_1px_2px_rgba(19,55,66,.05),0_32px_64px_-32px_rgba(19,55,66,.45)] backdrop-blur-sm sm:p-8"
     >
       <div className="grid gap-4 sm:grid-cols-3">
         <TextField id="brandName" name="brandName" label="Nom de marque" required placeholder="Dopaguard" value={fields.brandName} onChange={set("brandName")} />

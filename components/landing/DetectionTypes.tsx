@@ -142,7 +142,7 @@ const EXAMPLE_GROUPS: {
 export function DetectionTypes() {
   return (
     <section className="mx-auto max-w-5xl px-6 py-14 sm:py-24">
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto max-w-2xl text-center" data-reveal>
         <h2 className="text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
           Ce que Dopaguard détecte
         </h2>
@@ -152,12 +152,14 @@ export function DetectionTypes() {
       </div>
 
       <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-        {ANOMALY_TYPES.map((type) => {
+        {ANOMALY_TYPES.map((type, index) => {
           const Icon = type.icon;
           return (
             <div
               key={type.label}
-              className="flex flex-col items-center gap-3 rounded-2xl border border-dopaguard-muted bg-white px-4 py-5 text-center transition-all duration-200 hover:-translate-y-1 hover:border-dopaguard-teal/50 hover:shadow-[0_16px_40px_-20px_rgba(13,46,56,0.35)]"
+              data-reveal
+              style={{ "--i": index } as React.CSSProperties}
+              className="card-hover flex flex-col items-center gap-3 rounded-2xl border border-dopaguard-muted bg-white/90 px-4 py-5 text-center hover:-translate-y-1 hover:border-dopaguard-teal/50 hover:shadow-[0_16px_40px_-20px_rgba(13,46,56,0.35)]"
             >
               <span className="relative flex h-12 w-12 items-center justify-center rounded-full bg-dopaguard-muted text-dopaguard-navy">
                 <Icon />
@@ -169,7 +171,7 @@ export function DetectionTypes() {
         })}
       </div>
 
-      <div className="mt-14 grid items-stretch gap-x-8 gap-y-4 sm:grid-cols-3">
+      <div className="mt-14 grid items-stretch gap-x-8 gap-y-4 sm:grid-cols-3" data-reveal>
         {/* Rangee de badges alignee (desktop uniquement -- sur mobile chaque carte
             porte son badge, sinon les 3 badges s'empilent detaches de leurs cartes). */}
         {EXAMPLE_GROUPS.map((group) => (

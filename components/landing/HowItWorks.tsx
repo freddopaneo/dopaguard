@@ -129,7 +129,7 @@ const STEPS = [
 export function HowItWorks() {
   return (
     <section id="produits" className="mx-auto max-w-5xl scroll-mt-24 px-6 py-14 sm:py-24">
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto max-w-2xl text-center" data-reveal>
         <h2 className="text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
           Comment ça marche
         </h2>
@@ -150,7 +150,9 @@ export function HowItWorks() {
           return (
             <div
               key={step.label}
-              className="relative flex flex-col overflow-hidden rounded-2xl border border-dopaguard-muted bg-white shadow-[0_12px_40px_-20px_rgba(13,46,56,0.25)]"
+              data-reveal
+              style={{ "--i": index } as React.CSSProperties}
+              className="card-hover relative flex flex-col overflow-hidden rounded-2xl border border-dopaguard-muted bg-white/90 shadow-[0_24px_48px_-32px_rgba(19,55,66,.3)] hover:-translate-y-1 hover:shadow-[0_32px_56px_-28px_rgba(19,55,66,.4)]"
             >
               <div className={`relative h-44 ${step.tint}`}>
                 <Illustration />

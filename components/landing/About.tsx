@@ -37,11 +37,11 @@ const TESTIMONIALS = [
 export function About() {
   return (
     <section id="a-propos" className="mx-auto max-w-5xl scroll-mt-24 px-6 py-14 sm:py-24">
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto max-w-2xl text-center" data-reveal>
         <h2 className="text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">Le mot du fondateur</h2>
       </div>
 
-      <div className="mx-auto mt-8 max-w-2xl rounded-2xl border-l-4 border-dopaguard-lime bg-white p-7 sm:p-8">
+      <div data-reveal className="mx-auto mt-8 max-w-2xl rounded-2xl border border-dopaguard-muted border-l-4 border-l-dopaguard-lime bg-white/90 p-7 shadow-[0_24px_48px_-32px_rgba(19,55,66,.3)] sm:p-8">
         <p className="text-base leading-relaxed text-dopaguard-navyMid">
           &laquo;&nbsp;Entrepreneur dans la tech et la mobilité depuis plus de 20 ans, je cherche en permanence à
           optimiser mes entreprises — et à partager ce qui fonctionne avec nos clients. C&apos;est pour cela que
@@ -61,8 +61,8 @@ export function About() {
       </div>
 
       <div className="mt-14 grid gap-6 sm:grid-cols-3">
-        {SOLUTIONS.map((solution) => (
-          <div key={solution.label} className="rounded-2xl border border-dopaguard-muted bg-white p-6">
+        {SOLUTIONS.map((solution, index) => (
+          <div key={solution.label} data-reveal style={{ "--i": index } as React.CSSProperties} className="card-hover rounded-2xl border border-dopaguard-muted bg-white/90 p-6 hover:-translate-y-1 hover:shadow-[0_24px_48px_-32px_rgba(19,55,66,.35)]">
             <h3 className="font-semibold text-dopaguard-navy">{solution.label}</h3>
             <p className="mt-2 text-sm leading-relaxed text-dopaguard-navyMid/80">{solution.body}</p>
           </div>
@@ -74,10 +74,12 @@ export function About() {
           Ils surveillent leur réputation avec Dopaguard
         </p>
         <div className="mt-6 grid gap-6 sm:grid-cols-3">
-          {TESTIMONIALS.map((testimonial) => (
+          {TESTIMONIALS.map((testimonial, index) => (
             <div
               key={testimonial.author}
-              className="flex flex-col gap-4 rounded-2xl border-l-4 border-dopaguard-lime bg-white p-6"
+              data-reveal
+              style={{ "--i": index } as React.CSSProperties}
+              className="flex flex-col gap-4 rounded-2xl border border-dopaguard-muted border-l-4 border-l-dopaguard-lime bg-white/90 p-6"
             >
               <p className="text-sm leading-relaxed text-dopaguard-navyMid">
                 {testimonial.isQuote ? `« ${testimonial.text} »` : testimonial.text}

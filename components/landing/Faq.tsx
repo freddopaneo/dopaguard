@@ -67,7 +67,7 @@ export function Faq() {
     <section id="faq" className="mx-auto max-w-3xl scroll-mt-24 px-6 py-14 sm:py-24">
       {/* eslint-disable-next-line react/no-danger -- JSON-LD statique, aucune donnée utilisateur. */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }} />
-      <h2 className="text-center text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
+      <h2 data-reveal className="text-center text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
         Questions fréquentes
       </h2>
 
@@ -75,7 +75,12 @@ export function Faq() {
         {FAQ_ITEMS.map((item, index) => {
           const isOpen = openIndex === index;
           return (
-            <div key={item.question} className="rounded-2xl border border-dopaguard-muted bg-white">
+            <div
+              key={item.question}
+              data-reveal
+              style={{ "--i": Math.min(index, 6) } as React.CSSProperties}
+              className={`rounded-2xl border bg-white/90 transition-colors ${isOpen ? "border-dopaguard-teal/50 shadow-[0_24px_48px_-32px_rgba(19,55,66,.3)]" : "border-dopaguard-muted"}`}
+            >
               <button
                 type="button"
                 onClick={() => setOpenIndex(isOpen ? null : index)}

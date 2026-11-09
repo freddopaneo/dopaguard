@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="border-t border-dopaguard-muted py-10 text-center text-xs text-dopaguard-navyMid/50">
+    <footer className="border-t border-dopaguard-navy/10 py-10 text-center text-xs text-dopaguard-navyMid/50">
       <p>
         © {new Date().getFullYear()} {process.env.NEXT_PUBLIC_APP_NAME || "Dopaguard"} — Dopaneo.ai
       </p>

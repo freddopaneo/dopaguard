@@ -13,7 +13,7 @@ const NAV_LINKS = [
 
 function RadarLogo() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className="h-9 w-9 shrink-0 text-dopaguard-lime" aria-hidden>
+    <svg viewBox="0 0 24 24" fill="none" className="h-9 w-9 shrink-0 text-dopaguard-teal" aria-hidden>
       <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
       <circle cx="12" cy="12" r="5.5" stroke="currentColor" strokeWidth="1.5" opacity="0.7" />
       <line x1="12" y1="12" x2="17.5" y2="6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -42,11 +42,12 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="mx-auto max-w-7xl px-6 py-6">
+    <header className="sticky top-0 z-40 border-b border-dopaguard-navy/[0.07] bg-dopaguard-cream/80 backdrop-blur-md">
+      <div className="mx-auto max-w-7xl px-6 py-4">
       <div className="flex items-center justify-between gap-4">
         <a href="#top" className="flex items-center gap-2.5">
           <RadarLogo />
-          <span className="text-xl font-bold tracking-tight text-white">
+          <span className="text-xl font-bold tracking-tight text-dopaguard-navy">
             {process.env.NEXT_PUBLIC_APP_NAME || "Dopaguard"}
           </span>
         </a>
@@ -56,7 +57,7 @@ export function SiteHeader() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-white/70 transition hover:text-white"
+              className="rounded-full px-3 py-1.5 text-sm font-medium text-dopaguard-navyMid transition hover:bg-dopaguard-navy/[0.06] hover:text-dopaguard-navy"
             >
               {link.label}
             </a>
@@ -64,12 +65,12 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-5 lg:flex">
-          <a href="/login" className="text-sm font-medium text-white/60 underline-offset-2 hover:text-white hover:underline">
+          <a href="/login" className="text-sm font-medium text-dopaguard-navyMid underline-offset-2 hover:text-dopaguard-navy hover:underline">
             Se connecter
           </a>
           <a
             href="#scan-form"
-            className="inline-flex items-center justify-center rounded-lg bg-dopaguard-lime px-4 py-2 text-sm font-semibold text-dopaguard-navy transition hover:brightness-95"
+            className="inline-flex items-center justify-center rounded-full bg-dopaguard-navy px-5 py-2 text-sm font-semibold text-white shadow-[0_10px_24px_-12px_rgba(19,55,66,.7)] transition hover:-translate-y-0.5 hover:bg-dopaguard-navyMid"
           >
             Démarrer gratuitement
           </a>
@@ -80,42 +81,43 @@ export function SiteHeader() {
           onClick={() => setMobileOpen((open) => !open)}
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          className="text-white/80 hover:text-white lg:hidden"
+          className="text-dopaguard-navy lg:hidden"
         >
           <MenuIcon open={mobileOpen} />
         </button>
       </div>
 
       {mobileOpen && (
-        <nav className="mt-5 flex flex-col gap-1 border-t border-white/10 pt-5 lg:hidden">
+        <nav className="mt-4 flex flex-col gap-1 border-t border-dopaguard-navy/10 pt-4 lg:hidden">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="rounded-lg px-2 py-2.5 text-sm font-medium text-white/70 hover:bg-white/5 hover:text-white"
+              className="rounded-lg px-2 py-2.5 text-sm font-medium text-dopaguard-navyMid hover:bg-dopaguard-navy/5 hover:text-dopaguard-navy"
             >
               {link.label}
             </a>
           ))}
-          <div className="mt-2 flex flex-col gap-3 border-t border-white/10 pt-4">
+          <div className="mt-2 flex flex-col gap-3 border-t border-dopaguard-navy/10 pt-4">
             <a
               href="/login"
               onClick={() => setMobileOpen(false)}
-              className="text-sm font-medium text-white/60 hover:text-white"
+              className="text-sm font-medium text-dopaguard-navyMid hover:text-dopaguard-navy"
             >
               Se connecter
             </a>
             <a
               href="#scan-form"
               onClick={() => setMobileOpen(false)}
-              className="inline-flex items-center justify-center rounded-lg bg-dopaguard-lime px-4 py-2.5 text-sm font-semibold text-dopaguard-navy"
+              className="inline-flex items-center justify-center rounded-full bg-dopaguard-navy px-4 py-2.5 text-sm font-semibold text-white"
             >
               Démarrer gratuitement
             </a>
           </div>
         </nav>
       )}
+      </div>
     </header>
   );
 }

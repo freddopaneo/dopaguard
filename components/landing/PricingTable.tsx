@@ -119,7 +119,7 @@ export function PricingTable() {
 
   return (
     <section id="tarifs" className="mx-auto max-w-5xl px-6 py-14 sm:py-24">
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto max-w-2xl text-center" data-reveal>
         <p className="text-xs font-semibold uppercase tracking-wide text-dopaguard-teal">Programme Réputation IA</p>
         <h2 className="mt-2 text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
           Une réputation surveillée, à partir de 69 € par mois.
@@ -134,7 +134,7 @@ export function PricingTable() {
         {error && <p className="mt-4 text-sm font-medium text-dopaguard-critical">{error}</p>}
       </div>
 
-      <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-dopaguard-muted bg-white p-6">
+      <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-dopaguard-muted bg-white/90 p-6 shadow-[0_24px_48px_-32px_rgba(19,55,66,.3)]" data-reveal>
         <p className="text-xs font-semibold uppercase tracking-wide text-dopaguard-navyMid/50">Ce que ça vous fait gagner</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {VALUE_STACK.map((item) => (
@@ -150,10 +150,12 @@ export function PricingTable() {
       </div>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-3">
-        {PLANS.map((plan) => (
+        {PLANS.map((plan, index) => (
           <div
             key={plan.name}
-            className={`relative flex flex-col rounded-2xl border bg-white p-6 transition-all duration-200 hover:-translate-y-1 ${
+            data-reveal
+            style={{ "--i": index } as React.CSSProperties}
+            className={`card-hover relative flex flex-col rounded-2xl border bg-white/95 p-6 hover:-translate-y-1 ${
               plan.recommended
                 ? "border-2 border-dopaguard-lime shadow-[0_24px_70px_-15px_rgba(13,46,56,0.35)] lg:scale-[1.04]"
                 : "border-dopaguard-muted hover:shadow-[0_16px_40px_-20px_rgba(13,46,56,0.3)]"
@@ -206,7 +208,7 @@ export function PricingTable() {
               type="button"
               disabled={loadingPlan !== null}
               onClick={() => handleSelectPlan(plan.slug)}
-              className={`mt-6 w-full rounded-xl px-4 py-3 text-sm font-semibold transition hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-60 ${
+              className={`mt-6 w-full rounded-full px-4 py-3 text-sm font-semibold transition hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-60 ${
                 plan.recommended
                   ? "bg-dopaguard-lime text-dopaguard-navy shadow-[0_8px_24px_-8px_rgba(199,255,152,0.8)]"
                   : "bg-dopaguard-navy text-white"
@@ -221,11 +223,11 @@ export function PricingTable() {
         ))}
       </div>
 
-      <div className="mx-auto mt-10 max-w-2xl rounded-2xl bg-dopaguard-navy px-6 py-6 text-center text-white">
+      <div data-reveal className="mx-auto mt-10 max-w-2xl rounded-2xl border border-dopaguard-lime/70 bg-gradient-to-br from-dopaguard-lime/30 via-white to-dopaguard-teal/15 px-6 py-6 text-center text-dopaguard-navy shadow-[0_24px_48px_-32px_rgba(19,55,66,.35)]">
         <p className="text-base font-semibold">
-          🛡️ <span className="text-dopaguard-lime">Garantie Essai Zéro Risque</span>
+          🛡️ <span className="marqueur">Garantie Essai Zéro Risque</span>
         </p>
-        <p className="mt-2 text-sm leading-relaxed text-white/70">
+        <p className="mt-2 text-sm leading-relaxed text-dopaguard-navyMid/90">
           Vous ne payez rien avant la fin des 14 jours d&apos;essai. Si Dopaguard ne vous a rien appris d&apos;utile
           sur ce que les IA disent de votre entreprise, annulez avant la fin de l&apos;essai : vous ne serez jamais
           débité.
