@@ -15,6 +15,7 @@ import { HowItWorks } from "@/components/landing/HowItWorks";
 import { PricingTable } from "@/components/landing/PricingTable";
 import { About } from "@/components/landing/About";
 import { Footer } from "@/components/landing/Footer";
+import { Nuages } from "@/components/ui/Nuages";
 
 const GUIDE_PILLAR_SLUG = "reputation-ia-guide-complet-tpe-pme";
 
@@ -52,7 +53,9 @@ export default function VerticalPage({ params }: { params: { slug: string } }) {
   const hasCityPages = CITY_VERTICAL_SLUGS.includes(vertical.slug);
 
   return (
-    <div className="min-h-screen bg-dopaguard-cream text-dopaguard-navy">
+    <div className="relative min-h-screen bg-dopaguard-cream text-dopaguard-navy">
+      <Nuages />
+      <div className="relative z-10">
       {/* eslint-disable-next-line react/no-danger -- JSON-LD statique, aucune donnée utilisateur. */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }} />
       {/* eslint-disable-next-line react/no-danger -- JSON-LD statique, aucune donnée utilisateur. */}
@@ -78,7 +81,7 @@ export default function VerticalPage({ params }: { params: { slug: string } }) {
           {relatedArticle && (
             <a
               href={`/blog/${relatedArticle.slug}`}
-              className="flex flex-1 flex-col gap-2 rounded-2xl border border-dopaguard-muted bg-white p-6 hover:border-dopaguard-navy/30"
+              className="card-hover flex flex-1 flex-col gap-2 rounded-2xl border border-dopaguard-muted bg-white/90 p-6 hover:-translate-y-1 hover:border-dopaguard-teal/50 hover:shadow-[0_24px_48px_-32px_rgba(19,55,66,.35)]"
             >
               <span className="text-xs font-semibold uppercase tracking-wide text-dopaguard-teal">
                 Pour aller plus loin
@@ -90,7 +93,7 @@ export default function VerticalPage({ params }: { params: { slug: string } }) {
           {guideArticle && (
             <a
               href={`/blog/${guideArticle.slug}`}
-              className="flex flex-1 flex-col gap-2 rounded-2xl border border-dopaguard-muted bg-white p-6 hover:border-dopaguard-navy/30"
+              className="card-hover flex flex-1 flex-col gap-2 rounded-2xl border border-dopaguard-muted bg-white/90 p-6 hover:-translate-y-1 hover:border-dopaguard-teal/50 hover:shadow-[0_24px_48px_-32px_rgba(19,55,66,.35)]"
             >
               <span className="text-xs font-semibold uppercase tracking-wide text-dopaguard-teal">Le guide complet</span>
               <span className="font-semibold text-dopaguard-navy">{guideArticle.title}</span>
@@ -102,19 +105,20 @@ export default function VerticalPage({ params }: { params: { slug: string } }) {
 
       <About />
 
-      <section className="mx-auto max-w-3xl px-6 py-12 text-center sm:py-20">
+      <section className="mx-auto max-w-3xl px-6 py-12 text-center sm:py-20" data-reveal>
         <h2 className="text-3xl font-bold tracking-tight text-dopaguard-navy sm:text-4xl">
           Ce que l&apos;IA dit de vous change cette semaine. Le saurez-vous ?
         </h2>
         <a
           href="#scan-form"
-          className="mt-8 inline-flex items-center justify-center rounded-xl bg-dopaguard-navy px-6 py-3 text-sm font-semibold text-white hover:bg-dopaguard-navyMid"
+          className="mt-8 inline-flex items-center justify-center rounded-full bg-dopaguard-navy px-7 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_-12px_rgba(19,55,66,.6)] transition hover:-translate-y-0.5 hover:bg-dopaguard-navyMid"
         >
           Lancer mon scan gratuit (3 min)
         </a>
       </section>
 
       <Footer />
+      </div>
     </div>
   );
 }

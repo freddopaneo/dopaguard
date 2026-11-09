@@ -16,7 +16,7 @@ const ACCENT_BORDER: Record<VerticalAccent, string> = {
 export function VerticalPainPoints({ vertical }: { vertical: VerticalMeta }) {
   return (
     <section className="mx-auto max-w-5xl px-6 py-14 sm:py-24">
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto max-w-2xl text-center" data-reveal>
         <span
           className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-semibold ${ACCENT_BADGE[vertical.accent]}`}
         >

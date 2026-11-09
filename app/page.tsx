@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ScanForm } from "@/components/ScanForm";
 import { SiteHeader } from "@/components/landing/SiteHeader";
 import { WhyContinuousMonitoring } from "@/components/landing/WhyContinuousMonitoring";
 import { HowItWorks } from "@/components/landing/HowItWorks";
@@ -9,7 +8,7 @@ import { Faq } from "@/components/landing/Faq";
 import { About } from "@/components/landing/About";
 import { Footer } from "@/components/landing/Footer";
 import { MotTournant } from "@/components/landing/MotTournant";
-import { RadarIA } from "@/components/landing/RadarIA";
+import { ScanPanel } from "@/components/landing/ScanPanel";
 import { Nuages } from "@/components/ui/Nuages";
 import { getAppUrl } from "@/lib/app-url";
 import { ORGANIZATION_JSON_LD, PRODUCT_JSON_LD } from "@/lib/jsonld";
@@ -34,7 +33,7 @@ export default function Home() {
       <div className="relative z-10">
         <SiteHeader />
 
-        <main className="mx-auto grid max-w-7xl gap-14 px-6 pb-20 pt-10 sm:pb-28 sm:pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-12">
+        <main className="mx-auto grid max-w-7xl gap-14 px-6 pb-20 pt-10 sm:pb-28 sm:pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-12">
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
             <span className="inline-flex animate-monte items-center gap-2.5 rounded-full border border-dopaguard-navy/10 bg-white/85 px-3.5 py-1.5 text-xs font-semibold text-dopaguard-navyMid shadow-sm [animation-delay:.05s]">
               <span className="relative h-2 w-2 rounded-full bg-dopaguard-teal">
@@ -62,13 +61,7 @@ export default function Home() {
             </span>
           </div>
 
-          <div id="scan-form" className="relative scroll-mt-24 animate-monte [animation-delay:.3s]">
-            {/* Radar animé : la marque de Dopaguard, en mouvement, derrière le formulaire */}
-            <RadarIA className="pointer-events-none absolute -right-8 -top-36 hidden h-60 w-60 lg:block xl:-right-14 xl:-top-44 xl:h-72 xl:w-72" />
-            <div className="relative">
-              <ScanForm />
-            </div>
-          </div>
+          <ScanPanel />
         </main>
       <WhyContinuousMonitoring />
       <HowItWorks />

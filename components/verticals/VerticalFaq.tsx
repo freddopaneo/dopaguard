@@ -28,7 +28,7 @@ export function VerticalFaq({ vertical }: { vertical: VerticalMeta }) {
         {vertical.faqItems.map((item, index) => {
           const isOpen = openIndex === index;
           return (
-            <div key={item.question} className="rounded-2xl border border-dopaguard-muted bg-white">
+            <div key={item.question} data-reveal className="rounded-2xl border border-dopaguard-muted bg-white/90">
               <button
                 type="button"
                 onClick={() => setOpenIndex(isOpen ? null : index)}
